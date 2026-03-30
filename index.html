@@ -3,54 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyBibleLens | Support & Privacy</title>
+    <title>MyBibleLens | Legal & Support</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .legal-text h3 { @apply text-xl font-bold mt-8 mb-3 text-gray-900; }
+        .legal-text p { @apply mb-4 leading-relaxed text-gray-700; }
+        .legal-text ul { @apply list-disc ml-6 mb-4 space-y-2 text-gray-700; }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans">
+<body class="bg-white text-gray-900 font-sans">
 
-    <nav class="p-6 bg-white shadow-sm sticky top-0">
+    <nav class="p-6 border-b border-gray-100 sticky top-0 bg-white/80 backdrop-blur-md z-50">
         <div class="max-w-4xl mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold text-blue-600">MyBibleLens</h1>
-            <div class="space-x-4 text-sm font-medium">
-                <a href="#about" class="hover:underline">About</a>
-                <a href="#support" class="hover:underline">Support</a>
-                <a href="#privacy" class="hover:underline">Privacy</a>
+            <h1 class="text-xl font-bold tracking-tight">MyBibleLens</h1>
+            <div class="space-x-6 text-sm font-medium text-gray-500">
+                <a href="#about" class="hover:text-black transition">About</a>
+                <a href="#support" class="hover:text-black transition">Support</a>
+                <a href="#privacy" class="hover:text-black transition">Privacy</a>
+                <a href="#terms" class="hover:text-black transition">Terms</a>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-4xl mx-auto p-8 space-y-20">
+    <main class="max-w-3xl mx-auto px-6 py-16 space-y-24">
 
         <section id="about">
-            <h2 class="text-3xl font-bold mb-4">About MyBibleLens</h2>
-            <p class="text-lg text-gray-600">MyBibleLens is a modern, AI-powered Bible study and journaling tool designed to help you engage deeper with Scripture. We bridge the gap between ancient wisdom and modern technology.</p>
+            <h2 class="text-4xl font-extrabold mb-6">Deepening Faith through Intelligence.</h2>
+            <p class="text-xl text-gray-600 leading-relaxed">MyBibleLens is a mobile-first platform integrating advanced language models with biblical scholarship. We provide tools for deep study, AI-assisted journaling, and contextual scripture analysis to help users engage with the Bible in a modern, digital-first environment.</p>
         </section>
 
-        <section id="support" class="bg-blue-50 p-8 rounded-2xl">
-            <h2 class="text-3xl font-bold mb-4">Support</h2>
-            <p class="mb-4">Need help or have a feature request? We're here for you.</p>
-            <p class="font-semibold text-blue-600">Email: <a href="mailto:your-email@example.com">your-email@example.com</a></p>
-            <p class="mt-4 text-sm text-gray-500 italic text-sm">Response time: Usually within 24-48 hours.</p>
-        </section>
-
-        <section id="privacy">
-            <h2 class="text-3xl font-bold mb-4">Privacy Policy</h2>
-            <div class="prose text-gray-700 space-y-4">
-                <p><strong>Last Updated: March 2026</strong></p>
-                <p>MyBibleLens ("we", "us") respects your privacy. This policy explains how we handle your data.</p>
-                <h3 class="font-bold text-lg">1. Data Collection</h3>
-                <p>We do not sell your personal data. We collect minimal information (email/username) required for account synchronization and AI-powered study features via Supabase.</p>
-                <h3 class="font-bold text-lg">2. Third Party Services</h3>
-                <p>We use Supabase for authentication and database management. Their privacy policies apply to data stored on their servers.</p>
-                <h3 class="font-bold text-lg">3. Your Rights</h3>
-                <p>You can request data deletion at any time by contacting us through the Support section above.</p>
+        <section id="support" class="border-t pt-16">
+            <h2 class="text-3xl font-bold mb-6">Support</h2>
+            <div class="bg-gray-50 p-8 rounded-xl border border-gray-100">
+                <p class="mb-4 font-medium">For technical assistance, account inquiries, or bug reports, please contact our support team:</p>
+                <a href="mailto:support@mybiblelens.com" class="text-blue-600 font-bold text-lg hover:underline">support@mybiblelens.com</a>
+                <p class="mt-4 text-sm text-gray-500 italic">Expected response time is 24-48 hours.</p>
             </div>
+        </section>
+
+        <section id="privacy" class="border-t pt-16 legal-text">
+            <h2 class="text-3xl font-bold mb-8">Privacy Policy</h2>
+            <p class="text-sm text-gray-500 italic">Effective Date: March 29, 2026</p>
+
+            <h3>1. Information We Collect</h3>
+            <p>We collect information that you provide directly to us when creating an account or using our AI features. This includes:</p>
+            <ul>
+                <li><strong>Account Data:</strong> Email address and authentication credentials managed via Supabase.</li>
+                <li><strong>User Content:</strong> Journal entries, notes, and specific queries you input into the AI interface.</li>
+                <li><strong>Usage Data:</strong> Information on how you interact with the app, including timestamps and feature utilization.</li>
+            </ul>
+
+            <h3>2. How We Use Your Information</h3>
+            <p>Your data is used to provide, maintain, and improve MyBibleLens services. Specifically:</p>
+            <ul>
+                <li>To generate personalized AI insights based on your study habits.</li>
+                <li>To synchronize your study progress across multiple devices.</li>
+                <li>To ensure the security and integrity of our backend infrastructure.</li>
+            </ul>
+
+            <h3>3. Data Processing & AI Disclosure</h3>
+            <p>MyBibleLens utilizes Large Language Models (LLMs) to process text inputs. While we utilize industry-standard encryption through Supabase for data at rest, user inputs may be processed by third-party AI providers to generate study insights. We do not sell your personal data or your private journal entries to third parties.</p>
+
+            <h3>4. Data Retention and Deletion</h3>
+            <p>You retain full ownership of your data. Users may request the permanent deletion of their account and all associated data by contacting support@mybiblelens.com.</p>
+        </section>
+
+        <section id="terms" class="border-t pt-16 legal-text">
+            <h2 class="text-3xl font-bold mb-8">Terms of Service</h2>
+            
+            <h3>1. Acceptance of Terms</h3>
+            <p>By accessing MyBibleLens, you agree to be bound by these Terms. If you do not agree, you may not use the service.</p>
+
+            <h3>2. Use of AI Technology</h3>
+            <p>MyBibleLens provides AI-generated content for educational and devotional purposes. You acknowledge that:</p>
+            <ul>
+                <li>AI responses may occasionally be inaccurate or provide incomplete information.</li>
+                <li>The AI tool is a supplement to, not a replacement for, personal study and theological counsel.</li>
+                <li>You are responsible for any content you generate or share using the platform.</li>
+            </ul>
+
+            <h3>3. User Conduct</h3>
+            <p>You agree not to use the app for any unlawful purpose or to generate content that is harassing, abusive, or intended to disrupt the service for other users. We reserve the right to terminate accounts that violate these community standards.</p>
+
+            <h3>4. Limitation of Liability</h3>
+            <p>To the maximum extent permitted by law, MyBibleLens shall not be liable for any indirect, incidental, or consequential damages resulting from your use of the service or reliance on AI-generated content.</p>
         </section>
 
     </main>
 
-    <footer class="text-center p-10 text-gray-400 text-sm">
-        &copy; 2026 MyBibleLens. All rights reserved.
+    <footer class="border-t py-12 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-6 text-center text-gray-400 text-sm">
+            <p>&copy; 2026 MyBibleLens. All rights reserved.</p>
+            <p class="mt-2 text-xs font-mono uppercase tracking-widest">Built for depth. Powered by AI.</p>
+        </div>
     </footer>
 
 </body>
