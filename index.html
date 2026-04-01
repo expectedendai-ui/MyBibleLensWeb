@@ -1,102 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyBibleLens | Legal & Support</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .legal-text h3 { @apply text-xl font-bold mt-8 mb-3 text-gray-900; }
-        .legal-text p { @apply mb-4 leading-relaxed text-gray-700; }
-        .legal-text ul { @apply list-disc ml-6 mb-4 space-y-2 text-gray-700; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyBibleLens — Digital Sanctuary</title>
+  <meta name="description" content="MyBibleLens is an AI-powered spiritual research and personal growth sanctuary. About, Support, Privacy Policy, and Terms of Service.">
+  <meta property="og:title" content="MyBibleLens — Digital Sanctuary">
+  <meta property="og:description" content="AI-powered spiritual research and personal growth. Legal policies and mission.">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts: Hammersmith One (headlines) + Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./style.css">
 </head>
-<body class="bg-white text-gray-900 font-sans">
+<body>
 
-    <nav class="p-6 border-b border-gray-100 sticky top-0 bg-white/80 backdrop-blur-md z-50">
-        <div class="max-w-4xl mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold tracking-tight">MyBibleLens</h1>
-            <div class="space-x-6 text-sm font-medium text-gray-500">
-                <a href="#about" class="hover:text-black transition">About</a>
-                <a href="#support" class="hover:text-black transition">Support</a>
-                <a href="#privacy" class="hover:text-black transition">Privacy</a>
-                <a href="#terms" class="hover:text-black transition">Terms</a>
-            </div>
-        </div>
+  <!-- Skip Link -->
+  <a href="#main-content" class="sr-only" style="position:absolute;top:-9999px;left:-9999px;z-index:9999;background:#b6751d;color:#fff;padding:8px 16px;font-size:14px;border-radius:4px;">Skip to content</a>
+
+  <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="#about" class="logo-link" aria-label="MyBibleLens Home">
+        <!-- Inline SVG Logo -->
+        <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="2" y="4" width="24" height="32" rx="2" stroke="#b6751d" stroke-width="2.5"/>
+          <rect x="14" y="4" width="24" height="32" rx="2" stroke="#b6751d" stroke-width="2.5"/>
+          <circle cx="20" cy="20" r="6" fill="none" stroke="#b6751d" stroke-width="2"/>
+          <circle cx="20" cy="20" r="2" fill="#b6751d"/>
+        </svg>
+        <span class="logo-text">MYBIBLELENS</span>
+      </a>
+      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+        <a href="#about" class="nav-link active" data-section="about">About</a>
+        <a href="#support" class="nav-link" data-section="support">Support</a>
+        <a href="#privacy" class="nav-link" data-section="privacy">Privacy</a>
+        <a href="#terms" class="nav-link" data-section="terms">Terms</a>
+      </nav>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay">
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <a href="#about" class="mobile-nav-link" data-section="about">About</a>
+      <a href="#support" class="mobile-nav-link" data-section="support">Support</a>
+      <a href="#privacy" class="mobile-nav-link" data-section="privacy">Privacy</a>
+      <a href="#terms" class="mobile-nav-link" data-section="terms">Terms</a>
     </nav>
+  </div>
 
-    <main class="max-w-3xl mx-auto px-6 py-16 space-y-24">
+  <!-- ═══════════════════════════════ MAIN ═══════════════════════════════ -->
+  <main id="main-content">
 
-        <section id="about">
-            <h2 class="text-4xl font-extrabold mb-6">Deepening Faith through Intelligence.</h2>
-            <p class="text-xl text-gray-600 leading-relaxed">MyBibleLens is a mobile-first platform integrating advanced language models with biblical scholarship. We provide tools for deep study, AI-assisted journaling, and contextual scripture analysis to help users engage with the Bible in a modern, digital-first environment.</p>
-        </section>
+    <!-- ══════════════ ABOUT SECTION ══════════════ -->
+    <section class="page-section" id="about" data-page="about">
 
-        <section id="support" class="border-t pt-16">
-            <h2 class="text-3xl font-bold mb-6">Support</h2>
-            <div class="bg-gray-50 p-8 rounded-xl border border-gray-100">
-                <p class="mb-4 font-medium">For technical assistance, account inquiries, or bug reports, please contact our support team:</p>
-                <a href="mailto:support@mybiblelens.com" class="text-blue-600 font-bold text-lg hover:underline">support@mybiblelens.com</a>
-                <p class="mt-4 text-sm text-gray-500 italic">Expected response time is 24-48 hours.</p>
-            </div>
-        </section>
-
-        <section id="privacy" class="border-t pt-16 legal-text">
-            <h2 class="text-3xl font-bold mb-8">Privacy Policy</h2>
-            <p class="text-sm text-gray-500 italic">Effective Date: March 29, 2026</p>
-
-            <h3>1. Information We Collect</h3>
-            <p>We collect information that you provide directly to us when creating an account or using our AI features. This includes:</p>
-            <ul>
-                <li><strong>Account Data:</strong> Email address and authentication credentials managed via Supabase.</li>
-                <li><strong>User Content:</strong> Journal entries, notes, and specific queries you input into the AI interface.</li>
-                <li><strong>Usage Data:</strong> Information on how you interact with the app, including timestamps and feature utilization.</li>
-            </ul>
-
-            <h3>2. How We Use Your Information</h3>
-            <p>Your data is used to provide, maintain, and improve MyBibleLens services. Specifically:</p>
-            <ul>
-                <li>To generate personalized AI insights based on your study habits.</li>
-                <li>To synchronize your study progress across multiple devices.</li>
-                <li>To ensure the security and integrity of our backend infrastructure.</li>
-            </ul>
-
-            <h3>3. Data Processing & AI Disclosure</h3>
-            <p>MyBibleLens utilizes Large Language Models (LLMs) to process text inputs. While we utilize industry-standard encryption through Supabase for data at rest, user inputs may be processed by third-party AI providers to generate study insights. We do not sell your personal data or your private journal entries to third parties.</p>
-
-            <h3>4. Data Retention and Deletion</h3>
-            <p>You retain full ownership of your data. Users may request the permanent deletion of their account and all associated data by contacting support@mybiblelens.com.</p>
-        </section>
-
-        <section id="terms" class="border-t pt-16 legal-text">
-            <h2 class="text-3xl font-bold mb-8">Terms of Service</h2>
-            
-            <h3>1. Acceptance of Terms</h3>
-            <p>By accessing MyBibleLens, you agree to be bound by these Terms. If you do not agree, you may not use the service.</p>
-
-            <h3>2. Use of AI Technology</h3>
-            <p>MyBibleLens provides AI-generated content for educational and devotional purposes. You acknowledge that:</p>
-            <ul>
-                <li>AI responses may occasionally be inaccurate or provide incomplete information.</li>
-                <li>The AI tool is a supplement to, not a replacement for, personal study and theological counsel.</li>
-                <li>You are responsible for any content you generate or share using the platform.</li>
-            </ul>
-
-            <h3>3. User Conduct</h3>
-            <p>You agree not to use the app for any unlawful purpose or to generate content that is harassing, abusive, or intended to disrupt the service for other users. We reserve the right to terminate accounts that violate these community standards.</p>
-
-            <h3>4. Limitation of Liability</h3>
-            <p>To the maximum extent permitted by law, MyBibleLens shall not be liable for any indirect, incidental, or consequential damages resulting from your use of the service or reliance on AI-generated content.</p>
-        </section>
-
-    </main>
-
-    <footer class="border-t py-12 bg-gray-50">
-        <div class="max-w-4xl mx-auto px-6 text-center text-gray-400 text-sm">
-            <p>&copy; 2026 MyBibleLens. All rights reserved.</p>
-            <p class="mt-2 text-xs font-mono uppercase tracking-widest">Built for depth. Powered by AI.</p>
+      <!-- Hero -->
+      <div class="hero">
+        <div class="hero-inner">
+          <p class="hero-tag">A Digital Sanctuary</p>
+          <h1 class="hero-title">Unlearning the World.<br>Reclaiming the Human Spirit.</h1>
+          <p class="hero-subtitle">MyBibleLens is an AI-powered spiritual research platform built to help you understand yourself, deepen your faith, and leave a legacy rooted in God.</p>
         </div>
-    </footer>
+      </div>
 
-</body>
-</html>
+      <!-- Purpose -->
+      <div class="content-block">
+        <div class="content-inner">
+
+          <div class="about-grid">
+            <div class="about-main">
+              <h2 class="section-heading">The Mission</h2>
+              <p>My purpose in making this app was to guide me through challenges in life and really hone me into understanding what God has in store for me, and understanding how much Jesus Christ loves me and how He's by my side no matter what I'm going through.</p>
+              <p>For me to understand, I need more than just Christ in the Bible. I need something to help me understand — that's the <strong>Wisdom Guide</strong>. I want to understand my dreams — that's <strong>Dreams</strong>. The root meaning of things around me — <strong>Etymology</strong>. The chemicals in our bodies — <strong>Neuroscience</strong>. How to speak wisdom to others — <strong>Philosopher</strong>. And when I get distracted, lost, or forget who I am — <strong>The Refiner</strong>.</p>
+              <p>How can I pray stronger, manifest deeper? <strong>The Orb</strong>.</p>
+              <p>Where can I put all of this? <strong>Study Repository</strong>. How can I make connections? <strong>Infinite Canvas</strong>. How can I write it down? <strong>Reflection</strong>. How can I see what my people are studying? <strong>Beloved</strong>.</p>
+            </div>
+            <div class="about-aside">
+              <div class="callout-card">
+                <p class="callout-label">Founder's Note</p>
+                <p>Denzel built MyBibleLens out of a necessity to "Unlearn the World." Frustrated by the lack of depth in modern education, he taught himself the logic and architecture of AI to build a sanctuary for the human spirit. He is the visionary behind the <strong>Logos Guide</strong> and the curator of the <strong>Pure Existence Exchange</strong>.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <h2 class="section-heading">Your Purpose with the App</h2>
+          <p>The purpose for you is to understand yourself, to get away from the chaos of social media and the people around you, to understand God stronger, and to go to church understanding what they're talking about. To go to Bible studies and show people what you drew in your infinite canvas, having fun with it, already being in your Bible, writing things down physically — because it's all here, all here for you.</p>
+          <p>This isn't just an app. This is something you can one day sit down and share with your children during Bible study. You can point to a date, a season, a year of your life, and say, "This is what God brought me through. This is what He showed me. This is how everything is connected."</p>
+
+          <blockquote class="pull-quote">
+            "You can finally give your children something deeper than information — you can give them legacy."
+          </blockquote>
+
+          <p>I want families to be families again. I want communities to be communities again. I don't want outside voices teaching our children fear, shame, confusion, unworthiness, depression, anxiety, or leading them deeper into sin. I want them to know the truth. I want them to know love. I want them to know God.</p>
+          <p>At the end of the day, this is bigger than tech. Bigger than design. Bigger than me. This is just me putting God first.</p>
+
+          <div class="divider"></div>
+
+          <!-- Team -->
+          <h2 class="section-heading">The Team</h2>
+          <div class="team-grid">
+            <div class="team-card">
+              <p class="team-role">Founder & Lead Architect</p>
+              <p class="team-name">Denzel Rigaud</p>
+            </div>
+            <div class="team-card">
+              <p class="team-role">Technical Product Manager</p>
+              <p class="team-name">Denzel Rigaud</p>
+            </div>
+            <div class="team-card">
+              <p class="team-role">UI/UX Designer</p>
+              <p class="team-name">Denzel Rigaud</p>
+            </div>
+            <div class="team-card">
+              <p class="team-role">Front-End Developer</p>
+              <p class="team-name">Denzel Rigaud</p>
+            </div>
+            <div class="team-card">
+              <p class="team-role">Back-End Developer</p>
+              <p class="team-name">Denzel Rigaud & Gemini</p>
+            </div>
+            <div class="team-card">
+              <p class="team-role">AI Persona & Prompt Engineer</p>
+              <p class="team-name">Denzel Rigaud</p>
+            </div>
+            <div class="team-card">
+              <p class="team-role">Marketing & Advertising</p>
+              <p class="team-name">Denzel Rigaud</p>
+            </div>
+            <div class="team-card">
+              <p class="team-role">Investor</p>
+              <p class="team-name">Jesus</p>
+            </div>
+          </div>
+
+          <div class="partner-block">
+            <h3 class="subsection-heading">Looking to Partner?</h3>
+            <p>I can't wait to partner with a company with the same vision as me, that can help me prosper, because building this brick by brick all by myself feels great, but having a team beside me will be extraordinary.</p>
+            <p>Reach out at <a href="mailto:expectedendai@gmail.com">expectedendai@gmail.com</a></p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ SUPPORT SECTION ══════════════ -->
+    <section class="page-section" id="support" data-page="support" style="display:none;">
+      <div class="page-hero">
+        <h1 class="page-hero-title">Support</h1>
+        <p class="page-hero-subtitle">We're here to help you navigate your sanctuary.</p>
+      </div>
+      <div class="content-block">
+        <div class="content-inner legal-content">
+
+          <h2 class="section-heading">Contact Us</h2>
+          <p>For technical assistance, account inquiries, bug reports, or any legal questions, reach our support team at:</p>
+          <a href="mailto:expectedendai@gmail.com" class="contact-email-link">expectedendai@gmail.com</a>
+
+          <div class="divider"></div>
+
+          <h2 class="section-heading">Response Times</h2>
+          <div class="support-grid">
+            <div class="support-card">
+              <p class="support-card-label">General Inquiries</p
