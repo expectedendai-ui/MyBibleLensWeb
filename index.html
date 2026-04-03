@@ -25,12 +25,6 @@
   <header class="site-header" id="site-header">
     <div class="header-inner">
       <a href="#about" class="logo-link" aria-label="MyBibleLens Home">
-        <!-- Inline SVG Logo -->
-        <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="17" cy="17" r="11" stroke="#b6751d" stroke-width="2.5"/>
-          <circle cx="17" cy="17" r="5" stroke="#b6751d" stroke-width="1.5"/>
-          <line x1="25.5" y1="25.5" x2="36" y2="36" stroke="#b6751d" stroke-width="3" stroke-linecap="round"/>
-        </svg>
         <span class="logo-text">MYBIBLELENS</span>
       </a>
       <nav class="main-nav" id="main-nav" aria-label="Main navigation">
@@ -68,7 +62,7 @@
         <div class="hero-inner">
           <p class="hero-tag">A Digital Sanctuary</p>
           <h1 class="hero-title">Regardless of religious or spiritual label, the core message of humanity is compassion, love and kindness.</h1>
-          <p class="hero-subtitle">Let's grow together!</p>
+          <p class="hero-subtitle"><strong><em>Let's grow together!</em></strong></p>
         </div>
       </div>
 
@@ -202,6 +196,48 @@
             <li><strong>Resolution or escalation.</strong> We will resolve your issue directly or escalate it to the appropriate team member with a follow-up timeline.</li>
             <li><strong>Follow-up.</strong> If your issue requires extended investigation, we will provide status updates every 48 hours until resolution.</li>
           </ol>
+
+          <div class="divider"></div>
+
+          <h2 class="section-heading">Security</h2>
+          <p>Protecting your sanctuary is not optional — it is a core commitment. MyBibleLens handles deeply personal spiritual data and treats that responsibility with the same seriousness as the world's leading technology companies.</p>
+
+          <div class="support-grid">
+            <div class="support-card">
+              <p class="support-card-label">Encryption at Rest</p>
+              <p class="support-card-value">AES-256</p>
+              <p class="support-card-desc">All personal reflections, journal entries, and user content stored in our database are encrypted at rest using AES-256 — the same standard used by banks and government agencies.</p>
+            </div>
+            <div class="support-card">
+              <p class="support-card-label">Encryption in Transit</p>
+              <p class="support-card-value">TLS 1.2+</p>
+              <p class="support-card-desc">Every single piece of data transmitted between your device and our servers is protected by TLS 1.2 or higher. No unencrypted connections are permitted.</p>
+            </div>
+            <div class="support-card">
+              <p class="support-card-label">Authentication</p>
+              <p class="support-card-value">Supabase Auth</p>
+              <p class="support-card-desc">User authentication is managed by Supabase, a SOC 2-compliant infrastructure provider. Your credentials are never stored in plain text. We use industry-standard hashing and token-based sessions.</p>
+            </div>
+            <div class="support-card">
+              <p class="support-card-label">Access Control</p>
+              <p class="support-card-value">Zero Tolerance</p>
+              <p class="support-card-desc">Access to the production database is strictly limited to authorized personnel only, using role-based access controls and full audit logging. No third party can access your private data without your explicit action.</p>
+            </div>
+          </div>
+
+          <div class="legal-callout" style="margin-top: 2rem;">
+            <p><strong>Your data is yours. Period.</strong> MyBibleLens will never sell, rent, or share your personal reflections, spiritual insights, or any content you create within the sanctuary. Not to advertisers. Not to data brokers. Not to anyone. Your innermost thoughts stay locked inside your sanctuary.</p>
+          </div>
+
+          <h3 class="subsection-heading" style="margin-top: 2rem;">What We Do to Protect You</h3>
+          <ul class="legal-list">
+            <li><strong>No AI Training on Your Data:</strong> Your reflections and journal entries are never used to train, fine-tune, or improve any AI model — ours or anyone else's.</li>
+            <li><strong>Minimal Data Transmission:</strong> When you interact with the Lens AI agents, we transmit only the minimum content necessary to generate your response. Your full account history is never sent to third-party AI providers.</li>
+            <li><strong>Third-Party API Security:</strong> All requests to OpenAI and Google Gemini are made over encrypted, authenticated connections. We use API configurations that opt out of training data retention where available.</li>
+            <li><strong>Secure Infrastructure:</strong> Our entire backend runs on Supabase, which maintains SOC 2 Type II compliance, meaning it has been independently audited for security, availability, and confidentiality.</li>
+            <li><strong>Session Protection:</strong> User sessions are token-based with automatic expiration. We do not store long-lived credentials.</li>
+            <li><strong>Vulnerability Response:</strong> If you discover a security vulnerability, report it immediately to <a href="mailto:expectedendai@gmail.com">expectedendai@gmail.com</a>. We take all security reports seriously and will respond within 24 hours.</li>
+          </ul>
 
           <div class="divider"></div>
 
@@ -658,11 +694,6 @@
     <div class="footer-inner">
       <div class="footer-top">
         <div class="footer-brand">
-          <svg class="footer-logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="17" cy="17" r="11" stroke="#b6751d" stroke-width="2.5"/>
-            <circle cx="17" cy="17" r="5" stroke="#b6751d" stroke-width="1.5"/>
-            <line x1="25.5" y1="25.5" x2="36" y2="36" stroke="#b6751d" stroke-width="3" stroke-linecap="round"/>
-          </svg>
           <span class="footer-logo-text">MYBIBLELENS</span>
         </div>
         <nav class="footer-nav" aria-label="Footer navigation">
@@ -671,6 +702,12 @@
           <a href="#privacy">Privacy</a>
           <a href="#terms">Terms</a>
         </nav>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/smiledenzel?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="footer-social-link">@smiledenzel</a>
+        <a href="https://www.instagram.com/mybiblelens/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" class="footer-social-link">@mybiblelens</a>
+        <a href="https://www.instagram.com/thewatercheck?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="footer-social-link">@thewatercheck <span class="future-tag">Future Project!</span></a>
       </div>
       <div class="footer-divider"></div>
       <div class="footer-bottom">
