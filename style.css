@@ -472,6 +472,31 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
 }
 
 /* Partner Block */
+/* Show More Button */
+.show-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--gold);
+  background: transparent;
+  border: 1.5px solid var(--gold);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.show-more-btn:hover {
+  background: var(--gold);
+  color: var(--parchment);
+}
+.show-more-btn svg {
+  flex-shrink: 0;
+}
+
 .partner-block {
   background: var(--color-surface-2);
   border: 1px solid var(--color-border);

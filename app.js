@@ -151,3 +151,24 @@
   handleHash();
 
 })();
+
+// ─── Team Show More (global scope for onclick) ───
+function toggleTeam() {
+  var more = document.getElementById('team-more');
+  var btn = document.getElementById('team-toggle');
+  var label = document.getElementById('team-toggle-label');
+  var icon = document.getElementById('team-toggle-icon');
+  var isOpen = more.style.display === 'block';
+
+  if (isOpen) {
+    more.style.display = 'none';
+    label.textContent = 'Show Full Team';
+    btn.setAttribute('aria-expanded', 'false');
+    icon.style.transform = 'rotate(0deg)';
+  } else {
+    more.style.display = 'block';
+    label.textContent = 'Show Less';
+    btn.setAttribute('aria-expanded', 'true');
+    icon.style.transform = 'rotate(180deg)';
+  }
+}
