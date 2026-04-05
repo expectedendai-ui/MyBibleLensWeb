@@ -315,6 +315,16 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
   line-height: 1.1;
 }
 
+.hero-tm {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(182, 117, 29, 0.7);
+  margin-bottom: var(--space-3);
+}
+
 .hero-subtitle {
   font-family: var(--font-body);
   font-size: var(--text-base);
