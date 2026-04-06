@@ -172,3 +172,40 @@ function toggleTeam() {
     icon.style.transform = 'rotate(180deg)';
   }
 }
+
+// ─── Support Contact Form ───
+function handleSupportForm(e) {
+  e.preventDefault();
+
+  var btn     = document.getElementById('form-submit-btn');
+  var success = document.getElementById('form-success');
+  var error   = document.getElementById('form-error');
+
+  success.style.display = 'none';
+  error.style.display   = 'none';
+  btn.disabled    = true;
+  btn.textContent = 'Sending...';
+
+  var formData = new FormData(e.target);
+
+  fetch('https://formspree.io/f/xreoraez', {
+    method: 'POST',
+    body: formData,
+    headers: { 'Accept': 'application/json' }
+  })
+  .then(function(response) {
+    if (response.ok) {
+      success.style.display = 'block';
+      document.getElementById('support-form').reset();
+    } else {
+      error.style.display = 'block';
+    }
+  })
+  .catch(function() {
+    error.style.display = 'block';
+  })
+  .finally(function() {
+    btn.disabled    = false;
+    btn.textContent = 'Send Message';
+  });
+}
