@@ -135,7 +135,8 @@
               </div>
               <div class="team-card">
                 <p class="team-role">Marketing &amp; Advertising</p>
-                <p class="team-name">Denzel Rigaud</p>
+                <p class="team-name">You &amp; The Community</p>
+                <p class="team-desc" style="font-size:0.78rem;color:#7a5c3a;font-style:italic;margin-top:0.35rem;line-height:1.5;">Every share, every conversation, every testimony &mdash; you are the campaign.</p>
               </div>
               <div class="team-card">
                 <p class="team-role">Investor</p>
@@ -154,7 +155,7 @@
           <div class="partner-block">
             <h3 class="subsection-heading">Looking to Partner?</h3>
             <p>I can't wait to partner with a company with the same vision as me, where we can prosper, because building this brick by brick feels great, but having a team beside me will be extraordinary.</p>
-            <p>Reach out at <a href="mailto:expectedendai@gmail.com">expectedendai@gmail.com</a></p>
+            <p>Reach out at <a href="mailto:supportmybiblelens@gmail.com">supportmybiblelens@gmail.com</a></p>
           </div>
 
         </div>
@@ -171,8 +172,43 @@
         <div class="content-inner legal-content">
 
           <h2 class="section-heading">Contact Us</h2>
-          <p>For technical assistance, account inquiries, bug reports, or any legal questions, reach our support team at:</p>
-          <a href="mailto:expectedendai@gmail.com" class="contact-email-link">expectedendai@gmail.com</a>
+          <p>Use the form below to reach our support team. Select the category that best describes your inquiry so we can get you the right help, fast.</p>
+
+          <!-- CONTACT FORM -->
+          <form id="support-form" class="support-form" onsubmit="handleSupportForm(event)">
+            <div class="form-group">
+              <label class="form-label" for="support-name">Your Name</label>
+              <input type="text" id="support-name" name="name" class="form-input" placeholder="Denzel Rigaud" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="support-email">Your Email</label>
+              <input type="email" id="support-email" name="email" class="form-input" placeholder="you@example.com" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="support-category">What can we help you with?</label>
+              <select id="support-category" name="category" class="form-input form-select" required>
+                <option value="" disabled selected>Select a category...</option>
+                <option value="Technical Bug">🔴 Technical Bug</option>
+                <option value="Account Issue">🔑 Account Issue</option>
+                <option value="Question about a Verse">📖 Question about a Verse</option>
+                <option value="Privacy or Data Request">🔒 Privacy or Data Request</option>
+                <option value="Partnership Inquiry">🤝 Partnership Inquiry</option>
+                <option value="Security Vulnerability">🛡️ Security Vulnerability</option>
+                <option value="Other">💬 Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="support-message">Message</label>
+              <textarea id="support-message" name="message" class="form-input form-textarea" placeholder="Describe your issue or question in detail. Include your account email, any error messages, and screenshots if relevant." rows="6" required></textarea>
+            </div>
+            <button type="submit" class="form-submit-btn" id="form-submit-btn">Send Message</button>
+            <div id="form-success" class="form-success" style="display:none;">
+              <p>&#10003; Your message has been received. We'll be in touch within 24–48 hours.</p>
+            </div>
+            <div id="form-error" class="form-error" style="display:none;">
+              <p>Something went wrong. Please try again or email us directly at <a href="mailto:supportmybiblelens@gmail.com">supportmybiblelens@gmail.com</a>.</p>
+            </div>
+          </form>
 
           <div class="divider"></div>
 
@@ -204,7 +240,7 @@
 
           <h2 class="section-heading">Support Protocol</h2>
           <ol class="legal-list ordered">
-            <li><strong>Submit your inquiry</strong> via email to <a href="mailto:expectedendai@gmail.com">expectedendai@gmail.com</a>. Include your account email, a detailed description of the issue, and any relevant screenshots.</li>
+            <li><strong>Submit your inquiry</strong> using the contact form above. Select the correct category so your message is routed to the right team member immediately.</li>
             <li><strong>Receive an acknowledgment</strong> confirming receipt of your request within the stated response window.</li>
             <li><strong>Resolution or escalation.</strong> We will resolve your issue directly or escalate it to the appropriate team member with a follow-up timeline.</li>
             <li><strong>Follow-up.</strong> If your issue requires extended investigation, we will provide status updates every 48 hours until resolution.</li>
@@ -249,7 +285,7 @@
             <li><strong>Third-Party API Security:</strong> All requests to OpenAI and Google Gemini are made over encrypted, authenticated connections. We use API configurations that opt out of training data retention where available.</li>
             <li><strong>Secure Infrastructure:</strong> Our entire backend runs on Supabase, which maintains SOC 2 Type II compliance, meaning it has been independently audited for security, availability, and confidentiality.</li>
             <li><strong>Session Protection:</strong> User sessions are token-based with automatic expiration. We do not store long-lived credentials.</li>
-            <li><strong>Vulnerability Response:</strong> If you discover a security vulnerability, report it immediately to <a href="mailto:expectedendai@gmail.com">expectedendai@gmail.com</a>. We take all security reports seriously and will respond within 24 hours.</li>
+            <li><strong>Vulnerability Response:</strong> If you discover a security vulnerability, report it immediately to <a href="mailto:supportmybiblelens@gmail.com">supportmybiblelens@gmail.com</a>. We take all security reports seriously and will respond within 24 hours.</li>
           </ul>
 
           <div class="divider"></div>
@@ -257,9 +293,9 @@
           <h2 class="section-heading">Business Address</h2>
           <p>All legal and technical correspondence should be directed to:</p>
           <div class="address-block">
-            <p><strong>MyBibleLens</strong></p>
+            <p><strong>MyBibleLens&#8482;</strong></p>
             <p>Attn: Denzel Rigaud, Founder</p>
-            <p>Email: <a href="mailto:expectedendai@gmail.com">expectedendai@gmail.com</a></p>
+            <p>For all inquiries, please use the <a href="#support" onclick="showSection('support')" style="color:#b6751d;font-weight:600;">contact form above</a>.</p>
           </div>
 
         </div>
@@ -365,7 +401,7 @@
             <ul class="legal-list">
               <li><strong>Retention Period:</strong> We retain your data for as long as your account is active or as needed to provide the Service. Inactive accounts may be subject to deletion after 24 months of inactivity, with 30 days prior notice.</li>
               <li><strong>Right to Erasure:</strong> You may request the permanent, irreversible deletion of your account and <strong>all</strong> associated data — including reflections, journal entries, canvas data, AI interaction history, and your Apostolic Profile — at any time.</li>
-              <li><strong>How to Delete:</strong> Use the "Delete My Account & All Data" feature within the app settings, or email <a href="mailto:expectedendai@gmail.com">expectedendai@gmail.com</a> with the subject line "Data Deletion Request."</li>
+              <li><strong>How to Delete:</strong> Use the "Delete My Account & All Data" feature within the app settings, or email <a href="mailto:supportmybiblelens@gmail.com">supportmybiblelens@gmail.com</a> with the subject line "Data Deletion Request."</li>
               <li><strong>Deletion Timeline:</strong> Upon receipt of a verified deletion request, all personal data will be permanently removed from our active systems within <strong>30 calendar days</strong>. Backup systems will purge the data within an additional 60 days.</li>
               <li><strong>Exceptions:</strong> We may retain certain data if required by law, to resolve disputes, or to enforce our agreements. Any such retained data will be limited to what is legally necessary.</li>
             </ul>
@@ -420,13 +456,13 @@
               <li><strong>Right to Non-Discrimination:</strong> Exercise your rights without receiving discriminatory treatment.</li>
               <li><strong>No Sale of Personal Information:</strong> We do not sell your personal information. We do not engage in "sharing" for cross-context behavioral advertising as defined under the CCPA.</li>
             </ul>
-            <p>To exercise any of these rights, email <a href="mailto:expectedendai@gmail.com">expectedendai@gmail.com</a> with the subject line "Privacy Rights Request." We will respond within 30 days (or within the timeframe required by applicable law).</p>
+            <p>To exercise any of these rights, email <a href="mailto:supportmybiblelens@gmail.com">supportmybiblelens@gmail.com</a> with the subject line "Privacy Rights Request." We will respond within 30 days (or within the timeframe required by applicable law).</p>
           </div>
 
           <!-- 9 -->
           <div class="legal-section" id="priv-9">
             <h2 class="legal-heading"><span class="legal-num">9.</span> Children's Privacy</h2>
-            <p>MyBibleLens is not directed at children under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal data, please contact us at <a href="mailto:expectedendai@gmail.com">expectedendai@gmail.com</a>, and we will promptly delete such information.</p>
+            <p>MyBibleLens is not directed at children under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal data, please contact us at <a href="mailto:supportmybiblelens@gmail.com">supportmybiblelens@gmail.com</a>, and we will promptly delete such information.</p>
             <p>Users between the ages of 13 and 18 must have the permission of a parent or legal guardian to use the Service.</p>
           </div>
 
@@ -449,7 +485,7 @@
             <div class="address-block">
               <p><strong>MyBibleLens</strong></p>
               <p>Attn: Denzel Rigaud, Founder & Data Controller</p>
-              <p>Email: <a href="mailto:expectedendai@gmail.com">expectedendai@gmail.com</a></p>
+              <p>Email: <a href="mailto:supportmybiblelens@gmail.com">supportmybiblelens@gmail.com</a></p>
             </div>
           </div>
 
@@ -628,7 +664,7 @@
           <div class="legal-section" id="tos-12">
             <h2 class="legal-heading"><span class="legal-num">12.</span> Account Termination</h2>
             <ul class="legal-list">
-              <li><strong>By You:</strong> You may terminate your account at any time using the in-app deletion feature or by emailing <a href="mailto:expectedendai@gmail.com">expectedendai@gmail.com</a>.</li>
+              <li><strong>By You:</strong> You may terminate your account at any time using the in-app deletion feature or by emailing <a href="mailto:supportmybiblelens@gmail.com">supportmybiblelens@gmail.com</a>.</li>
               <li><strong>By MBL:</strong> We may suspend or terminate your account at our sole discretion if you violate these Terms, engage in prohibited conduct, or for any other reason with or without notice.</li>
               <li><strong>Effect of Termination:</strong> Upon termination, your right to use the Service ceases immediately. We will delete your data in accordance with our <a href="#privacy">Privacy Policy</a>.</li>
             </ul>
@@ -666,7 +702,7 @@
             <h2 class="legal-heading"><span class="legal-num">16.</span> Dispute Resolution & Governing Law</h2>
             <ul class="legal-list">
               <li><strong>Governing Law:</strong> These Terms shall be governed by and construed in accordance with the laws of the State of Florida, United States, without regard to its conflict of law provisions.</li>
-              <li><strong>Informal Resolution:</strong> Before filing any formal claim, you agree to first attempt to resolve the dispute informally by contacting us at <a href="mailto:expectedendai@gmail.com">expectedendai@gmail.com</a>. We will attempt to resolve the dispute within 30 days.</li>
+              <li><strong>Informal Resolution:</strong> Before filing any formal claim, you agree to first attempt to resolve the dispute informally by contacting us at <a href="mailto:supportmybiblelens@gmail.com">supportmybiblelens@gmail.com</a>. We will attempt to resolve the dispute within 30 days.</li>
               <li><strong>Arbitration:</strong> If informal resolution fails, any dispute arising out of or relating to these Terms or the Service shall be resolved through binding arbitration administered by the American Arbitration Association (AAA) under its Consumer Arbitration Rules. The arbitration shall take place in the State of Florida.</li>
               <li><strong>Class Action Waiver:</strong> YOU AND MYBIBLELENS AGREE THAT EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN YOUR OR ITS INDIVIDUAL CAPACITY, AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS OR REPRESENTATIVE PROCEEDING.</li>
               <li><strong>Small Claims Court:</strong> Either party may bring a qualifying claim in small claims court.</li>
@@ -692,7 +728,7 @@
             <div class="address-block">
               <p><strong>MyBibleLens</strong></p>
               <p>Attn: Denzel Rigaud, Founder</p>
-              <p>Email: <a href="mailto:expectedendai@gmail.com">expectedendai@gmail.com</a></p>
+              <p>Email: <a href="mailto:supportmybiblelens@gmail.com">supportmybiblelens@gmail.com</a></p>
             </div>
           </div>
 
@@ -725,7 +761,7 @@
       <div class="footer-divider"></div>
       <div class="footer-bottom">
         <p>&copy; 2026 MyBibleLens&#8482;. All rights reserved. Built by Denzel Rigaud. #StudentFounder</p>
-        <p class="footer-contact">Contact: <a href="mailto:expectedendai@gmail.com">expectedendai@gmail.com</a></p>
+        <p class="footer-contact"><a href="#support" onclick="showSection('support')" style="color:#b6751d;">Contact Support</a></p>
       </div>
     </div>
   </footer>
