@@ -209,3 +209,39 @@ function handleSupportForm(e) {
     btn.textContent = 'Send Message';
   });
 }
+
+function handlePartnershipForm(e) {
+  e.preventDefault();
+
+  var btn     = document.getElementById("partner-submit-btn");
+  var success = document.getElementById("partner-success-msg");
+  var error   = document.getElementById("partner-error-msg");
+
+  success.style.display = "none";
+  error.style.display   = "none";
+  btn.disabled    = true;
+  btn.textContent = "Sending...";
+
+  var formData = new FormData(e.target);
+
+  fetch("https://formspree.io/f/mzdkqdyy", {
+    method: "POST",
+    body: formData,
+    headers: { "Accept": "application/json" }
+  })
+  .then(function(response) {
+    if (response.ok) {
+      success.style.display = "block";
+      document.getElementById("partnership-form").reset();
+    } else {
+      error.style.display = "block";
+    }
+  })
+  .catch(function() {
+    error.style.display = "block";
+  })
+  .finally(function() {
+    btn.disabled    = false;
+    btn.textContent = "Send Message";
+  });
+}
