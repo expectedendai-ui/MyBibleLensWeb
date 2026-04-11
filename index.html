@@ -1128,22 +1128,27 @@
         <!-- CARD 2: Sanctuary -->
         <div class="pricing-card-wrapper">
           <div class="pricing-card">
-            <div class="pricing-card-inner" data-monthly="$14.77" data-yearly="$147.77">
+            <div class="pricing-card-inner">
               <div class="pricing-tier-name">Sanctuary</div>
               <div>
-                <div class="pricing-price" data-monthly-price="$14.77" data-yearly-price="$147.77">$14.77</div>
-                <div class="pricing-price-sub" data-monthly-sub="/month" data-yearly-sub="/year">/month</div>
+                <div class="pricing-price" id="sanctuary-price">$14.77</div>
+                <div class="pricing-price-sub" id="sanctuary-period">/month</div>
               </div>
               <div class="pricing-toggle">
-                <button class="pricing-toggle-btn active" data-period="monthly">Monthly</button>
-                <button class="pricing-toggle-btn" data-period="yearly">Yearly</button>
+                <button class="pricing-toggle-btn active" data-period="monthly" onclick="toggleSanctuaryBilling(this)">Monthly</button>
+                <button class="pricing-toggle-btn" data-period="yearly" onclick="toggleSanctuaryBilling(this)">Yearly</button>
+              </div>
+              <div style="margin:0.8rem 0;">
+                <label style="font-family:'Inter',sans-serif;font-size:0.75rem;color:#b6751d;text-transform:uppercase;letter-spacing:1px;">Members: <span id="sanctuary-count">2</span></label>
+                <input type="range" id="sanctuary-slider" min="1" max="15" value="2" oninput="updateSanctuaryPrice()" style="width:100%;accent-color:#b6751d;margin-top:0.4rem;cursor:pointer;">
+                <div style="font-family:'Inter',sans-serif;font-size:0.8rem;color:#D4921F;margin-top:0.3rem;">(<span id="sanctuary-per-member">$7.39</span> per member)</div>
               </div>
               <ul class="pricing-features" role="list">
                 <li>Everything in Apostle per member</li>
-                <li>1–15 members</li>
-                <li>Scripture Glow (10/week)</li>
+                <li>Scripture Glow (10/week) per member</li>
                 <li>Sermon Deck shared</li>
-                <li>50 Reflections/week</li>
+                <li>50 Reflections/week per member</li>
+                <li>All 7 themes</li>
               </ul>
               <button class="pricing-expand-btn" aria-label="Show all features">
                 <span class="expand-text">Show all ↓</span>
@@ -1157,22 +1162,27 @@
         <!-- CARD 3: Kingdom -->
         <div class="pricing-card-wrapper">
           <div class="pricing-card">
-            <div class="pricing-card-inner" data-monthly="$57.77" data-yearly="$577.77">
+            <div class="pricing-card-inner">
               <div class="pricing-tier-name">Kingdom ✦✦</div>
               <div>
-                <div class="pricing-price" data-monthly-price="$57.77" data-yearly-price="$577.77">$57.77</div>
-                <div class="pricing-price-sub" data-monthly-sub="/month" data-yearly-sub="/year">/month</div>
+                <div class="pricing-price" id="kingdom-price">$76.77</div>
+                <div class="pricing-price-sub" id="kingdom-period">/month</div>
               </div>
               <div class="pricing-toggle">
-                <button class="pricing-toggle-btn active" data-period="monthly">Monthly</button>
-                <button class="pricing-toggle-btn" data-period="yearly">Yearly</button>
+                <button class="pricing-toggle-btn active" data-period="monthly" onclick="toggleKingdomBilling(this)">Monthly</button>
+                <button class="pricing-toggle-btn" data-period="yearly" onclick="toggleKingdomBilling(this)">Yearly</button>
+              </div>
+              <div style="margin:0.8rem 0;">
+                <label style="font-family:'Inter',sans-serif;font-size:0.75rem;color:#b6751d;text-transform:uppercase;letter-spacing:1px;">Seats: <span id="kingdom-count">25</span></label>
+                <input type="range" id="kingdom-slider" min="15" max="1000" value="25" step="5" oninput="updateKingdomPrice()" style="width:100%;accent-color:#b6751d;margin-top:0.4rem;cursor:pointer;">
+                <div style="font-family:'Inter',sans-serif;font-size:0.8rem;color:#D4921F;margin-top:0.3rem;">(<span id="kingdom-per-seat">$3.07</span> per seat)</div>
               </div>
               <ul class="pricing-features" role="list">
-                <li>Everything in Sanctuary</li>
-                <li>15–1,000 members</li>
+                <li>Everything in Sanctuary per member</li>
                 <li>Unlimited everything</li>
                 <li>Pastor admin dashboard</li>
-                <li>Usage stats</li>
+                <li>Invite/remove members</li>
+                <li>Usage stats per member</li>
               </ul>
               <button class="pricing-expand-btn" aria-label="Show all features">
                 <span class="expand-text">Show all ↓</span>
@@ -1404,6 +1414,73 @@
         }
       });
     });
+  // ── Dynamic Pricing Sliders ──
+  var sanctuaryBilling = 'monthly';
+  var kingdomBilling = 'monthly';
+
+  function calcSanctuary(members) {
+    var price = 7.77;
+    for (var i = 2; i <= members; i++) {
+      if (i <= 5) price += 5.00;
+      else if (i <= 10) price += 3.50;
+      else price += 2.50;
+    }
+    return price;
+  }
+
+  function calcKingdom(seats) {
+    var price = 47.77;
+    if (seats > 15) {
+      var extra = seats - 15;
+      if (extra <= 485) price += extra * 1.90;
+      else price += 485 * 1.90 + (extra - 485) * 1.60;
+    }
+    return price;
+  }
+
+  function updateSanctuaryPrice() {
+    var slider = document.getElementById('sanctuary-slider');
+    var members = parseInt(slider.value);
+    var monthly = calcSanctuary(members);
+    var display = sanctuaryBilling === 'yearly' ? (monthly * 10) : monthly;
+    var suffix = sanctuaryBilling === 'yearly' ? '/year' : '/month';
+    var perMember = display / members;
+    document.getElementById('sanctuary-count').textContent = members;
+    document.getElementById('sanctuary-price').textContent = '$' + display.toFixed(2);
+    document.getElementById('sanctuary-period').textContent = suffix;
+    document.getElementById('sanctuary-per-member').textContent = '$' + perMember.toFixed(2);
+  }
+
+  function toggleSanctuaryBilling(btn) {
+    sanctuaryBilling = btn.getAttribute('data-period');
+    btn.parentNode.querySelectorAll('.pricing-toggle-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    updateSanctuaryPrice();
+  }
+
+  function updateKingdomPrice() {
+    var slider = document.getElementById('kingdom-slider');
+    var seats = parseInt(slider.value);
+    var monthly = calcKingdom(seats);
+    var display = kingdomBilling === 'yearly' ? (monthly * 10) : monthly;
+    var suffix = kingdomBilling === 'yearly' ? '/year' : '/month';
+    var perSeat = display / seats;
+    document.getElementById('kingdom-count').textContent = seats;
+    document.getElementById('kingdom-price').textContent = '$' + display.toFixed(2);
+    document.getElementById('kingdom-period').textContent = suffix;
+    document.getElementById('kingdom-per-seat').textContent = '$' + perSeat.toFixed(2);
+  }
+
+  function toggleKingdomBilling(btn) {
+    kingdomBilling = btn.getAttribute('data-period');
+    btn.parentNode.querySelectorAll('.pricing-toggle-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    updateKingdomPrice();
+  }
+
+  // Initialize on load
+  updateSanctuaryPrice();
+  updateKingdomPrice();
   </script>
 </body>
 </html>
