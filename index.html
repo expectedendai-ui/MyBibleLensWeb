@@ -3,809 +3,1385 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MyBibleLens™ — Digital Sanctuary</title>
-  <meta name="description" content="MyBibleLens is an AI-powered spiritual research and personal growth sanctuary. About, Support, Privacy Policy, and Terms of Service.">
-  <meta property="og:title" content="MyBibleLens — Digital Sanctuary">
-  <meta property="og:description" content="AI-powered spiritual research and personal growth. Legal policies and mission.">
-  <meta property="og:type" content="website">
+  <title>MyBibleLens™ — Unlearning the World. Reclaiming the Human Spirit.</title>
+  <meta name="description" content="MyBibleLens™ is a premium spiritual Bible study app with 6 powerful lenses, AI-powered tools, and a living prayer experience.">
 
-  <!-- Fonts: Hammersmith One (headlines) + Inter (body) -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="./style.css">
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
+
+  <style>
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      scroll-behavior: smooth;
+      scroll-padding-top: 4rem;
+    }
+
+    body {
+      min-height: 100dvh;
+      line-height: 1.6;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      color: #3D2B1F;
+      background-color: #F5F2ED;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Hammersmith One', 'Arial Black', sans-serif;
+      text-wrap: balance;
+      line-height: 1.15;
+    }
+
+    p, li, figcaption { text-wrap: pretty; max-width: 72ch; }
+
+    img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
+
+    a { text-decoration: none; color: inherit; }
+
+    button {
+      cursor: pointer;
+      background: none;
+      border: none;
+      font: inherit;
+      color: inherit;
+    }
+
+    ::selection {
+      background: rgba(182, 117, 29, 0.3);
+      color: #3D2B1F;
+    }
+
+    :focus-visible {
+      outline: 2px solid #b6751d;
+      outline-offset: 3px;
+      border-radius: 0.375rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* ========== DESIGN TOKENS ========== */
+    :root {
+      --deep-brown: #3D2B1F;
+      --parchment: #F5F2ED;
+      --gold: #b6751d;
+      --gold-light: #D4921F;
+      --cream: #FAF7F2;
+      --dark-bg: #1A1008;
+      --electric-blue: #00D4FF;
+      --dross-red: #B22222;
+      --white: #FFFFFF;
+      --muted-gold: rgba(212, 146, 31, 0.6);
+
+      --font-display: 'Hammersmith One', 'Arial Black', sans-serif;
+      --font-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --text-3xl: clamp(2.5rem, 1rem + 4vw, 5rem);
+
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --space-24: 6rem;
+
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      --radius-full: 9999px;
+
+      --transition-interactive: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+      --shadow-sm: 0 1px 2px rgba(26, 16, 8, 0.06);
+      --shadow-md: 0 4px 12px rgba(26, 16, 8, 0.1);
+      --shadow-lg: 0 12px 32px rgba(26, 16, 8, 0.14);
+
+      --content-wide: 1200px;
+    }
+
+    /* ========== LAYOUT ========== */
+    .container {
+      max-width: var(--content-wide);
+      margin-inline: auto;
+      padding-inline: var(--space-6);
+    }
+
+    .section-padding {
+      padding-block: clamp(var(--space-16), 8vw, var(--space-24));
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      position: relative;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--dark-bg);
+      overflow: hidden;
+      text-align: center;
+      padding: var(--space-8) var(--space-6);
+    }
+
+    /* Floating particles */
+    .hero-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(182, 117, 29, 0.4);
+      animation: particle-float linear infinite;
+    }
+
+    @keyframes particle-float {
+      0% { transform: translateY(0) translateX(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh) translateX(30px); opacity: 0; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-6);
+    }
+
+    /* Golden Orb */
+    .hero-orb {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%,
+        #f0c850 0%,
+        #D4921F 30%,
+        #b6751d 55%,
+        #8B5E14 80%,
+        #5C3D0E 100%
+      );
+      box-shadow:
+        0 0 60px rgba(212, 146, 31, 0.4),
+        0 0 120px rgba(182, 117, 29, 0.2),
+        inset 0 -10px 20px rgba(92, 61, 14, 0.4),
+        inset 0 10px 20px rgba(240, 200, 80, 0.3);
+      animation: orb-pulse 4s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes orb-pulse {
+      0%, 100% {
+        box-shadow:
+          0 0 60px rgba(212, 146, 31, 0.4),
+          0 0 120px rgba(182, 117, 29, 0.2),
+          inset 0 -10px 20px rgba(92, 61, 14, 0.4),
+          inset 0 10px 20px rgba(240, 200, 80, 0.3);
+      }
+      50% {
+        box-shadow:
+          0 0 80px rgba(212, 146, 31, 0.6),
+          0 0 160px rgba(182, 117, 29, 0.3),
+          inset 0 -10px 20px rgba(92, 61, 14, 0.4),
+          inset 0 10px 20px rgba(240, 200, 80, 0.4);
+      }
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 1.5rem + 3vw, 3.5rem);
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--muted-gold);
+      font-weight: 400;
+      max-width: 480px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: var(--space-4);
+    }
+
+    /* ========== BUTTONS ========== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: var(--space-3) var(--space-8);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      border-radius: var(--radius-full);
+      transition:
+        background var(--transition-interactive),
+        color var(--transition-interactive),
+        box-shadow var(--transition-interactive),
+        transform var(--transition-interactive),
+        border-color var(--transition-interactive);
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .btn:active { transform: translateY(1px); }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #D4921F, #b6751d);
+      color: var(--white);
+      border: 2px solid transparent;
+    }
+
+    .btn-gold:hover {
+      background: linear-gradient(135deg, #e0a02a, #c98520);
+      box-shadow: 0 4px 20px rgba(182, 117, 29, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--gold-light);
+      border: 2px solid var(--gold-light);
+    }
+
+    .btn-outline:hover {
+      background: rgba(212, 146, 31, 0.1);
+      border-color: #e0a02a;
+      transform: translateY(-2px);
+    }
+
+    .btn-large {
+      min-height: 52px;
+      padding: var(--space-4) var(--space-10);
+      font-size: var(--text-base);
+    }
+
+    .btn-full-mobile {
+      width: auto;
+    }
+
+    @media (max-width: 640px) {
+      .btn-full-mobile { width: 100%; }
+    }
+
+    /* ========== SECTION TITLES ========== */
+    .section-title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      color: var(--deep-brown);
+      margin-bottom: var(--space-3);
+    }
+
+    .section-title--light {
+      color: var(--gold-light);
+    }
+
+    .section-title--white {
+      color: var(--white);
+    }
+
+    .section-subtitle {
+      font-family: var(--font-body);
+      font-size: var(--text-lg);
+      color: rgba(61, 43, 31, 0.7);
+      font-weight: 400;
+      max-width: 600px;
+    }
+
+    .section-subtitle--light {
+      color: rgba(212, 146, 31, 0.6);
+    }
+
+    .section-header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      margin-bottom: var(--space-12);
+    }
+
+    /* ========== SECTION 2: LENS SYSTEM ========== */
+    .lens-section {
+      background: var(--parchment);
+    }
+
+    .lens-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-6);
+    }
+
+    .lens-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6) var(--space-8);
+      border-left: 4px solid var(--parchment);
+      min-height: 44px;
+      transition:
+        box-shadow var(--transition-interactive),
+        transform var(--transition-interactive);
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    .lens-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .lens-card h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      color: var(--deep-brown);
+      margin-bottom: var(--space-2);
+    }
+
+    .lens-card p {
+      font-size: var(--text-sm);
+      color: rgba(61, 43, 31, 0.7);
+      line-height: 1.6;
+    }
+
+    .lens-card--1 { border-left-color: #F5F2ED; }
+    .lens-card--2 { border-left-color: #1a237e; }
+    .lens-card--3 { border-left-color: #37474f; }
+    .lens-card--4 { border-left-color: #558b2f; }
+    .lens-card--5 { border-left-color: #f9a825; }
+    .lens-card--6 { border-left-color: #bf360c; }
+
+    /* ========== SECTION 3: THE ORB ========== */
+    .orb-section {
+      background: var(--dark-bg);
+      text-align: center;
+    }
+
+    .orb-section-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-8);
+    }
+
+    .orb-label {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      color: var(--gold-light);
+      letter-spacing: 0.05em;
+    }
+
+    .orb-large {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%,
+        #f0c850 0%,
+        #D4921F 30%,
+        #b6751d 55%,
+        #8B5E14 80%,
+        #5C3D0E 100%
+      );
+      box-shadow:
+        0 0 80px rgba(212, 146, 31, 0.5),
+        0 0 160px rgba(182, 117, 29, 0.25),
+        inset 0 -15px 30px rgba(92, 61, 14, 0.4),
+        inset 0 15px 30px rgba(240, 200, 80, 0.3);
+      animation: orb-rotate 20s linear infinite, orb-pulse 4s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes orb-rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .orb-description {
+      font-size: var(--text-base);
+      color: rgba(245, 242, 237, 0.75);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    /* ========== SECTION 4: STUDY REPOSITORY ========== */
+    .repo-section {
+      background: var(--parchment);
+    }
+
+    .repo-carousel {
+      display: flex;
+      gap: var(--space-6);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: var(--space-4);
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold) transparent;
+    }
+
+    .repo-carousel::-webkit-scrollbar { height: 6px; }
+    .repo-carousel::-webkit-scrollbar-track { background: transparent; }
+    .repo-carousel::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+    .repo-card {
+      flex: 0 0 auto;
+      width: 280px;
+      min-width: 280px;
+      background: var(--deep-brown);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6) var(--space-6);
+      border-left: 4px solid var(--gold);
+      scroll-snap-align: start;
+      opacity: 0;
+      transform: translateX(40px);
+    }
+
+    .repo-card h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      color: var(--gold-light);
+      margin-bottom: var(--space-3);
+    }
+
+    .repo-card p {
+      font-size: var(--text-sm);
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.6;
+    }
+
+    /* ========== SECTION 5: FOUNDING MEMBERS ========== */
+    .founding-section {
+      background: var(--dark-bg);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .founding-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(ellipse at center, rgba(182, 117, 29, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .founding-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-8);
+    }
+
+    .founding-number {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 3rem + 5vw, 8rem);
+      line-height: 1;
+      background: linear-gradient(
+        90deg,
+        #8B5E14 0%,
+        #D4921F 20%,
+        #f0c850 40%,
+        #D4921F 60%,
+        #b6751d 80%,
+        #8B5E14 100%
+      );
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 100% 50%; }
+      100% { background-position: -100% 50%; }
+    }
+
+    .founding-title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      color: var(--white);
+    }
+
+    .founding-subtitle {
+      font-size: var(--text-lg);
+      color: rgba(245, 242, 237, 0.7);
+      max-width: 560px;
+    }
+
+    .founding-price {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+      color: var(--gold-light);
+      line-height: 1.2;
+    }
+
+    .founding-price-sub {
+      font-size: var(--text-sm);
+      color: rgba(212, 146, 31, 0.6);
+      font-weight: 400;
+      margin-top: var(--space-1);
+    }
+
+    .founding-features {
+      list-style: none;
+      text-align: left;
+      max-width: 440px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .founding-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      font-size: var(--text-base);
+      color: rgba(245, 242, 237, 0.85);
+    }
+
+    .founding-features li::before {
+      content: '✓';
+      color: var(--gold-light);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Progress bar */
+    .progress-wrapper {
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #b6751d, #D4921F, #f0c850);
+      border-radius: var(--radius-full);
+      transition: width 1s var(--ease-out);
+    }
+
+    .progress-text {
+      font-size: var(--text-sm);
+      color: rgba(212, 146, 31, 0.6);
+      margin-top: var(--space-2);
+    }
+
+    .founding-quote {
+      font-style: italic;
+      font-size: var(--text-sm);
+      color: var(--muted-gold);
+      max-width: 400px;
+      margin-top: var(--space-4);
+    }
+
+    /* ========== SECTION 6: PRICING ========== */
+    .pricing-section {
+      background: var(--parchment);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-8);
+      align-items: start;
+    }
+
+    .pricing-card-wrapper {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+
+    .pricing-card {
+      position: relative;
+      border-radius: var(--radius-xl);
+      padding: 2px;
+      background: linear-gradient(135deg, #8B5E14, #D4921F, #f0c850, #D4921F, #8B5E14);
+      background-size: 200% 200%;
+      animation: border-shimmer 4s ease-in-out infinite;
+      transition:
+        transform var(--transition-interactive),
+        box-shadow var(--transition-interactive);
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 48px rgba(182, 117, 29, 0.2);
+    }
+
+    @keyframes border-shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .pricing-card-inner {
+      background: var(--dark-bg);
+      border-radius: calc(var(--radius-xl) - 2px);
+      padding: var(--space-8);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .pricing-tier-name {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      color: var(--gold-light);
+    }
+
+    .pricing-price {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    .pricing-price-sub {
+      font-size: var(--text-xs);
+      color: rgba(245, 242, 237, 0.5);
+      font-weight: 400;
+    }
+
+    /* Toggle pills */
+    .pricing-toggle {
+      display: flex;
+      gap: 0;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-full);
+      padding: 3px;
+      width: fit-content;
+    }
+
+    .pricing-toggle-btn {
+      padding: var(--space-2) var(--space-4);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      border-radius: var(--radius-full);
+      color: rgba(245, 242, 237, 0.5);
+      transition:
+        background var(--transition-interactive),
+        color var(--transition-interactive);
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+    }
+
+    .pricing-toggle-btn.active {
+      background: linear-gradient(135deg, #b6751d, #D4921F);
+      color: var(--white);
+    }
+
+    .pricing-toggle-btn:not(.active):hover {
+      color: rgba(245, 242, 237, 0.8);
+    }
+
+    .pricing-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      overflow: hidden;
+      max-height: 200px;
+      transition: max-height 0.3s ease;
+    }
+
+    .pricing-card-inner.expanded .pricing-features {
+      max-height: 600px;
+    }
+
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      font-size: var(--text-sm);
+      color: rgba(245, 242, 237, 0.75);
+    }
+
+    .pricing-features li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold-light);
+      flex-shrink: 0;
+      margin-top: 8px;
+    }
+
+    .pricing-expand-btn {
+      font-size: var(--text-xs);
+      color: var(--gold-light);
+      padding: var(--space-2) 0;
+      text-align: center;
+      opacity: 0.7;
+      transition: opacity var(--transition-interactive);
+    }
+
+    .pricing-expand-btn:hover { opacity: 1; }
+
+    .pricing-card-inner.expanded .pricing-expand-btn .expand-text {
+      display: none;
+    }
+
+    .pricing-card-inner:not(.expanded) .pricing-expand-btn .collapse-text {
+      display: none;
+    }
+
+    /* ========== SECTION 7: QUOTE ========== */
+    .quote-section {
+      background: var(--dark-bg);
+      text-align: center;
+    }
+
+    .quote-text {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      color: var(--white);
+      max-width: 640px;
+      margin-inline: auto;
+      line-height: 1.4;
+    }
+
+    .quote-author {
+      font-size: var(--text-base);
+      color: var(--gold-light);
+      margin-top: var(--space-6);
+      font-weight: 500;
+    }
+
+    .quote-handles {
+      font-size: var(--text-sm);
+      color: rgba(212, 146, 31, 0.5);
+      margin-top: var(--space-3);
+      letter-spacing: 0.02em;
+    }
+
+    /* ========== SECTION 8: FOOTER ========== */
+    .footer-section {
+      background: var(--parchment);
+      text-align: center;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-8);
+    }
+
+    .footer-title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      color: var(--deep-brown);
+    }
+
+    .app-badges {
+      display: flex;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .app-badge {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--deep-brown);
+      color: var(--white);
+      padding: var(--space-3) var(--space-6);
+      border-radius: var(--radius-lg);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      min-height: 44px;
+      transition:
+        background var(--transition-interactive),
+        transform var(--transition-interactive);
+    }
+
+    .app-badge:hover {
+      background: #2a1c12;
+      transform: translateY(-2px);
+    }
+
+    .app-badge svg { width: 24px; height: 24px; flex-shrink: 0; }
+
+    .footer-links {
+      display: flex;
+      gap: var(--space-6);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-links a {
+      font-size: var(--text-sm);
+      color: rgba(61, 43, 31, 0.6);
+      transition: color var(--transition-interactive);
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-legal {
+      font-size: var(--text-xs);
+      color: rgba(61, 43, 31, 0.5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      align-items: center;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .lens-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+        margin-inline: auto;
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+        width: 100%;
+        max-width: 320px;
+      }
+
+      .hero-ctas .btn { width: 100%; }
+
+      .founding-features {
+        padding-inline: var(--space-4);
+      }
+
+      .footer-links {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-4);
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .lens-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1025px) {
+      .lens-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .pricing-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* Utility: animated elements are visible by default for no-JS fallback */
+    .gsap-hidden { opacity: 0; }
+  </style>
 </head>
 <body>
 
-  <!-- Skip Link -->
-  <a href="#main-content" class="sr-only" style="position:absolute;top:-9999px;left:-9999px;z-index:9999;background:#b6751d;color:#fff;padding:8px 16px;font-size:14px;border-radius:4px;">Skip to content</a>
-
-  <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
-  <header class="site-header" id="site-header">
-    <div class="header-inner">
-      <a href="#about" class="logo-link" aria-label="MyBibleLens Home">
-        <span class="logo-text">MYBIBLELENS&#8482;</span>
-      </a>
-      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
-        <a href="#about" class="nav-link active" data-section="about">About</a>
-        <a href="#support" class="nav-link" data-section="support">Support</a>
-        <a href="#privacy" class="nav-link" data-section="privacy">Privacy</a>
-        <a href="#terms" class="nav-link" data-section="terms">Terms</a>
-      </nav>
-      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-      </button>
+  <!-- ===== SECTION 1: HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-particles" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="hero-orb" id="hero-orb" aria-hidden="true"></div>
+      <h1 class="hero-title">MyBibleLens™</h1>
+      <p class="hero-tagline">Unlearning the World. Reclaiming the Human Spirit.</p>
+      <div class="hero-ctas">
+        <a href="#download" class="btn btn-gold">Download the App</a>
+        <a href="#founding" class="btn btn-outline">Become a Founding Member</a>
+      </div>
     </div>
-  </header>
+  </section>
 
-  <!-- Mobile Nav Overlay -->
-  <div class="mobile-nav-overlay" id="mobile-nav-overlay">
-    <nav class="mobile-nav" aria-label="Mobile navigation">
-      <a href="#about" class="mobile-nav-link" data-section="about">About</a>
-      <a href="#support" class="mobile-nav-link" data-section="support">Support</a>
-      <a href="#privacy" class="mobile-nav-link" data-section="privacy">Privacy</a>
-      <a href="#terms" class="mobile-nav-link" data-section="terms">Terms</a>
-    </nav>
-  </div>
-
-  <!-- ═══════════════════════════════ MAIN ═══════════════════════════════ -->
-  <main id="main-content">
-
-    <!-- ══════════════ ABOUT SECTION ══════════════ -->
-    <section class="page-section" id="about" data-page="about">
-
-      <!-- Hero -->
-      <div class="hero">
-        <div class="hero-inner">
-          <p class="hero-tag">A Digital Sanctuary</p>
-          <h1 class="hero-title">Regardless of religious or spiritual label, the core message of humanity is compassion, love and kindness.</h1>
-          <p class="hero-tm">MyBibleLens&#8482;</p>
-          <p class="hero-subtitle"><strong><em>Let's grow together!</em></strong></p>
+  <!-- ===== SECTION 2: THE LENS SYSTEM ===== -->
+  <section class="lens-section section-padding" id="lenses">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Six Lenses. One Truth.</h2>
+        <p class="section-subtitle">Each lens reveals a different dimension of scripture.</p>
+      </div>
+      <div class="lens-grid">
+        <div class="lens-card lens-card--1">
+          <h3>Lens</h3>
+          <p>Understand Christ in the Bible</p>
+        </div>
+        <div class="lens-card lens-card--2">
+          <h3>Dreams</h3>
+          <p>Understand your dreams through scripture</p>
+        </div>
+        <div class="lens-card lens-card--3">
+          <h3>Etymology</h3>
+          <p>Root meaning of words in scripture</p>
+        </div>
+        <div class="lens-card lens-card--4">
+          <h3>Neuroscience</h3>
+          <p>The science behind your spirit</p>
+        </div>
+        <div class="lens-card lens-card--5">
+          <h3>The Mirror</h3>
+          <p>Speak wisdom. See yourself.</p>
+        </div>
+        <div class="lens-card lens-card--6">
+          <h3>Refiner</h3>
+          <p>When you forget who you are</p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- Purpose -->
-      <div class="content-block">
-        <div class="content-inner">
+  <!-- ===== SECTION 3: THE ORB ===== -->
+  <section class="orb-section section-padding" id="the-orb">
+    <div class="container">
+      <div class="orb-section-inner">
+        <h2 class="orb-label">The Orb</h2>
+        <div class="orb-large" id="orb-large" aria-hidden="true"></div>
+        <p class="orb-description">Pray stronger. Manifest deeper. The Orb cycles through all 7 Kingdom themes — a living, breathing center of your study.</p>
+      </div>
+    </div>
+  </section>
 
-          <div class="about-grid">
-            <div class="about-main">
-              <h2 class="section-heading">The Mission</h2>
-              <p>My purpose in making this app was to guide me through challenges in life and really hone me into understanding what God has in store for me, and understanding how much Jesus Christ loves me and how He's by my side no matter what I'm going through.</p>
-              <p>For me to understand, I need more than just Christ in the Bible. I need something to help me understand — that's the <strong>Lens</strong>. I want to understand my dreams — that's <strong>Dreams</strong>. The root meaning of things around me — <strong>Etymology</strong>. The chemicals in our bodies — <strong>Neuroscience</strong>. How to speak wisdom to others — <strong>Philosopher</strong>. And when I get distracted, lost, or forget who I am — <strong>The Refiner</strong>.</p>
-              <p>How can I pray stronger, manifest deeper? <strong>The Orb</strong>.</p>
-              <p>Where can I visualize this all? <strong>Study Repository</strong>. How can I make connections? <strong>Infinite Canvas</strong>. How can I write it down? <strong>Reflection</strong>. How can I see what my people are studying? <strong>Beloved</strong>.</p>
-            </div>
-            <div class="about-aside">
-              <div class="callout-card">
-                <p class="callout-label">Founder's Note</p>
-                <p>Unlearning the World. Reclaiming the Human Spirit. I built MyBibleLens&#8482; out of a necessity to "Unlearn the World." Frustrated by the lack of depth in modern education, I taught myself the logic and architecture of AI to build a sanctuary for the human spirit. The visionary behind the <strong>Lens</strong> and the curator of the <strong>Pure Existence Exchange</strong>.</p>
+  <!-- ===== SECTION 4: STUDY REPOSITORY ===== -->
+  <section class="repo-section section-padding" id="repository">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Your Study Repository</h2>
+        <p class="section-subtitle">Seven powerful tools to organize your spiritual journey.</p>
+      </div>
+      <div class="repo-carousel" role="list">
+        <div class="repo-card" role="listitem">
+          <h3>Infinite Canvas</h3>
+          <p>Map connections on an infinite board with mind maps, timelines, flowcharts, and org charts. Share with your fellowship.</p>
+        </div>
+        <div class="repo-card" role="listitem">
+          <h3>Scripture Glow</h3>
+          <p>Turn any verse into AI-generated artwork. 6 art themes from children's animation to Renaissance masterpieces.</p>
+        </div>
+        <div class="repo-card" role="listitem">
+          <h3>Reflections</h3>
+          <p>Write down what God reveals to you. Your private journal.</p>
+        </div>
+        <div class="repo-card" role="listitem">
+          <h3>Sermon Builder</h3>
+          <p>Build sermon decks slide by slide. Auto-title. Preview.</p>
+        </div>
+        <div class="repo-card" role="listitem">
+          <h3>Study Cards</h3>
+          <p>Create flashcard decks for memorization and review.</p>
+        </div>
+        <div class="repo-card" role="listitem">
+          <h3>Dream Journal</h3>
+          <p>Describe your dream. Let AI analyze it through scripture.</p>
+        </div>
+        <div class="repo-card" role="listitem">
+          <h3>Google Lens</h3>
+          <p>Point your camera at the world. See it through scripture.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 5: 7,777 FOUNDING MEMBERS ===== -->
+  <section class="founding-section section-padding" id="founding">
+    <div class="container">
+      <div class="founding-inner">
+        <div class="founding-number" id="founding-number" aria-label="7,777">0</div>
+        <h2 class="founding-title">Founding Members</h2>
+        <p class="founding-subtitle">The first 7,777 believers get lifetime access for a one-time payment.</p>
+        <div>
+          <div class="founding-price">$77.77</div>
+          <div class="founding-price-sub">one-time · forever</div>
+        </div>
+        <ul class="founding-features" role="list">
+          <li>All 6 Lens modes — unlimited</li>
+          <li>Scripture Glow — unlimited art generation</li>
+          <li>Infinite Canvas — unlimited boards</li>
+          <li>Sermon Builder — unlimited decks</li>
+          <li>Reflections — unlimited entries</li>
+          <li>All 7 Kingdom themes unlocked</li>
+          <li>Founding Member badge forever</li>
+          <li>Exclusive Orb color only for founders</li>
+        </ul>
+        <div class="progress-wrapper">
+          <div class="progress-track">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+          <p class="progress-text"><span id="spots-claimed">0</span> of 7,777 spots claimed</p>
+        </div>
+        <a href="#checkout-founding" class="btn btn-gold btn-large btn-full-mobile">
+          Claim Your Founding Spot — $77.77
+        </a>
+        <p class="founding-quote">Seven is completion. This is your first fruits.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 6: SUBSCRIPTION TIERS ===== -->
+  <section class="pricing-section section-padding" id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Choose Your Sanctuary</h2>
+        <p class="section-subtitle">Every price point designed to be accessible to believers at every income level.</p>
+      </div>
+      <div class="pricing-grid">
+
+        <!-- CARD 1: Apostle -->
+        <div class="pricing-card-wrapper">
+          <div class="pricing-card">
+            <div class="pricing-card-inner" data-monthly="$7.77" data-yearly="$77.77">
+              <div class="pricing-tier-name">Apostle ✦</div>
+              <div>
+                <div class="pricing-price" data-monthly-price="$7.77" data-yearly-price="$77.77">$7.77</div>
+                <div class="pricing-price-sub" data-monthly-sub="/month" data-yearly-sub="/year">/month</div>
               </div>
+              <div class="pricing-toggle">
+                <button class="pricing-toggle-btn active" data-period="monthly">Monthly</button>
+                <button class="pricing-toggle-btn" data-period="yearly">Yearly</button>
+              </div>
+              <ul class="pricing-features" role="list">
+                <li>All 6 Lens modes</li>
+                <li>3 Infinite Canvases</li>
+                <li>Scripture Glow (2/week)</li>
+                <li>Sermon Builder</li>
+                <li>30 Reflections/week</li>
+                <li>1 guest seat</li>
+                <li>All 7 themes</li>
+              </ul>
+              <button class="pricing-expand-btn" aria-label="Show all features">
+                <span class="expand-text">Show all ↓</span>
+                <span class="collapse-text">Show less ↑</span>
+              </button>
+              <a href="#checkout-apostle" class="btn btn-gold" style="width: 100%;">Become Apostle</a>
             </div>
           </div>
+        </div>
 
-          <div class="divider"></div>
-
-          <h2 class="section-heading">Your Purpose with the App</h2>
-          <p>The purpose for you is to understand yourself, to get away from the chaos of social media and the people around you, to understand God stronger, and to go to church understanding what they're talking about. To go to Bible studies and show people what you drew in your infinite canvas, having fun with it, already being in your Bible, writing things down physically — because it's all here, all here for you.</p>
-          <p>This isn't just an app. This is something you can one day sit down and share with your children during Bible study. You can point to a date, a season, a year of your life, and say, "This is what God brought me through. This is what He showed me. This is how everything is connected."</p>
-
-          <blockquote class="pull-quote">
-            "You can finally give your children something deeper than information — you can give them legacy."
-          </blockquote>
-
-          <p>I want families to be families again. I want communities to be communities again. I don't want outside voices teaching our children fear, shame, confusion, unworthiness, depression, anxiety, or leading them deeper into sin. I want them to know the truth. I want them to know love. I want them to know God.</p>
-          <p>At the end of the day, this is bigger than tech. Bigger than design. Bigger than me. This is just me putting God first.</p>
-
-          <div class="divider"></div>
-
-          <!-- Team -->
-          <h2 class="section-heading">The Team</h2>
-          <div class="team-grid">
-            <div class="team-card">
-              <p class="team-role">Founder &amp; Lead Architect</p>
-              <p class="team-name">Denzel Rigaud</p>
+        <!-- CARD 2: Sanctuary -->
+        <div class="pricing-card-wrapper">
+          <div class="pricing-card">
+            <div class="pricing-card-inner" data-monthly="$14.77" data-yearly="$147.77">
+              <div class="pricing-tier-name">Sanctuary</div>
+              <div>
+                <div class="pricing-price" data-monthly-price="$14.77" data-yearly-price="$147.77">$14.77</div>
+                <div class="pricing-price-sub" data-monthly-sub="/month" data-yearly-sub="/year">/month</div>
+              </div>
+              <div class="pricing-toggle">
+                <button class="pricing-toggle-btn active" data-period="monthly">Monthly</button>
+                <button class="pricing-toggle-btn" data-period="yearly">Yearly</button>
+              </div>
+              <ul class="pricing-features" role="list">
+                <li>Everything in Apostle per member</li>
+                <li>1–15 members</li>
+                <li>Scripture Glow (10/week)</li>
+                <li>Sermon Deck shared</li>
+                <li>50 Reflections/week</li>
+              </ul>
+              <button class="pricing-expand-btn" aria-label="Show all features">
+                <span class="expand-text">Show all ↓</span>
+                <span class="collapse-text">Show less ↑</span>
+              </button>
+              <a href="#checkout-sanctuary" class="btn btn-gold" style="width: 100%;">Build Your Sanctuary</a>
             </div>
           </div>
+        </div>
 
-          <div class="team-more" id="team-more" style="display:none;">
-            <div class="team-grid" style="margin-top: var(--space-4);">
-              <div class="team-card">
-                <p class="team-role">Technical Product Manager</p>
-                <p class="team-name">Denzel Rigaud</p>
+        <!-- CARD 3: Kingdom -->
+        <div class="pricing-card-wrapper">
+          <div class="pricing-card">
+            <div class="pricing-card-inner" data-monthly="$57.77" data-yearly="$577.77">
+              <div class="pricing-tier-name">Kingdom ✦✦</div>
+              <div>
+                <div class="pricing-price" data-monthly-price="$57.77" data-yearly-price="$577.77">$57.77</div>
+                <div class="pricing-price-sub" data-monthly-sub="/month" data-yearly-sub="/year">/month</div>
               </div>
-              <div class="team-card">
-                <p class="team-role">UI/UX Designer</p>
-                <p class="team-name">Denzel Rigaud</p>
+              <div class="pricing-toggle">
+                <button class="pricing-toggle-btn active" data-period="monthly">Monthly</button>
+                <button class="pricing-toggle-btn" data-period="yearly">Yearly</button>
               </div>
-              <div class="team-card">
-                <p class="team-role">Front-End Developer</p>
-                <p class="team-name">Denzel Rigaud</p>
-              </div>
-              <div class="team-card">
-                <p class="team-role">Back-End Developer</p>
-                <p class="team-name">Denzel Rigaud &amp; Gemini</p>
-              </div>
-              <div class="team-card">
-                <p class="team-role">AI Persona &amp; Prompt Engineer</p>
-                <p class="team-name">Denzel Rigaud &amp; Perplexity Computer</p>
-              </div>
-              <div class="team-card">
-                <p class="team-role">Marketing &amp; Advertising</p>
-                <p class="team-name">You &amp; The Community</p>
-                <p class="team-desc" style="font-size:0.78rem;color:#7a5c3a;font-style:italic;margin-top:0.35rem;line-height:1.5;">Every share, every conversation, every testimony &mdash; you are the campaign.</p>
-              </div>
-              <div class="team-card">
-                <p class="team-role">Investor</p>
-                <p class="team-name">God</p>
-              </div>
+              <ul class="pricing-features" role="list">
+                <li>Everything in Sanctuary</li>
+                <li>15–1,000 members</li>
+                <li>Unlimited everything</li>
+                <li>Pastor admin dashboard</li>
+                <li>Usage stats</li>
+              </ul>
+              <button class="pricing-expand-btn" aria-label="Show all features">
+                <span class="expand-text">Show all ↓</span>
+                <span class="collapse-text">Show less ↑</span>
+              </button>
+              <a href="#checkout-kingdom" class="btn btn-gold" style="width: 100%;">Establish Your Kingdom</a>
             </div>
           </div>
+        </div>
 
-          <button class="show-more-btn" id="team-toggle" onclick="toggleTeam()" aria-expanded="false">
-            <span id="team-toggle-label">Show Full Team</span>
-            <svg id="team-toggle-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16" aria-hidden="true" style="transition: transform 0.3s ease;">
-              <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 7: SOCIAL PROOF / QUOTE ===== -->
+  <section class="quote-section section-padding" id="quote">
+    <div class="container">
+      <blockquote class="quote-text">"The lens is digital. The transformation is physical."</blockquote>
+      <p class="quote-author">— Denzel Rigaud, Founder</p>
+      <p class="quote-handles">@mybiblelens · @smiledenzel</p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 8: DOWNLOAD / FOOTER ===== -->
+  <footer class="footer-section section-padding" id="download">
+    <div class="container">
+      <div class="footer-inner">
+        <h2 class="footer-title">Start Your Journey</h2>
+        <div class="app-badges">
+          <a href="#" class="app-badge" aria-label="Download on the App Store">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
             </svg>
-          </button>
-
-          <div class="partner-block">
-            <h3 class="subsection-heading">Looking to Partner?</h3>
-            <p>I can't wait to partner with a company with the same vision as me, where we can prosper, because building this brick by brick feels great, but having a team beside me will be extraordinary.</p>
-
-            <form id="partnership-form" class="support-form" action="https://formspree.io/f/mzdkqdyy" method="POST" onsubmit="handlePartnershipForm(event)">
-              <input type="hidden" name="_subject" value="MyBibleLens&#8482; Partnership Inquiry">
-
-              <div class="form-group">
-                <label class="form-label" for="partner-name">YOUR NAME</label>
-                <input type="text" id="partner-name" name="name" class="form-input" placeholder="Full Name" required>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="partner-email">YOUR EMAIL</label>
-                <input type="email" id="partner-email" name="email" class="form-input" placeholder="you@example.com" required>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="partner-company">COMPANY / ORGANIZATION <span style="font-size:0.75rem;font-weight:400;opacity:0.6;">(optional)</span></label>
-                <input type="text" id="partner-company" name="company" class="form-input" placeholder="Your company or ministry name">
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="partner-type">TYPE OF PARTNERSHIP</label>
-                <select id="partner-type" name="partnership_type" class="form-select" required>
-                  <option value="" disabled selected>Select a type...</option>
-                  <option value="Investor / Funding">Investor / Funding</option>
-                  <option value="Brand Partnership">Brand Partnership</option>
-                  <option value="Church / Ministry Partnership">Church / Ministry Partnership</option>
-                  <option value="Media &amp; Press">Media &amp; Press</option>
-                  <option value="Technology Partner">Technology Partner</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="partner-message">MESSAGE</label>
-                <textarea id="partner-message" name="message" class="form-textarea" rows="5" placeholder="Tell us about your vision and how you'd like to partner with MyBibleLens&#8482;." required></textarea>
-              </div>
-
-              <button type="submit" class="form-submit" id="partner-submit-btn">Send Message</button>
-              <p id="partner-success-msg" style="display:none;color:#2e7d32;font-weight:600;margin-top:1rem;font-size:0.95rem;">Thank you &mdash; we'll be in touch soon. God bless your vision.</p>
-              <p id="partner-error-msg" style="display:none;color:#b22222;font-weight:500;margin-top:1rem;font-size:0.9rem;">Something went wrong. Please try again.</p>
-            </form>
-          </div>
-
+            App Store
+          </a>
+          <a href="#" class="app-badge" aria-label="Get it on Google Play">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.24-.84-.76-.84-1.35m13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27m3.35-4.31c.34.27.56.69.56 1.19s-.22.92-.56 1.19l-2.29 1.32-2.5-2.5 2.5-2.5 2.29 1.3M6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z"/>
+            </svg>
+            Google Play
+          </a>
         </div>
-      </div>
-    </section>
-
-    <!-- ══════════════ SUPPORT SECTION ══════════════ -->
-    <section class="page-section" id="support" data-page="support" style="display:none;">
-      <div class="page-hero">
-        <h1 class="page-hero-title">Support</h1>
-        <p class="page-hero-subtitle">We're here to help you navigate your sanctuary.</p>
-      </div>
-      <div class="content-block">
-        <div class="content-inner legal-content">
-
-          <h2 class="section-heading">Contact Us</h2>
-          <p>Use the form below to reach our support team. Select the category that best describes your inquiry so we can get you the right help, fast.</p>
-
-          <!-- CONTACT FORM -->
-          <form id="support-form" class="support-form" onsubmit="handleSupportForm(event)">
-            <div class="form-group">
-              <label class="form-label" for="support-name">Your Name</label>
-              <input type="text" id="support-name" name="name" class="form-input" placeholder="Denzel Rigaud" required />
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="support-email">Your Email</label>
-              <input type="email" id="support-email" name="email" class="form-input" placeholder="you@example.com" required />
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="support-category">What can we help you with?</label>
-              <select id="support-category" name="category" class="form-input form-select" required>
-                <option value="" disabled selected>Select a category...</option>
-                <option value="Technical Bug">🔴 Technical Bug</option>
-                <option value="Account Issue">🔑 Account Issue</option>
-                <option value="Question about a Verse">📖 Question about a Verse</option>
-                <option value="Privacy or Data Request">🔒 Privacy or Data Request</option>
-                <option value="Partnership Inquiry">🤝 Partnership Inquiry</option>
-                <option value="Security Vulnerability">🛡️ Security Vulnerability</option>
-                <option value="Other">💬 Other</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="support-message">Message</label>
-              <textarea id="support-message" name="message" class="form-input form-textarea" placeholder="Describe your issue or question in detail. Include your account email, any error messages, and screenshots if relevant." rows="6" required></textarea>
-            </div>
-            <button type="submit" class="form-submit-btn" id="form-submit-btn">Send Message</button>
-            <div id="form-success" class="form-success" style="display:none;">
-              <p>&#10003; Your message has been received. We'll be in touch within 24–48 hours.</p>
-            </div>
-            <div id="form-error" class="form-error" style="display:none;">
-              <p>Something went wrong. Please try again or email us directly at <a href="mailto:supportmybiblelens@gmail.com">supportmybiblelens@gmail.com</a>.</p>
-            </div>
-          </form>
-
-          <div class="divider"></div>
-
-          <h2 class="section-heading">Response Times</h2>
-          <div class="support-grid">
-            <div class="support-card">
-              <p class="support-card-label">General Inquiries</p>
-              <p class="support-card-value">24 – 48 hours</p>
-              <p class="support-card-desc">Account questions, feedback, feature requests, and partnership inquiries.</p>
-            </div>
-            <div class="support-card">
-              <p class="support-card-label">Technical Issues</p>
-              <p class="support-card-value">24 – 48 hours</p>
-              <p class="support-card-desc">Bug reports, login problems, data sync issues, or app performance concerns.</p>
-            </div>
-            <div class="support-card">
-              <p class="support-card-label">Legal & Privacy</p>
-              <p class="support-card-value">3 – 5 business days</p>
-              <p class="support-card-desc">Data deletion requests, privacy inquiries, GDPR/CCPA subject access requests, or legal correspondence.</p>
-            </div>
-            <div class="support-card support-card--crisis">
-              <p class="support-card-label">Mental Health Crisis</p>
-              <p class="support-card-value">Immediate</p>
-              <p class="support-card-desc">If you or someone you know is in crisis, please contact the <strong>988 Suicide & Crisis Lifeline</strong> immediately by calling or texting <strong>988</strong>. MyBibleLens is not a crisis intervention tool.</p>
-            </div>
-          </div>
-
-          <div class="divider"></div>
-
-          <h2 class="section-heading">Support Protocol</h2>
-          <ol class="legal-list ordered">
-            <li><strong>Submit your inquiry</strong> using the contact form above. Select the correct category so your message is routed to the right team member immediately.</li>
-            <li><strong>Receive an acknowledgment</strong> confirming receipt of your request within the stated response window.</li>
-            <li><strong>Resolution or escalation.</strong> We will resolve your issue directly or escalate it to the appropriate team member with a follow-up timeline.</li>
-            <li><strong>Follow-up.</strong> If your issue requires extended investigation, we will provide status updates every 48 hours until resolution.</li>
-          </ol>
-
-          <div class="divider"></div>
-
-          <h2 class="section-heading">Security</h2>
-          <p>Protecting your sanctuary is not optional — it is a core commitment. MyBibleLens handles deeply personal spiritual data and treats that responsibility with the same seriousness as the world's leading technology companies.</p>
-
-          <div class="support-grid">
-            <div class="support-card">
-              <p class="support-card-label">Encryption at Rest</p>
-              <p class="support-card-value">AES-256</p>
-              <p class="support-card-desc">All personal reflections, journal entries, and user content stored in our database are encrypted at rest using AES-256 — the same standard used by banks and government agencies.</p>
-            </div>
-            <div class="support-card">
-              <p class="support-card-label">Encryption in Transit</p>
-              <p class="support-card-value">TLS 1.2+</p>
-              <p class="support-card-desc">Every single piece of data transmitted between your device and our servers is protected by TLS 1.2 or higher. No unencrypted connections are permitted.</p>
-            </div>
-            <div class="support-card">
-              <p class="support-card-label">Authentication</p>
-              <p class="support-card-value">Supabase Auth</p>
-              <p class="support-card-desc">User authentication is managed by Supabase, a SOC 2-compliant infrastructure provider. Your credentials are never stored in plain text. We use industry-standard hashing and token-based sessions.</p>
-            </div>
-            <div class="support-card">
-              <p class="support-card-label">Access Control</p>
-              <p class="support-card-value">Zero Tolerance</p>
-              <p class="support-card-desc">Access to the production database is strictly limited to authorized personnel only, using role-based access controls and full audit logging. No third party can access your private data without your explicit action.</p>
-            </div>
-          </div>
-
-          <div class="legal-callout" style="margin-top: 2rem;">
-            <p><strong>Your data is yours. Period.</strong> MyBibleLens will never sell, rent, or share your personal reflections, spiritual insights, or any content you create within the sanctuary. Not to advertisers. Not to data brokers. Not to anyone. Your innermost thoughts stay locked inside your sanctuary.</p>
-          </div>
-
-          <h3 class="subsection-heading" style="margin-top: 2rem;">What We Do to Protect You</h3>
-          <ul class="legal-list">
-            <li><strong>No AI Training on Your Data:</strong> Your reflections and journal entries are never used to train, fine-tune, or improve any AI model — ours or anyone else's.</li>
-            <li><strong>Minimal Data Transmission:</strong> When you interact with the Lens AI agents, we transmit only the minimum content necessary to generate your response. Your full account history is never sent to third-party AI providers.</li>
-            <li><strong>Third-Party API Security:</strong> All requests to OpenAI and Google Gemini are made over encrypted, authenticated connections. We use API configurations that opt out of training data retention where available.</li>
-            <li><strong>Secure Infrastructure:</strong> Our entire backend runs on Supabase, which maintains SOC 2 Type II compliance, meaning it has been independently audited for security, availability, and confidentiality.</li>
-            <li><strong>Session Protection:</strong> User sessions are token-based with automatic expiration. We do not store long-lived credentials.</li>
-            <li><strong>Vulnerability Response:</strong> If you discover a security vulnerability, report it immediately to <a href="mailto:supportmybiblelens@gmail.com">supportmybiblelens@gmail.com</a>. We take all security reports seriously and will respond within 24 hours.</li>
-          </ul>
-
-          <div class="divider"></div>
-
-          <h2 class="section-heading">Business Address</h2>
-          <p>All legal and technical correspondence should be directed to:</p>
-          <div class="address-block">
-            <p><strong>MyBibleLens&#8482;</strong></p>
-            <p>Attn: Denzel Rigaud, Founder</p>
-            <p>For all inquiries, please use the <a href="#support" onclick="showSection('support')" style="color:#b6751d;font-weight:600;">contact form above</a>.</p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════ PRIVACY SECTION ══════════════ -->
-    <section class="page-section" id="privacy" data-page="privacy" style="display:none;">
-      <div class="page-hero">
-        <h1 class="page-hero-title">Privacy Policy</h1>
-        <p class="page-hero-subtitle">Effective Date: April 1, 2026 &nbsp;|&nbsp; Last Updated: April 1, 2026</p>
-      </div>
-      <div class="content-block">
-        <div class="content-inner legal-content">
-
-          <div class="legal-intro">
-            <p>MyBibleLens&#8482; ("MBL," "we," "our," or "us") is committed to protecting the privacy of your data. This Privacy Policy describes how we collect, use, store, and protect information when you use the MyBibleLens application and related services (collectively, the "Service"). By using the Service, you consent to the practices described in this policy.</p>
-            <p>This is a sanctuary. Your data is treated with the same reverence as the reflections you write within it.</p>
-          </div>
-
-          <!-- TOC -->
-          <nav class="legal-toc" aria-label="Privacy Policy table of contents">
-            <h2 class="toc-title">Contents</h2>
-            <ol class="toc-list">
-              <li><a href="#priv-1">Information We Collect</a></li>
-              <li><a href="#priv-2">How We Use Your Information</a></li>
-              <li><a href="#priv-3">AI Data Processing & Disclosure</a></li>
-              <li><a href="#priv-4">Data Storage & Security</a></li>
-              <li><a href="#priv-5">Data Retention & Deletion</a></li>
-              <li><a href="#priv-6">Third-Party Services</a></li>
-              <li><a href="#priv-7">Cookies & Tracking</a></li>
-              <li><a href="#priv-8">Your Rights (GDPR / CCPA)</a></li>
-              <li><a href="#priv-9">Children's Privacy</a></li>
-              <li><a href="#priv-10">International Data Transfers</a></li>
-              <li><a href="#priv-11">Changes to This Policy</a></li>
-              <li><a href="#priv-12">Contact</a></li>
-            </ol>
-          </nav>
-
-          <!-- 1 -->
-          <div class="legal-section" id="priv-1">
-            <h2 class="legal-heading"><span class="legal-num">1.</span> Information We Collect</h2>
-            <h3 class="legal-subheading">a. Information You Provide Directly</h3>
-            <ul class="legal-list">
-              <li><strong>Account Data:</strong> Email address, display name, and authentication credentials managed via Supabase.</li>
-              <li><strong>User Content:</strong> Journal entries, reflections, scripture notes, Infinite Canvas data, Study Repository content, and any text inputs submitted to the Lens AI agents (including The Refiner, Etymology, Neuroscience, Dreams, and Philosopher modes).</li>
-              <li><strong>Apostolic Profile:</strong> User preferences, personalization settings (Personalization Palette), and session history.</li>
-              <li><strong>Communications:</strong> Any messages or inquiries you send to our support email.</li>
-            </ul>
-            <h3 class="legal-subheading">b. Information Collected Automatically</h3>
-            <ul class="legal-list">
-              <li><strong>Usage Data:</strong> Interaction patterns, feature utilization, timestamps, session duration, and device information (browser type, operating system, device identifiers).</li>
-              <li><strong>Log Data:</strong> IP addresses, access times, pages viewed, referring URLs, and error logs.</li>
-              <li><strong>Location Data:</strong> General geographic location derived from your IP address. We do not collect precise GPS-based location data.</li>
-            </ul>
-          </div>
-
-          <!-- 2 -->
-          <div class="legal-section" id="priv-2">
-            <h2 class="legal-heading"><span class="legal-num">2.</span> How We Use Your Information</h2>
-            <p>We use the information we collect for the following purposes:</p>
-            <ul class="legal-list">
-              <li><strong>Service Delivery:</strong> To operate, provide, and personalize the MyBibleLens experience, including AI-generated insights from the Lens.</li>
-              <li><strong>Synchronization:</strong> To sync your study progress, reflections, and canvas data across devices.</li>
-              <li><strong>Security:</strong> To protect the integrity and security of our infrastructure and detect unauthorized access.</li>
-              <li><strong>Communication:</strong> To respond to support inquiries and send essential service updates (no marketing emails without explicit opt-in).</li>
-              <li><strong>Improvement:</strong> To analyze aggregated, anonymized usage patterns to improve app functionality and user experience.</li>
-            </ul>
-            <div class="legal-callout">
-              <p><strong>What we will never do:</strong> We will never sell, rent, lease, or trade your personal data, journal entries, reflections, or any content you create within the sanctuary to any third party for any reason.</p>
-            </div>
-          </div>
-
-          <!-- 3 -->
-          <div class="legal-section" id="priv-3">
-            <h2 class="legal-heading"><span class="legal-num">3.</span> AI Data Processing & Disclosure</h2>
-            <p>MyBibleLens uses Large Language Models (LLMs) provided by third-party AI providers (OpenAI and Google Gemini) to power the Lens features. You should understand the following:</p>
-            <ul class="legal-list">
-              <li><strong>Processing:</strong> When you submit text to any Lens agent, your input is transmitted to third-party AI providers for processing. These providers process your input to generate a response and return it to the Service.</li>
-              <li><strong>No Training on Your Data:</strong> Your personal reflections, journal entries, and spiritual content are <strong>not</strong> used to train, fine-tune, or improve any AI model — whether ours or those of third-party providers. We use API configurations that opt out of training data retention where available.</li>
-              <li><strong>Encryption in Transit:</strong> All data transmitted between the app, our servers (Supabase), and third-party AI providers is encrypted using industry-standard TLS/SSL protocols.</li>
-              <li><strong>Third-Party AI Provider Policies:</strong> Third-party AI providers may process your input in accordance with their own data handling policies. We encourage you to review the privacy policies of <a href="https://openai.com/policies/privacy-policy/" target="_blank" rel="noopener noreferrer">OpenAI</a> and <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google</a>.</li>
-              <li><strong>Minimization:</strong> We transmit only the minimum content necessary for the AI to generate a response. We do not send your full account data, profile, or historical reflections to AI providers unless explicitly required by the feature you are using.</li>
-            </ul>
-          </div>
-
-          <!-- 4 -->
-          <div class="legal-section" id="priv-4">
-            <h2 class="legal-heading"><span class="legal-num">4.</span> Data Storage & Security</h2>
-            <ul class="legal-list">
-              <li><strong>Infrastructure:</strong> All user data is stored on Supabase, a secure, SOC 2-compliant cloud infrastructure provider.</li>
-              <li><strong>Encryption at Rest:</strong> All personal reflections, journal entries, and user content stored in our database are encrypted at rest using AES-256 encryption.</li>
-              <li><strong>Encryption in Transit:</strong> All data transmitted between your device and our servers is encrypted using TLS 1.2 or higher.</li>
-              <li><strong>Access Controls:</strong> Access to the production database is strictly limited to authorized personnel. We employ role-based access controls and audit logs.</li>
-              <li><strong>No Guarantee:</strong> While we implement industry-standard security measures, no method of electronic storage or internet transmission is 100% secure. We cannot guarantee absolute security.</li>
-            </ul>
-          </div>
-
-          <!-- 5 -->
-          <div class="legal-section" id="priv-5">
-            <h2 class="legal-heading"><span class="legal-num">5.</span> Data Retention & Deletion (Right to Erasure)</h2>
-            <p>You retain full ownership of your data at all times.</p>
-            <ul class="legal-list">
-              <li><strong>Retention Period:</strong> We retain your data for as long as your account is active or as needed to provide the Service. Inactive accounts may be subject to deletion after 24 months of inactivity, with 30 days prior notice.</li>
-              <li><strong>Right to Erasure:</strong> You may request the permanent, irreversible deletion of your account and <strong>all</strong> associated data — including reflections, journal entries, canvas data, AI interaction history, and your Apostolic Profile — at any time.</li>
-              <li><strong>How to Delete:</strong> Use the "Delete My Account & All Data" feature within the app settings, or email <a href="mailto:supportmybiblelens@gmail.com">supportmybiblelens@gmail.com</a> with the subject line "Data Deletion Request."</li>
-              <li><strong>Deletion Timeline:</strong> Upon receipt of a verified deletion request, all personal data will be permanently removed from our active systems within <strong>30 calendar days</strong>. Backup systems will purge the data within an additional 60 days.</li>
-              <li><strong>Exceptions:</strong> We may retain certain data if required by law, to resolve disputes, or to enforce our agreements. Any such retained data will be limited to what is legally necessary.</li>
-            </ul>
-          </div>
-
-          <!-- 6 -->
-          <div class="legal-section" id="priv-6">
-            <h2 class="legal-heading"><span class="legal-num">6.</span> Third-Party Services</h2>
-            <p>The Service may contain links to or integrations with third-party services, including:</p>
-            <ul class="legal-list">
-              <li><strong>AI Providers:</strong> OpenAI and Google Gemini for Lens AI processing.</li>
-              <li><strong>Supabase:</strong> For database, authentication, and storage services.</li>
-              <li><strong>Pure Existence Exchange:</strong> Affiliate links to third-party product vendors (water filters, EMF shielding, organic textiles, etc.).</li>
-              <li><strong>988 Suicide & Crisis Lifeline:</strong> External crisis intervention resource.</li>
-            </ul>
-            <p>These third-party services operate under their own privacy policies and terms of service. We are not responsible for their data practices. We encourage you to review their policies before interacting with them.</p>
-          </div>
-
-          <!-- 7 -->
-          <div class="legal-section" id="priv-7">
-            <h2 class="legal-heading"><span class="legal-num">7.</span> Cookies & Tracking Technologies</h2>
-            <p>MyBibleLens uses essential cookies and similar technologies solely to:</p>
-            <ul class="legal-list">
-              <li>Maintain your authenticated session.</li>
-              <li>Remember your preferences and personalization settings.</li>
-              <li>Ensure the security and functionality of the Service.</li>
-            </ul>
-            <p>We do <strong>not</strong> use third-party advertising cookies, behavioral tracking pixels, or cross-site tracking technologies. We do not sell or share your data with advertisers.</p>
-          </div>
-
-          <!-- 8 -->
-          <div class="legal-section" id="priv-8">
-            <h2 class="legal-heading"><span class="legal-num">8.</span> Your Rights</h2>
-            <p>Depending on your jurisdiction, you may have the following rights regarding your personal data:</p>
-
-            <h3 class="legal-subheading">Under GDPR (European Economic Area, UK, Switzerland)</h3>
-            <ul class="legal-list">
-              <li><strong>Right of Access:</strong> Request a copy of the personal data we hold about you.</li>
-              <li><strong>Right to Rectification:</strong> Request correction of inaccurate or incomplete data.</li>
-              <li><strong>Right to Erasure:</strong> Request deletion of your personal data (see Section 5).</li>
-              <li><strong>Right to Restrict Processing:</strong> Request that we limit how we process your data.</li>
-              <li><strong>Right to Data Portability:</strong> Request your data in a structured, machine-readable format.</li>
-              <li><strong>Right to Object:</strong> Object to processing based on legitimate interests.</li>
-              <li><strong>Right to Withdraw Consent:</strong> Withdraw previously given consent at any time.</li>
-              <li><strong>Right to Lodge a Complaint:</strong> File a complaint with your local data protection authority.</li>
-            </ul>
-
-            <h3 class="legal-subheading">Under CCPA (California Residents)</h3>
-            <ul class="legal-list">
-              <li><strong>Right to Know:</strong> Request disclosure of what personal information we collect, use, and disclose.</li>
-              <li><strong>Right to Delete:</strong> Request deletion of your personal information.</li>
-              <li><strong>Right to Non-Discrimination:</strong> Exercise your rights without receiving discriminatory treatment.</li>
-              <li><strong>No Sale of Personal Information:</strong> We do not sell your personal information. We do not engage in "sharing" for cross-context behavioral advertising as defined under the CCPA.</li>
-            </ul>
-            <p>To exercise any of these rights, email <a href="mailto:supportmybiblelens@gmail.com">supportmybiblelens@gmail.com</a> with the subject line "Privacy Rights Request." We will respond within 30 days (or within the timeframe required by applicable law).</p>
-          </div>
-
-          <!-- 9 -->
-          <div class="legal-section" id="priv-9">
-            <h2 class="legal-heading"><span class="legal-num">9.</span> Children's Privacy</h2>
-            <p>MyBibleLens is not directed at children under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal data, please contact us at <a href="mailto:supportmybiblelens@gmail.com">supportmybiblelens@gmail.com</a>, and we will promptly delete such information.</p>
-            <p>Users between the ages of 13 and 18 must have the permission of a parent or legal guardian to use the Service.</p>
-          </div>
-
-          <!-- 10 -->
-          <div class="legal-section" id="priv-10">
-            <h2 class="legal-heading"><span class="legal-num">10.</span> International Data Transfers</h2>
-            <p>Your data may be processed and stored in the United States and other jurisdictions where our service providers operate. By using the Service, you consent to the transfer of your data to jurisdictions that may have different data protection laws than your country of residence. We implement appropriate safeguards to protect your data during such transfers.</p>
-          </div>
-
-          <!-- 11 -->
-          <div class="legal-section" id="priv-11">
-            <h2 class="legal-heading"><span class="legal-num">11.</span> Changes to This Policy</h2>
-            <p>We may update this Privacy Policy from time to time. When we make material changes, we will update the "Effective Date" at the top of this page and, where appropriate, notify you via email or in-app notification. Your continued use of the Service after such changes constitutes acceptance of the updated policy.</p>
-          </div>
-
-          <!-- 12 -->
-          <div class="legal-section" id="priv-12">
-            <h2 class="legal-heading"><span class="legal-num">12.</span> Contact</h2>
-            <p>If you have any questions about this Privacy Policy or our data practices, contact us at:</p>
-            <div class="address-block">
-              <p><strong>MyBibleLens</strong></p>
-              <p>Attn: Denzel Rigaud, Founder & Data Controller</p>
-              <p>Email: <a href="mailto:supportmybiblelens@gmail.com">supportmybiblelens@gmail.com</a></p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════ TERMS OF SERVICE SECTION ══════════════ -->
-    <section class="page-section" id="terms" data-page="terms" style="display:none;">
-      <div class="page-hero">
-        <h1 class="page-hero-title">Terms of Service</h1>
-        <p class="page-hero-subtitle">Effective Date: April 1, 2026 &nbsp;|&nbsp; Last Updated: April 1, 2026</p>
-      </div>
-      <div class="content-block">
-        <div class="content-inner legal-content">
-
-          <div class="legal-intro">
-            <p>These Terms of Service ("Terms") constitute a legally binding agreement between you ("User," "you," or "your") and MyBibleLens&#8482; ("MBL," "we," "our," or "us"), operated by Denzel Rigaud. By accessing or using the MyBibleLens application and related services (collectively, the "Service"), you agree to be bound by these Terms. If you do not agree to these Terms, do not use the Service.</p>
-          </div>
-
-          <!-- TOC -->
-          <nav class="legal-toc" aria-label="Terms of Service table of contents">
-            <h2 class="toc-title">Contents</h2>
-            <ol class="toc-list">
-              <li><a href="#tos-1">Acceptance of Terms</a></li>
-              <li><a href="#tos-2">Eligibility</a></li>
-              <li><a href="#tos-3">Description of Service</a></li>
-              <li><a href="#tos-4">AI Technology Disclosure & Disclaimer</a></li>
-              <li><a href="#tos-5">Non-Professional Advice Disclaimer</a></li>
-              <li><a href="#tos-6">Mental Health & Crisis Disclaimer</a></li>
-              <li><a href="#tos-7">The Pure Existence Exchange — Affiliate Disclosure</a></li>
-              <li><a href="#tos-8">Health Claims Disclaimer</a></li>
-              <li><a href="#tos-9">User Content & Ownership</a></li>
-              <li><a href="#tos-10">Prohibited Conduct</a></li>
-              <li><a href="#tos-11">Intellectual Property</a></li>
-              <li><a href="#tos-12">Account Termination</a></li>
-              <li><a href="#tos-13">Disclaimer of Warranties</a></li>
-              <li><a href="#tos-14">Limitation of Liability</a></li>
-              <li><a href="#tos-15">Indemnification</a></li>
-              <li><a href="#tos-16">Dispute Resolution & Governing Law</a></li>
-              <li><a href="#tos-17">Severability</a></li>
-              <li><a href="#tos-18">Changes to These Terms</a></li>
-              <li><a href="#tos-19">Contact</a></li>
-            </ol>
-          </nav>
-
-          <!-- 1 -->
-          <div class="legal-section" id="tos-1">
-            <h2 class="legal-heading"><span class="legal-num">1.</span> Acceptance of Terms</h2>
-            <p>By creating an account, accessing, or using the Service, you acknowledge that you have read, understood, and agree to be bound by these Terms, our <a href="#privacy">Privacy Policy</a>, and any additional guidelines or policies referenced herein. These Terms apply to all users of the Service, including registered users, visitors, and any person who interacts with the Service.</p>
-          </div>
-
-          <!-- 2 -->
-          <div class="legal-section" id="tos-2">
-            <h2 class="legal-heading"><span class="legal-num">2.</span> Eligibility</h2>
-            <p>You must be at least 13 years of age to use the Service. Users between 13 and 18 years of age must have the consent of a parent or legal guardian. By using the Service, you represent and warrant that you meet these eligibility requirements.</p>
-          </div>
-
-          <!-- 3 -->
-          <div class="legal-section" id="tos-3">
-            <h2 class="legal-heading"><span class="legal-num">3.</span> Description of Service</h2>
-            <p>MyBibleLens is an AI-powered spiritual research and personal growth platform. The Service provides:</p>
-            <ul class="legal-list">
-              <li><strong>The Lens:</strong> AI-powered agents (including The Refiner, Etymology, Neuroscience, Philosopher, and Dreams modes) that generate text-based insights in response to user inputs.</li>
-              <li><strong>Study Tools:</strong> Including the Study Repository, Infinite Canvas, Reflections, The Orb, and the Beloved community features.</li>
-              <li><strong>The Pure Existence Exchange:</strong> A curated affiliate marketplace featuring non-toxic lifestyle products.</li>
-              <li><strong>The Apostolic Profile:</strong> A personalization system that stores your preferences and session data.</li>
-            </ul>
-          </div>
-
-          <!-- 4 -->
-          <div class="legal-section" id="tos-4">
-            <h2 class="legal-heading"><span class="legal-num">4.</span> AI Technology Disclosure & Disclaimer</h2>
-            <div class="legal-callout legal-callout--warning">
-              <p><strong>IMPORTANT — PLEASE READ CAREFULLY</strong></p>
-            </div>
-            <p>MyBibleLens utilizes third-party Large Language Models (LLMs) provided by OpenAI and Google Gemini. You acknowledge and agree that:</p>
-            <ul class="legal-list">
-              <li><strong>AI-Generated Content:</strong> All output from the Lens — including theological interpretations, scriptural analyses, neuroscience references, etymological breakdowns, dream interpretations, and "Refinement" or "Inversion" logic — is generated by artificial intelligence and may contain inaccuracies, errors, or hallucinations.</li>
-              <li><strong>No Guarantee of Accuracy:</strong> AI-generated content may not accurately reflect established theology, peer-reviewed science, verified historical facts, or any other domain of knowledge. The output is probabilistic, not deterministic.</li>
-              <li><strong>Supplementary Tool Only:</strong> The Lens is intended as a supplementary tool for personal spiritual exploration. It is <strong>not</strong> a replacement for personal Bible study, pastoral counsel, academic research, or consultation with qualified professionals.</li>
-              <li><strong>Your Responsibility:</strong> You are solely responsible for evaluating, verifying, and acting upon any AI-generated content. You must not rely on AI output as a sole source of truth, factual information, or the basis for any material decision.</li>
-              <li><strong>Automated System:</strong> You are interacting with an automated AI system, not a human being. No representation is made that any AI output constitutes human advice, opinion, or endorsement.</li>
-            </ul>
-          </div>
-
-          <!-- 5 -->
-          <div class="legal-section" id="tos-5">
-            <h2 class="legal-heading"><span class="legal-num">5.</span> Non-Professional Advice Disclaimer</h2>
-            <div class="legal-callout legal-callout--warning">
-              <p><strong>MYBIBLELENS IS NOT A SUBSTITUTE FOR PROFESSIONAL SERVICES.</strong></p>
-            </div>
-            <p>The Service is provided for <strong>spiritual, educational, and personal growth purposes only</strong>. You expressly acknowledge and agree that:</p>
-            <ul class="legal-list">
-              <li>The Service is <strong>NOT</strong> a substitute for licensed therapy, counseling, psychiatric care, or any form of mental health treatment.</li>
-              <li>The Service is <strong>NOT</strong> a substitute for medical advice, diagnosis, or treatment from a qualified healthcare provider.</li>
-              <li>The Service is <strong>NOT</strong> a substitute for legal, financial, or any other form of professional advice.</li>
-              <li>The Service does <strong>NOT</strong> provide clinical, diagnostic, or therapeutic interventions of any kind.</li>
-              <li>"The Refiner" feature provides AI-generated perspectives on personal struggles and is <strong>NOT</strong> a form of therapy, clinical assessment, or medical intervention. It is a spiritual reflection tool.</li>
-            </ul>
-            <p>If you are experiencing a mental health crisis, medical emergency, or any situation requiring professional intervention, discontinue use of the Service and contact a qualified professional or emergency service immediately.</p>
-          </div>
-
-          <!-- 6 -->
-          <div class="legal-section" id="tos-6">
-            <h2 class="legal-heading"><span class="legal-num">6.</span> Mental Health & Crisis Disclaimer</h2>
-            <div class="legal-callout legal-callout--crisis">
-              <p><strong>If you or someone you know is in immediate danger or experiencing a mental health crisis, call 911 or contact the 988 Suicide & Crisis Lifeline by calling or texting 988.</strong></p>
-            </div>
-            <p>MyBibleLens includes a hard-coded link to the 988 Suicide & Crisis Lifeline within the app settings. However, MyBibleLens is <strong>NOT</strong> a crisis intervention tool, emergency service, or substitute for professional crisis counseling. The AI agents are <strong>NOT</strong> trained, equipped, or authorized to handle mental health emergencies. If you are in crisis, please seek help from qualified professionals immediately.</p>
-          </div>
-
-          <!-- 7 -->
-          <div class="legal-section" id="tos-7">
-            <h2 class="legal-heading"><span class="legal-num">7.</span> The Pure Existence Exchange — Affiliate Disclosure</h2>
-            <p>The Pure Existence Exchange is a curated marketplace within MyBibleLens that features links to third-party products and services. You acknowledge and agree that:</p>
-            <ul class="legal-list">
-              <li><strong>Affiliate Commissions:</strong> MyBibleLens may receive a commission, referral fee, or other financial compensation when you purchase products through affiliate links in the Pure Existence Exchange. This does not affect the price you pay.</li>
-              <li><strong>Third-Party Products:</strong> All products featured in the Pure Existence Exchange are manufactured, sold, and fulfilled by independent third-party vendors. MyBibleLens does <strong>NOT</strong> manufacture, produce, warehouse, ship, guarantee, or control the quality, safety, legality, or effectiveness of any product listed in the Exchange.</li>
-              <li><strong>No Endorsement:</strong> The inclusion of a product in the Exchange does not constitute a medical endorsement, safety certification, or guarantee of efficacy. Product listings are curated based on alignment with the MBL lifestyle philosophy, not clinical testing.</li>
-              <li><strong>Your Responsibility:</strong> You are solely responsible for researching, evaluating, and making purchasing decisions. You assume all risk associated with the purchase and use of third-party products.</li>
-              <li><strong>Disputes:</strong> Any dispute regarding a product purchased through the Exchange must be resolved directly with the third-party vendor. MyBibleLens is not a party to any transaction between you and a third-party vendor.</li>
-            </ul>
-          </div>
-
-          <!-- 8 -->
-          <div class="legal-section" id="tos-8">
-            <h2 class="legal-heading"><span class="legal-num">8.</span> Health Claims Disclaimer</h2>
-            <p>Certain content within MyBibleLens — including references to the "32 Modern Disruptors," discussions of environmental toxins, electromagnetic fields, water quality, and other lifestyle topics — represents the personal observations and spiritual perspective of the Founder. You acknowledge and agree that:</p>
-            <ul class="legal-list">
-              <li>Such content constitutes <strong>environmental and lifestyle commentary</strong>, not medical or scientific claims.</li>
-              <li>No content within the Service has been evaluated, approved, or endorsed by the U.S. Food and Drug Administration (FDA), the Environmental Protection Agency (EPA), or any other regulatory body.</li>
-              <li>The Service does not diagnose, treat, cure, or prevent any disease or medical condition.</li>
-              <li>Products featured in the Pure Existence Exchange are <strong>not</strong> FDA-approved medical devices or treatments.</li>
-              <li>You should consult a qualified healthcare provider before making any health-related decisions based on content in the Service.</li>
-            </ul>
-          </div>
-
-          <!-- 9 -->
-          <div class="legal-section" id="tos-9">
-            <h2 class="legal-heading"><span class="legal-num">9.</span> User Content & Ownership</h2>
-            <ul class="legal-list">
-              <li><strong>Your Content:</strong> You retain full ownership of all content you create within the Service — including reflections, journal entries, canvas data, notes, and AI interaction inputs ("User Content").</li>
-              <li><strong>License to MBL:</strong> By using the Service, you grant MBL a limited, non-exclusive, royalty-free license to process, store, and display your User Content solely for the purpose of providing the Service to you. We do not use your User Content for any other purpose.</li>
-              <li><strong>No AI Training:</strong> Your User Content is not used to train, fine-tune, or improve any AI model.</li>
-              <li><strong>Responsibility:</strong> You are responsible for ensuring that your User Content does not violate any applicable laws or these Terms.</li>
-            </ul>
-          </div>
-
-          <!-- 10 -->
-          <div class="legal-section" id="tos-10">
-            <h2 class="legal-heading"><span class="legal-num">10.</span> Prohibited Conduct</h2>
-            <p>You agree not to use the Service to:</p>
-            <ul class="legal-list">
-              <li>Violate any applicable local, state, national, or international law or regulation.</li>
-              <li>Generate, distribute, or store content that is harassing, abusive, threatening, defamatory, obscene, or otherwise objectionable.</li>
-              <li>Engage in hate speech, discrimination, or targeted harassment of any individual or group.</li>
-              <li>Attempt to reverse-engineer, decompile, or extract the source code, algorithms, prompts, or underlying models of the Service.</li>
-              <li>Use automated systems (bots, scrapers, etc.) to access the Service without authorization.</li>
-              <li>Impersonate any person or entity, or misrepresent your affiliation with any person or entity.</li>
-              <li>Circumvent, disable, or interfere with any security features or usage limits of the Service.</li>
-              <li>Use AI-generated output to create content that misrepresents AI output as human-authored professional advice (medical, legal, financial, therapeutic).</li>
-              <li>Use the Service for any commercial purpose not expressly authorized by MBL.</li>
-            </ul>
-            <p>We reserve the right to suspend or permanently terminate accounts that violate these terms without prior notice.</p>
-          </div>
-
-          <!-- 11 -->
-          <div class="legal-section" id="tos-11">
-            <h2 class="legal-heading"><span class="legal-num">11.</span> Intellectual Property</h2>
-            <p>All intellectual property rights in the Service — including but not limited to the MyBibleLens&#8482; name, logo, the Lens branding, the Pure Existence Exchange branding, UI/UX design, custom AI prompt architecture, original content, and software code — are owned by MyBibleLens and Denzel Rigaud.</p>
-            <p>You may not reproduce, distribute, modify, create derivative works of, publicly display, or publicly perform any portion of the Service without prior written consent.</p>
-          </div>
-
-          <!-- 12 -->
-          <div class="legal-section" id="tos-12">
-            <h2 class="legal-heading"><span class="legal-num">12.</span> Account Termination</h2>
-            <ul class="legal-list">
-              <li><strong>By You:</strong> You may terminate your account at any time using the in-app deletion feature or by emailing <a href="mailto:supportmybiblelens@gmail.com">supportmybiblelens@gmail.com</a>.</li>
-              <li><strong>By MBL:</strong> We may suspend or terminate your account at our sole discretion if you violate these Terms, engage in prohibited conduct, or for any other reason with or without notice.</li>
-              <li><strong>Effect of Termination:</strong> Upon termination, your right to use the Service ceases immediately. We will delete your data in accordance with our <a href="#privacy">Privacy Policy</a>.</li>
-            </ul>
-          </div>
-
-          <!-- 13 -->
-          <div class="legal-section" id="tos-13">
-            <h2 class="legal-heading"><span class="legal-num">13.</span> Disclaimer of Warranties</h2>
-            <div class="legal-callout legal-callout--warning">
-              <p>THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, AND QUIET ENJOYMENT. WE DO NOT WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED, SECURE, ERROR-FREE, OR THAT ANY CONTENT WILL BE ACCURATE, RELIABLE, OR COMPLETE.</p>
-              <p>YOU ACKNOWLEDGE THAT YOUR USE OF THE SERVICE IS AT YOUR SOLE RISK AND THAT YOU WILL NOT RELY ON AI-GENERATED OUTPUT AS A SOLE SOURCE OF TRUTH OR FACTUAL INFORMATION, OR AS A SUBSTITUTE FOR PROFESSIONAL ADVICE.</p>
-            </div>
-          </div>
-
-          <!-- 14 -->
-          <div class="legal-section" id="tos-14">
-            <h2 class="legal-heading"><span class="legal-num">14.</span> Limitation of Liability</h2>
-            <p>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW:</p>
-            <ul class="legal-list">
-              <li>MYBIBLELENS, ITS FOUNDER, AFFILIATES, AND SERVICE PROVIDERS SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, PUNITIVE, OR EXEMPLARY DAMAGES ARISING OUT OF OR IN CONNECTION WITH YOUR USE OF THE SERVICE, INCLUDING BUT NOT LIMITED TO DAMAGES FOR LOSS OF PROFITS, GOODWILL, DATA, OR OTHER INTANGIBLE LOSSES.</li>
-              <li>OUR AGGREGATE LIABILITY FOR ALL CLAIMS ARISING OUT OF OR RELATING TO THESE TERMS OR THE SERVICE SHALL NOT EXCEED THE GREATER OF (A) THE AMOUNT YOU PAID FOR THE SERVICE IN THE 12 MONTHS PRECEDING THE CLAIM, OR (B) ONE HUNDRED DOLLARS ($100 USD).</li>
-              <li>THIS LIMITATION APPLIES REGARDLESS OF THE THEORY OF LIABILITY (CONTRACT, TORT, STRICT LIABILITY, OR OTHERWISE) AND EVEN IF MYBIBLELENS HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</li>
-            </ul>
-            <p>Some jurisdictions do not allow the exclusion or limitation of certain damages. In such jurisdictions, our liability is limited to the maximum extent permitted by law.</p>
-          </div>
-
-          <!-- 15 -->
-          <div class="legal-section" id="tos-15">
-            <h2 class="legal-heading"><span class="legal-num">15.</span> Indemnification</h2>
-            <p>You agree to indemnify, defend, and hold harmless MyBibleLens, its Founder, officers, agents, and affiliates from and against any claims, liabilities, damages, losses, and expenses (including reasonable attorneys' fees) arising out of or in connection with: (a) your use of the Service; (b) your User Content; (c) your violation of these Terms; or (d) your violation of any third-party rights.</p>
-          </div>
-
-          <!-- 16 -->
-          <div class="legal-section" id="tos-16">
-            <h2 class="legal-heading"><span class="legal-num">16.</span> Dispute Resolution & Governing Law</h2>
-            <ul class="legal-list">
-              <li><strong>Governing Law:</strong> These Terms shall be governed by and construed in accordance with the laws of the State of Florida, United States, without regard to its conflict of law provisions.</li>
-              <li><strong>Informal Resolution:</strong> Before filing any formal claim, you agree to first attempt to resolve the dispute informally by contacting us at <a href="mailto:supportmybiblelens@gmail.com">supportmybiblelens@gmail.com</a>. We will attempt to resolve the dispute within 30 days.</li>
-              <li><strong>Arbitration:</strong> If informal resolution fails, any dispute arising out of or relating to these Terms or the Service shall be resolved through binding arbitration administered by the American Arbitration Association (AAA) under its Consumer Arbitration Rules. The arbitration shall take place in the State of Florida.</li>
-              <li><strong>Class Action Waiver:</strong> YOU AND MYBIBLELENS AGREE THAT EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN YOUR OR ITS INDIVIDUAL CAPACITY, AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS OR REPRESENTATIVE PROCEEDING.</li>
-              <li><strong>Small Claims Court:</strong> Either party may bring a qualifying claim in small claims court.</li>
-            </ul>
-          </div>
-
-          <!-- 17 -->
-          <div class="legal-section" id="tos-17">
-            <h2 class="legal-heading"><span class="legal-num">17.</span> Severability</h2>
-            <p>If any provision of these Terms is found to be unenforceable or invalid by a court of competent jurisdiction, that provision shall be limited or eliminated to the minimum extent necessary, and the remaining provisions shall remain in full force and effect.</p>
-          </div>
-
-          <!-- 18 -->
-          <div class="legal-section" id="tos-18">
-            <h2 class="legal-heading"><span class="legal-num">18.</span> Changes to These Terms</h2>
-            <p>We reserve the right to modify these Terms at any time. When we make material changes, we will update the "Effective Date" at the top of this page and, where appropriate, notify you via email or in-app notification. Your continued use of the Service after the effective date of any modification constitutes your acceptance of the modified Terms.</p>
-          </div>
-
-          <!-- 19 -->
-          <div class="legal-section" id="tos-19">
-            <h2 class="legal-heading"><span class="legal-num">19.</span> Contact</h2>
-            <p>For questions about these Terms, contact us at:</p>
-            <div class="address-block">
-              <p><strong>MyBibleLens</strong></p>
-              <p>Attn: Denzel Rigaud, Founder</p>
-              <p>Email: <a href="mailto:supportmybiblelens@gmail.com">supportmybiblelens@gmail.com</a></p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <span class="footer-logo-text">MYBIBLELENS&#8482;</span>
-        </div>
-        <nav class="footer-nav" aria-label="Footer navigation">
-          <a href="#about">About</a>
-          <a href="#support">Support</a>
-          <a href="#privacy">Privacy</a>
-          <a href="#terms">Terms</a>
+        <nav class="footer-links" aria-label="Legal links">
+          <a href="legal.html#privacy">Privacy Policy</a>
+          <a href="legal.html#terms">Terms of Service</a>
+          <a href="legal.html#eula">EULA</a>
+          <a href="legal.html#ai-disclosure">AI Disclosure</a>
+          <a href="mailto:supportmybiblelens@gmail.com">Support</a>
         </nav>
-      </div>
-      <div class="footer-divider"></div>
-      <div class="footer-socials">
-        <a href="https://www.instagram.com/smiledenzel?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="footer-social-link">@smiledenzel</a>
-        <a href="https://www.instagram.com/mybiblelens/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" class="footer-social-link">@mybiblelens</a>
-        <a href="https://www.instagram.com/thewatercheck?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="footer-social-link">@thewatercheck <span class="future-tag">Future Project!</span></a>
-      </div>
-      <div class="footer-divider"></div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 MyBibleLens&#8482;. All rights reserved. Built by Denzel Rigaud. #StudentFounder</p>
-        <p class="footer-contact"><a href="#support" onclick="showSection('support')" style="color:#b6751d;">Contact Support</a></p>
+        <div class="footer-legal">
+          <span>© 2026 Expected End AI · MyBibleLens™</span>
+          <span>AI Study Aid. Use Discernment. Jesus loves you.</span>
+        </div>
       </div>
     </div>
   </footer>
 
-  <script src="./app.js"></script>
+  <script>
+    /* ========== PARTICLES ========== */
+    (function() {
+      const container = document.querySelector('.hero-particles');
+      if (!container) return;
+      const count = 30;
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.top = (60 + Math.random() * 40) + '%';
+        p.style.animationDuration = (6 + Math.random() * 10) + 's';
+        p.style.animationDelay = (Math.random() * 8) + 's';
+        p.style.width = (2 + Math.random() * 2) + 'px';
+        p.style.height = p.style.width;
+        p.style.opacity = 0.2 + Math.random() * 0.4;
+        container.appendChild(p);
+      }
+    })();
+
+    /* ========== PRICING TOGGLE ========== */
+    document.querySelectorAll('.pricing-toggle').forEach(function(toggle) {
+      const cardInner = toggle.closest('.pricing-card-inner');
+      const priceEl = cardInner.querySelector('.pricing-price');
+      const subEl = cardInner.querySelector('.pricing-price-sub');
+
+      toggle.querySelectorAll('.pricing-toggle-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          toggle.querySelectorAll('.pricing-toggle-btn').forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          var period = btn.getAttribute('data-period');
+          priceEl.textContent = priceEl.getAttribute('data-' + period + '-price');
+          subEl.textContent = subEl.getAttribute('data-' + period + '-sub');
+        });
+      });
+    });
+
+    /* ========== PRICING EXPAND ========== */
+    document.querySelectorAll('.pricing-expand-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var cardInner = btn.closest('.pricing-card-inner');
+        cardInner.classList.toggle('expanded');
+      });
+    });
+
+    /* ========== GSAP ANIMATIONS ========== */
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      /* Hero Orb: scale up + fade on scroll */
+      gsap.to('#hero-orb', {
+        scale: 2.5,
+        opacity: 0,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1
+        }
+      });
+
+      /* Lens cards: stagger fade-up */
+      gsap.utils.toArray('.lens-card').forEach(function(card, i) {
+        gsap.to(card, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          delay: i * 0.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%',
+            once: true
+          }
+        });
+      });
+
+      /* Orb section: scale from 0.5 to 1.0 */
+      gsap.fromTo('#orb-large', { scale: 0.5 }, {
+        scale: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.orb-section',
+          start: 'top 80%',
+          end: 'center center',
+          scrub: 1
+        }
+      });
+
+      /* Repo cards: slide in from right */
+      gsap.utils.toArray('.repo-card').forEach(function(card, i) {
+        gsap.to(card, {
+          opacity: 1,
+          x: 0,
+          duration: 0.6,
+          delay: i * 0.08,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.repo-section',
+            start: 'top 80%',
+            once: true
+          }
+        });
+      });
+
+      /* 7,777 count-up */
+      var foundingNumberEl = document.getElementById('founding-number');
+      var countObj = { val: 0 };
+      gsap.to(countObj, {
+        val: 7777,
+        duration: 2,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.founding-section',
+          start: 'top 80%',
+          once: true
+        },
+        onUpdate: function() {
+          foundingNumberEl.textContent = Math.floor(countObj.val).toLocaleString();
+        }
+      });
+
+      /* Pricing cards: stagger scale-up */
+      gsap.utils.toArray('.pricing-card-wrapper').forEach(function(card, i) {
+        gsap.to(card, {
+          opacity: 1,
+          scale: 1,
+          duration: 0.6,
+          delay: i * 0.15,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%',
+            once: true
+          }
+        });
+      });
+
+      /* Quote fade in */
+      gsap.from('.quote-text', {
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.quote-section',
+          start: 'top 80%',
+          once: true
+        }
+      });
+    });
+  </script>
 </body>
 </html>
