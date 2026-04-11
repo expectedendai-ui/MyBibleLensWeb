@@ -1483,9 +1483,32 @@
   updateSanctuaryPrice();
   updateKingdomPrice();
 
-  // ── Stripe Checkout via Supabase Edge Function ──
+  // ── Supabase Config ──
   var SUPABASE_URL = 'https://wokvqbxkzugceuvcrsyl.supabase.co';
   var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indva3ZxYnhrenVnY2V1dmNyc3lsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMzNjYyNjEsImV4cCI6MjA1ODk0MjI2MX0.bloMmxXjQOcZOhbCHHNqUjEyiRhIDPkZE4YHa7VRxms';
+
+  // ── Live Founding Member Count ──
+  async function updateFoundingCount() {
+    try {
+      var res = await fetch(SUPABASE_URL + '/rest/v1/founding_members?select=id', {
+        headers: { 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON }
+      });
+      var data = await res.json();
+      var count = Array.isArray(data) ? data.length : 0;
+      var spotsEl = document.getElementById('spots-claimed');
+      var fillEl = document.getElementById('progress-fill');
+      var foundingBtn = document.querySelector('[onclick*="founding"]');
+      if (spotsEl) spotsEl.textContent = count.toLocaleString();
+      if (fillEl) fillEl.style.width = Math.min((count / 7777) * 100, 100) + '%';
+      if (count >= 7777 && foundingBtn) {
+        foundingBtn.textContent = 'All 7,777 Spots Claimed';
+        foundingBtn.style.opacity = '0.5';
+        foundingBtn.style.pointerEvents = 'none';
+        foundingBtn.onclick = null;
+      }
+    } catch(e) { /* silent fail */ }
+  }
+  updateFoundingCount();
 
   function getApostleBilling() {
     var btns = document.querySelectorAll('#apostle-card .pricing-toggle-btn.active, .pricing-card-wrapper:nth-child(1) .pricing-toggle-btn.active');
