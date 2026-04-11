@@ -67,6 +67,57 @@
         </div>
       </div>
 
+      <!-- Partner Block (moved to top) -->
+      <div class="content-block" id="partner">
+        <div class="content-inner">
+          <div class="partner-block">
+            <h3 class="subsection-heading">Looking to Partner?</h3>
+            <p>I can't wait to partner with a company with the same vision as me, where we can prosper, because building this brick by brick feels great, but having a team beside me will be extraordinary.</p>
+
+            <form id="partnership-form" class="support-form" action="https://formspree.io/f/mzdkqdyy" method="POST" onsubmit="handlePartnershipForm(event)">
+              <input type="hidden" name="_subject" value="MyBibleLens&#8482; Partnership Inquiry">
+
+              <div class="form-group">
+                <label class="form-label" for="partner-name">YOUR NAME</label>
+                <input type="text" id="partner-name" name="name" class="form-input" placeholder="Full Name" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="partner-email">YOUR EMAIL</label>
+                <input type="email" id="partner-email" name="email" class="form-input" placeholder="you@example.com" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="partner-company">COMPANY / ORGANIZATION <span style="font-size:0.75rem;font-weight:400;opacity:0.6;">(optional)</span></label>
+                <input type="text" id="partner-company" name="company" class="form-input" placeholder="Your company or ministry name">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="partner-type">TYPE OF PARTNERSHIP</label>
+                <select id="partner-type" name="partnership_type" class="form-select" required>
+                  <option value="" disabled selected>Select a type...</option>
+                  <option value="Investor / Funding">Investor / Funding</option>
+                  <option value="Brand Partnership">Brand Partnership</option>
+                  <option value="Church / Ministry Partnership">Church / Ministry Partnership</option>
+                  <option value="Media &amp; Press">Media &amp; Press</option>
+                  <option value="Technology Partner">Technology Partner</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="partner-message">MESSAGE</label>
+                <textarea id="partner-message" name="message" class="form-textarea" rows="5" placeholder="Tell us about your vision and how you'd like to partner with MyBibleLens&#8482;." required></textarea>
+              </div>
+
+              <button type="submit" class="form-submit" id="partner-submit-btn">Send Message</button>
+              <p id="partner-success-msg" style="display:none;color:#2e7d32;font-weight:600;margin-top:1rem;font-size:0.95rem;">Thank you &mdash; we'll be in touch soon. God bless your vision.</p>
+              <p id="partner-error-msg" style="display:none;color:#b22222;font-weight:500;margin-top:1rem;font-size:0.9rem;">Something went wrong. Please try again.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+
       <!-- Purpose -->
       <div class="content-block">
         <div class="content-inner">
@@ -152,51 +203,7 @@
             </svg>
           </button>
 
-          <div class="partner-block">
-            <h3 class="subsection-heading">Looking to Partner?</h3>
-            <p>I can't wait to partner with a company with the same vision as me, where we can prosper, because building this brick by brick feels great, but having a team beside me will be extraordinary.</p>
 
-            <form id="partnership-form" class="support-form" action="https://formspree.io/f/mzdkqdyy" method="POST" onsubmit="handlePartnershipForm(event)">
-              <input type="hidden" name="_subject" value="MyBibleLens&#8482; Partnership Inquiry">
-
-              <div class="form-group">
-                <label class="form-label" for="partner-name">YOUR NAME</label>
-                <input type="text" id="partner-name" name="name" class="form-input" placeholder="Full Name" required>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="partner-email">YOUR EMAIL</label>
-                <input type="email" id="partner-email" name="email" class="form-input" placeholder="you@example.com" required>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="partner-company">COMPANY / ORGANIZATION <span style="font-size:0.75rem;font-weight:400;opacity:0.6;">(optional)</span></label>
-                <input type="text" id="partner-company" name="company" class="form-input" placeholder="Your company or ministry name">
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="partner-type">TYPE OF PARTNERSHIP</label>
-                <select id="partner-type" name="partnership_type" class="form-select" required>
-                  <option value="" disabled selected>Select a type...</option>
-                  <option value="Investor / Funding">Investor / Funding</option>
-                  <option value="Brand Partnership">Brand Partnership</option>
-                  <option value="Church / Ministry Partnership">Church / Ministry Partnership</option>
-                  <option value="Media &amp; Press">Media &amp; Press</option>
-                  <option value="Technology Partner">Technology Partner</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="partner-message">MESSAGE</label>
-                <textarea id="partner-message" name="message" class="form-textarea" rows="5" placeholder="Tell us about your vision and how you'd like to partner with MyBibleLens&#8482;." required></textarea>
-              </div>
-
-              <button type="submit" class="form-submit" id="partner-submit-btn">Send Message</button>
-              <p id="partner-success-msg" style="display:none;color:#2e7d32;font-weight:600;margin-top:1rem;font-size:0.95rem;">Thank you &mdash; we'll be in touch soon. God bless your vision.</p>
-              <p id="partner-error-msg" style="display:none;color:#b22222;font-weight:500;margin-top:1rem;font-size:0.9rem;">Something went wrong. Please try again.</p>
-            </form>
-          </div>
 
         </div>
       </div>

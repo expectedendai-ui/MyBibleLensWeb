@@ -1077,7 +1077,7 @@
           </div>
           <p class="progress-text"><span id="spots-claimed">0</span> of 7,777 spots claimed</p>
         </div>
-        <a href="#checkout-founding" class="btn btn-gold btn-large btn-full-mobile">
+        <a href="#" onclick="startCheckout('founding','monthly',1);return false;" class="btn btn-gold btn-large btn-full-mobile">
           Claim Your Founding Spot — $77.77
         </a>
         <p class="founding-quote">Seven is completion. This is your first fruits.</p>
@@ -1120,7 +1120,7 @@
                 <span class="expand-text">Show all ↓</span>
                 <span class="collapse-text">Show less ↑</span>
               </button>
-              <a href="#checkout-apostle" class="btn btn-gold" style="width: 100%;">Become Apostle</a>
+              <a href="#" onclick="startCheckout('apostle',getApostleBilling(),1);return false;" class="btn btn-gold" style="width: 100%;">Become Apostle</a>
             </div>
           </div>
         </div>
@@ -1154,7 +1154,7 @@
                 <span class="expand-text">Show all ↓</span>
                 <span class="collapse-text">Show less ↑</span>
               </button>
-              <a href="#checkout-sanctuary" class="btn btn-gold" style="width: 100%;">Build Your Sanctuary</a>
+              <a href="#" onclick="startCheckout('sanctuary',sanctuaryBilling,parseInt(document.getElementById('sanctuary-slider').value));return false;" class="btn btn-gold" style="width: 100%;">Build Your Sanctuary</a>
             </div>
           </div>
         </div>
@@ -1188,7 +1188,7 @@
                 <span class="expand-text">Show all ↓</span>
                 <span class="collapse-text">Show less ↑</span>
               </button>
-              <a href="#checkout-kingdom" class="btn btn-gold" style="width: 100%;">Establish Your Kingdom</a>
+              <a href="#" onclick="startCheckout('kingdom',kingdomBilling,parseInt(document.getElementById('kingdom-slider').value));return false;" class="btn btn-gold" style="width: 100%;">Establish Your Kingdom</a>
             </div>
           </div>
         </div>
@@ -1482,6 +1482,54 @@
   // Initialize on load
   updateSanctuaryPrice();
   updateKingdomPrice();
+
+  // ── Stripe Checkout via Supabase Edge Function ──
+  var SUPABASE_URL = 'https://wokvqbxkzugceuvcrsyl.supabase.co';
+  var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indva3ZxYnhrenVnY2V1dmNyc3lsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMzNjYyNjEsImV4cCI6MjA1ODk0MjI2MX0.bloMmxXjQOcZOhbCHHNqUjEyiRhIDPkZE4YHa7VRxms';
+
+  function getApostleBilling() {
+    var btns = document.querySelectorAll('#apostle-card .pricing-toggle-btn.active, .pricing-card-wrapper:nth-child(1) .pricing-toggle-btn.active');
+    if (btns.length > 0) return btns[0].getAttribute('data-period') || 'monthly';
+    return 'monthly';
+  }
+
+  async function startCheckout(tier, billing, seatCount) {
+    var btn = event.target;
+    var originalText = btn.textContent;
+    btn.textContent = 'Connecting...';
+    btn.style.pointerEvents = 'none';
+    btn.style.opacity = '0.7';
+
+    try {
+      var res = await fetch(SUPABASE_URL + '/functions/v1/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + SUPABASE_ANON,
+          'apikey': SUPABASE_ANON
+        },
+        body: JSON.stringify({
+          tier: tier,
+          billing: billing,
+          seat_count: seatCount
+        })
+      });
+
+      var data = await res.json();
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    } catch (err) {
+      alert('Connection error. Please try again.');
+    } finally {
+      btn.textContent = originalText;
+      btn.style.pointerEvents = 'auto';
+      btn.style.opacity = '1';
+    }
+  }
   </script>
 </body>
 </html>
