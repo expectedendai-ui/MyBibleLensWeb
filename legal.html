@@ -15,6 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="./style.css">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -259,6 +260,7 @@
               <label class="form-label" for="support-message">Message</label>
               <textarea id="support-message" name="message" class="form-input form-textarea" placeholder="Describe your issue or question in detail. Include your account email, any error messages, and screenshots if relevant." rows="6" required></textarea>
             </div>
+            <div class="g-recaptcha" data-sitekey="6Lf1xcAsAAAAEtN6c0P-t6jm6Ec1Q_o8lZH0KWV" style="margin-bottom:1rem;"></div>
             <button type="submit" class="form-submit-btn" id="form-submit-btn">Send Message</button>
             <div id="form-success" class="form-success" style="display:none;">
               <p>&#10003; Your message has been received. We'll be in touch within 24–48 hours.</p>
