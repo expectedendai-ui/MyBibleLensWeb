@@ -522,6 +522,204 @@
       gap: var(--space-8);
     }
 
+    /* ===== Two-column mission layout ===== */
+    .founding-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(1.5rem, 3vw, 3rem);
+      align-items: stretch;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) {
+      .founding-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ===== Mission Panel (left) ===== */
+    .mission-panel {
+      position: relative;
+      padding: clamp(2rem, 3vw, 2.75rem);
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(61,43,31,0.6) 0%, rgba(43,30,22,0.9) 100%);
+      overflow: hidden;
+      isolation: isolate;
+      text-align: left;
+    }
+    /* Shimmering gold ring (matches 17,000 number) */
+    .mission-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      padding: 2px;
+      background: linear-gradient(
+        90deg,
+        #8B5E14 0%,
+        #D4921F 20%,
+        #f0c850 40%,
+        #D4921F 60%,
+        #b6751d 80%,
+        #8B5E14 100%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 3s ease-in-out infinite;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .mission-panel > * { position: relative; z-index: 1; }
+
+    .mission-headline {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 1rem + 1.8vw, 2.25rem);
+      line-height: 1.15;
+      background: linear-gradient(
+        90deg,
+        #8B5E14 0%,
+        #D4921F 20%,
+        #f0c850 40%,
+        #D4921F 60%,
+        #b6751d 80%,
+        #8B5E14 100%
+      );
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3s ease-in-out infinite;
+      margin: 0 0 1.25rem 0;
+    }
+
+    .mission-body {
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 0.8rem + 0.3vw, 1.05rem);
+      line-height: 1.65;
+      color: rgba(245, 242, 237, 0.88);
+      margin: 0 0 1rem 0;
+    }
+    .mission-body strong { color: #f0c850; font-weight: 600; }
+
+    .mission-kicker {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #D4921F;
+      margin: 1.5rem 0 0.75rem 0;
+      text-align: left;
+    }
+
+    .mission-impact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.5rem 0;
+      display: grid;
+      gap: 0.6rem;
+    }
+    .mission-impact-list li {
+      position: relative;
+      padding-left: 1.9rem;
+      font-family: var(--font-body);
+      font-size: clamp(0.9rem, 0.8rem + 0.2vw, 1rem);
+      color: rgba(245, 242, 237, 0.92);
+      line-height: 1.45;
+      text-align: left;
+    }
+    .mission-impact-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.35em;
+      width: 1.2rem;
+      height: 1.2rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #b6741d 0%, #D4921F 100%);
+      box-shadow: 0 0 10px rgba(212,146,31,0.35);
+    }
+    .mission-impact-list li::after {
+      content: "";
+      position: absolute;
+      left: 0.34rem;
+      top: 0.58em;
+      width: 0.5rem;
+      height: 0.28rem;
+      border-left: 2px solid #f1e0ba;
+      border-bottom: 2px solid #f1e0ba;
+      transform: rotate(-45deg);
+    }
+
+    .mission-closer {
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 0.85rem + 0.2vw, 1.05rem);
+      line-height: 1.6;
+      color: rgba(245, 242, 237, 0.9);
+      margin: 0 0 1rem 0;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(212,146,31,0.2);
+    }
+    .mission-closer strong {
+      display: inline-block;
+      color: #f0c850;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .mission-social {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: rgba(245, 242, 237, 0.75);
+      margin: 0 0 0.5rem 0;
+    }
+    .mission-social-handles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 0 0 1.25rem 0;
+    }
+    .mission-social-handles a {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(212,146,31,0.08);
+      border: 1px solid rgba(212,146,31,0.3);
+      color: #f0c850;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+    .mission-social-handles a:hover {
+      background: rgba(212,146,31,0.18);
+      border-color: #D4921F;
+      transform: translateY(-1px);
+    }
+
+    .mission-scripture {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #D4921F;
+      text-align: right;
+      margin: 0;
+      padding-top: 0.5rem;
+    }
+
+    /* Adjust founding-inner when inside grid (right column) */
+    .founding-grid .founding-inner {
+      padding: clamp(2rem, 3vw, 2.75rem);
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(43,30,22,0.6) 0%, rgba(61,43,31,0.85) 100%);
+      border: 1px solid rgba(212,146,31,0.25);
+      gap: var(--space-6);
+    }
+
     .founding-number {
       font-family: var(--font-display);
       font-size: clamp(4rem, 3rem + 5vw, 8rem);
@@ -1064,7 +1262,44 @@
   <!-- ===== SECTION 5: 17,000 FOUNDING MEMBERS ===== -->
   <section class="founding-section section-padding" id="founding">
     <div class="container">
-      <div class="founding-inner">
+      <div class="founding-grid">
+
+        <!-- Left: Mission Panel -->
+        <aside class="mission-panel" aria-label="Our mission">
+          <h2 class="mission-headline">17,000 Seats.<br>One Shared Mission.</h2>
+
+          <p class="mission-body">
+            MyBibleLens© started as a dream in my dorm room — now it's becoming a reality, not just for me, but for <strong>all of us</strong>.
+          </p>
+          <p class="mission-body">
+            When you become a Founding Member, you aren't just unlocking a subscription — you're <strong>fueling a movement</strong>. Every dollar is poured directly back into our country.
+          </p>
+
+          <p class="mission-kicker">We're talkin&rsquo;</p>
+          <ul class="mission-impact-list" role="list">
+            <li>Donations to churches</li>
+            <li>Free Bible giveaways</li>
+            <li>Free iPad giveaways</li>
+            <li>Free journal giveaways</li>
+            <li>Scholarships for teens</li>
+          </ul>
+
+          <p class="mission-closer">
+            The era of soul-draining algorithms and digital chaos ends here. We are reclaiming our focus, our community, our friends, and our families. This isn't just another app — it's the dawn of <strong>The People's Era.</strong>
+          </p>
+
+          <p class="mission-social">Follow our journey to see the impact you helped start:</p>
+          <div class="mission-social-handles">
+            <a href="https://instagram.com/mybiblelens" target="_blank" rel="noopener">Instagram · @mybiblelens</a>
+            <a href="https://tiktok.com/@mybiblelens" target="_blank" rel="noopener">TikTok · @mybiblelens</a>
+            <a href="https://linkedin.com/company/mybiblelens" target="_blank" rel="noopener">LinkedIn · @mybiblelens</a>
+          </div>
+
+          <p class="mission-scripture">— Acts 4:32</p>
+        </aside>
+
+        <!-- Right: Founding Member Card -->
+        <div class="founding-inner">
         <div class="founding-number" id="founding-number" aria-label="17,000">0</div>
         <h2 class="founding-title">Founding Members</h2>
         <p class="founding-subtitle">The first 17,000 believers get lifetime access for a one-time payment.</p>
@@ -1095,6 +1330,8 @@
         </a>
         <p class="founding-quote">Seven is completion. This is your first fruits.</p>
       </div>
+
+      </div><!-- /.founding-grid -->
     </div>
   </section>
 
@@ -1520,10 +1757,12 @@
       if (spotsEl) spotsEl.textContent = count.toLocaleString();
       if (fillEl) fillEl.style.width = Math.min((count / 17000) * 100, 100) + '%';
       if (count >= 17000 && foundingBtn) {
-        foundingBtn.textContent = 'All 17,000 Spots Claimed';
-        foundingBtn.style.opacity = '0.5';
+        foundingBtn.innerHTML = '🙏 The Mission Has Begun. Thank You.';
+        foundingBtn.style.opacity = '0.85';
         foundingBtn.style.pointerEvents = 'none';
         foundingBtn.onclick = null;
+        var subtitleEl = document.querySelector('.founding-subtitle');
+        if (subtitleEl) subtitleEl.textContent = 'All 17,000 seats claimed. The People\u2019s Era is here.';
       }
     } catch(e) { /* silent fail */ }
   }
