@@ -547,7 +547,7 @@
       isolation: isolate;
       text-align: left;
     }
-    /* Shimmering gold ring (matches 17,000 number) */
+    /* Shimmering gold ring (matches 70,000 number) */
     .mission-panel::before {
       content: "";
       position: absolute;
@@ -1259,14 +1259,14 @@
     </div>
   </section>
 
-  <!-- ===== SECTION 5: 17,000 FOUNDING MEMBERS ===== -->
+  <!-- ===== SECTION 5: 70,000 FOUNDING MEMBERS ===== -->
   <section class="founding-section section-padding" id="founding">
     <div class="container">
       <div class="founding-grid">
 
         <!-- Left: Mission Panel -->
         <aside class="mission-panel" aria-label="Our mission">
-          <h2 class="mission-headline">17,000 Seats.<br>One Shared Mission.</h2>
+          <h2 class="mission-headline">70,000 Seats.<br>One Shared Mission.</h2>
 
           <p class="mission-body">
             MyBibleLens© started as a dream in my dorm room — now it's becoming a reality, not just for me, but for <strong>all of us</strong>.
@@ -1275,13 +1275,18 @@
             When you become a Founding Member, you aren't just unlocking a subscription — you're <strong>fueling a movement</strong>. Every dollar is poured directly back into our country.
           </p>
 
-          <p class="mission-kicker">We're talkin&rsquo;</p>
+          <p class="mission-kicker">We&rsquo;re talkin&rsquo;</p>
           <ul class="mission-impact-list" role="list">
             <li>Donations to churches</li>
             <li>Free Bible giveaways</li>
             <li>Free iPad giveaways</li>
             <li>Free journal giveaways</li>
             <li>Scholarships for teens</li>
+            <li>Supporting young coding &amp; tech bootcamps</li>
+            <li>Giving to families in need</li>
+            <li>Building calisthenics &amp; workout parks for the community</li>
+            <li>Supporting local farmers</li>
+            <li>And much, much more…</li>
           </ul>
 
           <p class="mission-closer">
@@ -1300,9 +1305,9 @@
 
         <!-- Right: Founding Member Card -->
         <div class="founding-inner">
-        <div class="founding-number" id="founding-number" aria-label="17,000">0</div>
+        <div class="founding-number" id="founding-number" aria-label="70,000">0</div>
         <h2 class="founding-title">Founding Members</h2>
-        <p class="founding-subtitle">The first 17,000 believers get lifetime access for a one-time payment.</p>
+        <p class="founding-subtitle">The first 70,000 believers get lifetime access for a one-time payment.</p>
         <div>
           <div class="founding-price">$77.77</div>
           <div class="founding-price-sub">one-time · forever</div>
@@ -1323,7 +1328,7 @@
           <div class="progress-track">
             <div class="progress-fill" id="progress-fill"></div>
           </div>
-          <p class="progress-text"><span id="spots-claimed">0</span> of 17,000 spots claimed</p>
+          <p class="progress-text"><span id="spots-claimed">0</span> of 70,000 spots claimed</p>
         </div>
         <a href="#" onclick="startCheckout('founding','monthly',1);return false;" class="btn btn-gold btn-large btn-full-mobile">
           Claim Your Founding Spot — $77.77
@@ -1626,11 +1631,11 @@
         });
       });
 
-      /* 17,000 count-up */
+      /* 70,000 count-up */
       var foundingNumberEl = document.getElementById('founding-number');
       var countObj = { val: 0 };
       gsap.to(countObj, {
-        val: 17000,
+        val: 70000,
         duration: 2,
         ease: 'power2.out',
         scrollTrigger: {
@@ -1755,14 +1760,14 @@
       var fillEl = document.getElementById('progress-fill');
       var foundingBtn = document.querySelector('[onclick*="founding"]');
       if (spotsEl) spotsEl.textContent = count.toLocaleString();
-      if (fillEl) fillEl.style.width = Math.min((count / 17000) * 100, 100) + '%';
-      if (count >= 17000 && foundingBtn) {
+      if (fillEl) fillEl.style.width = Math.min((count / 70000) * 100, 100) + '%';
+      if (count >= 70000 && foundingBtn) {
         foundingBtn.innerHTML = '🙏 The Mission Has Begun. Thank You.';
         foundingBtn.style.opacity = '0.85';
         foundingBtn.style.pointerEvents = 'none';
         foundingBtn.onclick = null;
         var subtitleEl = document.querySelector('.founding-subtitle');
-        if (subtitleEl) subtitleEl.textContent = 'All 17,000 seats claimed. The People\u2019s Era is here.';
+        if (subtitleEl) subtitleEl.textContent = 'All 70,000 seats claimed. The People\u2019s Era is here.';
       }
     } catch(e) { /* silent fail */ }
   }
