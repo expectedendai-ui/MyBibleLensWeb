@@ -818,50 +818,93 @@
       .coming-soon-toast .cs-body { font-size: 0.82rem; }
     }
 
-    /* ===== reCAPTCHA Trust Badge (footer) ===== */
+    /* ===== reCAPTCHA Trust Badge (under Founding cards, centered) ===== */
+    .recaptcha-trust-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: clamp(2rem, 4vw, 3rem);
+      padding: 0 1rem;
+    }
     .recaptcha-trust {
       display: inline-flex;
       align-items: center;
-      gap: 0.55rem;
-      padding: 0.5rem 0.95rem;
-      margin-top: 0.5rem;
+      gap: 0.7rem;
+      padding: 0.7rem 1.4rem;
       border-radius: 999px;
-      background: rgba(212,146,31,0.06);
-      border: 1px solid rgba(212,146,31,0.22);
+      background: linear-gradient(135deg, rgba(212,146,31,0.12) 0%, rgba(240,200,80,0.08) 100%);
+      border: 1px solid rgba(212,146,31,0.45);
+      box-shadow: 0 0 24px rgba(212,146,31,0.15), inset 0 1px 0 rgba(240,200,80,0.15);
       font-family: var(--font-body);
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: rgba(241,224,186,0.78);
+      font-size: 0.92rem;
+      color: #f1e0ba;
       letter-spacing: 0.01em;
-      transition: all 0.25s ease;
+      transition: all 0.3s ease;
     }
     .recaptcha-trust:hover {
-      background: rgba(212,146,31,0.1);
-      border-color: rgba(212,146,31,0.4);
-      color: #f1e0ba;
+      background: linear-gradient(135deg, rgba(212,146,31,0.2) 0%, rgba(240,200,80,0.14) 100%);
+      border-color: #D4921F;
+      box-shadow: 0 0 32px rgba(212,146,31,0.3), inset 0 1px 0 rgba(240,200,80,0.25);
+      transform: translateY(-1px);
     }
     .recaptcha-trust .rt-shield {
-      width: 16px;
-      height: 16px;
-      stroke: #D4921F;
-      stroke-width: 2;
+      width: 20px;
+      height: 20px;
+      stroke: #f0c850;
+      stroke-width: 2.2;
       fill: none;
       stroke-linecap: round;
       stroke-linejoin: round;
       flex-shrink: 0;
+      filter: drop-shadow(0 0 6px rgba(240,200,80,0.4));
+    }
+    .recaptcha-trust .rt-protected {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: linear-gradient(
+        90deg,
+        #b6741d 0%,
+        #D4921F 30%,
+        #f0c850 50%,
+        #D4921F 70%,
+        #b6741d 100%
+      );
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    .recaptcha-trust .rt-divider {
+      color: rgba(212,146,31,0.5);
+      margin: 0 0.15rem;
     }
     .recaptcha-trust strong {
       color: #f0c850;
       font-weight: 600;
     }
     .recaptcha-trust a {
-      color: rgba(241,224,186,0.78);
+      color: #f1e0ba;
       text-decoration: none;
-      transition: color 0.2s ease;
+      border-bottom: 1px dotted rgba(241,224,186,0.4);
+      transition: all 0.2s ease;
     }
-    .recaptcha-trust a:hover { color: #f0c850; }
-    @media (max-width: 480px) {
-      .recaptcha-trust { font-size: 0.72rem; padding: 0.4rem 0.8rem; }
+    .recaptcha-trust a:hover {
+      color: #f0c850;
+      border-bottom-color: #f0c850;
+    }
+    @media (max-width: 600px) {
+      .recaptcha-trust {
+        font-size: 0.82rem;
+        padding: 0.6rem 1rem;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+      }
+      .recaptcha-trust .rt-protected { font-size: 0.9rem; }
     }
 
     .founding-number {
@@ -1481,6 +1524,22 @@
       </div>
 
       </div><!-- /.founding-grid -->
+
+      <!-- reCAPTCHA Trust Badge (centered under cards) -->
+      <div class="recaptcha-trust-wrap">
+        <div class="recaptcha-trust" role="note" aria-label="This site is protected by reCAPTCHA">
+          <svg class="rt-shield" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2 L4 5 L4 11 C4 16 8 20 12 22 C16 20 20 16 20 11 L20 5 Z"></path>
+            <polyline points="9 12 11 14 15 10"></polyline>
+          </svg>
+          <span class="rt-protected">Protected</span>
+          <span>by <strong>reCAPTCHA</strong>
+            <span class="rt-divider">·</span>
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy</a> &amp;
+            <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms</a>
+          </span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1662,16 +1721,6 @@
         <div class="footer-legal">
           <span>© 2026 Expected End AI · MyBibleLens©</span>
           <span>AI Study Aid. Use Discernment. Jesus loves you.</span>
-          <div class="recaptcha-trust" role="note" aria-label="This site is protected by reCAPTCHA">
-            <svg class="rt-shield" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 2 L4 5 L4 11 C4 16 8 20 12 22 C16 20 20 16 20 11 L20 5 Z"></path>
-              <polyline points="9 12 11 14 15 10"></polyline>
-            </svg>
-            <span>Protected by <strong>reCAPTCHA</strong> ·
-              <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy</a> &amp;
-              <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms</a>
-            </span>
-          </div>
         </div>
       </div>
     </div>
