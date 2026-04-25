@@ -818,6 +818,52 @@
       .coming-soon-toast .cs-body { font-size: 0.82rem; }
     }
 
+    /* ===== reCAPTCHA Trust Badge (footer) ===== */
+    .recaptcha-trust {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.5rem 0.95rem;
+      margin-top: 0.5rem;
+      border-radius: 999px;
+      background: rgba(212,146,31,0.06);
+      border: 1px solid rgba(212,146,31,0.22);
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: rgba(241,224,186,0.78);
+      letter-spacing: 0.01em;
+      transition: all 0.25s ease;
+    }
+    .recaptcha-trust:hover {
+      background: rgba(212,146,31,0.1);
+      border-color: rgba(212,146,31,0.4);
+      color: #f1e0ba;
+    }
+    .recaptcha-trust .rt-shield {
+      width: 16px;
+      height: 16px;
+      stroke: #D4921F;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+    .recaptcha-trust strong {
+      color: #f0c850;
+      font-weight: 600;
+    }
+    .recaptcha-trust a {
+      color: rgba(241,224,186,0.78);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .recaptcha-trust a:hover { color: #f0c850; }
+    @media (max-width: 480px) {
+      .recaptcha-trust { font-size: 0.72rem; padding: 0.4rem 0.8rem; }
+    }
+
     .founding-number {
       font-family: var(--font-display);
       font-size: clamp(4rem, 3rem + 5vw, 8rem);
@@ -1616,6 +1662,16 @@
         <div class="footer-legal">
           <span>© 2026 Expected End AI · MyBibleLens©</span>
           <span>AI Study Aid. Use Discernment. Jesus loves you.</span>
+          <div class="recaptcha-trust" role="note" aria-label="This site is protected by reCAPTCHA">
+            <svg class="rt-shield" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2 L4 5 L4 11 C4 16 8 20 12 22 C16 20 20 16 20 11 L20 5 Z"></path>
+              <polyline points="9 12 11 14 15 10"></polyline>
+            </svg>
+            <span>Protected by <strong>reCAPTCHA</strong> ·
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy</a> &amp;
+              <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms</a>
+            </span>
+          </div>
         </div>
       </div>
     </div>
