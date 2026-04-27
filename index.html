@@ -248,6 +248,153 @@
       margin-top: var(--space-4);
     }
 
+    /* ===== TestFlight Pre-Launch Card (hero CTA replacement) ===== */
+    .testflight-card {
+      position: relative;
+      max-width: 580px;
+      width: 100%;
+      margin: var(--space-6) auto 0;
+      padding: clamp(1.4rem, 2.5vw, 2rem) clamp(1.5rem, 3vw, 2.25rem);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(61,43,31,0.7) 0%, rgba(43,30,22,0.92) 100%);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.45), 0 0 0 1px rgba(212,146,31,0.2);
+      overflow: hidden;
+      isolation: isolate;
+      text-align: center;
+    }
+    /* Shimmering gold ring border */
+    .testflight-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 22px;
+      padding: 2px;
+      background: linear-gradient(
+        90deg,
+        #8B5E14 0%, #D4921F 25%, #f0c850 50%, #D4921F 75%, #8B5E14 100%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 3.5s ease-in-out infinite;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .testflight-card > * { position: relative; z-index: 1; }
+
+    .tf-pulse-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(212,146,31,0.12);
+      border: 1px solid rgba(212,146,31,0.4);
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #f0c850;
+      margin-bottom: 0.85rem;
+    }
+    .tf-pulse-pill .tf-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #f0c850;
+      box-shadow: 0 0 8px #f0c850;
+      animation: tf-pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes tf-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    .tf-headline {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 1rem + 1.6vw, 2rem);
+      line-height: 1.15;
+      color: #f1e0ba;
+      margin: 0 0 0.85rem 0;
+    }
+    .tf-headline strong {
+      background: linear-gradient(
+        90deg, #b6741d 0%, #D4921F 30%, #f0c850 50%, #D4921F 70%, #b6741d 100%
+      );
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3.5s ease-in-out infinite;
+      font-weight: 400;
+    }
+
+    .tf-body {
+      font-family: var(--font-body);
+      font-size: clamp(0.9rem, 0.8rem + 0.3vw, 1rem);
+      line-height: 1.55;
+      color: rgba(241,224,186,0.85);
+      margin: 0 0 1.4rem 0;
+      max-width: 460px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .tf-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.95rem 1.85rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #b6741d 0%, #D4921F 50%, #b6741d 100%);
+      background-size: 200% 100%;
+      color: #2b1e16;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      box-shadow: 0 10px 28px rgba(182,116,29,0.45), inset 0 1px 0 rgba(255,255,255,0.2);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background-position 0.4s ease;
+      margin-bottom: 1rem;
+    }
+    .tf-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 36px rgba(182,116,29,0.6), inset 0 1px 0 rgba(255,255,255,0.25);
+      background-position: 100% 0;
+    }
+    .tf-cta .tf-ig-svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .tf-secondary {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: rgba(241,224,186,0.65);
+      margin-top: 0.25rem;
+    }
+    .tf-secondary a {
+      color: #f0c850;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(240,200,80,0.4);
+      transition: border-color 0.2s ease;
+    }
+    .tf-secondary a:hover { border-bottom-color: #f0c850; }
+
+    @media (max-width: 480px) {
+      .testflight-card { margin-top: var(--space-5); padding: 1.4rem 1.25rem; }
+      .tf-headline { font-size: 1.4rem; }
+      .tf-cta { width: 100%; padding: 1rem 1rem; }
+    }
+
     /* ========== BUTTONS ========== */
     .btn {
       display: inline-flex;
@@ -1348,9 +1495,30 @@
       <div class="hero-orb" id="hero-orb" aria-hidden="true"></div>
       <h1 class="hero-title">MyBibleLens©</h1>
       <p class="hero-tagline">Bringing people closer to God in a fun and easier way!</p>
-      <div class="hero-ctas">
-        <a href="#" onclick="showComingSoon();return false;" class="btn btn-gold">Download the App</a>
-        <a href="#founding" class="btn btn-outline">Become a Founding Member</a>
+      <div class="testflight-card" role="region" aria-label="Pre-Launch on TestFlight">
+        <div class="tf-pulse-pill">
+          <span class="tf-dot" aria-hidden="true"></span>
+          <span>Now in TestFlight</span>
+        </div>
+
+        <h2 class="tf-headline">
+          The App Is in <strong>Pre-Launch</strong>
+        </h2>
+
+        <p class="tf-body">
+          Help us shape MyBibleLens© before launch day. Join the TestFlight beta to spot bugs, suggest features, and walk with us as we build something for the people.
+        </p>
+
+        <a href="https://instagram.com/mybiblelens" target="_blank" rel="noopener" class="tf-cta" aria-label="Contact MyBibleLens on Instagram to join TestFlight">
+          <svg class="tf-ig-svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.22.42.56.22.96.48 1.38.9.42.42.68.82.9 1.38.17.42.37 1.05.42 2.22.07 1.25.07 1.65.07 4.85s0 3.6-.07 4.85c-.05 1.17-.25 1.8-.42 2.22a3.7 3.7 0 0 1-.9 1.38c-.42.42-.82.68-1.38.9-.42.17-1.05.37-2.22.42-1.25.07-1.65.07-4.85.07s-3.6 0-4.85-.07c-1.17-.05-1.8-.25-2.22-.42a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.17-.42-.37-1.05-.42-2.22C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.85c.05-1.17.25-1.8.42-2.22.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.17 1.05-.37 2.22-.42C8.4 2.2 8.8 2.2 12 2.2zM12 0C8.74 0 8.33 0 7.05.07c-1.28.06-2.15.26-2.92.55a5.9 5.9 0 0 0-2.13 1.38A5.9 5.9 0 0 0 .62 4.13c-.3.77-.5 1.64-.55 2.92C0 8.33 0 8.74 0 12s0 3.67.07 4.95c.06 1.28.26 2.15.55 2.92.3.79.7 1.46 1.38 2.13a5.9 5.9 0 0 0 2.13 1.38c.77.3 1.64.5 2.92.55C8.33 24 8.74 24 12 24s3.67 0 4.95-.07c1.28-.06 2.15-.26 2.92-.55a5.9 5.9 0 0 0 2.13-1.38 5.9 5.9 0 0 0 1.38-2.13c.3-.77.5-1.64.55-2.92.07-1.28.07-1.69.07-4.95s0-3.67-.07-4.95c-.06-1.28-.26-2.15-.55-2.92a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.87.62c-.77-.3-1.64-.5-2.92-.55C15.67 0 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zm0 10.16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.85a1.44 1.44 0 1 1 0 2.88 1.44 1.44 0 0 1 0-2.88z"/>
+          </svg>
+          Contact @mybiblelens on Instagram
+        </a>
+
+        <span class="tf-secondary">
+          Already a believer? <a href="#founding">Become a Founding Member →</a>
+        </span>
       </div>
     </div>
   </section>
