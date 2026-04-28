@@ -1,0 +1,8 @@
+# RFC 9116 — Security Contact File for MyBibleLens™
+# https://mybiblelens.us/legal.html#security
+
+Contact: mailto:security@mybiblelens.us
+Expires: 2027-04-28T11:25:26.000Z
+Preferred-Languages: en
+Canonical: https://mybiblelens.us/.well-known/security.txt
+Policy: https://mybiblelens.us/legal.html#security
