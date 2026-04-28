@@ -17,7 +17,11 @@
   // ─── Hash-Based Page Routing ───
   function showSection(sectionId) {
     // Default to 'about' if no valid section
-    const validSections = ['about', 'support', 'privacy', 'terms'];
+    const validSections = [
+      'about', 'support', 'privacy', 'terms',
+      'eula', 'ai-disclosure', 'cookies', 'acceptable-use',
+      'refund', 'subscription-disclosure', 'accessibility', 'dmca', 'security'
+    ];
     if (!validSections.includes(sectionId)) sectionId = 'about';
 
     // Hide all sections
@@ -47,22 +51,30 @@
 
   function handleHash() {
     var hash = window.location.hash.replace('#', '').split('?')[0];
-    // If it's a sub-anchor within a legal section (e.g., #priv-3, #tos-5), show the parent section
-    if (hash.startsWith('priv-')) {
-      showSection('privacy');
-      setTimeout(function () {
-        var el = document.getElementById(hash);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 100);
-    } else if (hash.startsWith('tos-')) {
-      showSection('terms');
-      setTimeout(function () {
-        var el = document.getElementById(hash);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 100);
-    } else {
-      showSection(hash || 'about');
+    // If it's a sub-anchor within a legal section (e.g., #priv-3, #tos-5, #eula-7, #ai-3), show the parent section
+    var subAnchorMap = {
+      'priv-': 'privacy',
+      'tos-': 'terms',
+      'eula-': 'eula',
+      'ai-': 'ai-disclosure',
+      'ck-': 'cookies',
+      'au-': 'acceptable-use'
+    };
+    var matched = false;
+    for (var prefix in subAnchorMap) {
+      if (hash.startsWith(prefix)) {
+        showSection(subAnchorMap[prefix]);
+        setTimeout(function (h) {
+          return function () {
+            var el = document.getElementById(h);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          };
+        }(hash), 100);
+        matched = true;
+        break;
+      }
     }
+    if (!matched) showSection(hash || 'about');
   }
 
   // Listen for hash changes
@@ -91,8 +103,12 @@
     link.addEventListener('click', function (e) {
       var href = this.getAttribute('href');
       if (href && href.startsWith('#')) {
-        // Check if it's a section link (about, support, privacy, terms)
-        var validSections = ['about', 'support', 'privacy', 'terms'];
+        // Check if it's a section link (top-level legal page)
+        var validSections = [
+          'about', 'support', 'privacy', 'terms',
+          'eula', 'ai-disclosure', 'cookies', 'acceptable-use',
+          'refund', 'subscription-disclosure', 'accessibility', 'dmca', 'security'
+        ];
         var target = href.replace('#', '');
         if (validSections.includes(target)) {
           e.preventDefault();
