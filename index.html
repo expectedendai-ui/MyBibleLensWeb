@@ -600,32 +600,21 @@
       background: var(--parchment);
     }
 
+    /* Study Repository — responsive grid (no scroll, all visible) */
     .repo-carousel {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: var(--space-6);
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
       padding-bottom: var(--space-4);
-      scrollbar-width: thin;
-      scrollbar-color: var(--gold) transparent;
     }
 
-    .repo-carousel::-webkit-scrollbar { height: 6px; }
-    .repo-carousel::-webkit-scrollbar-track { background: transparent; }
-    .repo-carousel::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
-
     .repo-card {
-      flex: 0 0 auto;
-      width: 280px;
-      min-width: 280px;
       background: var(--deep-brown);
       border-radius: var(--radius-lg);
       padding: var(--space-6) var(--space-6);
       border-left: 4px solid var(--gold);
-      scroll-snap-align: start;
       opacity: 0;
-      transform: translateX(40px);
+      transform: translateY(20px);
     }
 
     .repo-card h3 {
@@ -1527,7 +1516,7 @@
   <section class="lens-section section-padding" id="lenses">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">Seven Lenses. One Truth.</h2>
+        <h2 class="section-title">Eight Lenses. One Truth.</h2>
         <p class="section-subtitle">Each lens reveals a different dimension of scripture.</p>
       </div>
       <div class="lens-grid">
@@ -1559,6 +1548,10 @@
           <h3>Refiner</h3>
           <p>When you forget who you are</p>
         </div>
+        <div class="lens-card" style="border-left:4px solid #9d6a3f;">
+          <h3>Brothers &amp; Sisters</h3>
+          <p>The fellowship lens — see scripture through the voices of those walking with you.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -1579,7 +1572,7 @@
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">Your Study Repository</h2>
-        <p class="section-subtitle">Seven powerful tools to organize your spiritual journey.</p>
+        <p class="section-subtitle">Powerful tools to organize your spiritual journey.</p>
       </div>
       <div class="repo-carousel" role="list">
         <div class="repo-card" role="listitem">
@@ -1607,8 +1600,8 @@
           <p>Describe your dream. Let AI analyze it through scripture.</p>
         </div>
         <div class="repo-card" role="listitem">
-          <h3>Google Lens</h3>
-          <p>Point your camera at the world. See it through scripture.</p>
+          <h3>S.O.A.P.</h3>
+          <p>Scripture, Observation, Application, Prayer — the proven study method, structured for you with one tap.</p>
         </div>
       </div>
     </div>
@@ -1624,7 +1617,10 @@
           <h2 class="mission-headline">70,000 Seats.<br>One Shared Mission.</h2>
 
           <p class="mission-body">
-            MyBibleLens™ started as a dream in my dorm room — now it's becoming a reality, not just for me, but for <strong>all of us</strong>.
+            <strong>The number isn't random.</strong> Jesus sent <strong>seventy disciples</strong> ahead of Him into every town He was about to enter (Luke 10:1). The Table of Nations names <strong>seventy peoples</strong> descended from Noah — the original family of the earth (Genesis 10). Seventy is the number of <em>commission</em>, of <em>family</em>, of <em>the world being reached</em>.
+          </p>
+          <p class="mission-body">
+            We multiplied that by <strong>1,000</strong> — the number of <em>generations</em> God promises His covenant to those who love Him (Deuteronomy 7:9). Seventy disciples for the next thousand generations. <strong>That's 70,000 Founding Members.</strong> Not investors. Not customers. Sent ones.
           </p>
           <p class="mission-body">
             When you become a Founding Member, you secure <strong>lifetime app access</strong> and you join a movement that's bigger than the app itself. As MyBibleLens™ grows, the founder's vision is to direct a meaningful share of profits into community giveback through <strong>The MyBibleLens™ Foundation</strong>, currently in formation as a nonprofit organization to support causes including:
@@ -1654,6 +1650,9 @@
             <a href="https://linkedin.com/company/mybiblelens" target="_blank" rel="noopener">LinkedIn · @mybiblelens</a>
           </div>
 
+          <blockquote class="mission-acts" style="margin:1.5rem 0 0.75rem 0; padding:1.25rem 1.5rem; border-left:3px solid #b6741d; background:rgba(182,116,29,0.06); border-radius:0 8px 8px 0; font-family:var(--font-display); font-size:clamp(0.95rem, 0.85rem + 0.3vw, 1.1rem); line-height:1.55; color:#f1e0ba; font-style:italic;">
+            “All the believers were one in heart and mind. No one claimed that any of their possessions was their own, but they shared everything they had.”
+          </blockquote>
           <p class="mission-scripture">— Acts 4:32</p>
         </aside>
 
@@ -1722,11 +1721,42 @@
       </div>
       <div class="pricing-grid">
 
+        <!-- CARD 0: Seeker (Free) -->
+        <div class="pricing-card-wrapper">
+          <div class="pricing-card">
+            <div class="pricing-card-inner">
+              <div class="pricing-tier-name">Seeker</div>
+              <div>
+                <div class="pricing-price">Free</div>
+                <div class="pricing-price-sub">forever</div>
+              </div>
+              <div style="margin:0.6rem 0 0.4rem 0;font-family:'Inter',sans-serif;font-size:0.8rem;color:rgba(245,242,237,0.7);line-height:1.5;">
+                Your starting point. For those beginning the journey.
+              </div>
+              <ul class="pricing-features" role="list">
+                <li>AI Queries: 10 queries every 5 hours</li>
+                <li>Infinite Canvas: 1 private board</li>
+                <li>Scripture Glow: 1 AI image per month</li>
+                <li>Reflections: 15 slots for personal study</li>
+                <li>Study Cards: max 3 cards per AI session</li>
+                <li>Sermon Decks: not included</li>
+                <li>Customization: 3 standard themes</li>
+                <li>Seating: 1 personal seat</li>
+              </ul>
+              <button class="pricing-expand-btn" aria-label="Show all features">
+                <span class="expand-text">Show all ↓</span>
+                <span class="collapse-text">Show less ↑</span>
+              </button>
+              <div class="pricing-app-note" style="width:100%;padding:0.85rem 1rem;border:1px solid #b6741d;border-radius:999px;text-align:center;font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:600;color:#b6741d;background:rgba(182,116,29,0.05);letter-spacing:0.5px;">Free in the MyBibleLens™ app</div>
+            </div>
+          </div>
+        </div>
+
         <!-- CARD 1: Apostle -->
         <div class="pricing-card-wrapper">
           <div class="pricing-card">
             <div class="pricing-card-inner" data-monthly="$7.77" data-yearly="$77.77">
-              <div class="pricing-tier-name">Apostle ✦</div>
+              <div class="pricing-tier-name">Apostle ✦✦</div>
               <div>
                 <div class="pricing-price" data-monthly-price="$7.77" data-yearly-price="$77.77">$7.77</div>
                 <div class="pricing-price-sub" data-monthly-sub="/month" data-yearly-sub="/year">/month</div>
@@ -1758,7 +1788,7 @@
         <div class="pricing-card-wrapper">
           <div class="pricing-card">
             <div class="pricing-card-inner">
-              <div class="pricing-tier-name">Sanctuary</div>
+              <div class="pricing-tier-name">Sanctuary ✦✦✦</div>
               <div>
                 <div class="pricing-price" id="sanctuary-price">$17.77</div>
                 <div class="pricing-price-sub" id="sanctuary-period">/month</div>
@@ -1795,7 +1825,7 @@
         <div class="pricing-card-wrapper">
           <div class="pricing-card">
             <div class="pricing-card-inner">
-              <div class="pricing-tier-name">Kingdom ✦✦</div>
+              <div class="pricing-tier-name">Kingdom ✦✦✦✦</div>
               <div>
                 <div class="pricing-price" id="kingdom-price">$66.77</div>
                 <div class="pricing-price-sub" id="kingdom-period">/month</div>
@@ -1897,7 +1927,7 @@
           <a href="mailto:privacy@mybiblelens.us?subject=Limit%20the%20Use%20of%20My%20Sensitive%20Personal%20Information" style="color:#b6741d;text-decoration:underline;font-weight:600;">Limit the Use of My Sensitive Personal Information</a>
         </p>
         <div class="footer-legal">
-          <span>© 2026 Expected End AI · MyBibleLens™</span>
+          <span>© 2026 MyBibleLens LLC</span>
           <span>AI Study Aid. Use Discernment. Jesus loves you.</span>
         </div>
       </div>
@@ -1996,13 +2026,13 @@
         }
       });
 
-      /* Repo cards: slide in from right */
+      /* Repo cards: gentle rise into grid */
       gsap.utils.toArray('.repo-card').forEach(function(card, i) {
         gsap.to(card, {
           opacity: 1,
-          x: 0,
+          y: 0,
           duration: 0.6,
-          delay: i * 0.08,
+          delay: i * 0.06,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: '.repo-section',
