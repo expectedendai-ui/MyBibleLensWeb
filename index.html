@@ -395,6 +395,64 @@
       .tf-cta { width: 100%; padding: 1rem 1rem; }
     }
 
+    /* ========== CUSTOM MAGNIFIER CURSOR (sitewide) ========== */
+    /* Hide default browser cursor on devices with fine pointer (mouse/trackpad) */
+    @media (pointer: fine) {
+      html, body, * { cursor: none !important; }
+    }
+    /* On touch devices, restore native cursor and never render the custom sprite */
+    @media (pointer: coarse), (hover: none) {
+      html, body, * { cursor: auto !important; }
+      .mbl-cursor, .mbl-cursor-trail { display: none !important; }
+    }
+    /* Respect users who prefer reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .mbl-cursor-trail { display: none !important; }
+    }
+
+    .mbl-cursor,
+    .mbl-cursor-trail {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 38px;
+      height: 38px;
+      pointer-events: none;
+      z-index: 99999;
+      will-change: transform;
+      background-image: url('assets/cursor-magnifier.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      transform: translate3d(-100px, -100px, 0);
+      transition: width 0.18s ease-out, height 0.18s ease-out, opacity 0.25s ease;
+      filter: drop-shadow(0 2px 6px rgba(182,116,29,0.35));
+    }
+
+    /* Ghost trail dots: fainter, slightly delayed, sized down */
+    .mbl-cursor-trail {
+      width: 24px;
+      height: 24px;
+      opacity: 0.55;
+      filter: drop-shadow(0 1px 4px rgba(182,116,29,0.2));
+    }
+    .mbl-cursor-trail--2 { opacity: 0.35; width: 18px; height: 18px; }
+    .mbl-cursor-trail--3 { opacity: 0.18; width: 14px; height: 14px; }
+
+    /* Hover state: slight scale-up + brighter glow when over a button or link */
+    .mbl-cursor.is-interactive {
+      width: 48px;
+      height: 48px;
+      filter: drop-shadow(0 0 12px rgba(240,200,80,0.65));
+    }
+
+    /* Subtle idle pulse when mouse stops moving */
+    @keyframes mbl-cursor-idle {
+      0%, 100% { filter: drop-shadow(0 2px 6px rgba(182,116,29,0.35)); }
+      50%      { filter: drop-shadow(0 2px 10px rgba(240,200,80,0.55)); }
+    }
+    .mbl-cursor.is-idle { animation: mbl-cursor-idle 2.4s ease-in-out infinite; }
+
     /* ========== BUTTONS ========== */
     .btn {
       display: inline-flex;
@@ -1499,7 +1557,7 @@
         </h2>
 
         <p class="tf-body">
-          Help us shape MyBibleLens™ before launch day. Join the TestFlight beta to spot bugs, suggest features, and walk with us as we build something for the people.
+          Built with input from ministry leaders and pastors. Held to the highest standards of spiritual and technical integrity.
         </p>
 
         <a href="https://instagram.com/mybiblelens" target="_blank" rel="noopener" class="tf-cta" aria-label="Contact MyBibleLens on Instagram to join TestFlight">
@@ -1513,6 +1571,13 @@
           Already a believer? <a href="#founding">Become a Founding Member →</a>
         </span>
       </div>
+
+      <!-- Shimmering tagline below (not inside) the TestFlight card -->
+      <p class="hero-shimmer-tagline" style="max-width:720px; margin:clamp(1.5rem, 3vw, 2.25rem) auto 0; padding:0 1rem; font-family:var(--font-body); font-size:clamp(0.92rem, 0.82rem + 0.32vw, 1.08rem); line-height:1.6; text-align:center; letter-spacing:0.005em;">
+        <span style="display:inline-block; background:linear-gradient(90deg, #b6741d 0%, #D4921F 25%, #f0c850 50%, #D4921F 75%, #b6741d 100%); background-size:200% 100%; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; animation:shimmer 4s ease-in-out infinite; filter:drop-shadow(0 0 8px rgba(212,146,31,0.25));">
+          The world's first AI-powered scripture companion for Christianity — combining six study lenses, Sermon Deck, Infinite Canvas, S.O.A.P., and verse-to-art in one unified experience… and so much more. Share it with your friends and family.
+        </span>
+      </p>
     </div>
   </section>
 
@@ -2261,6 +2326,101 @@
         toast.setAttribute('aria-hidden', 'true');
         if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
       };
+    })();
+  </script>
+  <!-- ===== Custom magnifier cursor (sitewide) ===== -->
+  <div class="mbl-cursor" id="mbl-cursor" aria-hidden="true"></div>
+  <div class="mbl-cursor-trail mbl-cursor-trail--1" id="mbl-cursor-trail-1" aria-hidden="true"></div>
+  <div class="mbl-cursor-trail mbl-cursor-trail--2" id="mbl-cursor-trail-2" aria-hidden="true"></div>
+  <div class="mbl-cursor-trail mbl-cursor-trail--3" id="mbl-cursor-trail-3" aria-hidden="true"></div>
+
+  <script>
+    (function () {
+      // Bail on touch devices
+      var coarse = window.matchMedia('(pointer: coarse)').matches
+                || window.matchMedia('(hover: none)').matches;
+      if (coarse) return;
+
+      var sprite  = document.getElementById('mbl-cursor');
+      var trails  = [
+        document.getElementById('mbl-cursor-trail-1'),
+        document.getElementById('mbl-cursor-trail-2'),
+        document.getElementById('mbl-cursor-trail-3')
+      ];
+      if (!sprite) return;
+
+      // Sprite anchor offsets (center the image on the cursor tip)
+      var SPRITE_HALF = 19;
+      var TRAIL_HALVES = [12, 9, 7];
+      // Lerp coefficients (lower = more lag for ghost trail)
+      var LERPS = [0.22, 0.14, 0.09];
+
+      // Target (real mouse position) and animated positions for each layer
+      var target = { x: -100, y: -100 };
+      var positions = [
+        { x: -100, y: -100 }, // main sprite (slight smoothing)
+        { x: -100, y: -100 }, // trail 1
+        { x: -100, y: -100 }, // trail 2
+        { x: -100, y: -100 }  // trail 3
+      ];
+      var idleTimer = null;
+
+      function setIdle(on) {
+        if (on) sprite.classList.add('is-idle');
+        else    sprite.classList.remove('is-idle');
+      }
+
+      window.addEventListener('mousemove', function (e) {
+        target.x = e.clientX;
+        target.y = e.clientY;
+        setIdle(false);
+        if (idleTimer) clearTimeout(idleTimer);
+        idleTimer = setTimeout(function () { setIdle(true); }, 1400);
+      }, { passive: true });
+
+      // Hide cursor when leaving viewport
+      window.addEventListener('mouseleave', function () {
+        sprite.style.opacity = '0';
+        trails.forEach(function (t) { if (t) t.style.opacity = '0'; });
+      });
+      window.addEventListener('mouseenter', function () {
+        sprite.style.opacity = '1';
+        // Trails get their default opacity from CSS — clear inline override
+        trails.forEach(function (t) { if (t) t.style.opacity = ''; });
+      });
+
+      // Interactive hover state for any clickable element
+      function isInteractive(el) {
+        if (!el) return false;
+        if (el.matches && el.matches('a, button, [role="button"], input, select, textarea, label, [data-cursor-interactive]')) return true;
+        return el.parentElement ? isInteractive(el.parentElement) : false;
+      }
+      window.addEventListener('mouseover', function (e) {
+        if (isInteractive(e.target)) sprite.classList.add('is-interactive');
+        else                          sprite.classList.remove('is-interactive');
+      }, { passive: true });
+
+      // Smooth follow with requestAnimationFrame
+      function tick() {
+        // Main sprite follows target tightly (small smoothing)
+        var s = positions[0];
+        s.x += (target.x - s.x) * 0.32;
+        s.y += (target.y - s.y) * 0.32;
+        sprite.style.transform = 'translate3d(' + (s.x - SPRITE_HALF) + 'px, ' + (s.y - SPRITE_HALF) + 'px, 0)';
+
+        // Each trail lerps toward the previous trail (or main) with progressively more lag
+        for (var i = 0; i < trails.length; i++) {
+          var t = positions[i + 1];
+          var leader = positions[i]; // chase the previous layer
+          t.x += (leader.x - t.x) * LERPS[i];
+          t.y += (leader.y - t.y) * LERPS[i];
+          if (trails[i]) {
+            trails[i].style.transform = 'translate3d(' + (t.x - TRAIL_HALVES[i]) + 'px, ' + (t.y - TRAIL_HALVES[i]) + 'px, 0)';
+          }
+        }
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
     })();
   </script>
 </body>

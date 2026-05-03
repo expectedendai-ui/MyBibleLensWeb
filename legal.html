@@ -2262,5 +2262,89 @@
   </footer>
 
   <script src="./app.js"></script>
+  <!-- ===== Custom magnifier cursor (sitewide) ===== -->
+  <div class="mbl-cursor" id="mbl-cursor" aria-hidden="true"></div>
+  <div class="mbl-cursor-trail mbl-cursor-trail--1" id="mbl-cursor-trail-1" aria-hidden="true"></div>
+  <div class="mbl-cursor-trail mbl-cursor-trail--2" id="mbl-cursor-trail-2" aria-hidden="true"></div>
+  <div class="mbl-cursor-trail mbl-cursor-trail--3" id="mbl-cursor-trail-3" aria-hidden="true"></div>
+
+  <script>
+    (function () {
+      var coarse = window.matchMedia('(pointer: coarse)').matches
+                || window.matchMedia('(hover: none)').matches;
+      if (coarse) return;
+
+      var sprite = document.getElementById('mbl-cursor');
+      var trails = [
+        document.getElementById('mbl-cursor-trail-1'),
+        document.getElementById('mbl-cursor-trail-2'),
+        document.getElementById('mbl-cursor-trail-3')
+      ];
+      if (!sprite) return;
+
+      var SPRITE_HALF = 19;
+      var TRAIL_HALVES = [12, 9, 7];
+      var LERPS = [0.22, 0.14, 0.09];
+      var target = { x: -100, y: -100 };
+      var positions = [
+        { x: -100, y: -100 },
+        { x: -100, y: -100 },
+        { x: -100, y: -100 },
+        { x: -100, y: -100 }
+      ];
+      var idleTimer = null;
+
+      function setIdle(on) {
+        if (on) sprite.classList.add('is-idle');
+        else    sprite.classList.remove('is-idle');
+      }
+
+      window.addEventListener('mousemove', function (e) {
+        target.x = e.clientX;
+        target.y = e.clientY;
+        setIdle(false);
+        if (idleTimer) clearTimeout(idleTimer);
+        idleTimer = setTimeout(function () { setIdle(true); }, 1400);
+      }, { passive: true });
+
+      window.addEventListener('mouseleave', function () {
+        sprite.style.opacity = '0';
+        trails.forEach(function (t) { if (t) t.style.opacity = '0'; });
+      });
+      window.addEventListener('mouseenter', function () {
+        sprite.style.opacity = '1';
+        trails.forEach(function (t) { if (t) t.style.opacity = ''; });
+      });
+
+      function isInteractive(el) {
+        if (!el) return false;
+        if (el.matches && el.matches('a, button, [role="button"], input, select, textarea, label, [data-cursor-interactive]')) return true;
+        return el.parentElement ? isInteractive(el.parentElement) : false;
+      }
+      window.addEventListener('mouseover', function (e) {
+        if (isInteractive(e.target)) sprite.classList.add('is-interactive');
+        else                          sprite.classList.remove('is-interactive');
+      }, { passive: true });
+
+      function tick() {
+        var s = positions[0];
+        s.x += (target.x - s.x) * 0.32;
+        s.y += (target.y - s.y) * 0.32;
+        sprite.style.transform = 'translate3d(' + (s.x - SPRITE_HALF) + 'px, ' + (s.y - SPRITE_HALF) + 'px, 0)';
+
+        for (var i = 0; i < trails.length; i++) {
+          var t = positions[i + 1];
+          var leader = positions[i];
+          t.x += (leader.x - t.x) * LERPS[i];
+          t.y += (leader.y - t.y) * LERPS[i];
+          if (trails[i]) {
+            trails[i].style.transform = 'translate3d(' + (t.x - TRAIL_HALVES[i]) + 'px, ' + (t.y - TRAIL_HALVES[i]) + 'px, 0)';
+          }
+        }
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    })();
+  </script>
 </body>
 </html>
