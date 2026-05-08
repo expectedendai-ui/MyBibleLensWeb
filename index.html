@@ -366,11 +366,81 @@
       box-shadow: 0 14px 36px rgba(182,116,29,0.6), inset 0 1px 0 rgba(255,255,255,0.25);
       background-position: 100% 0;
     }
-    .tf-cta .tf-ig-svg {
+    .tf-cta .tf-ig-svg,
+    .tf-cta .tf-cta-icon {
       width: 18px;
       height: 18px;
       fill: currentColor;
       flex-shrink: 0;
+    }
+    .tf-cta .tf-cta-icon { fill: none; }
+
+    /* Smaller secondary Instagram link, sits below the main waitlist CTA */
+    .tf-ig-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      background: transparent;
+      border: 1px solid rgba(182,116,29,0.45);
+      color: #f1e0ba;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+      margin: 0.35rem 0 0.85rem;
+      opacity: 0.85;
+    }
+    .tf-ig-secondary:hover {
+      border-color: #D4921F;
+      color: #ffffff;
+      background: rgba(182,116,29,0.12);
+      opacity: 1;
+    }
+    .tf-ig-secondary .tf-ig-svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* "It's more than just an app" scroll cue below TestFlight card */
+    .hero-scroll-cue {
+      max-width: 560px;
+      margin: clamp(1.5rem, 3vw, 2.25rem) auto 0;
+      padding: 0 1rem;
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 0.85rem + 0.3vw, 1.1rem);
+      font-weight: 500;
+      color: #f0c850;
+      text-align: center;
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .hero-scroll-cue__text {
+      display: inline-block;
+    }
+    .hero-scroll-cue__arrow {
+      display: inline-block;
+      font-size: 1.4rem;
+      color: #D4921F;
+      animation: heroScrollBounce 2.4s ease-in-out infinite;
+      filter: drop-shadow(0 0 6px rgba(212,146,31,0.4));
+    }
+    @keyframes heroScrollBounce {
+      0%, 100% { transform: translateY(0); opacity: 0.85; }
+      50%      { transform: translateY(6px); opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-scroll-cue__arrow { animation: none; }
     }
 
     .tf-secondary {
@@ -393,6 +463,7 @@
       .testflight-card { margin-top: var(--space-5); padding: 1.4rem 1.25rem; }
       .tf-headline { font-size: 1.4rem; }
       .tf-cta { width: 100%; padding: 1rem 1rem; }
+      .tf-ig-secondary { font-size: 0.74rem; padding: 0.5rem 0.95rem; }
     }
 
     /* ========== CUSTOM MAGNIFIER CURSOR (sitewide) ========== */
@@ -1748,17 +1819,31 @@
           Built with input from ministry leaders and pastors. Held to the highest standards of spiritual and technical integrity.
         </p>
 
-        <a href="https://instagram.com/smiledenzel" target="_blank" rel="noopener" class="tf-cta" aria-label="Contact Denzel on Instagram to join TestFlight">
+        <a href="https://tally.so/r/VLvzGa" target="_blank" rel="noopener" class="tf-cta" aria-label="Join the MyBibleLens waitlist">
+          <svg class="tf-cta-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 11l3 3 8-8"/>
+            <path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/>
+          </svg>
+          Join the Waitlist
+        </a>
+
+        <a href="https://instagram.com/smiledenzel" target="_blank" rel="noopener" class="tf-ig-secondary" aria-label="Follow Denzel on Instagram">
           <svg class="tf-ig-svg" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.22.42.56.22.96.48 1.38.9.42.42.68.82.9 1.38.17.42.37 1.05.42 2.22.07 1.25.07 1.65.07 4.85s0 3.6-.07 4.85c-.05 1.17-.25 1.8-.42 2.22a3.7 3.7 0 0 1-.9 1.38c-.42.42-.82.68-1.38.9-.42.17-1.05.37-2.22.42-1.25.07-1.65.07-4.85.07s-3.6 0-4.85-.07c-1.17-.05-1.8-.25-2.22-.42a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.17-.42-.37-1.05-.42-2.22C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.85c.05-1.17.25-1.8.42-2.22.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.17 1.05-.37 2.22-.42C8.4 2.2 8.8 2.2 12 2.2zM12 0C8.74 0 8.33 0 7.05.07c-1.28.06-2.15.26-2.92.55a5.9 5.9 0 0 0-2.13 1.38A5.9 5.9 0 0 0 .62 4.13c-.3.77-.5 1.64-.55 2.92C0 8.33 0 8.74 0 12s0 3.67.07 4.95c.06 1.28.26 2.15.55 2.92.3.79.7 1.46 1.38 2.13a5.9 5.9 0 0 0 2.13 1.38c.77.3 1.64.5 2.92.55C8.33 24 8.74 24 12 24s3.67 0 4.95-.07c1.28-.06 2.15-.26 2.92-.55a5.9 5.9 0 0 0 2.13-1.38 5.9 5.9 0 0 0 1.38-2.13c.3-.77.5-1.64.55-2.92.07-1.28.07-1.69.07-4.95s0-3.67-.07-4.95c-.06-1.28-.26-2.15-.55-2.92a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.87.62c-.77-.3-1.64-.5-2.92-.55C15.67 0 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zm0 10.16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.85a1.44 1.44 0 1 1 0 2.88 1.44 1.44 0 0 1 0-2.88z"/>
           </svg>
-          Contact @smiledenzel on Instagram
+          Follow @smiledenzel on Instagram
         </a>
 
         <span class="tf-secondary">
           Already a believer? <a href="#founding">Become a Founding Member →</a>
         </span>
       </div>
+
+      <!-- More-than-an-app scroll cue -->
+      <p class="hero-scroll-cue" aria-label="Scroll for more">
+        <span class="hero-scroll-cue__text">It&rsquo;s more than just an app — scroll below to check it out</span>
+        <span class="hero-scroll-cue__arrow" aria-hidden="true">↓</span>
+      </p>
 
       <!-- Shimmering tagline below (not inside) the TestFlight card -->
       <p class="hero-shimmer-tagline" style="max-width:720px; margin:clamp(1.5rem, 3vw, 2.25rem) auto 0; padding:0 1rem; font-family:var(--font-body); font-size:clamp(0.92rem, 0.82rem + 0.32vw, 1.08rem); line-height:1.6; text-align:center; letter-spacing:0.005em;">
