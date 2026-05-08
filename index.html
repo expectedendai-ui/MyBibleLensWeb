@@ -1528,6 +1528,68 @@
     /* Utility: animated elements are visible by default for no-JS fallback */
     .gsap-hidden { opacity: 0; }
 
+    /* ═════════════════════════════════════════════════════════
+       "What this app will never have" — manifesto block under Study Repository
+       ═════════════════════════════════════════════════════════ */
+    .never-have-block {
+      max-width: 720px;
+      margin: clamp(2.5rem, 5vw, 4rem) auto 0;
+      padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1.25rem, 3vw, 2rem);
+      background: rgba(241, 224, 186, 0.35);
+      border: 1px solid rgba(182, 116, 29, 0.18);
+      border-left: 4px solid #b6741d;
+      border-radius: 12px;
+    }
+    .never-have-title {
+      font-family: 'Hammersmith One', sans-serif;
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
+      color: #b6741d;
+      margin: 0 0 1.1rem;
+      letter-spacing: 0.01em;
+    }
+    .never-have-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.95rem, 2vw, 1.05rem);
+      line-height: 1.65;
+      color: #3a2a17;
+    }
+    .never-have-list li {
+      position: relative;
+      padding: 0.5rem 0 0.5rem 1.6rem;
+      border-bottom: 1px dashed rgba(182, 116, 29, 0.18);
+    }
+    .never-have-list li:last-child {
+      border-bottom: none;
+    }
+    .never-have-list li::before {
+      content: "✕";
+      position: absolute;
+      left: 0;
+      top: 0.55rem;
+      color: #b6741d;
+      font-weight: 700;
+      font-size: 0.95em;
+    }
+    .never-have-list li strong {
+      color: #9d6a3f;
+      font-weight: 700;
+    }
+    .never-have-list li em {
+      font-style: italic;
+      color: #b6741d;
+    }
+    .never-have-closer {
+      margin: 1.25rem 0 0;
+      font-family: 'Hammersmith One', sans-serif;
+      font-size: clamp(1rem, 2.2vw, 1.15rem);
+      color: #9d6a3f;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+
     /* ═══════════════════════════════════════════════════
        MISSION IMPACT PLEDGE — $7,000,000 dazzling shimmer + sparkles
        ═══════════════════════════════════════════════════ */
@@ -1686,11 +1748,11 @@
           Built with input from ministry leaders and pastors. Held to the highest standards of spiritual and technical integrity.
         </p>
 
-        <a href="https://instagram.com/mybiblelens" target="_blank" rel="noopener" class="tf-cta" aria-label="Contact MyBibleLens on Instagram to join TestFlight">
+        <a href="https://instagram.com/smiledenzel" target="_blank" rel="noopener" class="tf-cta" aria-label="Contact Denzel on Instagram to join TestFlight">
           <svg class="tf-ig-svg" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.22.42.56.22.96.48 1.38.9.42.42.68.82.9 1.38.17.42.37 1.05.42 2.22.07 1.25.07 1.65.07 4.85s0 3.6-.07 4.85c-.05 1.17-.25 1.8-.42 2.22a3.7 3.7 0 0 1-.9 1.38c-.42.42-.82.68-1.38.9-.42.17-1.05.37-2.22.42-1.25.07-1.65.07-4.85.07s-3.6 0-4.85-.07c-1.17-.05-1.8-.25-2.22-.42a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.17-.42-.37-1.05-.42-2.22C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.85c.05-1.17.25-1.8.42-2.22.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.17 1.05-.37 2.22-.42C8.4 2.2 8.8 2.2 12 2.2zM12 0C8.74 0 8.33 0 7.05.07c-1.28.06-2.15.26-2.92.55a5.9 5.9 0 0 0-2.13 1.38A5.9 5.9 0 0 0 .62 4.13c-.3.77-.5 1.64-.55 2.92C0 8.33 0 8.74 0 12s0 3.67.07 4.95c.06 1.28.26 2.15.55 2.92.3.79.7 1.46 1.38 2.13a5.9 5.9 0 0 0 2.13 1.38c.77.3 1.64.5 2.92.55C8.33 24 8.74 24 12 24s3.67 0 4.95-.07c1.28-.06 2.15-.26 2.92-.55a5.9 5.9 0 0 0 2.13-1.38 5.9 5.9 0 0 0 1.38-2.13c.3-.77.5-1.64.55-2.92.07-1.28.07-1.69.07-4.95s0-3.67-.07-4.95c-.06-1.28-.26-2.15-.55-2.92a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.87.62c-.77-.3-1.64-.5-2.92-.55C15.67 0 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zm0 10.16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.85a1.44 1.44 0 1 1 0 2.88 1.44 1.44 0 0 1 0-2.88z"/>
           </svg>
-          Contact @mybiblelens on Instagram
+          Contact @smiledenzel on Instagram
         </a>
 
         <span class="tf-secondary">
@@ -1701,7 +1763,7 @@
       <!-- Shimmering tagline below (not inside) the TestFlight card -->
       <p class="hero-shimmer-tagline" style="max-width:720px; margin:clamp(1.5rem, 3vw, 2.25rem) auto 0; padding:0 1rem; font-family:var(--font-body); font-size:clamp(0.92rem, 0.82rem + 0.32vw, 1.08rem); line-height:1.6; text-align:center; letter-spacing:0.005em;">
         <span style="display:inline-block; background:linear-gradient(90deg, #b6741d 0%, #D4921F 25%, #f0c850 50%, #D4921F 75%, #b6741d 100%); background-size:200% 100%; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; animation:shimmer 4s ease-in-out infinite; filter:drop-shadow(0 0 8px rgba(212,146,31,0.25));">
-          The world's first AI-powered scripture companion for Christianity — combining six study lenses, Sermon Deck, Infinite Canvas, S.O.A.P., and verse-to-art in one unified experience… and so much more. Share it with your friends and family.
+          The world's first <strong>Christianity Productivity App.</strong> Including a <strong>Lens-Powered feature</strong> to capture Scripture like never before — and <strong>Faith Growth features</strong> built to share with your friends and family. Six Study Lenses, a Sermon Deck, an Infinite Canvas, S.O.A.P., and Verse-to-Art — all in one unified experience. And so much more you can share with your friends and family.
         </span>
       </p>
     </div>
@@ -1711,17 +1773,13 @@
   <section class="lens-section section-padding" id="lenses">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">Eight Lenses. One Truth.</h2>
+        <h2 class="section-title">Six Lenses. One Truth.</h2>
         <p class="section-subtitle">Each lens reveals a different dimension of scripture.</p>
       </div>
       <div class="lens-grid">
         <div class="lens-card lens-card--1">
           <h3>Lens</h3>
           <p>Point your camera at printed Bible text — Scripture Scanner</p>
-        </div>
-        <div class="lens-card" style="border-left:4px solid #b6741d;">
-          <h3>Lens Guide</h3>
-          <p>Understand Christ in the Bible</p>
         </div>
         <div class="lens-card lens-card--2">
           <h3>Dreams</h3>
@@ -1734,10 +1792,6 @@
         <div class="lens-card lens-card--4">
           <h3>Neuroscience</h3>
           <p>The science behind your spirit</p>
-        </div>
-        <div class="lens-card lens-card--5">
-          <h3>The Mirror</h3>
-          <p>Speak wisdom. See yourself.</p>
         </div>
         <div class="lens-card lens-card--6">
           <h3>Refiner</h3>
@@ -1892,6 +1946,20 @@
           <h3>S.O.A.P.</h3>
           <p>Scripture, Observation, Application, Prayer — the proven study method, structured for you with one tap.</p>
         </div>
+      </div>
+
+      <!-- What this app will never have -->
+      <div class="never-have-block">
+        <h3 class="never-have-title">What this app will never have:</h3>
+        <ul class="never-have-list" role="list">
+          <li><strong>No Gamification</strong> &mdash; your faith isn&rsquo;t a game.</li>
+          <li><strong>No AI Voice</strong> &mdash; God already speaks. You don&rsquo;t need a robot to.</li>
+          <li><strong>No Algorithm</strong> &mdash; nothing deciding what you see or when you see it.</li>
+          <li><strong>No Explore Feed</strong> &mdash; no rabbit holes. No comparison traps.</li>
+          <li><strong>No Scripture in-app</strong> &mdash; because it&rsquo;s for your <em>journal</em> and your <em>physical Bible.</em> The Word belongs in your hands, not behind a screen.</li>
+          <li><strong>No Companion</strong> &mdash; they use that word as a sugarcoat. This app isn&rsquo;t your friend. God is.</li>
+        </ul>
+        <p class="never-have-closer">Just an efficient tool to grow your faith with God.</p>
       </div>
     </div>
   </section>
