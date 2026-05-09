@@ -927,6 +927,61 @@
       transform: translateY(-1px);
     }
 
+    .mission-disclaimer {
+      margin: 0 0 1.25rem 0;
+      font-family: var(--font-body);
+    }
+    .mission-disclaimer summary {
+      list-style: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(241, 224, 186, 0.06);
+      border: 1px solid rgba(212, 146, 31, 0.28);
+      color: rgba(241, 224, 186, 0.78);
+      font-size: 0.74rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+    .mission-disclaimer summary::-webkit-details-marker { display: none; }
+    .mission-disclaimer summary::after {
+      content: '+';
+      font-weight: 700;
+      color: #f0c850;
+      transition: transform 0.2s ease;
+      font-size: 0.95rem;
+      line-height: 1;
+    }
+    .mission-disclaimer[open] summary::after {
+      content: '−';
+    }
+    .mission-disclaimer summary:hover {
+      background: rgba(212, 146, 31, 0.12);
+      border-color: rgba(212, 146, 31, 0.5);
+      color: #f1e0ba;
+    }
+    .mission-disclaimer-body {
+      margin-top: 0.85rem;
+      padding: 0.85rem 1rem;
+      border-left: 2px solid rgba(212, 146, 31, 0.35);
+      background: rgba(0, 0, 0, 0.18);
+      border-radius: 0 8px 8px 0;
+    }
+    .mission-disclaimer-body p {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: rgba(245, 242, 237, 0.72);
+      margin: 0 0 0.65rem 0;
+    }
+    .mission-disclaimer-body p:last-child { margin-bottom: 0; }
+    .mission-disclaimer-body strong { color: #f0c850; font-weight: 600; }
+    .mission-disclaimer-body em { color: rgba(241, 224, 186, 0.92); font-style: italic; }
+
     .mission-scripture {
       font-family: var(--font-display);
       font-size: 0.95rem;
@@ -1859,6 +1914,10 @@
           <h3>S.O.A.P.</h3>
           <p>Scripture, Observation, Application, Prayer — the proven study method, structured for you with one tap.</p>
         </div>
+        <div class="repo-card repo-card--more" role="listitem">
+          <h3>Much, Much More</h3>
+          <p>This is just the beginning. New tools land here every season — quietly, intentionally, never rushed. Founding Members receive every one, free, forever. The repository grows with you.</p>
+        </div>
       </div>
 
       <!-- What this app will never have -->
@@ -1870,7 +1929,8 @@
           <li><strong>No Algorithm</strong> &mdash; nothing deciding what you see or when you see it.</li>
           <li><strong>No Explore Feed</strong> &mdash; no rabbit holes. No comparison traps.</li>
           <li><strong>No Scripture in-app</strong> &mdash; because it&rsquo;s for your <em>journal</em> and your <em>physical Bible.</em> The Word belongs in your hands, not behind a screen.</li>
-          <li><strong>No Companion</strong> &mdash; they use that word as a sugarcoat. This app isn&rsquo;t your friend. God is.</li>
+          <li><strong>No Companion</strong>&mdash; &ldquo;Companion&rdquo; is a sugarcoat. This app isn&rsquo;t your friend. God is. Go to your church. Your pastor. The people who actually love you!</li>
+          <li><strong>No Selling Your Data</strong> &mdash; your prayers aren&rsquo;t a product.</li>
         </ul>
         <p class="never-have-closer">Just an efficient tool to grow your faith with God.</p>
       </div>
@@ -1886,12 +1946,6 @@
         <aside class="mission-panel" aria-label="Our mission">
           <h2 class="mission-headline">70,000 Seats.<br>One Shared Mission.</h2>
 
-          <p class="mission-body">
-            <strong>The number isn't random.</strong> Jesus sent <strong>seventy disciples</strong> ahead of Him into every town He was about to enter (Luke 10:1). The Table of Nations names <strong>seventy peoples</strong> descended from Noah — the original family of the earth (Genesis 10). Seventy is the number of <em>commission</em>, of <em>family</em>, of <em>the world being reached</em>.
-          </p>
-          <p class="mission-body">
-            We multiplied that by <strong>1,000</strong> — the number of <em>generations</em> God promises His covenant to those who love Him (Deuteronomy 7:9). Seventy disciples for the next thousand generations. <strong>That's 70,000 Founding Members.</strong> Not investors. Not customers. Sent ones.
-          </p>
           <p class="mission-body">
             When you become a Founding Member, you secure <strong>lifetime app access</strong> and you join a movement that's bigger than the app itself. As MyBibleLens™ grows, the founder's vision is to direct a meaningful share of profits into community giveback through <strong>The MyBibleLens™ Foundation</strong>, currently in formation as a nonprofit organization to support causes including:
           </p>
@@ -1917,8 +1971,15 @@
           <div class="mission-social-handles">
             <a href="https://instagram.com/mybiblelens" target="_blank" rel="noopener">Instagram · @mybiblelens</a>
             <a href="https://tiktok.com/@mybiblelens" target="_blank" rel="noopener">TikTok · @mybiblelens</a>
-            <a href="https://linkedin.com/company/mybiblelens" target="_blank" rel="noopener">LinkedIn · @mybiblelens</a>
           </div>
+
+          <details class="mission-disclaimer">
+            <summary>Why 70,000?</summary>
+            <div class="mission-disclaimer-body">
+              <p><strong>The number isn't random.</strong> Jesus sent <strong>seventy disciples</strong> ahead of Him into every town He was about to enter (Luke 10:1). The Table of Nations names <strong>seventy peoples</strong> descended from Noah — the original family of the earth (Genesis 10). Seventy is the number of <em>commission</em>, of <em>family</em>, of <em>the world being reached</em>.</p>
+              <p>We multiplied that by <strong>1,000</strong> — the number of <em>generations</em> God promises His covenant to those who love Him (Deuteronomy 7:9). Seventy disciples for the next thousand generations. <strong>That's 70,000 Founding Members.</strong> Not investors. Not customers. Sent ones.</p>
+            </div>
+          </details>
 
         </aside>
 
