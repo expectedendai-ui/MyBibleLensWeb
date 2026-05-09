@@ -2273,22 +2273,6 @@
         }
       });
 
-      /* Lens cards: stagger fade-up */
-      gsap.utils.toArray('.lens-card').forEach(function(card, i) {
-        gsap.to(card, {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          delay: i * 0.1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 85%',
-            once: true
-          }
-        });
-      });
-
       /* Orb section: scale from 0.5 to 1.0 */
       gsap.fromTo('#orb-large', { scale: 0.5 }, {
         scale: 1,
