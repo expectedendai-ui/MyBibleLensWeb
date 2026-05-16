@@ -1,0 +1,20 @@
+{
+  "name": "mybiblelens-web",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Marketing site for MyBibleLens — bringing people closer to God in an exciting and easy way!",
+  "scripts": {
+    "dev": "http-server -p 8765 -c-1 --cors -o /index.html",
+    "format": "prettier --write \"**/*.{html,css,js,json,md}\"",
+    "format:check": "prettier --check \"**/*.{html,css,js,json,md}\"",
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:update": "playwright test --update-snapshots",
+    "test:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "http-server": "^14.1.1",
+    "prettier": "^3.4.2"
+  }
+}
