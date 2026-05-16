@@ -6,6 +6,18 @@ const { waitForPageReady } = require("./utils");
  * Visual regression baselines for the marketing site. Every change that
  * intentionally moves pixels needs `npm run test:update` and a commit of the
  * updated PNG baselines under `tests/__screenshots__/`.
+ *
+ * IMPORTANT — local-only suite:
+ * Pixel snapshots here are captured on the developer's machine (macOS). Linux
+ * Chromium in CI renders text at different sub-pixel heights, which not only
+ * shifts pixels but changes the section's *measured height* — so the diff
+ * machinery fails before it even runs ("Expected 1440×948, received 1440×979").
+ *
+ * Until we have Linux-rendered baselines (captured via Docker + Playwright's
+ * official `mcr.microsoft.com/playwright` image, then committed alongside the
+ * macOS PNGs in platform-specific subfolders), CI runs only the behavior /
+ * smoke suite. Run this suite locally with `npm run test:visual` before any
+ * intentional UI change to confirm what moved.
  */
 test.describe("Visual regression — index.html", () => {
   // Note: a single full-page screenshot is too volatile to be useful

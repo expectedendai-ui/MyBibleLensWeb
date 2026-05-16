@@ -3,91 +3,106 @@
    ═══════════════════════════════════════════════════════ */
 
 (function () {
-  'use strict';
+  "use strict";
 
   // ─── Elements ───
-  const header = document.getElementById('site-header');
-  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-  const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
-  const sections = document.querySelectorAll('.page-section');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-  const footerLinks = document.querySelectorAll('.footer-nav a');
+  const header = document.getElementById("site-header");
+  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+  const mobileNavOverlay = document.getElementById("mobile-nav-overlay");
+  const sections = document.querySelectorAll(".page-section");
+  const navLinks = document.querySelectorAll(".nav-link");
+  const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+  const footerLinks = document.querySelectorAll(".footer-nav a");
 
   // ─── Hash-Based Page Routing ───
   function showSection(sectionId) {
     // Default to 'about' if no valid section
     const validSections = [
-      'about', 'support', 'privacy', 'terms',
-      'eula', 'ai-disclosure', 'cookies', 'acceptable-use',
-      'refund', 'subscription-disclosure', 'accessibility', 'dmca', 'security'
+      "about",
+      "support",
+      "privacy",
+      "terms",
+      "eula",
+      "ai-disclosure",
+      "cookies",
+      "acceptable-use",
+      "refund",
+      "subscription-disclosure",
+      "accessibility",
+      "dmca",
+      "security",
     ];
-    if (!validSections.includes(sectionId)) sectionId = 'about';
+    if (!validSections.includes(sectionId)) sectionId = "about";
 
     // Hide all sections
-    sections.forEach(function (s) { s.style.display = 'none'; });
+    sections.forEach(function (s) {
+      s.style.display = "none";
+    });
 
     // Show target
     const target = document.getElementById(sectionId);
     if (target) {
-      target.style.display = 'block';
+      target.style.display = "block";
       // Re-trigger animation
-      target.style.animation = 'none';
+      target.style.animation = "none";
       target.offsetHeight; // force reflow
-      target.style.animation = '';
+      target.style.animation = "";
     }
 
     // Update nav active states
     navLinks.forEach(function (link) {
-      link.classList.toggle('active', link.getAttribute('data-section') === sectionId);
+      link.classList.toggle("active", link.getAttribute("data-section") === sectionId);
     });
 
     // Scroll to top of content
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
 
     // Close mobile menu if open
     closeMobileMenu();
   }
 
   function handleHash() {
-    var hash = window.location.hash.replace('#', '').split('?')[0];
+    var hash = window.location.hash.replace("#", "").split("?")[0];
     // If it's a sub-anchor within a legal section (e.g., #priv-3, #tos-5, #eula-7, #ai-3), show the parent section
     var subAnchorMap = {
-      'priv-': 'privacy',
-      'tos-': 'terms',
-      'eula-': 'eula',
-      'ai-': 'ai-disclosure',
-      'ck-': 'cookies',
-      'au-': 'acceptable-use'
+      "priv-": "privacy",
+      "tos-": "terms",
+      "eula-": "eula",
+      "ai-": "ai-disclosure",
+      "ck-": "cookies",
+      "au-": "acceptable-use",
     };
     var matched = false;
     for (var prefix in subAnchorMap) {
       if (hash.startsWith(prefix)) {
         showSection(subAnchorMap[prefix]);
-        setTimeout(function (h) {
-          return function () {
-            var el = document.getElementById(h);
-            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          };
-        }(hash), 100);
+        setTimeout(
+          (function (h) {
+            return function () {
+              var el = document.getElementById(h);
+              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+            };
+          })(hash),
+          100
+        );
         matched = true;
         break;
       }
     }
-    if (!matched) showSection(hash || 'about');
+    if (!matched) showSection(hash || "about");
   }
 
   // Listen for hash changes
-  window.addEventListener('hashchange', handleHash);
+  window.addEventListener("hashchange", handleHash);
 
   // All nav links trigger hash-based routing
   function setupNavLinks(links) {
     links.forEach(function (link) {
-      link.addEventListener('click', function (e) {
-        var href = this.getAttribute('href');
-        if (href && href.startsWith('#')) {
+      link.addEventListener("click", function (e) {
+        var href = this.getAttribute("href");
+        if (href && href.startsWith("#")) {
           e.preventDefault();
-          var section = href.replace('#', '');
+          var section = href.replace("#", "");
           window.location.hash = section;
         }
       });
@@ -100,16 +115,26 @@
 
   // TOC links inside legal pages — smooth scroll within the visible section
   document.querySelectorAll('.toc-list a, .legal-content a[href^="#"]').forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      var href = this.getAttribute('href');
-      if (href && href.startsWith('#')) {
+    link.addEventListener("click", function (e) {
+      var href = this.getAttribute("href");
+      if (href && href.startsWith("#")) {
         // Check if it's a section link (top-level legal page)
         var validSections = [
-          'about', 'support', 'privacy', 'terms',
-          'eula', 'ai-disclosure', 'cookies', 'acceptable-use',
-          'refund', 'subscription-disclosure', 'accessibility', 'dmca', 'security'
+          "about",
+          "support",
+          "privacy",
+          "terms",
+          "eula",
+          "ai-disclosure",
+          "cookies",
+          "acceptable-use",
+          "refund",
+          "subscription-disclosure",
+          "accessibility",
+          "dmca",
+          "security",
         ];
-        var target = href.replace('#', '');
+        var target = href.replace("#", "");
         if (validSections.includes(target)) {
           e.preventDefault();
           window.location.hash = target;
@@ -119,7 +144,7 @@
         var el = document.getElementById(target);
         if (el) {
           e.preventDefault();
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       }
     });
@@ -127,65 +152,71 @@
 
   // ─── Mobile Menu ───
   function closeMobileMenu() {
-    mobileMenuBtn.classList.remove('open');
-    mobileMenuBtn.setAttribute('aria-expanded', 'false');
-    mobileNavOverlay.classList.remove('open');
-    document.body.style.overflow = '';
+    mobileMenuBtn.classList.remove("open");
+    mobileMenuBtn.setAttribute("aria-expanded", "false");
+    mobileNavOverlay.classList.remove("open");
+    document.body.style.overflow = "";
   }
 
-  mobileMenuBtn.addEventListener('click', function () {
-    var isOpen = this.classList.toggle('open');
-    this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    mobileNavOverlay.classList.toggle('open');
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+  mobileMenuBtn.addEventListener("click", function () {
+    var isOpen = this.classList.toggle("open");
+    this.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    mobileNavOverlay.classList.toggle("open");
+    document.body.style.overflow = isOpen ? "hidden" : "";
   });
 
   // ─── Scroll Effects ───
   var lastScrollY = 0;
-  window.addEventListener('scroll', function () {
-    var currentScroll = window.scrollY;
-    // Header shadow
-    header.classList.toggle('scrolled', currentScroll > 10);
-    lastScrollY = currentScroll;
-  }, { passive: true });
+  window.addEventListener(
+    "scroll",
+    function () {
+      var currentScroll = window.scrollY;
+      // Header shadow
+      header.classList.toggle("scrolled", currentScroll > 10);
+      lastScrollY = currentScroll;
+    },
+    { passive: true }
+  );
 
   // ─── Scroll Reveal ───
-  var revealObserver = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
+  var revealObserver = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
 
-  document.querySelectorAll('.reveal').forEach(function (el) {
+  document.querySelectorAll(".reveal").forEach(function (el) {
     revealObserver.observe(el);
   });
 
   // ─── Initialize ───
   handleHash();
-
 })();
 
 // ─── Team Show More (global scope for onclick) ───
 function toggleTeam() {
-  var more = document.getElementById('team-more');
-  var btn = document.getElementById('team-toggle');
-  var label = document.getElementById('team-toggle-label');
-  var icon = document.getElementById('team-toggle-icon');
-  var isOpen = more.style.display === 'block';
+  var more = document.getElementById("team-more");
+  var btn = document.getElementById("team-toggle");
+  var label = document.getElementById("team-toggle-label");
+  var icon = document.getElementById("team-toggle-icon");
+  var isOpen = more.style.display === "block";
 
   if (isOpen) {
-    more.style.display = 'none';
-    label.textContent = 'Show Full Team';
-    btn.setAttribute('aria-expanded', 'false');
-    icon.style.transform = 'rotate(0deg)';
+    more.style.display = "none";
+    label.textContent = "Show Full Team";
+    btn.setAttribute("aria-expanded", "false");
+    icon.style.transform = "rotate(0deg)";
   } else {
-    more.style.display = 'block';
-    label.textContent = 'Show Less';
-    btn.setAttribute('aria-expanded', 'true');
-    icon.style.transform = 'rotate(180deg)';
+    more.style.display = "block";
+    label.textContent = "Show Less";
+    btn.setAttribute("aria-expanded", "true");
+    icon.style.transform = "rotate(180deg)";
   }
 }
 
@@ -193,49 +224,49 @@ function toggleTeam() {
 function handleSupportForm(e) {
   e.preventDefault();
 
-  var btn     = document.getElementById('form-submit-btn');
-  var success = document.getElementById('form-success');
-  var error   = document.getElementById('form-error');
+  var btn = document.getElementById("form-submit-btn");
+  var success = document.getElementById("form-success");
+  var error = document.getElementById("form-error");
 
-  success.style.display = 'none';
-  error.style.display   = 'none';
-  btn.disabled    = true;
-  btn.textContent = 'Sending...';
+  success.style.display = "none";
+  error.style.display = "none";
+  btn.disabled = true;
+  btn.textContent = "Sending...";
 
   var formData = new FormData(e.target);
 
-  fetch('https://formspree.io/f/xreoraez', {
-    method: 'POST',
+  fetch("https://formspree.io/f/xreoraez", {
+    method: "POST",
     body: formData,
-    headers: { 'Accept': 'application/json' }
+    headers: { Accept: "application/json" },
   })
-  .then(function(response) {
-    if (response.ok) {
-      success.style.display = 'block';
-      document.getElementById('support-form').reset();
-    } else {
-      error.style.display = 'block';
-    }
-  })
-  .catch(function() {
-    error.style.display = 'block';
-  })
-  .finally(function() {
-    btn.disabled    = false;
-    btn.textContent = 'Send Message';
-  });
+    .then(function (response) {
+      if (response.ok) {
+        success.style.display = "block";
+        document.getElementById("support-form").reset();
+      } else {
+        error.style.display = "block";
+      }
+    })
+    .catch(function () {
+      error.style.display = "block";
+    })
+    .finally(function () {
+      btn.disabled = false;
+      btn.textContent = "Send Message";
+    });
 }
 
 function handlePartnershipForm(e) {
   e.preventDefault();
 
-  var btn     = document.getElementById("partner-submit-btn");
+  var btn = document.getElementById("partner-submit-btn");
   var success = document.getElementById("partner-success-msg");
-  var error   = document.getElementById("partner-error-msg");
+  var error = document.getElementById("partner-error-msg");
 
   success.style.display = "none";
-  error.style.display   = "none";
-  btn.disabled    = true;
+  error.style.display = "none";
+  btn.disabled = true;
   btn.textContent = "Sending...";
 
   var formData = new FormData(e.target);
@@ -243,21 +274,21 @@ function handlePartnershipForm(e) {
   fetch("https://formspree.io/f/mzdkqdyy", {
     method: "POST",
     body: formData,
-    headers: { "Accept": "application/json" }
+    headers: { Accept: "application/json" },
   })
-  .then(function(response) {
-    if (response.ok) {
-      success.style.display = "block";
-      document.getElementById("partnership-form").reset();
-    } else {
+    .then(function (response) {
+      if (response.ok) {
+        success.style.display = "block";
+        document.getElementById("partnership-form").reset();
+      } else {
+        error.style.display = "block";
+      }
+    })
+    .catch(function () {
       error.style.display = "block";
-    }
-  })
-  .catch(function() {
-    error.style.display = "block";
-  })
-  .finally(function() {
-    btn.disabled    = false;
-    btn.textContent = "Send Message";
-  });
+    })
+    .finally(function () {
+      btn.disabled = false;
+      btn.textContent = "Send Message";
+    });
 }

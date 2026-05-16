@@ -4,7 +4,13 @@
    ═══════════════════════════════════════════════════════ */
 
 /* ─── RESET ─── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 html {
   -moz-text-size-adjust: none;
@@ -20,42 +26,42 @@ html {
 /* ─── SANCTUARY PALETTE ─── */
 :root {
   /* Core Brand Colors */
-  --deep-brown:     #3D2B1F;
-  --parchment:      #F5F2ED;
-  --gold:           #b6751d;
-  --gold-hover:     #9a6218;
-  --electric-blue:  #00D4FF;
-  --dross-red:      #B22222;
+  --deep-brown: #3d2b1f;
+  --parchment: #f5f2ed;
+  --gold: #b6751d;
+  --gold-hover: #9a6218;
+  --electric-blue: #00d4ff;
+  --dross-red: #b22222;
 
   /* Surfaces */
-  --color-bg:       #F5F2ED;
-  --color-surface:  #EFEBE4;
-  --color-surface-2: #FAF8F5;
-  --color-border:   #D6CEBD;
-  --color-divider:  #E0D9CC;
+  --color-bg: #f5f2ed;
+  --color-surface: #efebe4;
+  --color-surface-2: #faf8f5;
+  --color-border: #d6cebd;
+  --color-divider: #e0d9cc;
 
   /* Text */
-  --color-text:       #3D2B1F;
-  --color-text-muted: #7A6E60;
-  --color-text-faint: #B0A594;
+  --color-text: #3d2b1f;
+  --color-text-muted: #7a6e60;
+  --color-text-faint: #b0a594;
 
   /* Type Scale */
-  --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
-  --text-sm:   clamp(0.875rem, 0.8rem  + 0.35vw, 1rem);
-  --text-base: clamp(1rem,     0.95rem + 0.25vw, 1.125rem);
-  --text-lg:   clamp(1.125rem, 1rem    + 0.75vw, 1.5rem);
-  --text-xl:   clamp(1.5rem,   1.2rem  + 1.25vw, 2.25rem);
-  --text-2xl:  clamp(2rem,     1.2rem  + 2.5vw,  3.5rem);
-  --text-hero: clamp(2.5rem,   1rem    + 4vw,    4.5rem);
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+  --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+  --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+  --text-hero: clamp(2.5rem, 1rem + 4vw, 4.5rem);
 
   /* Spacing (4px base) */
-  --space-1:  0.25rem;
-  --space-2:  0.5rem;
-  --space-3:  0.75rem;
-  --space-4:  1rem;
-  --space-5:  1.25rem;
-  --space-6:  1.5rem;
-  --space-8:  2rem;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
   --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
@@ -64,8 +70,8 @@ html {
   --space-32: 8rem;
 
   /* Fonts */
-  --font-display: 'Hammersmith One', 'Impact', sans-serif;
-  --font-body:    'Inter', 'Helvetica Neue', sans-serif;
+  --font-display: "Hammersmith One", "Impact", sans-serif;
+  --font-body: "Inter", "Helvetica Neue", sans-serif;
 
   /* Radius — brand guide: 32px for large cards, pill for chambers */
   --radius-sm: 0.375rem;
@@ -97,10 +103,37 @@ body {
   background-color: var(--color-bg);
 }
 
-img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
-input, button, textarea, select { font: inherit; color: inherit; }
-h1, h2, h3, h4, h5, h6 { text-wrap: balance; line-height: 1.15; }
-p, li, figcaption { text-wrap: pretty; max-width: 72ch; }
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+  line-height: 1.15;
+}
+p,
+li,
+figcaption {
+  text-wrap: pretty;
+  max-width: 72ch;
+}
 
 ::selection {
   background: rgba(182, 117, 29, 0.2);
@@ -114,7 +147,9 @@ p, li, figcaption { text-wrap: pretty; max-width: 72ch; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -122,18 +157,32 @@ p, li, figcaption { text-wrap: pretty; max-width: 72ch; }
   }
 }
 
-button { cursor: pointer; background: none; border: none; }
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
 
 a {
   color: var(--gold);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
-a:hover { color: var(--gold-hover); text-decoration: underline; }
+a:hover {
+  color: var(--gold-hover);
+  text-decoration: underline;
+}
 
 .sr-only {
-  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -171,7 +220,10 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
   text-decoration: none;
   color: var(--color-text);
 }
-.logo-link:hover { text-decoration: none; color: var(--color-text); }
+.logo-link:hover {
+  text-decoration: none;
+  color: var(--color-text);
+}
 
 .logo-icon {
   width: 36px;
@@ -208,7 +260,7 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
   color: var(--deep-brown);
 }
 .nav-link.active::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -278,8 +330,12 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
 }
 
 @media (max-width: 768px) {
-  .main-nav { display: none; }
-  .mobile-menu-btn { display: flex; }
+  .main-nav {
+    display: none;
+  }
+  .mobile-menu-btn {
+    display: flex;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -421,7 +477,7 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
   text-transform: uppercase;
   /* Halo gold reads as actual gold against the deep-brown bubble; the brand
      burnished gold goes muddy on dark surfaces. */
-  color: #F0C850;
+  color: #f0c850;
   text-shadow: 0 0 12px rgba(240, 200, 80, 0.35);
   margin-bottom: var(--space-4);
 }
@@ -587,7 +643,9 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
   margin-bottom: var(--space-2);
   font-size: var(--text-sm);
 }
-.address-block p:last-child { margin-bottom: 0; }
+.address-block p:last-child {
+  margin-bottom: 0;
+}
 
 /* ═══════════════════════════════════════════════════════
    LEGAL CONTENT (Privacy & Terms)
@@ -874,15 +932,23 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Scroll reveal */
 .reveal {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
 }
 .reveal.visible {
   opacity: 1;
@@ -911,24 +977,26 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
 }
 
 .form-label {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
-  color: #3D2B1F;
+  color: #3d2b1f;
   letter-spacing: 0.03em;
   text-transform: uppercase;
 }
 
 .form-input {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 0.95rem;
-  color: #3D2B1F;
-  background: #FDFAF6;
+  color: #3d2b1f;
+  background: #fdfaf6;
   border: 1.5px solid rgba(182, 117, 29, 0.3);
   border-radius: 8px;
   padding: 0.75rem 1rem;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
   width: 100%;
   box-sizing: border-box;
 }
@@ -957,16 +1025,18 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
 }
 
 .form-submit-btn {
-  font-family: 'Hammersmith One', sans-serif;
+  font-family: "Hammersmith One", sans-serif;
   font-size: 1rem;
   letter-spacing: 0.05em;
-  color: #F5F2ED;
+  color: #f5f2ed;
   background: #b6751d;
   border: none;
   border-radius: 8px;
   padding: 0.9rem 2rem;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.1s ease;
   align-self: flex-start;
 }
 
@@ -998,12 +1068,12 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
   border: 1px solid rgba(178, 34, 34, 0.25);
   border-radius: 8px;
   padding: 1rem 1.25rem;
-  color: #B22222;
+  color: #b22222;
   font-size: 0.95rem;
 }
 
 .form-error a {
-  color: #B22222;
+  color: #b22222;
   font-weight: 600;
 }
 
@@ -1019,14 +1089,27 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
 
 /* ========== CUSTOM MAGNIFIER CURSOR (sitewide) ========== */
 @media (pointer: fine) {
-  html, body, * { cursor: none !important; }
+  html,
+  body,
+  * {
+    cursor: none !important;
+  }
 }
 @media (pointer: coarse), (hover: none) {
-  html, body, * { cursor: auto !important; }
-  .mbl-cursor, .mbl-cursor-trail { display: none !important; }
+  html,
+  body,
+  * {
+    cursor: auto !important;
+  }
+  .mbl-cursor,
+  .mbl-cursor-trail {
+    display: none !important;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
-  .mbl-cursor-trail { display: none !important; }
+  .mbl-cursor-trail {
+    display: none !important;
+  }
 }
 .mbl-cursor,
 .mbl-cursor-trail {
@@ -1038,26 +1121,37 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
   pointer-events: none;
   z-index: 99999;
   will-change: transform;
-  background-image: url('assets/cursor-magnifier.png');
+  background-image: url("assets/cursor-magnifier.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   transform: translate3d(-100px, -100px, 0);
-  transition: width 0.18s ease-out, height 0.18s ease-out, opacity 0.25s ease;
-  filter: drop-shadow(0 2px 6px rgba(182,116,29,0.35));
+  transition:
+    width 0.18s ease-out,
+    height 0.18s ease-out,
+    opacity 0.25s ease;
+  filter: drop-shadow(0 2px 6px rgba(182, 116, 29, 0.35));
 }
 .mbl-cursor-trail {
   width: 24px;
   height: 24px;
   opacity: 0.55;
-  filter: drop-shadow(0 1px 4px rgba(182,116,29,0.2));
+  filter: drop-shadow(0 1px 4px rgba(182, 116, 29, 0.2));
 }
-.mbl-cursor-trail--2 { opacity: 0.35; width: 18px; height: 18px; }
-.mbl-cursor-trail--3 { opacity: 0.18; width: 14px; height: 14px; }
+.mbl-cursor-trail--2 {
+  opacity: 0.35;
+  width: 18px;
+  height: 18px;
+}
+.mbl-cursor-trail--3 {
+  opacity: 0.18;
+  width: 14px;
+  height: 14px;
+}
 .mbl-cursor.is-interactive {
   width: 48px;
   height: 48px;
-  filter: drop-shadow(0 0 12px rgba(240,200,80,0.65));
+  filter: drop-shadow(0 0 12px rgba(240, 200, 80, 0.65));
 }
 /* ═══════════════════════════════════════════════════════════════════
    MISSION IMPACT PLEDGE — $7,000,000 dazzling shimmer + sparkles
@@ -1065,7 +1159,7 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
 .mission-impact-pledge {
   text-align: center;
   margin: 2.75rem 0 2rem;
-  font-family: 'Hammersmith One', sans-serif;
+  font-family: "Hammersmith One", sans-serif;
   font-size: 1.6rem;
   letter-spacing: 0.01em;
   color: #9d6a3f;
@@ -1082,26 +1176,32 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
   padding: 0.5em 0.6em;
   vertical-align: middle;
   /* Pure CSS gold halo behind the number */
-  background:
-    radial-gradient(
-      ellipse at center,
-      rgba(247, 225, 168, 0.30) 0%,
-      rgba(243, 219, 149, 0.15) 40%,
-      rgba(255, 248, 224, 0) 70%
-    );
+  background: radial-gradient(
+    ellipse at center,
+    rgba(247, 225, 168, 0.3) 0%,
+    rgba(243, 219, 149, 0.15) 40%,
+    rgba(255, 248, 224, 0) 70%
+  );
   border-radius: 50%;
   animation: pledge-halo 4s ease-in-out infinite;
 }
 
 @keyframes pledge-halo {
-  0%, 100% { background-size: 100% 100%; opacity: 1; }
-  50%      { background-size: 130% 130%; opacity: 0.85; }
+  0%,
+  100% {
+    background-size: 100% 100%;
+    opacity: 1;
+  }
+  50% {
+    background-size: 130% 130%;
+    opacity: 0.85;
+  }
 }
 
 .pledge-amount-text {
   position: relative;
   display: inline-block;
-  font-family: 'Hammersmith One', sans-serif;
+  font-family: "Hammersmith One", sans-serif;
   font-size: clamp(3.5rem, 11vw, 6rem);
   font-weight: 900;
   letter-spacing: 0.02em;
@@ -1121,13 +1221,11 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
   );
   background-size: 250% 100%;
   -webkit-background-clip: text;
-          background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   /* Layered glow — brighter, stronger */
-  filter:
-    drop-shadow(0 0 12px rgba(247, 225, 168, 0.85))
-    drop-shadow(0 0 24px rgba(243, 219, 149, 0.55))
-    drop-shadow(0 4px 8px rgba(182, 116, 29, 0.45));
+  filter: drop-shadow(0 0 12px rgba(247, 225, 168, 0.85))
+    drop-shadow(0 0 24px rgba(243, 219, 149, 0.55)) drop-shadow(0 4px 8px rgba(182, 116, 29, 0.45));
   animation:
     pledge-shine 2.8s ease-in-out infinite,
     pledge-pulse 2.4s ease-in-out infinite;
@@ -1148,21 +1246,24 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
 }
 
 @keyframes pledge-shine {
-  0%   { background-position: 200% 50%; }
-  100% { background-position: -100% 50%; }
+  0% {
+    background-position: 200% 50%;
+  }
+  100% {
+    background-position: -100% 50%;
+  }
 }
 
 @keyframes pledge-pulse {
-  0%, 100% {
-    filter:
-      drop-shadow(0 0 12px rgba(247, 225, 168, 0.85))
+  0%,
+  100% {
+    filter: drop-shadow(0 0 12px rgba(247, 225, 168, 0.85))
       drop-shadow(0 0 24px rgba(243, 219, 149, 0.55))
       drop-shadow(0 4px 8px rgba(182, 116, 29, 0.45));
     transform: scale(1);
   }
   50% {
-    filter:
-      drop-shadow(0 0 24px rgba(255, 248, 224, 1))
+    filter: drop-shadow(0 0 24px rgba(255, 248, 224, 1))
       drop-shadow(0 0 40px rgba(247, 225, 168, 0.75))
       drop-shadow(0 0 60px rgba(243, 219, 149, 0.45))
       drop-shadow(0 4px 10px rgba(182, 116, 29, 0.55));
@@ -1172,7 +1273,7 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
 
 .pledge-tagline {
   display: inline-block;
-  font-family: 'Hammersmith One', sans-serif;
+  font-family: "Hammersmith One", sans-serif;
   font-size: clamp(1.3rem, 3vw, 1.8rem);
   font-weight: 700;
   color: #b6741d;
@@ -1190,24 +1291,9 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
   z-index: 2;
   /* 4-point star shape via two perpendicular ellipses + center dot */
   background:
-    radial-gradient(
-      ellipse 50% 8% at center,
-      #fff8e0 0%,
-      #f7e1a8 40%,
-      transparent 80%
-    ),
-    radial-gradient(
-      ellipse 8% 50% at center,
-      #fff8e0 0%,
-      #f7e1a8 40%,
-      transparent 80%
-    ),
-    radial-gradient(
-      circle at center,
-      #fff8e0 0%,
-      #f7e1a8 30%,
-      transparent 60%
-    );
+    radial-gradient(ellipse 50% 8% at center, #fff8e0 0%, #f7e1a8 40%, transparent 80%),
+    radial-gradient(ellipse 8% 50% at center, #fff8e0 0%, #f7e1a8 40%, transparent 80%),
+    radial-gradient(circle at center, #fff8e0 0%, #f7e1a8 30%, transparent 60%);
   filter: drop-shadow(0 0 6px rgba(255, 248, 224, 1)) drop-shadow(0 0 12px rgba(247, 225, 168, 0.7));
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
@@ -1274,31 +1360,83 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
 }
 
 @keyframes pledge-sparkle-1 {
-  0%, 100% { opacity: 0; transform: scale(0.3) rotate(0deg); }
-  15%      { opacity: 1; transform: scale(1.4) rotate(45deg); }
-  30%      { opacity: 0.8; transform: scale(1) rotate(90deg); }
-  60%      { opacity: 0.4; transform: scale(0.7) rotate(135deg); }
-  80%      { opacity: 0.9; transform: scale(1.2) rotate(180deg); }
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0deg);
+  }
+  15% {
+    opacity: 1;
+    transform: scale(1.4) rotate(45deg);
+  }
+  30% {
+    opacity: 0.8;
+    transform: scale(1) rotate(90deg);
+  }
+  60% {
+    opacity: 0.4;
+    transform: scale(0.7) rotate(135deg);
+  }
+  80% {
+    opacity: 0.9;
+    transform: scale(1.2) rotate(180deg);
+  }
 }
 
 @keyframes pledge-sparkle-2 {
-  0%, 100% { opacity: 0; transform: scale(0.4) rotate(0deg); }
-  20%      { opacity: 1; transform: scale(1.5) rotate(-45deg); }
-  50%      { opacity: 0.6; transform: scale(0.85) rotate(-90deg); }
-  75%      { opacity: 0.9; transform: scale(1.1) rotate(-180deg); }
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4) rotate(0deg);
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1.5) rotate(-45deg);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.85) rotate(-90deg);
+  }
+  75% {
+    opacity: 0.9;
+    transform: scale(1.1) rotate(-180deg);
+  }
 }
 
 @keyframes pledge-sparkle-3 {
-  0%, 100% { opacity: 0; transform: scale(0.3) rotate(0deg); }
-  25%      { opacity: 0.9; transform: scale(1.2) rotate(60deg); }
-  55%      { opacity: 1; transform: scale(1.4) rotate(-30deg); }
-  85%      { opacity: 0.5; transform: scale(0.8) rotate(20deg); }
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0deg);
+  }
+  25% {
+    opacity: 0.9;
+    transform: scale(1.2) rotate(60deg);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.4) rotate(-30deg);
+  }
+  85% {
+    opacity: 0.5;
+    transform: scale(0.8) rotate(20deg);
+  }
 }
 
 @keyframes pledge-sparkle-4 {
-  0%, 100% { opacity: 0; transform: scale(0.4) rotate(0deg); }
-  35%      { opacity: 1; transform: scale(1.5) rotate(50deg); }
-  70%      { opacity: 0.6; transform: scale(0.9) rotate(-40deg); }
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4) rotate(0deg);
+  }
+  35% {
+    opacity: 1;
+    transform: scale(1.5) rotate(50deg);
+  }
+  70% {
+    opacity: 0.6;
+    transform: scale(0.9) rotate(-40deg);
+  }
 }
 
 /* Mobile: stack tagline on its own line, slightly smaller sparkles */
@@ -1307,12 +1445,30 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
     font-size: 1.25rem;
     margin: 2rem 0 1.5rem;
   }
-  .pledge-spark--1 { width: 16px; height: 16px; }
-  .pledge-spark--2 { width: 14px; height: 14px; }
-  .pledge-spark--3 { width: 12px; height: 12px; }
-  .pledge-spark--4 { width: 11px; height: 11px; }
-  .pledge-spark--5 { width: 12px; height: 12px; }
-  .pledge-spark--6 { width: 14px; height: 14px; }
+  .pledge-spark--1 {
+    width: 16px;
+    height: 16px;
+  }
+  .pledge-spark--2 {
+    width: 14px;
+    height: 14px;
+  }
+  .pledge-spark--3 {
+    width: 12px;
+    height: 12px;
+  }
+  .pledge-spark--4 {
+    width: 11px;
+    height: 11px;
+  }
+  .pledge-spark--5 {
+    width: 12px;
+    height: 12px;
+  }
+  .pledge-spark--6 {
+    width: 14px;
+    height: 14px;
+  }
 }
 
 /* Respect reduced-motion preference — keep gradient + glow, drop animation */
@@ -1328,7 +1484,14 @@ a:hover { color: var(--gold-hover); text-decoration: underline; }
 }
 
 @keyframes mbl-cursor-idle {
-  0%, 100% { filter: drop-shadow(0 2px 6px rgba(182,116,29,0.35)); }
-  50%      { filter: drop-shadow(0 2px 10px rgba(240,200,80,0.55)); }
+  0%,
+  100% {
+    filter: drop-shadow(0 2px 6px rgba(182, 116, 29, 0.35));
+  }
+  50% {
+    filter: drop-shadow(0 2px 10px rgba(240, 200, 80, 0.55));
+  }
 }
-.mbl-cursor.is-idle { animation: mbl-cursor-idle 2.4s ease-in-out infinite; }
+.mbl-cursor.is-idle {
+  animation: mbl-cursor-idle 2.4s ease-in-out infinite;
+}

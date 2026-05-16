@@ -22,10 +22,22 @@ A single-page marketing site served from GitHub Pages at **mybiblelens.us**. Pla
 npm run dev               # local preview at http://localhost:8765
 npm run format            # Prettier write
 npm run format:check      # Prettier check (CI uses this)
-npm run test              # Playwright run
+npm run test              # All Playwright tests (smoke + visual)
+npm run test:smoke        # Smoke / behavior tests only
+npm run test:visual       # Visual regression only (local — see note below)
+npm run test:ci           # What CI runs (smoke only)
 npm run test:update       # Update visual-regression baselines (only after intentional UI change)
 npm run test:headed       # Playwright with visible browser
 ```
+
+### Visual regression is local-only
+
+Pixel baselines are captured on macOS. Linux Chromium in CI renders text at
+different sub-pixel heights — the section's measured height shifts, so the
+diff fails before running. **CI runs only smoke tests.** Run
+`npm run test:visual` locally before intentional UI changes to confirm
+what moved. (TODO: capture Linux baselines via `mcr.microsoft.com/playwright`
+in Docker if we ever need cross-platform visual coverage.)
 
 ## Brand identity (locked — match the iOS app)
 
