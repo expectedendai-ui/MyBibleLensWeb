@@ -38,6 +38,7 @@
         scroll-behavior: smooth;
         /* Leaves room for the floating glass nav so anchor jumps don't slide under it. */
         scroll-padding-top: 5.5rem;
+        overflow-x: hidden;
       }
 
       body {
@@ -818,7 +819,7 @@
       /* Study Repository — responsive grid (no scroll, all visible) */
       .repo-carousel {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
         gap: var(--space-6);
         padding-bottom: var(--space-4);
       }
@@ -1466,7 +1467,7 @@
 
       .pricing-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
         gap: var(--space-8);
         align-items: start;
       }
