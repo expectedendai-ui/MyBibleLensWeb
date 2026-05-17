@@ -142,6 +142,7 @@
         --space-2: 0.5rem;
         --space-3: 0.75rem;
         --space-4: 1rem;
+        --space-5: 1.25rem;
         --space-6: 1.5rem;
         --space-8: 2rem;
         --space-10: 2.5rem;
@@ -2518,10 +2519,74 @@
           padding: var(--space-6) var(--space-5);
         }
         .pricing-card-inner {
-          padding: var(--space-5);
+          /* Mobile cards: more padding so the gold-bordered "Buy once" pill
+             button and the heading don't kiss the card's gold border. */
+          padding: var(--space-6) var(--space-5);
+          gap: var(--space-5);
         }
         .section-padding {
           padding-block: clamp(var(--space-12), 12vw, var(--space-16));
+        }
+      }
+
+      /* ───── Mobile polish: repo cards + download CTA + never-have ─────
+         Phone-only (≤480px) — tightens type, indents past the gold accent
+         line, and stacks the App Store/Play buttons so they breathe. */
+      @media (max-width: 480px) {
+        /* Slight extra room from the screen edge so the gold border doesn't
+           visually kiss the iPhone frame. */
+        .container {
+          padding-inline: 1.25rem;
+        }
+
+        /* Asymmetric padding: more on the LEFT so the heading doesn't
+           crowd the gold accent line. Tighter top/bottom for compactness. */
+        .repo-card {
+          padding: 1.15rem 1.1rem 1.15rem 1.5rem;
+          border-radius: 14px;
+        }
+        .repo-card h3 {
+          font-size: 1.05rem;
+          line-height: 1.25;
+          margin-bottom: 0.45rem;
+        }
+        .repo-card p {
+          font-size: 0.9rem;
+          line-height: 1.55;
+        }
+
+        /* Download CTA: stack the store buttons vertically so each is a
+           full-width tap target. */
+        .repo-card--download .app-badges {
+          flex-direction: column;
+          gap: 0.6rem;
+          width: 100%;
+        }
+        .repo-card--download .app-badge {
+          width: 100%;
+          justify-content: center;
+          padding-block: 0.7rem;
+        }
+
+        /* "What this app will never have" — tighten the indent + list item
+           padding so wrapped lines align cleanly under the X mark. */
+        .never-have-block {
+          padding: 1.25rem 1.1rem;
+          border-radius: 14px;
+        }
+        .never-have-title {
+          font-size: 1.2rem;
+          margin-bottom: 0.85rem;
+        }
+        .never-have-list {
+          font-size: 0.92rem;
+          line-height: 1.55;
+        }
+        .never-have-list li {
+          padding: 0.55rem 0 0.55rem 1.35rem;
+        }
+        .never-have-list li::before {
+          top: 0.6rem;
         }
       }
 
@@ -3932,6 +3997,159 @@
               </div>
             </div>
           </div>
+
+          <!-- CARD 5: Empire Pack — consumable seat add-on, +10 seats ($249.99) -->
+          <div class="pricing-card-wrapper">
+            <div class="pricing-card">
+              <div class="pricing-card-inner">
+                <div
+                  style="
+                    display: inline-block;
+                    align-self: flex-start;
+                    margin-bottom: 0.5rem;
+                    padding: 0.25rem 0.7rem;
+                    border-radius: 999px;
+                    background: rgba(212, 146, 31, 0.12);
+                    border: 1px solid rgba(212, 146, 31, 0.35);
+                    font-family: &quot;Inter&quot;, sans-serif;
+                    font-size: 0.7rem;
+                    font-weight: 700;
+                    letter-spacing: 0.18em;
+                    text-transform: uppercase;
+                    color: #f0c850;
+                  "
+                >
+                  Seat Add-on
+                </div>
+                <div class="pricing-tier-name">Empire Pack</div>
+                <div>
+                  <div class="pricing-price">$249.99</div>
+                  <div class="pricing-price-sub">one-time · +10 seats</div>
+                </div>
+                <div
+                  style="
+                    margin: 0.6rem 0 0.4rem 0;
+                    font-family: &quot;Inter&quot;, sans-serif;
+                    font-size: 0.8rem;
+                    color: rgba(245, 242, 237, 0.78);
+                    line-height: 1.5;
+                  "
+                >
+                  Add 10 more seats to any paid tier. Stack as many as you need — invite the whole small group, family, or ministry team.
+                </div>
+                <ul class="pricing-features" role="list">
+                  <li>+10 seats (stackable)</li>
+                  <li>$25 per seat</li>
+                  <li>Requires Apostle, Sanctuary, Kingdom, or Founding</li>
+                  <li>Seats inherit the owner's tier features</li>
+                  <li>No recurring charges</li>
+                </ul>
+                <button class="pricing-expand-btn" aria-label="Show all features">
+                  <span class="expand-text">Show all ↓</span>
+                  <span class="collapse-text">Show less ↑</span>
+                </button>
+                <div
+                  class="pricing-app-note"
+                  style="
+                    width: 100%;
+                    padding: 0.85rem 1rem;
+                    border: 1px solid #b6741d;
+                    border-radius: 999px;
+                    text-align: center;
+                    font-family: &quot;Inter&quot;, sans-serif;
+                    font-size: 0.85rem;
+                    font-weight: 600;
+                    color: #b6741d;
+                    background: rgba(182, 116, 29, 0.05);
+                    letter-spacing: 0.5px;
+                  "
+                >
+                  Buy once in the MyBibleLens™ app
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 6: Empire Plus — consumable seat add-on, +50 seats ($999.99) -->
+          <div class="pricing-card-wrapper">
+            <div
+              class="pricing-card"
+              style="
+                background: linear-gradient(135deg, #1a1008 0%, #3d2b1f 100%);
+                border: 2px solid #b6751d;
+                box-shadow:
+                  0 0 0 1px rgba(212, 146, 31, 0.18),
+                  0 20px 60px -20px rgba(212, 146, 31, 0.25);
+              "
+            >
+              <div class="pricing-card-inner">
+                <div
+                  style="
+                    display: inline-block;
+                    align-self: flex-start;
+                    margin-bottom: 0.5rem;
+                    padding: 0.25rem 0.7rem;
+                    border-radius: 999px;
+                    background: rgba(240, 200, 80, 0.15);
+                    border: 1px solid rgba(240, 200, 80, 0.45);
+                    font-family: &quot;Inter&quot;, sans-serif;
+                    font-size: 0.7rem;
+                    font-weight: 700;
+                    letter-spacing: 0.18em;
+                    text-transform: uppercase;
+                    color: #f0c850;
+                  "
+                >
+                  Best Bulk Value
+                </div>
+                <div class="pricing-tier-name">Empire Plus</div>
+                <div>
+                  <div class="pricing-price">$999.99</div>
+                  <div class="pricing-price-sub">one-time · +50 seats</div>
+                </div>
+                <div
+                  style="
+                    margin: 0.6rem 0 0.4rem 0;
+                    font-family: &quot;Inter&quot;, sans-serif;
+                    font-size: 0.8rem;
+                    color: rgba(245, 242, 237, 0.78);
+                    line-height: 1.5;
+                  "
+                >
+                  For churches, schools, and growing ministries. Bulk savings — $20 per seat instead of $25.
+                </div>
+                <ul class="pricing-features" role="list">
+                  <li>+50 seats (stackable)</li>
+                  <li>$20 per seat — 20% off Empire Pack</li>
+                  <li>Requires Apostle, Sanctuary, Kingdom, or Founding</li>
+                  <li>Seats inherit the owner's tier features</li>
+                  <li>No recurring charges</li>
+                </ul>
+                <button class="pricing-expand-btn" aria-label="Show all features">
+                  <span class="expand-text">Show all ↓</span>
+                  <span class="collapse-text">Show less ↑</span>
+                </button>
+                <div
+                  class="pricing-app-note"
+                  style="
+                    width: 100%;
+                    padding: 0.85rem 1rem;
+                    border: 1px solid #b6741d;
+                    border-radius: 999px;
+                    text-align: center;
+                    font-family: &quot;Inter&quot;, sans-serif;
+                    font-size: 0.85rem;
+                    font-weight: 600;
+                    color: #b6741d;
+                    background: rgba(182, 116, 29, 0.05);
+                    letter-spacing: 0.5px;
+                  "
+                >
+                  Buy once in the MyBibleLens™ app
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <p
@@ -3946,7 +4164,7 @@
           "
         >
           Purchases are processed by Apple In-App Purchase or Google Play Billing. Lifetime means lifetime of the app — no recurring
-          charges, ever.
+          charges, ever. Empire Pack &amp; Empire Plus require an existing paid tier; seats inherit the owner's plan.
         </p>
       </div>
     </section>
