@@ -25,13 +25,13 @@ html {
 
 /* ─── SANCTUARY PALETTE ─── */
 :root {
-  /* Core Brand Colors */
+  /* Core Brand Colors (warm palette only — no cool tones) */
   --deep-brown: #3d2b1f;
   --parchment: #f5f2ed;
   --gold: #b6751d;
   --gold-hover: #9a6218;
-  --electric-blue: #00d4ff;
-  --dross-red: #b22222;
+  --ember-gold: #d4921f;
+  --halo-gold: #f0c850;
 
   /* Surfaces */
   --color-bg: #f5f2ed;
@@ -605,11 +605,11 @@ a:hover {
   box-shadow: inset 0 1px 2px rgba(61, 43, 31, 0.04);
 }
 .support-card--crisis {
-  border-color: var(--dross-red);
-  background: rgba(178, 34, 34, 0.04);
+  border-color: var(--ember-gold);
+  background: rgba(212, 146, 31, 0.04);
 }
 .support-card--crisis .support-card-label {
-  color: var(--dross-red);
+  color: var(--ember-gold);
 }
 .support-card-label {
   font-size: var(--text-xs);
@@ -781,8 +781,8 @@ a:hover {
 }
 
 .legal-callout--warning {
-  background: rgba(178, 34, 34, 0.06);
-  border-left-color: var(--dross-red);
+  background: rgba(212, 146, 31, 0.06);
+  border-left-color: var(--ember-gold);
 }
 .legal-callout--warning p {
   font-size: var(--text-xs);
@@ -792,12 +792,12 @@ a:hover {
 }
 
 .legal-callout--crisis {
-  background: rgba(178, 34, 34, 0.08);
-  border-left-color: var(--dross-red);
+  background: rgba(212, 146, 31, 0.08);
+  border-left-color: var(--ember-gold);
 }
 .legal-callout--crisis p {
   font-weight: 600;
-  color: var(--dross-red);
+  color: var(--ember-gold);
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -1064,16 +1064,16 @@ a:hover {
 }
 
 .form-error {
-  background: rgba(178, 34, 34, 0.06);
-  border: 1px solid rgba(178, 34, 34, 0.25);
+  background: rgba(212, 146, 31, 0.06);
+  border: 1px solid rgba(212, 146, 31, 0.25);
   border-radius: 8px;
   padding: 1rem 1.25rem;
-  color: #b22222;
+  color: var(--ember-gold);
   font-size: 0.95rem;
 }
 
 .form-error a {
-  color: #b22222;
+  color: var(--ember-gold);
   font-weight: 600;
 }
 

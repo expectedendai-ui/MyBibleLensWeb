@@ -114,16 +114,16 @@
         }
       }
 
-      /* ========== DESIGN TOKENS ========== */
+      /* ========== DESIGN TOKENS (warm palette only) ========== */
       :root {
         --deep-brown: #3d2b1f;
         --parchment: #f5f2ed;
         --gold: #b6751d;
         --gold-light: #d4921f;
+        --ember-gold: #d4921f;
+        --halo-gold: #f0c850;
         --cream: #faf7f2;
         --dark-bg: #1a1008;
-        --electric-blue: #00d4ff;
-        --dross-red: #b22222;
         --white: #ffffff;
         --muted-gold: rgba(212, 146, 31, 0.6);
 
@@ -3345,6 +3345,505 @@
         opacity: 0 !important;
         pointer-events: none !important;
       }
+
+      /* ═══════════════════════════════════════════════════════
+         SCRIPTURE CANVAS — infinite Miro-board hero layer
+         Drifting feature nodes connected by animated gold curves.
+         Sits BEHIND .hero-content, ABOVE the heaven-rays gradient.
+         ═══════════════════════════════════════════════════════ */
+      .scripture-canvas {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+        overflow: hidden;
+        opacity: 0.95;
+        /* Infinite-canvas dot grid — classic Miro/Figma whiteboard texture */
+        background-image:
+          radial-gradient(circle, rgba(240, 200, 80, 0.16) 1.1px, transparent 1.4px);
+        background-size: 28px 28px;
+        background-position: 0 0;
+        animation: canvas-grid-drift 60s linear infinite;
+      }
+      @keyframes canvas-grid-drift {
+        from { background-position: 0 0; }
+        to   { background-position: 56px 56px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .scripture-canvas { animation: none !important; }
+      }
+      .canvas-node {
+        position: absolute;
+        left: var(--nx);
+        top: var(--ny);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.5rem 0.85rem;
+        border-radius: 0.75rem;
+        background: rgba(43, 30, 22, 0.62);
+        backdrop-filter: blur(10px) saturate(120%);
+        -webkit-backdrop-filter: blur(10px) saturate(120%);
+        border: 1px solid rgba(240, 200, 80, 0.32);
+        color: rgba(245, 242, 237, 0.92);
+        font-family: "Hammersmith One", "Arial Black", sans-serif;
+        font-size: clamp(0.62rem, 0.55rem + 0.3vw, 0.78rem);
+        letter-spacing: 0.08em;
+        white-space: nowrap;
+        text-transform: uppercase;
+        box-shadow:
+          0 8px 24px -12px rgba(26, 16, 8, 0.6),
+          inset 0 1px 0 rgba(240, 200, 80, 0.12);
+        transform: translate(-50%, -50%);
+        animation: canvas-node-drift 14s ease-in-out infinite alternate;
+        animation-delay: var(--node-delay, 0s);
+      }
+      .canvas-node__icon {
+        width: 1.05rem;
+        height: 1.05rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(240, 200, 80, 0.95);
+        flex-shrink: 0;
+      }
+      .canvas-node__icon svg {
+        width: 100%;
+        height: 100%;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.7;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      @keyframes canvas-node-drift {
+        0% {
+          transform: translate(-50%, -50%) translate(0, 0) rotate(0deg);
+        }
+        50% {
+          transform: translate(-50%, -50%) translate(-4px, 5px) rotate(-0.35deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) translate(6px, -4px) rotate(0.45deg);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .canvas-node {
+          animation: none !important;
+        }
+      }
+      @media (max-width: 768px) {
+        .scripture-canvas {
+          opacity: 0.5;
+        }
+        .canvas-node {
+          padding: 0.35rem 0.6rem;
+          font-size: 0.6rem;
+          letter-spacing: 0.06em;
+        }
+        .canvas-node__icon {
+          width: 0.85rem;
+          height: 0.85rem;
+        }
+        .canvas-node[data-feature="sermon"],
+        .canvas-node[data-feature="sanctuary"],
+        .canvas-node[data-feature="games"] {
+          display: none;
+        }
+      }
+      /* ═══════════════════════════════════════════════════════
+         COLLABORATOR CURSORS — fake fellowship presence on the canvas
+         3 cursors drift across the hero with name labels, like Miro
+         showing other people working alongside you.
+         ═══════════════════════════════════════════════════════ */
+      .collab-cursor {
+        position: absolute;
+        left: 0;
+        top: 0;
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        opacity: 0;
+        animation: collab-cursor-appear 1.4s ease-out forwards;
+        animation-delay: var(--collab-delay, 0s);
+        will-change: transform, left, top;
+      }
+      .collab-cursor svg {
+        display: block;
+        width: 22px;
+        height: 22px;
+        filter: drop-shadow(0 2px 8px rgba(26, 16, 8, 0.55));
+      }
+      .collab-cursor__label {
+        position: absolute;
+        top: 18px;
+        left: 14px;
+        padding: 0.18rem 0.5rem;
+        border-radius: 0.35rem;
+        background: var(--collab-color, #d4921f);
+        color: #1a1008;
+        font-family: "Inter", sans-serif;
+        font-size: 0.65rem;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        white-space: nowrap;
+        box-shadow: 0 4px 12px -4px rgba(26, 16, 8, 0.6);
+      }
+      @keyframes collab-cursor-appear {
+        from { opacity: 0; }
+        to   { opacity: 0.92; }
+      }
+      /* When a cursor "clicks" a node, the node pulses */
+      .canvas-node.is-pulsed {
+        animation:
+          canvas-node-drift 14s ease-in-out infinite alternate,
+          canvas-node-pulse 0.7s ease-out;
+        animation-delay: var(--node-delay, 0s), 0s;
+      }
+      @keyframes canvas-node-pulse {
+        0%   { box-shadow: 0 8px 24px -12px rgba(26, 16, 8, 0.6), inset 0 1px 0 rgba(240, 200, 80, 0.12), 0 0 0 0 rgba(240, 200, 80, 0.6); border-color: rgba(240, 200, 80, 0.85); }
+        50%  { box-shadow: 0 8px 24px -12px rgba(26, 16, 8, 0.6), inset 0 1px 0 rgba(240, 200, 80, 0.12), 0 0 0 14px rgba(240, 200, 80, 0); border-color: rgba(240, 200, 80, 1); }
+        100% { box-shadow: 0 8px 24px -12px rgba(26, 16, 8, 0.6), inset 0 1px 0 rgba(240, 200, 80, 0.12), 0 0 0 0 rgba(240, 200, 80, 0); border-color: rgba(240, 200, 80, 0.32); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .collab-cursor,
+        .canvas-node.is-pulsed { animation: none !important; }
+      }
+      @media (max-width: 768px) {
+        /* No real cursors on mobile — hide the fake ones too */
+        .collab-cursor { display: none; }
+      }
+
+      /* Container that holds parallax-transformed nodes — JS shifts on mousemove */
+      .scripture-canvas[data-parallax="1"] .canvas-node { will-change: transform; }
+
+      /* ═══════════════════════════════════════════════════════
+         CANVAS PHOTOS — pinned scripture art that floats around
+         the board. Cursors periodically "grab" + drag them.
+         ═══════════════════════════════════════════════════════ */
+      .canvas-photo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 120px;
+        translate: -50% -50%;
+        padding: 6px 6px 18px 6px;
+        background: #f5f2ed;
+        border-radius: 3px;
+        box-shadow:
+          0 14px 36px -10px rgba(26, 16, 8, 0.65),
+          0 0 0 1px rgba(240, 200, 80, 0.18);
+        rotate: -3deg;
+        opacity: 0;
+        z-index: 2;
+        pointer-events: none;
+        will-change: left, top, transform;
+        transition:
+          left 12s cubic-bezier(0.4, 0.2, 0.3, 1),
+          top 12s cubic-bezier(0.4, 0.2, 0.3, 1),
+          rotate 0.45s ease-out,
+          scale 0.4s ease-out,
+          box-shadow 0.4s ease-out;
+      }
+      .canvas-photo img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 2px;
+      }
+      .canvas-photo.is-popping {
+        animation: canvas-photo-pop 1.1s cubic-bezier(0.34, 1.45, 0.5, 1) forwards;
+      }
+      @keyframes canvas-photo-pop {
+        0%   { opacity: 0; scale: 0.4; rotate: -12deg; }
+        70%  { opacity: 1; scale: 1.05; rotate: -1deg; }
+        100% { opacity: 1; scale: 1; rotate: -3deg; }
+      }
+      /* Larger variant — for hero/featured photos */
+      .canvas-photo--lg {
+        width: 170px;
+      }
+      @media (max-width: 768px) {
+        .canvas-photo--lg { width: 120px; }
+      }
+      .canvas-photo.is-dragged {
+        rotate: 0.5deg;
+        scale: 1.08;
+        box-shadow:
+          0 22px 52px -10px rgba(26, 16, 8, 0.78),
+          0 0 0 2px rgba(240, 200, 80, 0.55);
+        z-index: 4;
+        transition:
+          left 0.6s cubic-bezier(0.4, 0.2, 0.3, 1),
+          top 0.6s cubic-bezier(0.4, 0.2, 0.3, 1),
+          rotate 0.4s ease-out,
+          scale 0.4s ease-out,
+          box-shadow 0.4s ease-out;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .canvas-photo,
+        .canvas-photo.is-popping,
+        .canvas-photo.is-dragged { animation: none !important; transition: none !important; }
+      }
+      @media (max-width: 768px) {
+        .canvas-photo { width: 90px; padding: 4px 4px 14px 4px; }
+      }
+
+      /* Make sure hero content & particles stay above the canvas */
+      .hero-content {
+        position: relative;
+        z-index: 3;
+      }
+      .hero-particles {
+        z-index: 2;
+      }
+
+      /* ═══════════════════════════════════════════════════════
+         REPO CARD MINI-PREVIEWS — per-feature animated visuals
+         Pure CSS keyframes, GPU-friendly transforms only.
+         ═══════════════════════════════════════════════════════ */
+      .repo-card {
+        overflow: hidden;
+      }
+      .repo-card__preview {
+        position: relative;
+        height: 96px;
+        margin-bottom: 1rem;
+        border-radius: 0.55rem;
+        background: linear-gradient(180deg, rgba(245, 242, 237, 0.06) 0%, rgba(0, 0, 0, 0.2) 100%);
+        border: 1px solid rgba(182, 117, 29, 0.2);
+        overflow: hidden;
+        transition: border-color 220ms ease;
+      }
+      .repo-card:hover .repo-card__preview {
+        border-color: rgba(212, 146, 31, 0.5);
+      }
+      /* —— Infinite Canvas preview: dot grid + drawn lines —— */
+      .preview-canvas {
+        position: absolute;
+        inset: 0;
+      }
+      .preview-canvas .pc-grid {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(circle, rgba(240, 200, 80, 0.4) 1.1px, transparent 1.4px);
+        background-size: 14px 14px;
+        background-position: center;
+        opacity: 0.6;
+      }
+      .preview-canvas .pc-line {
+        position: absolute;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(240, 200, 80, 0.85), transparent);
+        opacity: 0;
+        animation: pc-line-draw 5s ease-in-out infinite;
+        transform-origin: left center;
+      }
+      .preview-canvas .pc-line:nth-child(2) {
+        top: 30%;
+        left: 18%;
+        width: 56%;
+        transform: rotate(-12deg);
+      }
+      .preview-canvas .pc-line:nth-child(3) {
+        top: 62%;
+        left: 16%;
+        width: 50%;
+        transform: rotate(9deg);
+        animation-delay: 1.4s;
+      }
+      .preview-canvas .pc-line:nth-child(4) {
+        top: 47%;
+        left: 38%;
+        width: 36%;
+        transform: rotate(-22deg);
+        animation-delay: 2.7s;
+      }
+      @keyframes pc-line-draw {
+        0%, 90%, 100% { opacity: 0; }
+        20%, 70% { opacity: 1; }
+      }
+
+      /* —— Scripture Glow preview: gold shimmer wipe —— */
+      .preview-glow {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 72% 38%, rgba(240, 200, 80, 0.48) 0%, transparent 60%),
+          radial-gradient(circle at 28% 70%, rgba(212, 146, 31, 0.55) 0%, transparent 60%),
+          linear-gradient(135deg, #2b1e16 0%, #3d2b1f 100%);
+      }
+      .preview-glow::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -40%;
+        width: 30%;
+        height: 100%;
+        background: linear-gradient(105deg, transparent 0%, rgba(255, 248, 224, 0.5) 50%, transparent 100%);
+        filter: blur(8px);
+        animation: preview-glow-shimmer 4.5s ease-in-out infinite;
+      }
+      @keyframes preview-glow-shimmer {
+        0%, 100% {
+          left: -40%;
+          opacity: 0;
+        }
+        30% {
+          opacity: 1;
+        }
+        70% {
+          left: 110%;
+          opacity: 0;
+        }
+      }
+
+      /* —— Sermon Builder preview: outline lines drawing in —— */
+      .preview-sermon {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0.65rem 0.95rem;
+        gap: 0.34rem;
+      }
+      .preview-sermon .ps-line {
+        height: 6px;
+        background: linear-gradient(90deg, rgba(240, 200, 80, 0.78), rgba(212, 146, 31, 0.45) 35%, transparent 75%);
+        border-radius: 3px;
+        width: 0;
+        opacity: 0;
+        animation: ps-line-grow 5.5s ease-in-out infinite;
+      }
+      .preview-sermon .ps-line:nth-child(1) { --target-w: 88%; animation-delay: 0s; }
+      .preview-sermon .ps-line:nth-child(2) { --target-w: 64%; animation-delay: 0.35s; }
+      .preview-sermon .ps-line:nth-child(3) { --target-w: 80%; animation-delay: 0.7s; }
+      .preview-sermon .ps-line:nth-child(4) { --target-w: 52%; animation-delay: 1.05s; }
+      .preview-sermon .ps-line:nth-child(5) { --target-w: 72%; animation-delay: 1.4s; }
+      @keyframes ps-line-grow {
+        0%, 80%, 100% { width: 0; opacity: 0; }
+        12% { opacity: 1; }
+        25%, 65% { width: var(--target-w); opacity: 1; }
+        75% { opacity: 0; }
+      }
+
+      /* —— Study Cards preview: card stack with flipping middle card —— */
+      .preview-cards {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        perspective: 600px;
+      }
+      .preview-cards .pc-card {
+        position: absolute;
+        width: 50px;
+        height: 70px;
+        border-radius: 6px;
+        background: linear-gradient(135deg, rgba(240, 200, 80, 0.65) 0%, rgba(182, 117, 29, 0.5) 100%);
+        border: 1px solid rgba(240, 200, 80, 0.6);
+        box-shadow: 0 4px 14px -4px rgba(26, 16, 8, 0.55);
+        transform-style: preserve-3d;
+      }
+      .preview-cards .pc-card:nth-child(1) {
+        transform: translate(-22px, 6px) rotate(-8deg);
+      }
+      .preview-cards .pc-card:nth-child(2) {
+        animation: pc-card-flip 4.5s ease-in-out infinite;
+      }
+      .preview-cards .pc-card:nth-child(3) {
+        transform: translate(22px, 6px) rotate(8deg);
+      }
+      @keyframes pc-card-flip {
+        0%, 60%, 100% { transform: rotateY(0deg); }
+        30% { transform: rotateY(180deg); }
+      }
+
+      /* —— Mosaic preview: 6 tiles popping in to form a board —— */
+      .preview-mosaic {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        gap: 3px;
+        padding: 0.55rem;
+      }
+      .preview-mosaic .pm-tile {
+        background: linear-gradient(135deg, rgba(240, 200, 80, 0.42) 0%, rgba(212, 146, 31, 0.28) 100%);
+        border-radius: 4px;
+        opacity: 0;
+        transform: scale(0.5);
+        animation: pm-tile-pop 5.5s ease-out infinite;
+      }
+      .preview-mosaic .pm-tile:nth-child(1) { grid-area: 1 / 1 / 3 / 3; animation-delay: 0.1s; }
+      .preview-mosaic .pm-tile:nth-child(2) { grid-area: 1 / 3 / 2 / 5; animation-delay: 0.4s; }
+      .preview-mosaic .pm-tile:nth-child(3) { grid-area: 1 / 5 / 3 / 6; animation-delay: 0.7s; }
+      .preview-mosaic .pm-tile:nth-child(4) { grid-area: 2 / 3 / 4 / 4; animation-delay: 1.0s; }
+      .preview-mosaic .pm-tile:nth-child(5) { grid-area: 3 / 4 / 4 / 6; animation-delay: 1.3s; }
+      .preview-mosaic .pm-tile:nth-child(6) { grid-area: 3 / 1 / 4 / 3; animation-delay: 1.6s; }
+      @keyframes pm-tile-pop {
+        0%, 75%, 100% { opacity: 0; transform: scale(0.5); }
+        12%, 62% { opacity: 1; transform: scale(1); }
+      }
+
+      /* —— Games preview: fan of game cards, cycling titles —— */
+      .preview-games {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding-bottom: 8px;
+      }
+      .preview-games .pg-card {
+        position: absolute;
+        bottom: 14px;
+        width: 34px;
+        height: 50px;
+        border-radius: 4px;
+        background: linear-gradient(135deg, rgba(240, 200, 80, 0.55) 0%, rgba(212, 146, 31, 0.45) 100%);
+        border: 1px solid rgba(240, 200, 80, 0.6);
+        transform-origin: bottom center;
+        opacity: 0;
+        animation: pg-card-fan 5s ease-in-out infinite;
+      }
+      .preview-games .pg-card:nth-child(1) { --pg-rot: -32deg; animation-delay: 0s; }
+      .preview-games .pg-card:nth-child(2) { --pg-rot: -16deg; animation-delay: 0.18s; }
+      .preview-games .pg-card:nth-child(3) { --pg-rot: 0deg;   animation-delay: 0.36s; }
+      .preview-games .pg-card:nth-child(4) { --pg-rot: 16deg;  animation-delay: 0.54s; }
+      .preview-games .pg-card:nth-child(5) { --pg-rot: 32deg;  animation-delay: 0.72s; }
+      @keyframes pg-card-fan {
+        0% { opacity: 0; transform: translateY(20px) rotate(0deg); }
+        25% { opacity: 1; transform: translateY(0) rotate(var(--pg-rot)); }
+        70% { opacity: 1; transform: translateY(0) rotate(var(--pg-rot)); }
+        100% { opacity: 0; transform: translateY(-6px) rotate(var(--pg-rot)); }
+      }
+      .preview-games .pg-titles {
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: "Hammersmith One", sans-serif;
+        font-size: 0.58rem;
+        letter-spacing: 0.18em;
+        color: rgba(240, 200, 80, 0.95);
+        text-transform: uppercase;
+        white-space: nowrap;
+        text-shadow: 0 0 8px rgba(240, 200, 80, 0.4);
+      }
+      .preview-games .pg-titles::before {
+        content: "Four Corners";
+        animation: pg-title-text 7.5s steps(1) infinite;
+      }
+      @keyframes pg-title-text {
+        0%, 100% { content: "Four Corners"; }
+        25%      { content: "Jonah's Run"; }
+        50%      { content: "Burning Bush"; }
+        75%      { content: "Bible Tag"; }
+      }
     </style>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -3403,6 +3902,84 @@
     <!-- ===== SECTION 1: HERO ===== -->
     <section class="hero" id="hero">
       <div class="hero-particles" aria-hidden="true"></div>
+
+      <!-- Scripture Canvas — drifting Miro-board layer behind the hero text -->
+      <div class="scripture-canvas" data-parallax="1" aria-hidden="true">
+
+        <!-- Pinned scripture art — pops in, gets dragged around by cursors -->
+        <div class="canvas-photo" data-photo="ascension">
+          <img src="assets/ascension.jpg" alt="" loading="lazy" decoding="async" width="400" height="600" />
+        </div>
+        <div class="canvas-photo" data-photo="bibles">
+          <img src="assets/bibles.jpg" alt="" loading="lazy" decoding="async" width="400" height="711" />
+        </div>
+        <div class="canvas-photo" data-photo="cross">
+          <img src="assets/cross.jpg" alt="" loading="lazy" decoding="async" width="400" height="611" />
+        </div>
+        <div class="canvas-photo" data-photo="benefits">
+          <img src="assets/benefits.jpg" alt="" loading="lazy" decoding="async" width="400" height="400" />
+        </div>
+        <div class="canvas-photo canvas-photo--lg" data-photo="testimony">
+          <img src="assets/testimony.jpg" alt="" loading="lazy" decoding="async" width="600" height="750" />
+        </div>
+
+        <!-- Fake collaborator cursors — fellowship presence -->
+        <div class="collab-cursor" data-collab="james" style="--collab-color: #d4921f; --collab-delay: 0.6s">
+          <svg viewBox="0 0 24 24" fill="#d4921f" stroke="#1a1008" stroke-width="1.2">
+            <path d="M5 3l14 8-7 1.5L9 21z" />
+          </svg>
+          <span class="collab-cursor__label">Pastor James</span>
+        </div>
+        <div class="collab-cursor" data-collab="ashley" style="--collab-color: #f0c850; --collab-delay: 1.2s">
+          <svg viewBox="0 0 24 24" fill="#f0c850" stroke="#1a1008" stroke-width="1.2">
+            <path d="M5 3l14 8-7 1.5L9 21z" />
+          </svg>
+          <span class="collab-cursor__label">Ashley</span>
+        </div>
+        <div class="collab-cursor" data-collab="denzel" style="--collab-color: #b6751d; --collab-delay: 1.8s">
+          <svg viewBox="0 0 24 24" fill="#b6751d" stroke="#1a1008" stroke-width="1.2">
+            <path d="M5 3l14 8-7 1.5L9 21z" />
+          </svg>
+          <span class="collab-cursor__label">Denzel</span>
+        </div>
+        <div class="canvas-node" data-feature="canvas" style="--nx: 14%; --ny: 28%; --node-delay: 0s">
+          <span class="canvas-node__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18M3 15h18M9 3v18M15 3v18" /></svg>
+          </span>
+          <span class="canvas-node__label">Infinite Canvas</span>
+        </div>
+        <div class="canvas-node" data-feature="glow" style="--nx: 72%; --ny: 24%; --node-delay: -2.8s">
+          <span class="canvas-node__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2l1.8 5.5L19 9l-4.5 3.5L16 18l-4-3-4 3 1.5-5.5L5 9l5.2-1.5L12 2z" /></svg>
+          </span>
+          <span class="canvas-node__label">Scripture Glow</span>
+        </div>
+        <div class="canvas-node" data-feature="sermon" style="--nx: 84%; --ny: 76%; --node-delay: -5.6s">
+          <span class="canvas-node__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z" /><path d="M20 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z" /></svg>
+          </span>
+          <span class="canvas-node__label">Sermon Builder</span>
+        </div>
+        <div class="canvas-node" data-feature="mosaic" style="--nx: 50%; --ny: 88%; --node-delay: -8.4s">
+          <span class="canvas-node__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1" /><rect x="13" y="3" width="8" height="5" rx="1" /><rect x="13" y="10" width="8" height="11" rx="1" /><rect x="3" y="13" width="8" height="8" rx="1" /></svg>
+          </span>
+          <span class="canvas-node__label">Mosaic</span>
+        </div>
+        <div class="canvas-node" data-feature="games" style="--nx: 22%; --ny: 72%; --node-delay: -11.2s">
+          <span class="canvas-node__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="3" y="6" width="12" height="14" rx="1.5" transform="rotate(-8 9 13)" /><rect x="9" y="4" width="12" height="14" rx="1.5" transform="rotate(8 15 11)" /></svg>
+          </span>
+          <span class="canvas-node__label">Games</span>
+        </div>
+        <div class="canvas-node" data-feature="sanctuary" style="--nx: 8%; --ny: 56%; --node-delay: -1.4s">
+          <span class="canvas-node__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3l8 6v10a2 2 0 0 1-2 2h-3v-7H9v7H6a2 2 0 0 1-2-2V9z" /></svg>
+          </span>
+          <span class="canvas-node__label">Live Sanctuary</span>
+        </div>
+      </div>
+
       <div class="hero-content">
         <div class="hero-orb" id="hero-orb" aria-hidden="true"></div>
         <h1 class="hero-title">MyBibleLens™</h1>
@@ -3437,10 +4014,21 @@
         </div>
         <div class="repo-carousel" role="list">
           <div class="repo-card" role="listitem">
+            <div class="repo-card__preview" aria-hidden="true">
+              <div class="preview-canvas">
+                <div class="pc-grid"></div>
+                <div class="pc-line"></div>
+                <div class="pc-line"></div>
+                <div class="pc-line"></div>
+              </div>
+            </div>
             <h3>Infinite Canvas</h3>
             <p>Map connections on an infinite board with mind maps, timelines, flowcharts, and org charts. Share with your fellowship.</p>
           </div>
           <div class="repo-card" role="listitem">
+            <div class="repo-card__preview" aria-hidden="true">
+              <div class="preview-glow"></div>
+            </div>
             <h3>Scripture Glow</h3>
             <p>Turn any verse into AI-generated artwork. 6 art themes from children's animation to Renaissance masterpieces.</p>
           </div>
@@ -3449,18 +4037,60 @@
             <p>Write down what God reveals to you. Your private journal.</p>
           </div>
           <div class="repo-card" role="listitem">
+            <div class="repo-card__preview" aria-hidden="true">
+              <div class="preview-sermon">
+                <div class="ps-line"></div>
+                <div class="ps-line"></div>
+                <div class="ps-line"></div>
+                <div class="ps-line"></div>
+                <div class="ps-line"></div>
+              </div>
+            </div>
             <h3>Sermon Builder</h3>
             <p>Build sermon decks slide by slide. Auto-title. Preview.</p>
           </div>
           <div class="repo-card" role="listitem">
+            <div class="repo-card__preview" aria-hidden="true">
+              <div class="preview-cards">
+                <div class="pc-card"></div>
+                <div class="pc-card"></div>
+                <div class="pc-card"></div>
+              </div>
+            </div>
             <h3>Study Cards</h3>
             <p>Create flashcard decks for memorization and review.</p>
           </div>
           <div class="repo-card" role="listitem">
+            <div class="repo-card__preview" aria-hidden="true">
+              <div class="preview-mosaic">
+                <div class="pm-tile"></div>
+                <div class="pm-tile"></div>
+                <div class="pm-tile"></div>
+                <div class="pm-tile"></div>
+                <div class="pm-tile"></div>
+                <div class="pm-tile"></div>
+              </div>
+            </div>
             <h3>Mosaic</h3>
             <p>
               A freeform vision board for your faith. Cut out images, layer stickers, paint with light. Save it. Share it. Build it with
               your fellowship in real time.
+            </p>
+          </div>
+          <div class="repo-card" role="listitem">
+            <div class="repo-card__preview" aria-hidden="true">
+              <div class="preview-games">
+                <div class="pg-titles"></div>
+                <div class="pg-card"></div>
+                <div class="pg-card"></div>
+                <div class="pg-card"></div>
+                <div class="pg-card"></div>
+                <div class="pg-card"></div>
+              </div>
+            </div>
+            <h3>Games</h3>
+            <p>
+              50 Bible-study group games — Four Corners, Jonah&rsquo;s Run, Burning Bush. Read the card. Close the phone. Go play with humans.
             </p>
           </div>
           <div class="repo-card" role="listitem">
@@ -4583,6 +5213,312 @@
       });
       // (Dynamic pricing sliders + billing toggles removed — pricing is now
       //  fixed one-time IAP tiers managed by Apple/Google.)
+
+      /* ═══════════════════════════════════════════════════════
+         SCRIPTURE CANVAS — floating nodes + collab cursors + parallax
+         Pure DOM-driven motion. Respects prefers-reduced-motion.
+         ═══════════════════════════════════════════════════════ */
+      (function () {
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+        // Wait one frame so the hero's layout is settled before we read its size
+        function whenReady(cb) {
+          if (document.readyState === "complete") return requestAnimationFrame(cb);
+          window.addEventListener("load", function () { requestAnimationFrame(cb); }, { once: true });
+        }
+
+        whenReady(function () {
+          const hero = document.getElementById("hero");
+          if (!hero) return;
+
+          /* ── Feature nodes float around the canvas like Miro items being dragged ── */
+          if (!reduceMotion) {
+            // Each node gets a meandering loop of waypoints (percentages of hero size).
+            // Paths are tuned to keep nodes spread out and avoid the center text zone.
+            const nodePaths = {
+              canvas:    [{ x: 0.14, y: 0.26 }, { x: 0.08, y: 0.42 }, { x: 0.18, y: 0.58 }, { x: 0.10, y: 0.72 }, { x: 0.20, y: 0.30 }],
+              glow:      [{ x: 0.78, y: 0.22 }, { x: 0.88, y: 0.38 }, { x: 0.82, y: 0.18 }, { x: 0.70, y: 0.30 }, { x: 0.85, y: 0.46 }],
+              sermon:    [{ x: 0.88, y: 0.74 }, { x: 0.78, y: 0.62 }, { x: 0.90, y: 0.58 }, { x: 0.82, y: 0.80 }, { x: 0.72, y: 0.70 }],
+              mosaic:    [{ x: 0.50, y: 0.92 }, { x: 0.42, y: 0.84 }, { x: 0.58, y: 0.88 }, { x: 0.46, y: 0.94 }, { x: 0.54, y: 0.82 }],
+              games:     [{ x: 0.18, y: 0.72 }, { x: 0.28, y: 0.84 }, { x: 0.12, y: 0.82 }, { x: 0.22, y: 0.66 }, { x: 0.30, y: 0.78 }],
+              sanctuary: [{ x: 0.08, y: 0.54 }, { x: 0.14, y: 0.40 }, { x: 0.06, y: 0.62 }, { x: 0.16, y: 0.50 }, { x: 0.10, y: 0.38 }],
+            };
+            document.querySelectorAll(".scripture-canvas .canvas-node").forEach(function (node) {
+              const feature = node.dataset.feature;
+              const path = nodePaths[feature];
+              if (!path) return;
+              let idx = 0;
+              function step() {
+                const rect = hero.getBoundingClientRect();
+                const target = path[idx % path.length];
+                node.style.transition = "left 16s ease-in-out, top 16s ease-in-out";
+                node.style.left = (target.x * rect.width).toFixed(1) + "px";
+                node.style.top = (target.y * rect.height).toFixed(1) + "px";
+                idx++;
+              }
+              step();
+              // Stagger so they don't all move in lockstep
+              const stagger = Math.random() * 4000;
+              setTimeout(function () { setInterval(step, 16000); }, stagger);
+            });
+          }
+
+          /* ── Collaborator cursors — Pastor James, Ashley, Denzel drift around ── */
+          // Track which cursor is currently "busy" dragging a photo so we
+          // don't override its position during the drag.
+          const cursorBusy = { james: false, ashley: false, denzel: false };
+
+          if (!isMobile && !reduceMotion) {
+            // Where each cursor enters from (off-canvas). James from top-left,
+            // Denzel from top-right (user request), Ashley from bottom (user request).
+            const collabEntry = {
+              james:  { x: -0.10, y: -0.10 },
+              ashley: { x: 0.50,  y: 1.15 },
+              denzel: { x: 1.12,  y: -0.10 },
+            };
+            const collabPaths = {
+              james:  [{ x: 0.30, y: 0.46 }, { x: 0.60, y: 0.34 }, { x: 0.72, y: 0.56 }, { x: 0.44, y: 0.70 }, { x: 0.26, y: 0.54 }],
+              ashley: [{ x: 0.74, y: 0.34 }, { x: 0.56, y: 0.52 }, { x: 0.34, y: 0.42 }, { x: 0.48, y: 0.68 }, { x: 0.68, y: 0.62 }],
+              denzel: [{ x: 0.40, y: 0.66 }, { x: 0.26, y: 0.32 }, { x: 0.52, y: 0.24 }, { x: 0.76, y: 0.46 }, { x: 0.58, y: 0.78 }],
+            };
+            document.querySelectorAll(".collab-cursor").forEach(function (cursor) {
+              const id = cursor.dataset.collab;
+              const path = collabPaths[id];
+              const entry = collabEntry[id];
+              if (!path || !entry) return;
+
+              // Place cursor at off-canvas entry point instantly — no transition.
+              const rect0 = hero.getBoundingClientRect();
+              cursor.style.transition = "none";
+              cursor.style.left = (entry.x * rect0.width).toFixed(1) + "px";
+              cursor.style.top = (entry.y * rect0.height).toFixed(1) + "px";
+              // Force reflow so the next transition fires from this start point.
+              void cursor.offsetHeight;
+
+              let idx = 0;
+              function moveNext() {
+                if (cursorBusy[id]) return; // skip if mid-drag
+                const rect = hero.getBoundingClientRect();
+                const target = path[idx % path.length];
+                cursor.style.transition = "left 9s cubic-bezier(0.4, 0.2, 0.3, 1), top 9s cubic-bezier(0.4, 0.2, 0.3, 1)";
+                cursor.style.left = (target.x * rect.width).toFixed(1) + "px";
+                cursor.style.top = (target.y * rect.height).toFixed(1) + "px";
+                idx++;
+                // After arrival, "click" a random node — pulse it
+                setTimeout(function () {
+                  const nodes = document.querySelectorAll(".canvas-node");
+                  if (!nodes.length) return;
+                  const pick = nodes[Math.floor(Math.random() * nodes.length)];
+                  pick.classList.add("is-pulsed");
+                  setTimeout(function () { pick.classList.remove("is-pulsed"); }, 800);
+                }, 8000);
+              }
+              moveNext();
+              setInterval(moveNext, 9500);
+            });
+          }
+
+          /* ── Canvas photos: pop in, drift, get dragged by cursors ── */
+          if (!reduceMotion) {
+            const photoDefs = {
+              ascension: {
+                path: [
+                  { x: 0.66, y: 0.40 },
+                  { x: 0.74, y: 0.62 },
+                  { x: 0.58, y: 0.78 },
+                  { x: 0.70, y: 0.30 },
+                  { x: 0.80, y: 0.50 },
+                ],
+                popDelay: 2200,
+              },
+              bibles: {
+                path: [
+                  { x: 0.30, y: 0.74 },
+                  { x: 0.20, y: 0.55 },
+                  { x: 0.32, y: 0.38 },
+                  { x: 0.16, y: 0.66 },
+                  { x: 0.28, y: 0.50 },
+                ],
+                popDelay: 3400, // pop in slightly after Ascension
+              },
+              cross: {
+                path: [
+                  { x: 0.50, y: 0.86 },
+                  { x: 0.44, y: 0.72 },
+                  { x: 0.54, y: 0.92 },
+                  { x: 0.40, y: 0.84 },
+                  { x: 0.58, y: 0.78 },
+                ],
+                popDelay: 4600, // pop in after Ascension + Bibles
+              },
+              benefits: {
+                path: [
+                  { x: 0.18, y: 0.20 },
+                  { x: 0.30, y: 0.28 },
+                  { x: 0.12, y: 0.32 },
+                  { x: 0.24, y: 0.16 },
+                  { x: 0.34, y: 0.24 },
+                ],
+                popDelay: 5800, // pops in after cross
+              },
+              testimony: {
+                // Larger photo — sits in the right-upper zone for visibility
+                path: [
+                  { x: 0.78, y: 0.18 },
+                  { x: 0.68, y: 0.26 },
+                  { x: 0.82, y: 0.32 },
+                  { x: 0.72, y: 0.16 },
+                  { x: 0.86, y: 0.24 },
+                ],
+                popDelay: 7000,
+              },
+            };
+
+            function makePhoto(name) {
+              const photo = document.querySelector('.canvas-photo[data-photo="' + name + '"]');
+              if (!photo) return null;
+              const def = photoDefs[name];
+              if (!def) return null;
+
+              const state = {
+                el: photo,
+                name: name,
+                path: def.path,
+                idx: 0,
+                mode: "idle", // "idle" | "dragging"
+              };
+
+              function slow() {
+                photo.style.transition = "left 12s cubic-bezier(0.4, 0.2, 0.3, 1), top 12s cubic-bezier(0.4, 0.2, 0.3, 1), rotate 0.45s ease-out, scale 0.4s ease-out, box-shadow 0.4s ease-out";
+              }
+              function drag() {
+                photo.style.transition = "left 0.6s cubic-bezier(0.4, 0.2, 0.3, 1), top 0.6s cubic-bezier(0.4, 0.2, 0.3, 1), rotate 0.4s ease-out, scale 0.4s ease-out, box-shadow 0.4s ease-out";
+              }
+              state.slow = slow;
+              state.drag = drag;
+              state.idleStep = function () {
+                if (state.mode !== "idle") return;
+                const rect = hero.getBoundingClientRect();
+                const t = state.path[state.idx % state.path.length];
+                slow();
+                photo.style.left = (t.x * rect.width).toFixed(1) + "px";
+                photo.style.top = (t.y * rect.height).toFixed(1) + "px";
+                state.idx++;
+              };
+
+              // Pop-in after the configured delay
+              setTimeout(function () {
+                const rect = hero.getBoundingClientRect();
+                photo.style.left = (def.path[0].x * rect.width).toFixed(1) + "px";
+                photo.style.top = (def.path[0].y * rect.height).toFixed(1) + "px";
+                photo.classList.add("is-popping");
+                state.idx = 1;
+                setTimeout(function () {
+                  state.idleStep();
+                  setInterval(state.idleStep, 12500);
+                }, 1200);
+              }, def.popDelay);
+
+              return state;
+            }
+
+            const photos = Object.keys(photoDefs).map(makePhoto).filter(Boolean);
+
+            /* Cursor-drag drama — every ~9s a random idle photo gets grabbed */
+            if (!isMobile && photos.length) {
+              const cursorIds = ["james", "ashley", "denzel"];
+              function triggerDrag() {
+                // Pick a random idle photo
+                const idlePhotos = photos.filter(function (p) { return p.mode === "idle"; });
+                if (!idlePhotos.length) return;
+                const ps = idlePhotos[Math.floor(Math.random() * idlePhotos.length)];
+
+                // Pick a free cursor
+                const freeCursorIds = cursorIds.filter(function (id) { return !cursorBusy[id]; });
+                if (!freeCursorIds.length) return;
+                const cursorId = freeCursorIds[Math.floor(Math.random() * freeCursorIds.length)];
+                const cursor = document.querySelector('.collab-cursor[data-collab="' + cursorId + '"]');
+                if (!cursor) return;
+                cursorBusy[cursorId] = true;
+
+                // (a) move cursor TO the photo
+                const photoRect = ps.el.getBoundingClientRect();
+                const heroRect = hero.getBoundingClientRect();
+                const photoCx = photoRect.left + photoRect.width / 2 - heroRect.left;
+                const photoCy = photoRect.top + photoRect.height / 2 - heroRect.top;
+                cursor.style.transition = "left 1.4s cubic-bezier(0.4, 0.2, 0.3, 1), top 1.4s cubic-bezier(0.4, 0.2, 0.3, 1)";
+                cursor.style.left = photoCx + "px";
+                cursor.style.top = photoCy + "px";
+
+                // (b) after arrival, "grab" + drag both to a new spot
+                setTimeout(function () {
+                  ps.mode = "dragging";
+                  ps.el.classList.add("is-dragged");
+                  ps.drag();
+                  const heroR = hero.getBoundingClientRect();
+                  const nx = 0.20 + Math.random() * 0.60;
+                  const ny = 0.32 + Math.random() * 0.46;
+                  const targetX = nx * heroR.width;
+                  const targetY = ny * heroR.height;
+                  cursor.style.transition = "left 2.6s cubic-bezier(0.4, 0.2, 0.3, 1), top 2.6s cubic-bezier(0.4, 0.2, 0.3, 1)";
+                  cursor.style.left = targetX + "px";
+                  cursor.style.top = targetY + "px";
+                  ps.el.style.left = targetX + "px";
+                  ps.el.style.top = targetY + "px";
+
+                  // (c) release after the drag finishes
+                  setTimeout(function () {
+                    ps.el.classList.remove("is-dragged");
+                    ps.mode = "idle";
+                    cursorBusy[cursorId] = false;
+                    ps.slow();
+                  }, 3000);
+                }, 1500);
+              }
+              setTimeout(function () {
+                triggerDrag();
+                setInterval(triggerDrag, 9000);
+              }, 9000);
+            }
+          }
+
+          /* ── Mouse parallax — nodes shift gently opposite to cursor ── */
+          if (!reduceMotion) {
+            const canvas = document.querySelector(".scripture-canvas[data-parallax='1']");
+            const nodes = document.querySelectorAll(".scripture-canvas .canvas-node");
+            if (canvas && nodes.length) {
+              let targetX = 0, targetY = 0, currX = 0, currY = 0;
+              let rafId = null;
+              hero.addEventListener("mousemove", function (e) {
+                const rect = hero.getBoundingClientRect();
+                // Normalize -0.5 to 0.5
+                targetX = (e.clientX - rect.left) / rect.width - 0.5;
+                targetY = (e.clientY - rect.top) / rect.height - 0.5;
+                if (rafId === null) loop();
+              }, { passive: true });
+              function loop() {
+                // Ease toward target
+                currX += (targetX - currX) * 0.08;
+                currY += (targetY - currY) * 0.08;
+                nodes.forEach(function (n, i) {
+                  // Different depth per node — i picks the parallax strength
+                  const depth = 8 + (i % 3) * 6; // 8, 14, 20 px max shift
+                  const dx = -currX * depth;
+                  const dy = -currY * depth;
+                  // Use standalone `translate` so it composes with the `transform` keyframe drift.
+                  n.style.translate = dx.toFixed(2) + "px " + dy.toFixed(2) + "px";
+                });
+                if (Math.abs(targetX - currX) > 0.001 || Math.abs(targetY - currY) > 0.001) {
+                  rafId = requestAnimationFrame(loop);
+                } else {
+                  rafId = null;
+                }
+              }
+            }
+          }
+        });
+      })();
 
       // ── Supabase Config ──
       var SUPABASE_URL = "https://wokvqbxkzugceuvcrsyl.supabase.co";
