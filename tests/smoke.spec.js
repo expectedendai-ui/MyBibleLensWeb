@@ -41,10 +41,13 @@ test.describe("MyBibleLens marketing site — smoke", () => {
   test("study repository renders all feature cards", async ({ page }) => {
     await page.goto("/");
     await waitForPageReady(page);
-    // 8 feature cards + "Much More" + "Start Your Journey" = 10
+    // 9 feature cards (Infinite Canvas, Scripture Glow, Reflections, Sermon
+    // Builder, Study Cards, Mosaic, Games, S.O.A.P., Live Sanctuary)
+    // + "Much More" + "Start Your Journey" = 11
     const cards = page.locator(".repo-card");
-    await expect(cards).toHaveCount(10);
+    await expect(cards).toHaveCount(11);
     await expect(page.locator(".repo-card", { hasText: "Mosaic" })).toBeVisible();
+    await expect(page.locator(".repo-card", { hasText: "Games" })).toBeVisible();
     await expect(page.locator(".repo-card", { hasText: "Start Your Journey" })).toBeVisible();
   });
 

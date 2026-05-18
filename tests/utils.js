@@ -25,9 +25,21 @@ async function waitForPageReady(page) {
       .orb-section::before,
       .pricing-card-wrapper:nth-child(5) .pricing-card::after,
       .floating-nav,
-      .scroll-halo {
+      .scroll-halo,
+      /* Scripture Canvas dynamic elements: positions are JS-driven and
+         non-deterministic by frame. Hide them for stable baselines. */
+      .collab-cursor,
+      .canvas-photo {
         opacity: 0 !important;
         visibility: hidden !important;
+      }
+      /* Lock the floating feature nodes at their CSS default positions
+         (animations are paused above, but inline left/top from JS would
+         still drift the nodes — force them back to --nx/--ny). */
+      .scripture-canvas .canvas-node {
+        left: var(--nx) !important;
+        top: var(--ny) !important;
+        translate: none !important;
       }
       /* Lock mosaic tiles at frame 0 of their float animation so the showcase
          snapshot is deterministic. Tiles stay visible — only the wobble is paused. */
