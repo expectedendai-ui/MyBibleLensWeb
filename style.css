@@ -433,6 +433,61 @@ a:hover {
   }
 }
 
+/* Polaroid-style photo cards floating in the About hero canvas */
+.hero-photo-card {
+  position: absolute;
+  left: var(--px);
+  top: var(--py);
+  transform: translate(-50%, -50%) rotate(var(--rot, 0deg));
+  margin: 0;
+  z-index: 1;
+  padding: 0.55rem 0.55rem 1.2rem;
+  background: #fdf9f1;
+  border-radius: 0.35rem;
+  box-shadow:
+    0 18px 38px -14px rgba(26, 16, 8, 0.55),
+    0 4px 10px -4px rgba(26, 16, 8, 0.4);
+  width: clamp(130px, 14vw, 200px);
+  opacity: 0;
+  animation:
+    hero-photo-appear 0.9s cubic-bezier(0.34, 1.45, 0.5, 1) 0.7s forwards,
+    hero-photo-drift 11s ease-in-out 1.6s infinite alternate;
+}
+.hero-photo-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+}
+@keyframes hero-photo-appear {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--rot, 0deg)) scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(var(--rot, 0deg)) scale(1);
+  }
+}
+@keyframes hero-photo-drift {
+  0% {
+    transform: translate(-50%, -50%) rotate(var(--rot, 0deg)) translate(0, 0);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(calc(var(--rot, 0deg) + 1.5deg)) translate(-4px, 6px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-photo-card {
+    animation: hero-photo-appear 0.5s ease-out 0.4s forwards !important;
+  }
+}
+@media (max-width: 640px) {
+  .hero-photo-card {
+    width: 95px;
+  }
+}
+
 .hero-inner {
   max-width: var(--content-default);
   margin: 0 auto;
