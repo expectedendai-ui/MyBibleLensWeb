@@ -352,7 +352,7 @@ a:hover {
 .hero--canvas {
   position: relative;
   overflow: hidden;
-  min-height: clamp(560px, 65vh, 760px);
+  min-height: clamp(640px, 72vh, 860px);
 }
 .hero-canvas-bg {
   position: absolute;
@@ -442,14 +442,14 @@ a:hover {
   transform: translate(-50%, -50%) rotate(var(--rot, 0deg));
   margin: 0;
   z-index: 1;
-  padding: 0.45rem 0.45rem 1rem;
+  padding: 0.55rem 0.55rem 1.2rem;
   background: #fdf9f1;
-  border-radius: 0.3rem;
+  border-radius: 0.35rem;
   box-shadow:
-    0 14px 30px -12px rgba(26, 16, 8, 0.55),
+    0 18px 36px -14px rgba(26, 16, 8, 0.6),
     0 4px 10px -4px rgba(26, 16, 8, 0.4);
-  width: clamp(110px, 11vw, 160px);
-  max-width: 160px;
+  width: clamp(160px, 16vw, 220px);
+  max-width: 220px;
   opacity: 0;
   animation:
     hero-photo-appear 0.9s cubic-bezier(0.34, 1.45, 0.5, 1) 0.7s forwards,
@@ -459,7 +459,7 @@ a:hover {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 200px;
+  max-height: 280px;
   object-fit: cover;
   border-radius: 2px;
 }
@@ -488,7 +488,7 @@ a:hover {
 }
 @media (max-width: 640px) {
   .hero-photo-card {
-    width: 90px;
+    width: 130px;
   }
   .hero-photo-card--mobile-hide {
     display: none;
