@@ -4093,11 +4093,23 @@
           </svg>
           <span class="collab-cursor__label">Ashley</span>
         </div>
-        <div class="collab-cursor" data-collab="denzel" style="--collab-color: #b6751d; --collab-delay: 1.8s">
+        <div class="collab-cursor" data-collab="carline" style="--collab-color: #b6751d; --collab-delay: 1.8s">
           <svg viewBox="0 0 24 24" fill="#b6751d" stroke="#1a1008" stroke-width="1.2">
             <path d="M5 3l14 8-7 1.5L9 21z" />
           </svg>
-          <span class="collab-cursor__label">Denzel</span>
+          <span class="collab-cursor__label">Carline</span>
+        </div>
+        <div class="collab-cursor" data-collab="eva" style="--collab-color: #c97f1c; --collab-delay: 2.4s">
+          <svg viewBox="0 0 24 24" fill="#c97f1c" stroke="#1a1008" stroke-width="1.2">
+            <path d="M5 3l14 8-7 1.5L9 21z" />
+          </svg>
+          <span class="collab-cursor__label">Eva</span>
+        </div>
+        <div class="collab-cursor" data-collab="ila" style="--collab-color: #e8a93e; --collab-delay: 3.0s">
+          <svg viewBox="0 0 24 24" fill="#e8a93e" stroke="#1a1008" stroke-width="1.2">
+            <path d="M5 3l14 8-7 1.5L9 21z" />
+          </svg>
+          <span class="collab-cursor__label">Ila</span>
         </div>
         <div class="canvas-node" data-feature="canvas" style="--nx: 14%; --ny: 28%; --node-delay: 0s">
           <span class="canvas-node__icon" aria-hidden="true">
@@ -5480,18 +5492,19 @@
             });
           }
 
-          /* ── Collaborator cursors — Pastor James, Ashley, Denzel drift around ── */
+          /* ── Collaborator cursors — Pastor James, Ashley, Carline, Eva, Ila drift around ── */
           // Track which cursor is currently "busy" dragging a photo so we
           // don't override its position during the drag.
-          const cursorBusy = { james: false, ashley: false, denzel: false };
+          const cursorBusy = { james: false, ashley: false, carline: false, eva: false, ila: false };
 
           if (!isMobile && !reduceMotion) {
-            // Where each cursor enters from (off-canvas). James from top-left,
-            // Denzel from top-right (user request), Ashley from bottom (user request).
+            // Where each cursor enters from (off-canvas).
             const collabEntry = {
               james: { x: -0.1, y: -0.1 },
               ashley: { x: 0.5, y: 1.15 },
-              denzel: { x: 1.12, y: -0.1 },
+              carline: { x: 1.12, y: -0.1 },
+              eva: { x: -0.1, y: 1.1 },
+              ila: { x: 1.12, y: 1.1 },
             };
             const collabPaths = {
               james: [
@@ -5508,12 +5521,26 @@
                 { x: 0.48, y: 0.68 },
                 { x: 0.68, y: 0.62 },
               ],
-              denzel: [
+              carline: [
                 { x: 0.4, y: 0.66 },
                 { x: 0.26, y: 0.32 },
                 { x: 0.52, y: 0.24 },
                 { x: 0.76, y: 0.46 },
                 { x: 0.58, y: 0.78 },
+              ],
+              eva: [
+                { x: 0.2, y: 0.62 },
+                { x: 0.42, y: 0.5 },
+                { x: 0.32, y: 0.28 },
+                { x: 0.58, y: 0.4 },
+                { x: 0.46, y: 0.72 },
+              ],
+              ila: [
+                { x: 0.8, y: 0.7 },
+                { x: 0.64, y: 0.58 },
+                { x: 0.7, y: 0.36 },
+                { x: 0.52, y: 0.48 },
+                { x: 0.84, y: 0.52 },
               ],
             };
             document.querySelectorAll(".collab-cursor").forEach(function (cursor) {
@@ -5665,7 +5692,7 @@
 
             /* Cursor-drag drama — every ~9s a random idle photo gets grabbed */
             if (!isMobile && photos.length) {
-              const cursorIds = ["james", "ashley", "denzel"];
+              const cursorIds = ["james", "ashley", "carline", "eva", "ila"];
               function triggerDrag() {
                 // Pick a random idle photo
                 const idlePhotos = photos.filter(function (p) {
