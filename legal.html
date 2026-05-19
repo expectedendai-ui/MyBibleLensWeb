@@ -80,71 +80,6 @@
         </div>
       </div>
 
-      <!-- Business Information block (LLC + address placeholders) -->
-      <div class="content-block">
-        <div class="content-inner" style="padding-top:1rem;padding-bottom:0.5rem;">
-          <div style="background:rgba(182,116,29,0.05); border:1px dashed rgba(182,116,29,0.35); border-radius:8px; padding:1rem 1.25rem; font-family:'Inter',sans-serif; font-size:0.85rem; line-height:1.6; color:rgba(61,43,31,0.85);">
-            <p style="margin:0 0 0.4rem 0;"><strong style="color:#b6741d;">Business Information</strong></p>
-            <p style="margin:0;"><strong>Operating Entity:</strong> [LLC formation pending. Once registered, this section will list MyBibleLens LLC, the State of formation, and the EIN where appropriate.]</p>
-            <p style="margin:0.4rem 0 0 0;"><strong>Business Mailing Address:</strong> [Mailing address pending registration of MyBibleLens LLC and virtual mailbox setup. Updated address will be posted upon completion.]</p>
-            <p style="margin:0.4rem 0 0 0;"><strong>Trademark Status:</strong> MyBibleLens™ is an unregistered trademark. USPTO Serial #99755819. The ® symbol will only be used after registration is granted.</p>
-            <p style="margin:0.4rem 0 0 0;"><strong>Founder &amp; Operator:</strong> Denzel Rigaud, doing business as MyBibleLens™ pending LLC formation.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Partner Block (moved to top) -->
-      <div class="content-block" id="partner">
-        <div class="content-inner">
-          <div class="partner-block">
-            <h3 class="subsection-heading">Looking to Partner?</h3>
-            <p>I can't wait to partner with a company with the same vision as me, where we can prosper, because building this brick by brick feels great, but having a team beside me will be extraordinary.</p>
-
-            <form id="partnership-form" class="support-form" action="https://formspree.io/f/mzdkqdyy" method="POST" onsubmit="handlePartnershipForm(event)">
-              <input type="hidden" name="_subject" value="MyBibleLens™ Partnership Inquiry">
-
-              <div class="form-group">
-                <label class="form-label" for="partner-name">YOUR NAME</label>
-                <input type="text" id="partner-name" name="name" class="form-input" placeholder="Full Name" required>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="partner-email">YOUR EMAIL</label>
-                <input type="email" id="partner-email" name="email" class="form-input" placeholder="you@example.com" required>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="partner-company">COMPANY / ORGANIZATION <span style="font-size:0.75rem;font-weight:400;opacity:0.6;">(optional)</span></label>
-                <input type="text" id="partner-company" name="company" class="form-input" placeholder="Your company or ministry name">
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="partner-type">TYPE OF PARTNERSHIP</label>
-                <select id="partner-type" name="partnership_type" class="form-select" required>
-                  <option value="" disabled selected>Select a type...</option>
-                  <option value="Investor / Funding">Investor / Funding</option>
-                  <option value="Brand Partnership">Brand Partnership</option>
-                  <option value="Church / Ministry Partnership">Church / Ministry Partnership</option>
-                  <option value="Media &amp; Press">Media &amp; Press</option>
-                  <option value="Technology Partner">Technology Partner</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="partner-message">MESSAGE</label>
-                <textarea id="partner-message" name="message" class="form-textarea" rows="5" placeholder="Tell us about your vision and how you'd like to partner with MyBibleLens™." required></textarea>
-              </div>
-
-              <div class="g-recaptcha" data-sitekey="6Lf1xcAsAAAAAEtN6c0P-t6jm6Ec1Q_o8IZH0KWV" style="margin-bottom:1rem;"></div>
-              <button type="submit" class="form-submit" id="partner-submit-btn">Send Message</button>
-              <p id="partner-success-msg" style="display:none;color:#2e7d32;font-weight:600;margin-top:1rem;font-size:0.95rem;">Thank you &mdash; we'll be in touch soon. God bless your vision.</p>
-              <p id="partner-error-msg" style="display:none;color:#b22222;font-weight:500;margin-top:1rem;font-size:0.9rem;">Something went wrong. Please try again.</p>
-            </form>
-          </div>
-        </div>
-      </div>
-
       <!-- Purpose -->
       <div class="content-block" id="my-mission">
         <div class="content-inner">
@@ -152,8 +87,32 @@
           <div class="about-grid">
             <div class="about-main">
               <h2 class="section-heading">What is the People Era?</h2>
-              <p style="margin-bottom:1.5rem;">A movement bigger than the app. The full story — the math, the mission, the giveback — is something I'd rather share with you directly.</p>
-              <a href="#support" onclick="showSection('support'); return false;" style="display:inline-block;background:#b6741d;color:#fff;font-family:'Hammersmith One',sans-serif;font-size:0.95rem;padding:0.75rem 2rem;border-radius:8px;text-decoration:none;letter-spacing:0.5px;">Contact me to find out!</a>
+              <p style="margin-bottom:1.25rem;">As MyBibleLens grows, the founder's vision is to direct a meaningful share of profits into community giveback through the <strong>MyBibleLens Foundation</strong>. Causes include:</p>
+
+              <ul style="list-style:none; padding:0; margin:0 0 1.5rem 0; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:0.55rem; font-family:'Inter', sans-serif;">
+                <li style="padding-left:1.25rem; position:relative;"><span style="position:absolute; left:0; color:#b6741d;">✦</span> Donations to churches</li>
+                <li style="padding-left:1.25rem; position:relative;"><span style="position:absolute; left:0; color:#b6741d;">✦</span> Free Bible giveaways</li>
+                <li style="padding-left:1.25rem; position:relative;"><span style="position:absolute; left:0; color:#b6741d;">✦</span> Free iPad giveaways</li>
+                <li style="padding-left:1.25rem; position:relative;"><span style="position:absolute; left:0; color:#b6741d;">✦</span> Free journal giveaways</li>
+                <li style="padding-left:1.25rem; position:relative;"><span style="position:absolute; left:0; color:#b6741d;">✦</span> Scholarships for teens</li>
+                <li style="padding-left:1.25rem; position:relative;"><span style="position:absolute; left:0; color:#b6741d;">✦</span> Coding &amp; tech bootcamp support</li>
+                <li style="padding-left:1.25rem; position:relative;"><span style="position:absolute; left:0; color:#b6741d;">✦</span> Direct aid to families in need</li>
+                <li style="padding-left:1.25rem; position:relative;"><span style="position:absolute; left:0; color:#b6741d;">✦</span> Calisthenics &amp; workout parks</li>
+                <li style="padding-left:1.25rem; position:relative;"><span style="position:absolute; left:0; color:#b6741d;">✦</span> Supporting local farmers</li>
+                <li style="padding-left:1.25rem; position:relative; font-style:italic; color:rgba(61,43,31,0.7);">And much, much more…</li>
+              </ul>
+
+              <div style="text-align:center; color:#b6741d; letter-spacing:0.6em; font-size:0.9rem; margin:1.5rem 0 0.25rem 0;">✦ ✦ ✦ ✦ ✦</div>
+              <div style="text-align:center; color:#b6741d; letter-spacing:0.6em; font-size:0.9rem; margin:0 0 1.5rem 0;">✦ ✦ ✦ ✦ ✦</div>
+
+              <blockquote style="font-style:italic; font-family:'Inter', Georgia, serif; font-size:1.05rem; line-height:1.7; color:rgba(61,43,31,0.92); border-left:4px solid #b6741d; padding:0.5rem 0 0.5rem 1.25rem; margin:0 0 1.75rem 0;">
+                "The era of soul-draining algorithms and digital chaos ends here. We are reclaiming our focus, our community, our friends, and our families. This isn't just another app — it's the dawn of The People's Era."
+              </blockquote>
+
+              <div style="text-align:center; padding:1rem 0 0.25rem 0;">
+                <p style="font-family:'Inter', Georgia, serif; font-style:italic; font-size:1rem; line-height:1.7; color:rgba(61,43,31,0.85); max-width:560px; margin:0 auto 0.6rem auto;">"For even the Son of Man came not to be served but to serve, and to give His life as a ransom for many."</p>
+                <p style="font-family:'Hammersmith One', sans-serif; font-size:0.85rem; letter-spacing:0.18em; color:#b6741d; text-transform:uppercase; margin:0;">— Mark 10:45</p>
+              </div>
             </div>
             <div class="about-aside">
               <div class="callout-card">
@@ -259,6 +218,58 @@
 
 
 
+        </div>
+      </div>
+
+      <!-- Partner Block (moved to bottom — after the Team — so the People's Era message leads) -->
+      <div class="content-block" id="partner">
+        <div class="content-inner">
+          <div class="partner-block">
+            <h3 class="subsection-heading">Looking to Partner?</h3>
+            <p>I can't wait to partner with a company with the same vision as me, where we can prosper, because building this brick by brick feels great, but having a team beside me will be extraordinary.</p>
+
+            <form id="partnership-form" class="support-form" action="https://formspree.io/f/mzdkqdyy" method="POST" onsubmit="handlePartnershipForm(event)">
+              <input type="hidden" name="_subject" value="MyBibleLens™ Partnership Inquiry">
+
+              <div class="form-group">
+                <label class="form-label" for="partner-name">YOUR NAME</label>
+                <input type="text" id="partner-name" name="name" class="form-input" placeholder="Full Name" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="partner-email">YOUR EMAIL</label>
+                <input type="email" id="partner-email" name="email" class="form-input" placeholder="you@example.com" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="partner-company">COMPANY / ORGANIZATION <span style="font-size:0.75rem;font-weight:400;opacity:0.6;">(optional)</span></label>
+                <input type="text" id="partner-company" name="company" class="form-input" placeholder="Your company or ministry name">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="partner-type">TYPE OF PARTNERSHIP</label>
+                <select id="partner-type" name="partnership_type" class="form-select" required>
+                  <option value="" disabled selected>Select a type...</option>
+                  <option value="Investor / Funding">Investor / Funding</option>
+                  <option value="Brand Partnership">Brand Partnership</option>
+                  <option value="Church / Ministry Partnership">Church / Ministry Partnership</option>
+                  <option value="Media &amp; Press">Media &amp; Press</option>
+                  <option value="Technology Partner">Technology Partner</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="partner-message">MESSAGE</label>
+                <textarea id="partner-message" name="message" class="form-textarea" rows="5" placeholder="Tell us about your vision and how you'd like to partner with MyBibleLens™." required></textarea>
+              </div>
+
+              <div class="g-recaptcha" data-sitekey="6Lf1xcAsAAAAAEtN6c0P-t6jm6Ec1Q_o8IZH0KWV" style="margin-bottom:1rem;"></div>
+              <button type="submit" class="form-submit" id="partner-submit-btn">Send Message</button>
+              <p id="partner-success-msg" style="display:none;color:#2e7d32;font-weight:600;margin-top:1rem;font-size:0.95rem;">Thank you &mdash; we'll be in touch soon. God bless your vision.</p>
+              <p id="partner-error-msg" style="display:none;color:#b22222;font-weight:500;margin-top:1rem;font-size:0.9rem;">Something went wrong. Please try again.</p>
+            </form>
+          </div>
         </div>
       </div>
     </section>
