@@ -509,25 +509,48 @@ a:hover {
 }
 
 @media (max-width: 640px) {
-  .hero-photo-card {
-    width: 130px;
+  /* On mobile: hero becomes a CSS grid so polaroids can't stack accidentally.
+     Row 1 = title (full width), rows 2 + 3 = 2x2 photo grid below. */
+  .hero--canvas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 1.5rem 0.5rem;
+    padding: 3rem 1rem 2.5rem;
+    align-items: center;
+    justify-items: center;
+    min-height: auto;
   }
-  /* On mobile: title stays at top, all 4 polaroids drop into a 2x2 grid below */
+  .hero--canvas .hero-inner {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-photo-card {
+    position: static;
+    transform: rotate(var(--rot, 0deg));
+    width: 140px;
+    align-self: center;
+    justify-self: center;
+    animation: none;
+    opacity: 1;
+  }
   .hero-photo-card--tl {
-    --px: 27%;
-    --py: 52%;
+    grid-row: 2;
+    grid-column: 1;
   }
   .hero-photo-card--tr {
-    --px: 73%;
-    --py: 50%;
+    grid-row: 2;
+    grid-column: 2;
   }
   .hero-photo-card--bl {
-    --px: 28%;
-    --py: 80%;
+    grid-row: 3;
+    grid-column: 1;
   }
   .hero-photo-card--br {
-    --px: 72%;
-    --py: 78%;
+    grid-row: 3;
+    grid-column: 2;
   }
 }
 
