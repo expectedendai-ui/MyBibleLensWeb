@@ -72,8 +72,25 @@
     <!-- ══════════════ ABOUT SECTION ══════════════ -->
     <section class="page-section" id="about" data-page="about">
 
-      <!-- Hero -->
-      <div class="hero">
+      <!-- Hero — Infinite-canvas treatment, "The Builder's Manifesto" -->
+      <div class="hero hero--canvas">
+        <!-- Dot-grid infinite canvas background -->
+        <div class="hero-canvas-bg" aria-hidden="true"></div>
+
+        <!-- Collaborator cursor: Denzel -->
+        <div class="hero-cursor" aria-hidden="true" style="--cx: 78%; --cy: 22%;">
+          <svg viewBox="0 0 16 16" width="22" height="22">
+            <path
+              d="M1 1 L1 12 L4.5 8.5 L6.5 13 L8.5 12 L6.5 7.5 L12 7.5 Z"
+              fill="#F0C850"
+              stroke="#3D2B1F"
+              stroke-width="1"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span class="hero-cursor__label">Denzel</span>
+        </div>
+
         <div class="hero-inner">
           <p class="hero-tag">Decoded</p>
           <h1 class="hero-title">The Builder's Manifesto</h1>
