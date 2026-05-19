@@ -486,12 +486,48 @@ a:hover {
     animation: hero-photo-appear 0.5s ease-out 0.4s forwards !important;
   }
 }
+/* Polaroid position classes — desktop scatter around the title */
+.hero-photo-card--tl {
+  --px: 22%;
+  --py: 32%;
+  --rot: -6deg;
+}
+.hero-photo-card--tr {
+  --px: 78%;
+  --py: 28%;
+  --rot: 7deg;
+}
+.hero-photo-card--bl {
+  --px: 26%;
+  --py: 76%;
+  --rot: 4deg;
+}
+.hero-photo-card--br {
+  --px: 76%;
+  --py: 72%;
+  --rot: -4deg;
+}
+
 @media (max-width: 640px) {
   .hero-photo-card {
     width: 130px;
   }
-  .hero-photo-card--mobile-hide {
-    display: none;
+  /* On mobile: title stays at top, all 4 polaroids drop into a 2x2 grid below */
+  .hero-photo-card--tl {
+    --px: 27%;
+    --py: 52%;
+  }
+  .hero-photo-card--tr {
+    --px: 73%;
+    --py: 50%;
+  }
+  .hero-photo-card--bl {
+    --px: 28%;
+    --py: 80%;
+  }
+  .hero-photo-card--br {
+    --px: 72%;
+    --py: 78%;
   }
 }
 

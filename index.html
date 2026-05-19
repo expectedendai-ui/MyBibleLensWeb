@@ -3539,9 +3539,13 @@
         }
       }
       @media (max-width: 768px) {
-        /* No real cursors on mobile — hide the fake ones too */
+        /* Mobile cursors still visible — small static drift for the alive feel */
         .collab-cursor {
-          display: none;
+          /* keep them — they drift on mobile too now */
+        }
+        .collab-cursor__label {
+          font-size: 0.6rem;
+          padding: 0.15rem 0.4rem;
         }
       }
 
@@ -5497,7 +5501,7 @@
           // don't override its position during the drag.
           const cursorBusy = { james: false, ashley: false, carline: false, eva: false, ila: false };
 
-          if (!isMobile && !reduceMotion) {
+          if (!reduceMotion) {
             // Where each cursor enters from (off-canvas).
             const collabEntry = {
               james: { x: -0.1, y: -0.1 },

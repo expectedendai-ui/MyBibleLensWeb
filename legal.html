@@ -77,17 +77,18 @@
         <!-- Dot-grid infinite canvas background -->
         <div class="hero-canvas-bg" aria-hidden="true"></div>
 
-        <!-- Floating polaroid photos — scattered around the title like an Instax wall -->
-        <figure class="hero-photo-card" style="--px: 22%; --py: 32%; --rot: -6deg;">
+        <!-- Floating polaroid photos — scattered around the title like an Instax wall.
+             Positions live in style.css so mobile can reposition them below the title. -->
+        <figure class="hero-photo-card hero-photo-card--tl">
           <img src="assets/about-photo-1.jpg" alt="Horses don't stop, they keep going" loading="lazy" />
         </figure>
-        <figure class="hero-photo-card" style="--px: 78%; --py: 28%; --rot: 7deg;">
+        <figure class="hero-photo-card hero-photo-card--tr">
           <img src="assets/about-photo-3.jpg" alt="Lynn track team — the early days" loading="lazy" />
         </figure>
-        <figure class="hero-photo-card hero-photo-card--mobile-hide" style="--px: 26%; --py: 76%; --rot: 4deg;">
+        <figure class="hero-photo-card hero-photo-card--bl">
           <img src="assets/about-photo-2.jpg" alt="The wall — every paper a piece of the build" loading="lazy" />
         </figure>
-        <figure class="hero-photo-card hero-photo-card--mobile-hide" style="--px: 76%; --py: 72%; --rot: -4deg;">
+        <figure class="hero-photo-card hero-photo-card--br">
           <img src="assets/about-photo-4.jpg" alt="Eyes on the next hurdle" loading="lazy" />
         </figure>
 
