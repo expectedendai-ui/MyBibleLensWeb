@@ -1472,6 +1472,145 @@
         gap: var(--space-8);
         align-items: start;
       }
+      /* Wide-row cards: Empire Plus + Custom Pricing span the full grid */
+      .pricing-card-wrapper--wide {
+        grid-column: 1 / -1;
+        max-width: 920px;
+        margin: 0 auto;
+        width: 100%;
+      }
+      .pricing-card-inner--wide {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: var(--space-5);
+        align-items: center;
+        padding: var(--space-5) var(--space-6);
+      }
+      .pricing-card-inner--wide > div:not([class]),
+      .pricing-card-inner--wide > div[style] {
+        grid-column: 1 / 2;
+      }
+      .pricing-card-inner--wide .pricing-features,
+      .pricing-card-inner--wide .pricing-expand-btn {
+        grid-column: 1 / 2;
+      }
+      .pricing-card-inner--wide .pricing-app-note {
+        grid-column: 2 / 3;
+        grid-row: 1 / -1;
+        align-self: center;
+        justify-self: center;
+        max-width: 320px;
+      }
+      @media (max-width: 760px) {
+        .pricing-card-inner--wide {
+          grid-template-columns: 1fr;
+        }
+        .pricing-card-inner--wide .pricing-app-note {
+          grid-column: 1 / -1;
+          grid-row: auto;
+        }
+      }
+      /* Custom Pricing card */
+      .pricing-card--custom {
+        background: linear-gradient(135deg, #f0c850 0%, #d4921f 55%, #b6751d 100%) !important;
+        border: 2px solid #9a6218 !important;
+        animation: none !important;
+      }
+      .pricing-card-inner.pricing-card-inner--custom {
+        background: linear-gradient(135deg, #fff8e0 0%, #f5f2ed 100%);
+        border-radius: var(--radius-xl);
+        grid-template-columns: 1.6fr 1fr;
+        padding: var(--space-7) var(--space-8);
+      }
+      .custom-pricing__copy {
+        color: #3d2b1f;
+      }
+      .custom-pricing__eyebrow {
+        display: inline-block;
+        padding: 0.3rem 0.85rem;
+        background: rgba(182, 117, 29, 0.12);
+        border: 1px solid rgba(182, 117, 29, 0.35);
+        border-radius: 999px;
+        font-family: "Inter", sans-serif;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #9a6218;
+        margin-bottom: 0.9rem;
+      }
+      .custom-pricing__title {
+        font-family: "Hammersmith One", sans-serif;
+        font-size: clamp(2rem, 1.5rem + 1.8vw, 2.8rem);
+        color: #1a1008;
+        margin: 0 0 0.7rem 0;
+        line-height: 1.05;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+      }
+      .custom-pricing__body {
+        font-family: "Inter", sans-serif;
+        font-size: 1.08rem;
+        line-height: 1.65;
+        color: #3d2b1f;
+        font-weight: 500;
+        margin: 0;
+        max-width: 560px;
+      }
+      .custom-pricing__cta {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+      }
+      .custom-pricing__btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 1.05rem 2rem;
+        background: linear-gradient(135deg, #3d2b1f 0%, #1a1008 100%);
+        color: #f0c850;
+        border: 2px solid #b6751d;
+        border-radius: 999px;
+        font-family: "Inter", sans-serif;
+        font-weight: 700;
+        font-size: 1.05rem;
+        letter-spacing: 0.04em;
+        text-decoration: none;
+        box-shadow:
+          0 14px 30px -10px rgba(26, 16, 8, 0.45),
+          0 0 0 0 rgba(240, 200, 80, 0);
+        transition:
+          transform 0.3s cubic-bezier(0.34, 1.45, 0.5, 1),
+          box-shadow 0.3s ease,
+          background 0.3s ease;
+      }
+      .custom-pricing__btn svg {
+        width: 20px;
+        height: 20px;
+      }
+      .custom-pricing__btn:hover {
+        transform: translateY(-3px) scale(1.04);
+        background: linear-gradient(135deg, #1a1008 0%, #3d2b1f 100%);
+        box-shadow:
+          0 22px 44px -12px rgba(26, 16, 8, 0.6),
+          0 0 0 6px rgba(240, 200, 80, 0.22);
+      }
+      .custom-pricing__hint {
+        font-family: "Inter", sans-serif;
+        font-size: 0.85rem;
+        color: #5c3d0e;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+      }
+      @media (max-width: 760px) {
+        .pricing-card-inner--custom {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+        .custom-pricing__body {
+          margin: 0 auto;
+        }
+      }
 
       .pricing-card-wrapper {
         opacity: 0;
@@ -2485,6 +2624,305 @@
         z-index: 1;
       }
 
+      /* ════════════════════════════════════════════════════════════════
+         iPad Showcase — animated carousel that replaced the 10-card grid
+         ════════════════════════════════════════════════════════════════ */
+      .repo-badges {
+        display: flex;
+        justify-content: center;
+        gap: 0.9rem;
+        margin: 0 auto var(--space-3) auto;
+        flex-wrap: wrap;
+      }
+      .app-badge--solo {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.7rem 1.25rem;
+        background: linear-gradient(135deg, #2b1e16 0%, #3d2b1f 100%);
+        color: #f5f2ed;
+        border: 1px solid rgba(240, 200, 80, 0.4);
+        border-radius: 999px;
+        font-family: "Inter", sans-serif;
+        font-weight: 600;
+        font-size: 0.95rem;
+        letter-spacing: 0.01em;
+        text-decoration: none;
+        box-shadow:
+          0 12px 30px -12px rgba(26, 16, 8, 0.45),
+          0 0 0 0 rgba(240, 200, 80, 0);
+        transition:
+          transform 0.3s cubic-bezier(0.34, 1.45, 0.5, 1),
+          box-shadow 0.3s ease,
+          border-color 0.3s ease;
+      }
+      .app-badge--solo svg {
+        width: 18px;
+        height: 18px;
+      }
+      .app-badge--solo:hover {
+        transform: translateY(-2px) scale(1.03);
+        border-color: rgba(240, 200, 80, 0.85);
+        box-shadow:
+          0 18px 38px -10px rgba(26, 16, 8, 0.6),
+          0 0 0 4px rgba(240, 200, 80, 0.18);
+      }
+      .repo-coming-soon {
+        text-align: center;
+        font-family: "Inter", sans-serif;
+        font-size: 0.78rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: rgba(61, 43, 31, 0.55);
+        margin: 0 0 var(--space-6) 0;
+      }
+      .repo-eyebrow {
+        text-align: center;
+        font-family: "Hammersmith One", sans-serif;
+        font-size: clamp(1.35rem, 1rem + 1.8vw, 2.3rem);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #9a6218;
+        margin: 0 0 1.25rem 0;
+        line-height: 1.15;
+        background: linear-gradient(90deg, #b6751d 0%, #f0c850 50%, #b6751d 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: repo-eyebrow-shimmer 6s linear infinite;
+      }
+      .repo-eyebrow strong {
+        font-weight: 700;
+        font-size: 1.08em;
+      }
+      @keyframes repo-eyebrow-shimmer {
+        0% {
+          background-position: 0% 50%;
+        }
+        100% {
+          background-position: 200% 50%;
+        }
+      }
+
+      .ipad-showcase {
+        position: relative;
+        display: grid;
+        grid-template-columns: 64px 1fr 64px;
+        align-items: center;
+        gap: var(--space-5);
+        max-width: 1480px;
+        margin: 0 auto;
+        padding: var(--space-6) 0 var(--space-3);
+      }
+      .ipad-stage {
+        position: relative;
+        overflow: hidden;
+        border-radius: 24px;
+      }
+      .ipad-track {
+        position: relative;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        min-height: 820px;
+      }
+      .ipad-slide {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        grid-template-columns: 1.65fr 1fr;
+        gap: var(--space-7);
+        align-items: center;
+        padding: var(--space-6) var(--space-7);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(24px) scale(0.97);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s cubic-bezier(0.34, 1.45, 0.5, 1);
+      }
+      .ipad-slide.is-active {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+      }
+      .ipad-frame {
+        position: relative;
+        margin: 0;
+        border-radius: 28px;
+        overflow: hidden;
+        background: #1a1008;
+        box-shadow:
+          0 40px 90px -22px rgba(26, 16, 8, 0.6),
+          0 0 0 2px rgba(240, 200, 80, 0.3),
+          inset 0 2px 0 rgba(240, 200, 80, 0.22);
+        transform: rotate(-1.5deg);
+        transition: transform 0.6s cubic-bezier(0.34, 1.45, 0.5, 1);
+        animation: ipad-frame-float 7s ease-in-out infinite alternate;
+      }
+      .ipad-frame img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 22px;
+      }
+      .ipad-frame__halo {
+        position: absolute;
+        inset: -14%;
+        border-radius: 44px;
+        background: radial-gradient(ellipse at center, rgba(240, 200, 80, 0.45) 0%, rgba(212, 146, 31, 0.22) 35%, transparent 70%);
+        filter: blur(55px);
+        z-index: -1;
+        opacity: 0.95;
+        animation: ipad-halo-pulse 4s ease-in-out infinite;
+      }
+      @keyframes ipad-frame-float {
+        from {
+          transform: rotate(-1.5deg) translateY(-4px);
+        }
+        to {
+          transform: rotate(-2.2deg) translateY(6px);
+        }
+      }
+      @keyframes ipad-halo-pulse {
+        0%,
+        100% {
+          opacity: 0.7;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.04);
+        }
+      }
+      .ipad-slide:hover .ipad-frame {
+        animation-play-state: paused;
+        transform: rotate(0deg) scale(1.02);
+      }
+      .ipad-caption {
+        color: #3d2b1f;
+        padding: 0 var(--space-3);
+      }
+      .ipad-caption h3 {
+        font-family: "Hammersmith One", sans-serif;
+        font-size: clamp(2.2rem, 1.6rem + 2vw, 3.4rem);
+        color: #b6751d;
+        margin: 0 0 1.1rem 0;
+        line-height: 1.02;
+      }
+      .ipad-caption p {
+        font-family: "Inter", sans-serif;
+        font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.3rem);
+        line-height: 1.65;
+        color: rgba(61, 43, 31, 0.85);
+        margin: 0;
+        max-width: 540px;
+      }
+      .ipad-nav {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 1px solid rgba(182, 117, 29, 0.35);
+        background: rgba(245, 242, 237, 0.85);
+        color: #b6751d;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(6px);
+        box-shadow: 0 10px 24px -10px rgba(26, 16, 8, 0.35);
+        transition:
+          transform 0.25s cubic-bezier(0.34, 1.45, 0.5, 1),
+          background 0.25s ease,
+          border-color 0.25s ease,
+          color 0.25s ease;
+      }
+      .ipad-nav svg {
+        width: 22px;
+        height: 22px;
+      }
+      .ipad-nav:hover {
+        transform: scale(1.1);
+        background: #b6751d;
+        color: #f5f2ed;
+        border-color: #b6751d;
+      }
+      .ipad-dots {
+        position: absolute;
+        bottom: -2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 0.55rem;
+      }
+      .ipad-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        border: 0;
+        background: rgba(61, 43, 31, 0.22);
+        cursor: pointer;
+        padding: 0;
+        transition:
+          background 0.3s ease,
+          transform 0.3s ease,
+          width 0.3s ease;
+      }
+      .ipad-dot.is-active {
+        background: #b6751d;
+        width: 26px;
+        border-radius: 5px;
+      }
+      .ipad-dot:hover {
+        background: #d4921f;
+        transform: scale(1.2);
+      }
+      @media (max-width: 900px) {
+        .ipad-showcase {
+          grid-template-columns: 1fr;
+          gap: var(--space-3);
+        }
+        .ipad-slide {
+          grid-template-columns: 1fr;
+          padding: var(--space-4);
+          gap: var(--space-5);
+        }
+        .ipad-nav {
+          position: absolute;
+          top: 32%;
+          z-index: 3;
+        }
+        .ipad-nav--prev {
+          left: 4px;
+        }
+        .ipad-nav--next {
+          right: 4px;
+        }
+        .ipad-track {
+          min-height: 900px;
+        }
+        .ipad-caption {
+          text-align: center;
+        }
+        .ipad-caption p {
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .ipad-dots {
+          bottom: -2.5rem;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .ipad-frame,
+        .ipad-frame__halo {
+          animation: none !important;
+        }
+        .ipad-slide {
+          transition: opacity 0.2s ease;
+        }
+      }
+
       /* ───── Responsive sanity passes ───── */
       @media (max-width: 980px) {
         .pricing-grid {
@@ -3320,25 +3758,30 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 28px;
-        height: 28px;
-        margin-left: 0.25rem;
+        width: 40px;
+        height: 40px;
+        margin-left: 0.4rem;
         border-radius: 50%;
-        background: transparent;
-        color: rgba(245, 242, 237, 0.55);
+        background: rgba(212, 146, 31, 0.12);
+        border: 1.5px solid rgba(240, 200, 80, 0.5);
+        color: #f0c850;
         font-family: var(--font-display);
-        font-size: 1.1rem;
+        font-size: 1.75rem;
+        font-weight: 900;
         line-height: 1;
         flex-shrink: 0;
+        cursor: pointer;
         transition:
           background 160ms ease,
           color 160ms ease,
+          border-color 160ms ease,
           transform 160ms ease;
       }
       .floating-nav__close:hover {
-        background: rgba(212, 146, 31, 0.15);
-        color: #f0c850;
-        transform: rotate(90deg);
+        background: rgba(240, 200, 80, 0.28);
+        border-color: #f0c850;
+        color: #ffffff;
+        transform: rotate(90deg) scale(1.08);
       }
       .floating-nav[data-dismissed="true"] {
         transform: translateX(-50%) translateY(-130%) !important;
@@ -3562,9 +4005,9 @@
         position: absolute;
         left: 50%;
         top: 50%;
-        width: 120px;
+        width: 175px;
         translate: -50% -50%;
-        padding: 6px 6px 18px 6px;
+        padding: 8px 8px 22px 8px;
         background: #f5f2ed;
         border-radius: 3px;
         box-shadow:
@@ -3610,10 +4053,17 @@
       }
       /* Larger variant — for hero/featured photos */
       .canvas-photo--lg {
-        width: 170px;
+        width: 260px;
+      }
+      /* Poster variant — taller scripture posters */
+      .canvas-photo--poster {
+        width: 200px;
       }
       @media (max-width: 768px) {
         .canvas-photo--lg {
+          width: 150px;
+        }
+        .canvas-photo--poster {
           width: 120px;
         }
       }
@@ -3641,8 +4091,8 @@
       }
       @media (max-width: 768px) {
         .canvas-photo {
-          width: 90px;
-          padding: 4px 4px 14px 4px;
+          width: 115px;
+          padding: 5px 5px 16px 5px;
         }
       }
 
@@ -4031,7 +4481,6 @@
         </a>
         <nav class="floating-nav__links" aria-label="Jump to section">
           <a href="#repository" data-target="repository">The Repository</a>
-          <a href="#the-orb" data-target="the-orb">The Orb</a>
           <a href="#mosaic-showcase" data-target="mosaic-showcase">Mosaic</a>
           <a href="#pricing" data-target="pricing">Pricing</a>
           <a href="#faq" data-target="faq">FAQ</a>
@@ -4053,7 +4502,6 @@
       </div>
       <nav class="floating-nav__mobile" id="floating-nav-mobile" aria-label="Jump to section (mobile)" hidden>
         <a href="#repository">The Repository</a>
-        <a href="#the-orb">The Orb</a>
         <a href="#mosaic-showcase">Mosaic</a>
         <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
@@ -4082,6 +4530,12 @@
         </div>
         <div class="canvas-photo canvas-photo--lg" data-photo="testimony">
           <img src="assets/testimony.jpg" alt="" loading="lazy" decoding="async" width="600" height="750" />
+        </div>
+        <div class="canvas-photo canvas-photo--poster" data-photo="matthew66">
+          <img src="assets/poster-matthew-6-6.jpg" alt="" loading="lazy" decoding="async" width="800" height="1000" />
+        </div>
+        <div class="canvas-photo canvas-photo--poster" data-photo="kingofkings">
+          <img src="assets/poster-king-of-kings.jpg" alt="" loading="lazy" decoding="async" width="800" height="1000" />
         </div>
 
         <!-- Fake collaborator cursors — fellowship presence -->
@@ -4114,6 +4568,18 @@
             <path d="M5 3l14 8-7 1.5L9 21z" />
           </svg>
           <span class="collab-cursor__label">Ila</span>
+        </div>
+        <div class="collab-cursor" data-collab="kevin" style="--collab-color: #c08826; --collab-delay: 3.6s">
+          <svg viewBox="0 0 24 24" fill="#c08826" stroke="#1a1008" stroke-width="1.2">
+            <path d="M5 3l14 8-7 1.5L9 21z" />
+          </svg>
+          <span class="collab-cursor__label">Kevin</span>
+        </div>
+        <div class="collab-cursor" data-collab="grace" style="--collab-color: #ddb04a; --collab-delay: 4.2s">
+          <svg viewBox="0 0 24 24" fill="#ddb04a" stroke="#1a1008" stroke-width="1.2">
+            <path d="M5 3l14 8-7 1.5L9 21z" />
+          </svg>
+          <span class="collab-cursor__label">Grace</span>
         </div>
         <div class="canvas-node" data-feature="canvas" style="--nx: 14%; --ny: 28%; --node-delay: 0s">
           <span class="canvas-node__icon" aria-hidden="true">
@@ -4172,11 +4638,6 @@
         <h1 class="hero-title">MyBibleLens™</h1>
         <p class="hero-tagline">Bringing people closer to God in an exciting and easy way!</p>
 
-        <!-- Shimmering tagline — sits above the scroll cue -->
-        <p class="hero-shimmer-tagline">
-          <span class="hero-shimmer-tagline__text">The world's first <strong>all-in-one Bible Productivity App.</strong></span>
-        </p>
-
         <!-- More-than-an-app scroll cue -->
         <p class="hero-scroll-cue" aria-label="Scroll for more">
           <span class="hero-scroll-cue__text">This isn&rsquo;t just another app. Scroll to see why.</span>
@@ -4195,160 +4656,228 @@
     <!-- ===== SECTION 4: STUDY REPOSITORY ===== -->
     <section class="repo-section section-padding" id="repository">
       <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Your Study Repository</h2>
-          <p class="section-subtitle">Powerful tools to organize your spiritual journey.</p>
-        </div>
-        <div class="repo-carousel" role="list">
-          <div class="repo-card" role="listitem">
-            <div class="repo-card__preview" aria-hidden="true">
-              <div class="preview-canvas">
-                <div class="pc-grid"></div>
-                <div class="pc-line"></div>
-                <div class="pc-line"></div>
-                <div class="pc-line"></div>
-              </div>
-            </div>
-            <h3>Infinite Canvas</h3>
-            <p>Map connections on an infinite board with mind maps, timelines, flowcharts, and org charts. Share with your fellowship.</p>
-          </div>
-          <div class="repo-card" role="listitem">
-            <div class="repo-card__preview" aria-hidden="true">
-              <div class="preview-glow"></div>
-            </div>
-            <h3>Scripture Glow</h3>
-            <p>Turn any verse into AI-generated artwork. 6 art themes from children's animation to Renaissance masterpieces.</p>
-          </div>
-          <div class="repo-card" role="listitem">
-            <h3>Reflections</h3>
-            <p>Write down what God reveals to you. Your private journal.</p>
-          </div>
-          <div class="repo-card" role="listitem">
-            <div class="repo-card__preview" aria-hidden="true">
-              <div class="preview-sermon">
-                <div class="ps-line"></div>
-                <div class="ps-line"></div>
-                <div class="ps-line"></div>
-                <div class="ps-line"></div>
-                <div class="ps-line"></div>
-              </div>
-            </div>
-            <h3>Sermon Builder</h3>
-            <p>Build sermon decks slide by slide. Auto-title. Preview.</p>
-          </div>
-          <div class="repo-card" role="listitem">
-            <div class="repo-card__preview" aria-hidden="true">
-              <div class="preview-cards">
-                <div class="pc-card"></div>
-                <div class="pc-card"></div>
-                <div class="pc-card"></div>
-              </div>
-            </div>
-            <h3>Study Cards</h3>
-            <p>Create flashcard decks for memorization and review.</p>
-          </div>
-          <div class="repo-card" role="listitem">
-            <div class="repo-card__preview" aria-hidden="true">
-              <div class="preview-mosaic">
-                <div class="pm-tile"></div>
-                <div class="pm-tile"></div>
-                <div class="pm-tile"></div>
-                <div class="pm-tile"></div>
-                <div class="pm-tile"></div>
-                <div class="pm-tile"></div>
-              </div>
-            </div>
-            <h3>Mosaic</h3>
-            <p>
-              A freeform vision board for your faith. Cut out images, layer stickers, paint with light. Save it. Share it. Build it with
-              your fellowship in real time.
-            </p>
-          </div>
-          <div class="repo-card" role="listitem">
-            <div class="repo-card__preview" aria-hidden="true">
-              <div class="preview-games">
-                <div class="pg-titles"></div>
-                <div class="pg-card"></div>
-                <div class="pg-card"></div>
-                <div class="pg-card"></div>
-                <div class="pg-card"></div>
-                <div class="pg-card"></div>
-              </div>
-            </div>
-            <h3>Games</h3>
-            <p>
-              50 Bible-study group games — Four Corners, Jonah&rsquo;s Run, Burning Bush. Read the card. Close the phone. Go play with
-              humans.
-            </p>
-          </div>
-          <div class="repo-card" role="listitem">
-            <h3>S.O.A.P.</h3>
-            <p>Scripture, Observation, Application, Prayer — the proven study method, structured for you with one tap.</p>
-          </div>
-          <div class="repo-card" role="listitem">
-            <h3>Live Sanctuary</h3>
-            <p>
-              Real-time collaboration with presence avatars and per-layer locks. Study, build, and pray together — even from across the
-              country.
-            </p>
-          </div>
-          <div class="repo-card repo-card--more" role="listitem">
-            <h3>Much, Much More</h3>
-            <p>
-              This is just the beginning. New tools land here every season — quietly, intentionally, never rushed. Every paid tier owns
-              every future tool, free, forever. The repository grows with you.
-            </p>
-          </div>
-
-          <!-- Download CTA card — sits next to "Much, Much More" -->
-          <div
-            class="repo-card repo-card--download"
-            role="listitem"
-            style="
-              background: linear-gradient(135deg, #2b1e16 0%, #3d2b1f 100%);
-              border-left: 4px solid #f0c850;
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              gap: 1rem;
+        <!-- App Store / Google Play badges — moved ABOVE the section title -->
+        <div class="repo-badges" aria-label="Download MyBibleLens">
+          <a
+            href="#"
+            onclick="
+              showComingSoon();
+              return false;
             "
+            class="app-badge app-badge--solo"
+            aria-label="Coming soon to the App Store"
           >
-            <h3 style="margin-bottom: 0.25rem">Start Your Journey</h3>
-            <p style="margin-bottom: 0.75rem">Available soon on iPhone, iPad &amp; Android.</p>
-            <div class="app-badges" style="margin: 0; justify-content: flex-start">
-              <a
-                href="#"
-                onclick="
-                  showComingSoon();
-                  return false;
-                "
-                class="app-badge"
-                aria-label="Coming soon to the App Store"
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path
-                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+              />
+            </svg>
+            App Store
+          </a>
+          <a
+            href="#"
+            onclick="
+              showComingSoon();
+              return false;
+            "
+            class="app-badge app-badge--solo"
+            aria-label="Coming soon to Google Play"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.24-.84-.76-.84-1.35m13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27m3.35-4.31c.34.27.56.69.56 1.19s-.22.92-.56 1.19l-2.29 1.32-2.5-2.5 2.5-2.5 2.29 1.3M6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z"
+              />
+            </svg>
+            Google Play
+          </a>
+        </div>
+        <p class="repo-coming-soon">Coming soon · iPhone, iPad &amp; Android</p>
+
+        <div class="section-header">
+          <p class="repo-eyebrow">The world&rsquo;s first <strong>Bible Sanctuary App</strong> !!!</p>
+          <h2 class="section-title">Your Study Repository</h2>
+          <p class="section-subtitle">Powerful tools to organize your spiritual journey — all in one repository.</p>
+        </div>
+
+        <!-- ===== iPad Showcase ===== -->
+        <div class="ipad-showcase" data-ipad-showcase>
+          <button class="ipad-nav ipad-nav--prev" type="button" aria-label="Previous feature" data-ipad-prev>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <div class="ipad-stage">
+            <ol class="ipad-track" role="list" data-ipad-track>
+              <li class="ipad-slide is-active" data-ipad-slide data-ipad-feature="canvas">
+                <figure class="ipad-frame">
+                  <img
+                    src="assets/ipad/01-Canvas.jpg"
+                    alt="Infinite Canvas — map connections on an infinite board"
+                    loading="lazy"
+                    decoding="async"
+                    width="1600"
+                    height="1200"
                   />
-                </svg>
-                App Store
-              </a>
-              <a
-                href="#"
-                onclick="
-                  showComingSoon();
-                  return false;
-                "
-                class="app-badge"
-                aria-label="Coming soon to Google Play"
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path
-                    d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.24-.84-.76-.84-1.35m13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27m3.35-4.31c.34.27.56.69.56 1.19s-.22.92-.56 1.19l-2.29 1.32-2.5-2.5 2.5-2.5 2.29 1.3M6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z"
+                  <span class="ipad-frame__halo" aria-hidden="true"></span>
+                </figure>
+                <figcaption class="ipad-caption">
+                  <h3>Infinite Canvas</h3>
+                  <p>
+                    Map connections on an infinite board with mind maps, timelines, flowcharts, and org charts. Share with your fellowship —
+                    Live Sanctuary built in, S.O.A.P. structured for you with one tap.
+                  </p>
+                </figcaption>
+              </li>
+              <li class="ipad-slide" data-ipad-slide data-ipad-feature="mosaic">
+                <figure class="ipad-frame">
+                  <img
+                    src="assets/ipad/02-Mosaic.jpg"
+                    alt="Mosaic — vision board for your faith"
+                    loading="lazy"
+                    decoding="async"
+                    width="1600"
+                    height="1200"
                   />
-                </svg>
-                Google Play
-              </a>
-            </div>
+                  <span class="ipad-frame__halo" aria-hidden="true"></span>
+                </figure>
+                <figcaption class="ipad-caption">
+                  <h3>Mosaic + Scripture Glow</h3>
+                  <p>
+                    A freeform vision board for your faith. Cut out images, layer stickers, paint with light. Turn any verse into
+                    AI-generated art — 6 themes, children&rsquo;s animation to Renaissance masterpieces.
+                  </p>
+                </figcaption>
+              </li>
+              <li class="ipad-slide" data-ipad-slide data-ipad-feature="sermon">
+                <figure class="ipad-frame">
+                  <img
+                    src="assets/ipad/03-Sermon.jpg"
+                    alt="Sermon Builder — slide by slide"
+                    loading="lazy"
+                    decoding="async"
+                    width="1600"
+                    height="1200"
+                  />
+                  <span class="ipad-frame__halo" aria-hidden="true"></span>
+                </figure>
+                <figcaption class="ipad-caption">
+                  <h3>Sermon Builder</h3>
+                  <p>Build sermon decks slide by slide. Auto-title. Preview. Present from your iPad straight to the pulpit.</p>
+                </figcaption>
+              </li>
+              <li class="ipad-slide" data-ipad-slide data-ipad-feature="games">
+                <figure class="ipad-frame">
+                  <img
+                    src="assets/ipad/04-Games.jpg"
+                    alt="50 Bible-study group games"
+                    loading="lazy"
+                    decoding="async"
+                    width="1600"
+                    height="1200"
+                  />
+                  <span class="ipad-frame__halo" aria-hidden="true"></span>
+                </figure>
+                <figcaption class="ipad-caption">
+                  <h3>Games</h3>
+                  <p>
+                    50 Bible-study group games — Four Corners, Jonah&rsquo;s Run, Burning Bush. Read the card. Close the phone. Go play with
+                    humans.
+                  </p>
+                </figcaption>
+              </li>
+              <li class="ipad-slide" data-ipad-slide data-ipad-feature="themes">
+                <figure class="ipad-frame">
+                  <img
+                    src="assets/ipad/05-Themes.jpg"
+                    alt="Personalize your sanctuary — 9 themes"
+                    loading="lazy"
+                    decoding="async"
+                    width="1600"
+                    height="1200"
+                  />
+                  <span class="ipad-frame__halo" aria-hidden="true"></span>
+                </figure>
+                <figcaption class="ipad-caption">
+                  <h3>Themes</h3>
+                  <p>
+                    Personalize your sanctuary. 9 hand-tuned palettes — Sage, Lilac, Sky, Sanctuary, Ember, Halo, Parchment, Bronze,
+                    Espresso. Pick the room that fits your spirit today.
+                  </p>
+                </figcaption>
+              </li>
+              <li class="ipad-slide" data-ipad-slide data-ipad-feature="reflections">
+                <figure class="ipad-frame">
+                  <img
+                    src="assets/ipad/06-Reflections.jpg"
+                    alt="Reflections journal"
+                    loading="lazy"
+                    decoding="async"
+                    width="1600"
+                    height="1200"
+                  />
+                  <span class="ipad-frame__halo" aria-hidden="true"></span>
+                </figure>
+                <figcaption class="ipad-caption">
+                  <h3>Reflections + Study Cards</h3>
+                  <p>
+                    Write down what God reveals to you. Build flashcard decks for memorization and review. Your private journal — never
+                    indexed, never sold.
+                  </p>
+                </figcaption>
+              </li>
+              <li class="ipad-slide" data-ipad-slide data-ipad-feature="sync">
+                <figure class="ipad-frame">
+                  <img
+                    src="assets/ipad/07-Sync.jpg"
+                    alt="Multi-device cloud sync"
+                    loading="lazy"
+                    decoding="async"
+                    width="1600"
+                    height="1200"
+                  />
+                  <span class="ipad-frame__halo" aria-hidden="true"></span>
+                </figure>
+                <figcaption class="ipad-caption">
+                  <h3>Sync</h3>
+                  <p>
+                    Multi-device cloud sync. Start on iPhone, finish on iPad. Up to 14 seats per board — every paid tier owns every future
+                    tool, free, forever.
+                  </p>
+                </figcaption>
+              </li>
+              <li class="ipad-slide" data-ipad-slide data-ipad-feature="bibles">
+                <figure class="ipad-frame">
+                  <img
+                    src="assets/ipad/08-Bibles.jpg"
+                    alt="Multiple Bible versions"
+                    loading="lazy"
+                    decoding="async"
+                    width="1600"
+                    height="1200"
+                  />
+                  <span class="ipad-frame__halo" aria-hidden="true"></span>
+                </figure>
+                <figcaption class="ipad-caption">
+                  <h3>Bibles</h3>
+                  <p>Every major translation — KJV, NIV, ESV, NLT, NASB, AMP and more. Switch versions inline. The Word, your way.</p>
+                </figcaption>
+              </li>
+            </ol>
+          </div>
+          <button class="ipad-nav ipad-nav--next" type="button" aria-label="Next feature" data-ipad-next>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+          <div class="ipad-dots" role="tablist" aria-label="iPad feature pager" data-ipad-dots>
+            <button class="ipad-dot is-active" type="button" role="tab" aria-label="Canvas" data-ipad-dot="0"></button>
+            <button class="ipad-dot" type="button" role="tab" aria-label="Mosaic" data-ipad-dot="1"></button>
+            <button class="ipad-dot" type="button" role="tab" aria-label="Sermon" data-ipad-dot="2"></button>
+            <button class="ipad-dot" type="button" role="tab" aria-label="Games" data-ipad-dot="3"></button>
+            <button class="ipad-dot" type="button" role="tab" aria-label="Themes" data-ipad-dot="4"></button>
+            <button class="ipad-dot" type="button" role="tab" aria-label="Reflections" data-ipad-dot="5"></button>
+            <button class="ipad-dot" type="button" role="tab" aria-label="Sync" data-ipad-dot="6"></button>
+            <button class="ipad-dot" type="button" role="tab" aria-label="Bibles" data-ipad-dot="7"></button>
           </div>
         </div>
 
@@ -4442,27 +4971,7 @@
       </div>
     </section>
 
-    <!-- Gold divider between mosaic and orb -->
-    <div class="gold-divider gold-divider--on-dark" aria-hidden="true">
-      <span class="gold-divider__line"></span>
-      <span class="gold-divider__ornament">The Living Center</span>
-      <span class="gold-divider__line"></span>
-    </div>
-
-    <!-- ===== SECTION 3: THE ORB ===== -->
-    <section class="orb-section section-padding" id="the-orb">
-      <div class="container">
-        <div class="orb-section-inner">
-          <h2 class="orb-label">The Orb</h2>
-          <div class="orb-large" id="orb-large" aria-hidden="true"></div>
-          <p class="orb-description">
-            Pray stronger. Manifest deeper. The Orb cycles through all 7 Kingdom themes — a living, breathing center of your study.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Gold divider between orb and pricing -->
+    <!-- Gold divider between mosaic and pricing -->
     <div class="gold-divider gold-divider--on-light" aria-hidden="true">
       <span class="gold-divider__line"></span>
       <span class="gold-divider__ornament">The Sanctuary</span>
@@ -4889,9 +5398,9 @@
           </div>
 
           <!-- CARD 6: Empire Plus — consumable seat add-on, +50 seats ($999.99) -->
-          <div class="pricing-card-wrapper">
+          <div class="pricing-card-wrapper pricing-card-wrapper--wide">
             <div
-              class="pricing-card"
+              class="pricing-card pricing-card--wide"
               style="
                 background: linear-gradient(135deg, #1a1008 0%, #3d2b1f 100%);
                 border: 2px solid #b6751d;
@@ -4900,7 +5409,7 @@
                   0 20px 60px -20px rgba(212, 146, 31, 0.25);
               "
             >
-              <div class="pricing-card-inner">
+              <div class="pricing-card-inner pricing-card-inner--wide">
                 <div
                   style="
                     display: inline-block;
@@ -4964,6 +5473,40 @@
                   "
                 >
                   Buy once in the MyBibleLens™ app
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 7: Custom Pricing — for ministries that need more than 50 seats -->
+          <div class="pricing-card-wrapper pricing-card-wrapper--wide">
+            <div class="pricing-card pricing-card--wide pricing-card--custom">
+              <div class="pricing-card-inner pricing-card-inner--wide pricing-card-inner--custom">
+                <div class="custom-pricing__copy">
+                  <span class="custom-pricing__eyebrow">Need more than 50 seats?</span>
+                  <h3 class="custom-pricing__title">Custom Pricing</h3>
+                  <p class="custom-pricing__body">
+                    For mega-churches, universities, denominations, and missions organizations. Tell us how many seats you need —
+                    we&rsquo;ll build it for you.
+                  </p>
+                </div>
+                <div class="custom-pricing__cta">
+                  <a href="mailto:hello@mybiblelens.us?subject=Custom%20Pricing%20Inquiry" class="custom-pricing__btn">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                      <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                    Contact me
+                  </a>
+                  <span class="custom-pricing__hint">Replies within 24 hours</span>
                 </div>
               </div>
             </div>
@@ -5351,36 +5894,25 @@
           },
         });
 
-        /* Orb section: scale from 0.5 to 1.0 */
-        gsap.fromTo(
-          "#orb-large",
-          { scale: 0.5 },
-          {
-            scale: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: ".orb-section",
-              start: "top 80%",
-              end: "center center",
-              scrub: 1,
-            },
-          }
-        );
+        /* (Orb section removed — was a scale-in scroll trigger) */
 
-        /* Repo cards: gentle rise into grid */
-        gsap.utils.toArray(".repo-card").forEach(function (card, i) {
-          gsap.to(card, {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            delay: i * 0.06,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: ".repo-section",
-              start: "top 80%",
-              once: true,
-            },
-          });
+        /* iPad showcase: gentle rise into view */
+        gsap.utils.toArray(".ipad-showcase").forEach(function (el) {
+          gsap.fromTo(
+            el,
+            { opacity: 0, y: 32 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.9,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: el,
+                start: "top 85%",
+                once: true,
+              },
+            }
+          );
         });
 
         /* Pricing cards: stagger scale-up */
@@ -5499,7 +6031,7 @@
           /* ── Collaborator cursors — Pastor James, Ashley, Carline, Eva, Ila drift around ── */
           // Track which cursor is currently "busy" dragging a photo so we
           // don't override its position during the drag.
-          const cursorBusy = { james: false, ashley: false, carline: false, eva: false, ila: false };
+          const cursorBusy = { james: false, ashley: false, carline: false, eva: false, ila: false, kevin: false, grace: false };
 
           if (!reduceMotion) {
             // Where each cursor enters from (off-canvas).
@@ -5509,6 +6041,8 @@
               carline: { x: 1.12, y: -0.1 },
               eva: { x: -0.1, y: 1.1 },
               ila: { x: 1.12, y: 1.1 },
+              kevin: { x: -0.12, y: 0.5 },
+              grace: { x: 1.14, y: 0.5 },
             };
             const collabPaths = {
               james: [
@@ -5545,6 +6079,20 @@
                 { x: 0.7, y: 0.36 },
                 { x: 0.52, y: 0.48 },
                 { x: 0.84, y: 0.52 },
+              ],
+              kevin: [
+                { x: 0.18, y: 0.52 },
+                { x: 0.36, y: 0.66 },
+                { x: 0.5, y: 0.42 },
+                { x: 0.28, y: 0.38 },
+                { x: 0.42, y: 0.58 },
+              ],
+              grace: [
+                { x: 0.82, y: 0.5 },
+                { x: 0.66, y: 0.4 },
+                { x: 0.54, y: 0.58 },
+                { x: 0.72, y: 0.66 },
+                { x: 0.6, y: 0.32 },
               ],
             };
             document.querySelectorAll(".collab-cursor").forEach(function (cursor) {
@@ -5640,6 +6188,28 @@
                 ],
                 popDelay: 7000,
               },
+              matthew66: {
+                // Matthew 6:6 prayer poster — drifts in the mid-left zone
+                path: [
+                  { x: 0.12, y: 0.45 },
+                  { x: 0.08, y: 0.6 },
+                  { x: 0.18, y: 0.52 },
+                  { x: 0.1, y: 0.4 },
+                  { x: 0.14, y: 0.58 },
+                ],
+                popDelay: 8200,
+              },
+              kingofkings: {
+                // King of Kings / Savior poster — drifts in the mid-right zone
+                path: [
+                  { x: 0.86, y: 0.46 },
+                  { x: 0.78, y: 0.58 },
+                  { x: 0.9, y: 0.52 },
+                  { x: 0.82, y: 0.4 },
+                  { x: 0.88, y: 0.62 },
+                ],
+                popDelay: 9400,
+              },
             };
 
             function makePhoto(name) {
@@ -5696,7 +6266,7 @@
 
             /* Cursor-drag drama — every ~9s a random idle photo gets grabbed */
             if (!isMobile && photos.length) {
-              const cursorIds = ["james", "ashley", "carline", "eva", "ila"];
+              const cursorIds = ["james", "ashley", "carline", "eva", "ila", "kevin", "grace"];
               function triggerDrag() {
                 // Pick a random idle photo
                 const idlePhotos = photos.filter(function (p) {
@@ -5846,6 +6416,105 @@
             hideTimer = null;
           }
         };
+      })();
+    </script>
+    <!-- ===== iPad showcase carousel — auto-rotate + manual nav + keyboard + pause on hover ===== -->
+    <script>
+      (function () {
+        const showcase = document.querySelector("[data-ipad-showcase]");
+        if (!showcase) return;
+        const slides = Array.from(showcase.querySelectorAll("[data-ipad-slide]"));
+        const dots = Array.from(showcase.querySelectorAll("[data-ipad-dot]"));
+        const prev = showcase.querySelector("[data-ipad-prev]");
+        const next = showcase.querySelector("[data-ipad-next]");
+        if (!slides.length) return;
+
+        let index = 0;
+        let timer = null;
+        const ROTATE_MS = 5500;
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        function render() {
+          slides.forEach(function (s, i) {
+            s.classList.toggle("is-active", i === index);
+          });
+          dots.forEach(function (d, i) {
+            d.classList.toggle("is-active", i === index);
+            d.setAttribute("aria-selected", i === index ? "true" : "false");
+          });
+        }
+        function go(n) {
+          index = (n + slides.length) % slides.length;
+          render();
+        }
+        function step() {
+          go(index + 1);
+        }
+        function start() {
+          if (reduceMotion) return;
+          stop();
+          timer = setInterval(step, ROTATE_MS);
+        }
+        function stop() {
+          if (timer) {
+            clearInterval(timer);
+            timer = null;
+          }
+        }
+
+        if (prev)
+          prev.addEventListener("click", function () {
+            go(index - 1);
+            start();
+          });
+        if (next)
+          next.addEventListener("click", function () {
+            go(index + 1);
+            start();
+          });
+        dots.forEach(function (d, i) {
+          d.addEventListener("click", function () {
+            go(i);
+            start();
+          });
+        });
+        showcase.addEventListener("mouseenter", stop);
+        showcase.addEventListener("mouseleave", start);
+        showcase.addEventListener("focusin", stop);
+        showcase.addEventListener("focusout", start);
+
+        // Keyboard arrows when the showcase is in the viewport
+        document.addEventListener("keydown", function (e) {
+          const rect = showcase.getBoundingClientRect();
+          const visible = rect.top < window.innerHeight && rect.bottom > 0;
+          if (!visible) return;
+          if (e.key === "ArrowLeft") {
+            go(index - 1);
+            start();
+          }
+          if (e.key === "ArrowRight") {
+            go(index + 1);
+            start();
+          }
+        });
+
+        // Pause when offscreen (saves CPU + battery)
+        if ("IntersectionObserver" in window) {
+          const io = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) start();
+                else stop();
+              });
+            },
+            { threshold: 0.25 }
+          );
+          io.observe(showcase);
+        } else {
+          start();
+        }
+
+        render();
       })();
     </script>
     <!-- ===== Custom magnifier cursor (sitewide) ===== -->
