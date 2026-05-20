@@ -11,44 +11,35 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     expect(errors, `Console errors detected:\n${errors.join("\n")}`).toHaveLength(0);
   });
 
-  test("hero renders the brand title + slogan + simplified shimmer line", async ({ page }) => {
+  test("hero renders the brand title + slogan + scroll cue", async ({ page }) => {
     await page.goto("/");
     await waitForPageReady(page);
     await expect(page.locator(".hero-title")).toHaveText(/MyBibleLens/);
     await expect(page.locator(".hero-tagline")).toContainText("Bringing people closer to God");
-    // The long Verse-to-Art / Sermon-Deck / Lens-Powered marketing paragraph
-    // should be GONE — replaced with the single positioning line.
-    const shimmer = page.locator(".hero-shimmer-tagline");
-    await expect(shimmer).toContainText("The world's first");
-    await expect(shimmer).toContainText("Bible Productivity App");
-    await expect(shimmer).not.toContainText("Lens-Powered");
-    await expect(shimmer).not.toContainText("Sermon Deck");
-    await expect(shimmer).not.toContainText("Verse-to-Art");
+    // Scroll cue lives in the hero as the call-to-explore prompt.
+    await expect(page.locator(".hero-scroll-cue")).toBeVisible();
   });
 
-  test("hero order: shimmer line sits above the scroll cue", async ({ page }) => {
-    await page.goto("/");
+  test("repository section eyebrow announces Bible Sanctuary App", async ({ page }) => {
+    await page.goto("/#repository");
     await waitForPageReady(page);
-    const shimmerTop = await page
-      .locator(".hero-shimmer-tagline")
-      .evaluate((el) => el.getBoundingClientRect().top);
-    const cueTop = await page
-      .locator(".hero-scroll-cue")
-      .evaluate((el) => el.getBoundingClientRect().top);
-    expect(shimmerTop).toBeLessThan(cueTop);
+    const eyebrow = page.locator(".repo-eyebrow");
+    await expect(eyebrow).toContainText(/world.s first/i);
+    await expect(eyebrow).toContainText("Bible Sanctuary App");
   });
 
-  test("study repository renders all feature cards", async ({ page }) => {
-    await page.goto("/");
+  test("iPad showcase renders all feature slides", async ({ page }) => {
+    await page.goto("/#repository");
     await waitForPageReady(page);
-    // 9 feature cards (Infinite Canvas, Scripture Glow, Reflections, Sermon
-    // Builder, Study Cards, Mosaic, Games, S.O.A.P., Live Sanctuary)
-    // + "Much More" + "Start Your Journey" = 11
-    const cards = page.locator(".repo-card");
-    await expect(cards).toHaveCount(11);
-    await expect(page.locator(".repo-card", { hasText: "Mosaic" })).toBeVisible();
-    await expect(page.locator(".repo-card", { hasText: "Games" })).toBeVisible();
-    await expect(page.locator(".repo-card", { hasText: "Start Your Journey" })).toBeVisible();
+    // 8 iPad mockup slides: Canvas, Mosaic, Sermon, Games, Themes,
+    // Reflections, Sync, Bibles.
+    const slides = page.locator(".ipad-slide");
+    await expect(slides).toHaveCount(8);
+    await expect(page.locator(".ipad-slide", { hasText: "Infinite Canvas" })).toBeAttached();
+    await expect(page.locator(".ipad-slide", { hasText: "Mosaic" })).toBeAttached();
+    await expect(page.locator(".ipad-slide", { hasText: "Games" })).toBeAttached();
+    // Dot pager has one button per slide
+    await expect(page.locator(".ipad-dot")).toHaveCount(8);
   });
 
   test("pricing section shows all 5 tiers with correct prices", async ({ page }) => {

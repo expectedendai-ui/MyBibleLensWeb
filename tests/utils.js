@@ -22,7 +22,6 @@ async function waitForPageReady(page) {
       .hero-particles,
       .hero::before,
       .hero::after,
-      .orb-section::before,
       .pricing-card-wrapper:nth-child(5) .pricing-card::after,
       .floating-nav,
       .scroll-halo,
@@ -52,7 +51,7 @@ async function waitForPageReady(page) {
       .hero-title { background-position: 50% 50% !important; }
       /* Force final state for GSAP scroll-trigger animations — otherwise
          fullPage screenshots vary based on scroll timing during capture. */
-      .repo-card,
+      .ipad-showcase,
       .pricing-card-wrapper {
         opacity: 1 !important;
         transform: none !important;

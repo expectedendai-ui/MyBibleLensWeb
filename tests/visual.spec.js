@@ -45,12 +45,6 @@ test.describe("Visual regression — index.html", () => {
     await expect(page.locator(".mosaic-showcase")).toHaveScreenshot("mosaic-showcase.png");
   });
 
-  test("orb", async ({ page }) => {
-    await page.goto("/#the-orb");
-    await waitForPageReady(page);
-    await expect(page.locator(".orb-section")).toHaveScreenshot("orb.png");
-  });
-
   test("pricing", async ({ page }) => {
     await page.goto("/#pricing");
     await waitForPageReady(page);
