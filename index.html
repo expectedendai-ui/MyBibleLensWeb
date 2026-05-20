@@ -1472,6 +1472,78 @@
         gap: var(--space-8);
         align-items: start;
       }
+
+      /* Big visible seat pill — sits directly under the price */
+      .pricing-seat-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0.5rem 0 0.2rem 0;
+        padding: 0.55rem 1.1rem;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #f0c850 0%, #d4921f 100%);
+        color: #1a1008;
+        font-family: "Inter", sans-serif;
+        font-weight: 800;
+        font-size: 1.02rem;
+        letter-spacing: 0.02em;
+        box-shadow:
+          0 8px 22px -8px rgba(212, 146, 31, 0.55),
+          inset 0 1px 0 rgba(255, 248, 224, 0.6);
+        align-self: flex-start;
+        white-space: nowrap;
+      }
+      .pricing-seat-pill__icon {
+        font-size: 1.1rem;
+        line-height: 1;
+      }
+
+      /* Always-visible "What are seats?" explainer card */
+      .seats-explainer-card {
+        max-width: 620px;
+        margin: 1.5rem auto 0;
+        padding: 1.4rem 1.8rem;
+        border-radius: 18px;
+        background: linear-gradient(135deg, #fff8e0 0%, #f5f2ed 100%);
+        border: 2px solid rgba(212, 146, 31, 0.5);
+        box-shadow:
+          0 22px 50px -16px rgba(26, 16, 8, 0.5),
+          0 0 0 5px rgba(240, 200, 80, 0.14);
+        text-align: left;
+      }
+      .seats-explainer-card__head {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        margin-bottom: 0.65rem;
+      }
+      .seats-explainer-card__icon {
+        font-size: 1.45rem;
+        line-height: 1;
+      }
+      .seats-explainer-card__title {
+        font-family: "Hammersmith One", sans-serif;
+        font-size: 1.5rem;
+        color: #1a1008;
+        margin: 0;
+        line-height: 1;
+      }
+      .seats-explainer-card__body {
+        font-family: "Inter", sans-serif;
+        font-size: 1rem;
+        line-height: 1.65;
+        color: #3d2b1f;
+        margin: 0;
+      }
+      .seats-explainer-card__body strong {
+        color: #1a1008;
+        font-weight: 700;
+      }
+      .seats-explainer-card__body em {
+        font-style: italic;
+        color: #9a6218;
+        font-weight: 600;
+      }
       /* Wide-row cards: Empire Plus + Custom Pricing span the full grid */
       .pricing-card-wrapper--wide {
         grid-column: 1 / -1;
@@ -3081,7 +3153,7 @@
         }
       }
 
-      /* ───── Floating glass nav ───── */
+      /* ───── Floating glass nav (also mirrored in style.css for legal.html) ───── */
       .floating-nav {
         position: fixed;
         top: 1rem;
@@ -3091,7 +3163,8 @@
         width: min(960px, calc(100vw - 2rem));
         transition:
           transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
-          opacity 320ms cubic-bezier(0.16, 1, 0.3, 1);
+          opacity 320ms cubic-bezier(0.16, 1, 0.3, 1),
+          width 320ms cubic-bezier(0.16, 1, 0.3, 1);
         opacity: 1;
       }
       .floating-nav[data-hidden="true"] {
@@ -3115,6 +3188,9 @@
           0 0 0 1px rgba(240, 200, 80, 0.06),
           0 18px 50px -16px rgba(0, 0, 0, 0.6),
           0 8px 24px -10px rgba(212, 146, 31, 0.25);
+        transition:
+          padding 280ms cubic-bezier(0.16, 1, 0.3, 1),
+          gap 280ms cubic-bezier(0.16, 1, 0.3, 1);
       }
       .floating-nav__brand {
         display: inline-flex;
@@ -3126,6 +3202,7 @@
         letter-spacing: 0.02em;
         transition: color 180ms ease;
         flex-shrink: 0;
+        text-decoration: none;
       }
       .floating-nav__brand:hover {
         color: #fff8e0;
@@ -3157,6 +3234,7 @@
           color 180ms ease,
           background 180ms ease;
         white-space: nowrap;
+        text-decoration: none;
       }
       .floating-nav__links a:hover {
         color: #f0c850;
@@ -3177,6 +3255,7 @@
         background: rgba(212, 146, 31, 0.12);
         border: 1px solid rgba(212, 146, 31, 0.3);
         flex-shrink: 0;
+        cursor: pointer;
       }
       .floating-nav__menu-toggle:hover {
         background: rgba(212, 146, 31, 0.22);
@@ -3218,6 +3297,7 @@
         border-radius: 22px;
         background: rgba(26, 16, 8, 0.85);
         backdrop-filter: blur(18px) saturate(160%);
+        -webkit-backdrop-filter: blur(18px) saturate(160%);
         border: 1px solid rgba(212, 146, 31, 0.25);
         display: flex;
         flex-direction: column;
@@ -3231,6 +3311,7 @@
         color: rgba(245, 242, 237, 0.85);
         padding: 0.7rem 0.9rem;
         border-radius: 14px;
+        text-decoration: none;
         transition:
           background 160ms ease,
           color 160ms ease;
@@ -3753,41 +3834,7 @@
         }
       }
 
-      /* ───── Floating nav: close button ───── */
-      .floating-nav__close {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        margin-left: 0.4rem;
-        border-radius: 50%;
-        background: rgba(212, 146, 31, 0.12);
-        border: 1.5px solid rgba(240, 200, 80, 0.5);
-        color: #f0c850;
-        font-family: var(--font-display);
-        font-size: 1.75rem;
-        font-weight: 900;
-        line-height: 1;
-        flex-shrink: 0;
-        cursor: pointer;
-        transition:
-          background 160ms ease,
-          color 160ms ease,
-          border-color 160ms ease,
-          transform 160ms ease;
-      }
-      .floating-nav__close:hover {
-        background: rgba(240, 200, 80, 0.28);
-        border-color: #f0c850;
-        color: #ffffff;
-        transform: rotate(90deg) scale(1.08);
-      }
-      .floating-nav[data-dismissed="true"] {
-        transform: translateX(-50%) translateY(-130%) !important;
-        opacity: 0 !important;
-        pointer-events: none !important;
-      }
+      /* Floating-nav close button + collapsed state live in style.css */
 
       /* ═══════════════════════════════════════════════════════
          SCRIPTURE CANVAS — infinite Miro-board hero layer
@@ -4496,7 +4543,7 @@
         >
           <span class="floating-nav__menu-icon" aria-hidden="true"></span>
         </button>
-        <button class="floating-nav__close" type="button" aria-label="Dismiss navigation bar" title="Dismiss" id="floating-nav-close">
+        <button class="floating-nav__close" type="button" aria-label="Shrink navigation bar" title="Shrink" id="floating-nav-close">
           ×
         </button>
       </div>
@@ -4999,6 +5046,18 @@
             Every paid tier unlocks the <strong>same features</strong>. The only difference is how many seats you get to share with your
             fellowship, family, or small group.
           </p>
+
+          <!-- Always-visible "What are seats?" explainer card -->
+          <div class="seats-explainer-card">
+            <div class="seats-explainer-card__head">
+              <span class="seats-explainer-card__icon" aria-hidden="true">🪑</span>
+              <p class="seats-explainer-card__title">What are seats?</p>
+            </div>
+            <p class="seats-explainer-card__body">
+              When you purchase a Tier, you're giving the gift of a seat to a number of people based on the tier you select — meaning that
+              user now holds that Tier, <strong>for life</strong>. Visit <em>'Subscription &amp; Manage Sanctuary'</em> in Settings.
+            </p>
+          </div>
         </div>
         <div class="pricing-grid">
           <!-- CARD 0: Seeker (Free) -->
@@ -5031,7 +5090,6 @@
                   <li>Sermon Builder: locked</li>
                   <li>Sharing: locked</li>
                   <li>Cloud sync: off</li>
-                  <li><strong>Seats: 1</strong></li>
                 </ul>
                 <button class="pricing-expand-btn" aria-label="Show all features">
                   <span class="expand-text">Show all ↓</span>
@@ -5068,6 +5126,10 @@
                   <div class="pricing-price">$14.99</div>
                   <div class="pricing-price-sub">one-time · lifetime</div>
                 </div>
+                <div class="pricing-seat-pill">
+                  <span class="pricing-seat-pill__icon">🪑</span>
+                  1 seat
+                </div>
                 <div
                   style="
                     margin: 0.6rem 0 0.4rem 0;
@@ -5090,7 +5152,6 @@
                   <li>Sharing unlocked across the app</li>
                   <li>Cloud sync across devices</li>
                   <li>All themes &amp; Orb colors</li>
-                  <li><strong>Seats: 1</strong></li>
                 </ul>
                 <button class="pricing-expand-btn" aria-label="Show all features">
                   <span class="expand-text">Show all ↓</span>
@@ -5127,6 +5188,10 @@
                   <div class="pricing-price">$29.99</div>
                   <div class="pricing-price-sub">one-time · lifetime</div>
                 </div>
+                <div class="pricing-seat-pill">
+                  <span class="pricing-seat-pill__icon">🪑</span>
+                  3 seats
+                </div>
                 <div
                   style="
                     margin: 0.6rem 0 0.4rem 0;
@@ -5149,7 +5214,6 @@
                   <li>Sharing unlocked across the app</li>
                   <li>Cloud sync across devices</li>
                   <li>All themes &amp; Orb colors</li>
-                  <li><strong>Seats: 3</strong></li>
                 </ul>
                 <button class="pricing-expand-btn" aria-label="Show all features">
                   <span class="expand-text">Show all ↓</span>
@@ -5186,6 +5250,10 @@
                   <div class="pricing-price">$59.99</div>
                   <div class="pricing-price-sub">one-time · lifetime</div>
                 </div>
+                <div class="pricing-seat-pill">
+                  <span class="pricing-seat-pill__icon">🪑</span>
+                  7 seats
+                </div>
                 <div
                   style="
                     margin: 0.6rem 0 0.4rem 0;
@@ -5208,7 +5276,6 @@
                   <li>Sharing unlocked across the app</li>
                   <li>Cloud sync across devices</li>
                   <li>All themes &amp; Orb colors</li>
-                  <li><strong>Seats: 7</strong></li>
                 </ul>
                 <button class="pricing-expand-btn" aria-label="Show all features">
                   <span class="expand-text">Show all ↓</span>
@@ -5273,6 +5340,10 @@
                   <div class="pricing-price">$99.99</div>
                   <div class="pricing-price-sub">one-time · lifetime</div>
                 </div>
+                <div class="pricing-seat-pill">
+                  <span class="pricing-seat-pill__icon">🪑</span>
+                  14 seats
+                </div>
                 <div
                   style="
                     margin: 0.6rem 0 0.4rem 0;
@@ -5297,7 +5368,6 @@
                   <li>All themes &amp; Orb colors</li>
                   <li>Founding Member badge — forever</li>
                   <li>Exclusive Founding-only Orb color</li>
-                  <li><strong>Seats: 14</strong></li>
                 </ul>
                 <button class="pricing-expand-btn" aria-label="Show all features">
                   <span class="expand-text">Show all ↓</span>
@@ -5352,6 +5422,10 @@
                 <div>
                   <div class="pricing-price">$249.99</div>
                   <div class="pricing-price-sub">one-time · +10 seats</div>
+                </div>
+                <div class="pricing-seat-pill">
+                  <span class="pricing-seat-pill__icon">🪑</span>
+                  +10 seats
                 </div>
                 <div
                   style="
@@ -5433,6 +5507,10 @@
                 <div>
                   <div class="pricing-price">$999.99</div>
                   <div class="pricing-price-sub">one-time · +50 seats</div>
+                </div>
+                <div class="pricing-seat-pill">
+                  <span class="pricing-seat-pill__icon">🪑</span>
+                  +50 seats
                 </div>
                 <div
                   style="
@@ -5750,17 +5828,18 @@
         const mobileMenu = document.getElementById("floating-nav-mobile");
         const closeBtn = document.getElementById("floating-nav-close");
 
-        // Persisted "user dismissed nav for this session" state. We use
-        // sessionStorage (not localStorage) so a refresh brings it back —
-        // users who panic-tap × never end up permanently nav-less.
-        const DISMISSED_KEY = "mbl_floating_nav_dismissed_v1";
-        let dismissed = false;
+        // Persisted "user collapsed nav for this session" state. The X no
+        // longer hides the nav — it shrinks it to a tiny pill that re-expands
+        // on click. sessionStorage means a refresh keeps it collapsed; a new
+        // tab/session starts fresh.
+        const COLLAPSED_KEY = "mbl_floating_nav_collapsed_v1";
+        let collapsed = false;
         try {
-          dismissed = sessionStorage.getItem(DISMISSED_KEY) === "1";
+          collapsed = sessionStorage.getItem(COLLAPSED_KEY) === "1";
         } catch (_) {
           /* sessionStorage blocked (private mode) — fail open, nav still works */
         }
-        if (dismissed && nav) nav.setAttribute("data-dismissed", "true");
+        if (collapsed && nav) nav.setAttribute("data-collapsed", "true");
 
         // Show nav once the hero is mostly out of view
         const hero = document.getElementById("hero");
@@ -5776,7 +5855,10 @@
             const progress = Math.max(0, Math.min(1, window.scrollY / max));
             if (halo) halo.style.width = (progress * 100).toFixed(2) + "%";
 
-            if (nav && nav.getAttribute("data-dismissed") !== "true") {
+            if (nav && nav.getAttribute("data-collapsed") === "true") {
+              // Collapsed pill stays visible regardless of scroll position
+              nav.setAttribute("data-hidden", "false");
+            } else if (nav) {
               const past = window.scrollY > showThreshold();
               nav.setAttribute("data-hidden", past ? "false" : "true");
               if (!past && mobileMenu && !mobileMenu.hidden) {
@@ -5806,12 +5888,16 @@
         window.addEventListener("resize", onScroll, { passive: true });
         onScroll();
 
-        // Close button — dismiss nav for the session
+        // Close button — collapse nav to a tiny orb-pill (does NOT hide it).
+        // Persist collapsed state for the session so refreshes remember it.
         if (closeBtn && nav) {
-          closeBtn.addEventListener("click", () => {
-            nav.setAttribute("data-dismissed", "true");
+          closeBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            nav.setAttribute("data-collapsed", "true");
+            // Collapsed pill stays visible regardless of scroll position
+            nav.setAttribute("data-hidden", "false");
             try {
-              sessionStorage.setItem(DISMISSED_KEY, "1");
+              sessionStorage.setItem(COLLAPSED_KEY, "1");
             } catch (_) {
               /* sessionStorage blocked — soft fail */
             }
@@ -5821,6 +5907,26 @@
               if (mobileToggle) mobileToggle.setAttribute("aria-expanded", "false");
             }
           });
+        }
+
+        // Clicking the collapsed pill re-expands the nav. Block link
+        // navigation while collapsed so the brand link doesn't intercept.
+        if (nav) {
+          nav.addEventListener(
+            "click",
+            (e) => {
+              if (nav.getAttribute("data-collapsed") !== "true") return;
+              e.preventDefault();
+              e.stopPropagation();
+              nav.setAttribute("data-collapsed", "false");
+              try {
+                sessionStorage.removeItem(COLLAPSED_KEY);
+              } catch (_) {
+                /* sessionStorage blocked — soft fail */
+              }
+            },
+            true /* capture phase — intercept before the <a> default fires */
+          );
         }
 
         // Mobile menu toggle
@@ -5874,6 +5980,8 @@
           cardInner.classList.toggle("expanded");
         });
       });
+
+      /* ("What are seats?" card is always visible — no toggle JS needed) */
 
       /* ========== GSAP ANIMATIONS ========== */
       document.addEventListener("DOMContentLoaded", function () {

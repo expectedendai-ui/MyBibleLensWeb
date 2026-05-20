@@ -140,7 +140,9 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await expect(nav).toHaveAttribute("data-hidden", "false");
   });
 
-  test("Floating nav close button dismisses for the session", async ({ page }) => {
+  test("Floating nav close button collapses (does not dismiss) for the session", async ({
+    page,
+  }) => {
     await page.goto("/");
     await waitForPageReady(page);
     // Scroll past hero so the nav is showing
@@ -148,22 +150,27 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await page.waitForTimeout(200);
     const nav = page.locator("#floating-nav");
     await expect(nav).toHaveAttribute("data-hidden", "false");
-    // Click the × close button (need to click the button under our nav-hide CSS;
-    // visibility:hidden from waitForPageReady would block click, so reset that).
+    // Click the × close button — visibility:hidden from waitForPageReady would
+    // block click, so reset that.
     await page.addStyleTag({
       content: ".floating-nav { visibility: visible !important; opacity: 1 !important; }",
     });
     await page.locator("#floating-nav-close").click();
-    await expect(nav).toHaveAttribute("data-dismissed", "true");
-    // After dismissal, further scrolling should not bring it back
-    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight / 2));
-    await page.waitForTimeout(200);
-    await expect(nav).toHaveAttribute("data-dismissed", "true");
+    // Should collapse, not disappear
+    await expect(nav).toHaveAttribute("data-collapsed", "true");
+    await expect(nav).toHaveAttribute("data-hidden", "false");
     // sessionStorage flag is set
     const stored = await page.evaluate(() =>
-      sessionStorage.getItem("mbl_floating_nav_dismissed_v1")
+      sessionStorage.getItem("mbl_floating_nav_collapsed_v1")
     );
     expect(stored).toBe("1");
+    // Clicking the collapsed pill re-expands it
+    await nav.click();
+    await expect(nav).toHaveAttribute("data-collapsed", "false");
+    const clearedAfterReopen = await page.evaluate(() =>
+      sessionStorage.getItem("mbl_floating_nav_collapsed_v1")
+    );
+    expect(clearedAfterReopen).toBeNull();
   });
 
   test("Scroll halo grows as the page is scrolled", async ({ page }) => {

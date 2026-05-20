@@ -28,6 +28,43 @@
   <!-- Skip Link -->
   <a href="#main-content" class="sr-only" style="position:absolute;top:-9999px;left:-9999px;z-index:9999;background:#b6751d;color:#fff;padding:8px 16px;font-size:14px;border-radius:4px;">Skip to content</a>
 
+  <!-- ═══════════════════════════════ FLOATING NAV (shared across pages) ═══════════════════════════════ -->
+  <header class="floating-nav" id="floating-nav" aria-label="Site sections" data-hidden="true">
+    <div class="floating-nav__inner">
+      <a href="index.html#hero" class="floating-nav__brand" aria-label="MyBibleLens — back to home">
+        <span class="floating-nav__orb" aria-hidden="true"></span>
+        <span class="floating-nav__brand-text">MyBibleLens</span>
+      </a>
+      <nav class="floating-nav__links" aria-label="Jump to section">
+        <a href="index.html#repository" data-target="repository">The Repository</a>
+        <a href="index.html#mosaic-showcase" data-target="mosaic-showcase">Mosaic</a>
+        <a href="index.html#pricing" data-target="pricing">Pricing</a>
+        <a href="index.html#faq" data-target="faq">FAQ</a>
+        <a href="#about" data-target="about">About</a>
+      </nav>
+      <button
+        class="floating-nav__menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="floating-nav-mobile"
+        aria-label="Open menu"
+        id="floating-nav-toggle"
+      >
+        <span class="floating-nav__menu-icon" aria-hidden="true"></span>
+      </button>
+      <button class="floating-nav__close" type="button" aria-label="Shrink navigation bar" title="Shrink" id="floating-nav-close">
+        ×
+      </button>
+    </div>
+    <nav class="floating-nav__mobile" id="floating-nav-mobile" aria-label="Jump to section (mobile)" hidden>
+      <a href="index.html#repository">The Repository</a>
+      <a href="index.html#mosaic-showcase">Mosaic</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
   <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
   <header class="site-header" id="site-header">
     <div class="header-inner">
@@ -149,7 +186,20 @@
             <div class="about-aside">
               <div class="callout-card">
                 <p>I just want to bring people closer to God! This app is something I needed when I was younger—something my sister and the friends around me need. What's the need? The need to sit down and learn about God and a faithful life, just have fun, and share my ideas and testimony with friends and family. And I strongly dislike being on social media; it's just eeehhhh these days. I kinda feel as if every single Bible app does only one thing, and that is give you scriptures... that's all it does. I respect them because we're all doing the same job at the end of the day, but it's booooooooooringgggg. I also believe that Scripture should be physical, alongside your journal, and technology should be a tool.</p>
-                <p style="margin-top:0.85rem; font-family:'Hammersmith One', sans-serif; color:#b6741d; font-size:0.95rem;">— Denzel Rigaud :)</p>
+                <a
+                  href="https://instagram.com/denzelrigaud"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="ig-handle-btn"
+                  aria-label="Follow Denzel Rigaud on Instagram"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                  </svg>
+                  @denzelrigaud
+                </a>
               </div>
             </div>
           </div>
@@ -296,7 +346,7 @@
                 <textarea id="partner-message" name="message" class="form-textarea" rows="5" placeholder="Tell us about your vision and how you'd like to partner with MyBibleLens™." required></textarea>
               </div>
 
-              <div class="g-recaptcha" data-sitekey="6Lf1xcAsAAAAAEtN6c0P-t6jm6Ec1Q_o8IZH0KWV" style="margin-bottom:1rem;"></div>
+              <div class="g-recaptcha" data-sitekey="6LcmjMAsAAAAAO7vwrqLK8gyoJl4JcQKZKWG3UoN" style="margin-bottom:1rem;"></div>
               <button type="submit" class="form-submit" id="partner-submit-btn">Send Message</button>
               <p id="partner-success-msg" style="display:none;color:#2e7d32;font-weight:600;margin-top:1rem;font-size:0.95rem;">Thank you &mdash; we'll be in touch soon. God bless your vision.</p>
               <p id="partner-error-msg" style="display:none;color:#b22222;font-weight:500;margin-top:1rem;font-size:0.9rem;">Something went wrong. Please try again.</p>
@@ -348,7 +398,7 @@
               <label class="form-label" for="support-message">Message</label>
               <textarea id="support-message" name="message" class="form-input form-textarea" placeholder="Describe your issue or question in detail. Include your account email, any error messages, and screenshots if relevant." rows="6" required></textarea>
             </div>
-            <div class="g-recaptcha" data-sitekey="6Lf1xcAsAAAAAEtN6c0P-t6jm6Ec1Q_o8IZH0KWV" style="margin-bottom:1rem;"></div>
+            <div class="g-recaptcha" data-sitekey="6LcmjMAsAAAAAO7vwrqLK8gyoJl4JcQKZKWG3UoN" style="margin-bottom:1rem;"></div>
             <button type="submit" class="form-submit-btn" id="form-submit-btn">Send Message</button>
             <div id="form-success" class="form-success" style="display:none;">
               <p>&#10003; Your message has been received. We'll be in touch within 24–48 hours.</p>
@@ -2637,6 +2687,92 @@
         requestAnimationFrame(tick);
       }
       requestAnimationFrame(tick);
+    })();
+  </script>
+
+  <!-- ===== Floating glass nav — show on scroll + collapse-not-dismiss X ===== -->
+  <script>
+    (function () {
+      const nav = document.getElementById("floating-nav");
+      if (!nav) return;
+      const closeBtn = document.getElementById("floating-nav-close");
+      const mobileToggle = document.getElementById("floating-nav-toggle");
+      const mobileMenu = document.getElementById("floating-nav-mobile");
+
+      // Persisted "user collapsed nav for this session"
+      const COLLAPSED_KEY = "mbl_floating_nav_collapsed_v1";
+      let collapsed = false;
+      try {
+        collapsed = sessionStorage.getItem(COLLAPSED_KEY) === "1";
+      } catch (_) {}
+      if (collapsed) nav.setAttribute("data-collapsed", "true");
+
+      // Reveal once we've scrolled a bit (legal.html has no #hero — use 200px)
+      const SHOW_AFTER = 200;
+      let ticking = false;
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          if (nav.getAttribute("data-collapsed") === "true") {
+            // Collapsed pill stays visible regardless of scroll
+            nav.setAttribute("data-hidden", "false");
+          } else {
+            const past = window.scrollY > SHOW_AFTER;
+            nav.setAttribute("data-hidden", past ? "false" : "true");
+            if (!past && mobileMenu && !mobileMenu.hidden) {
+              mobileMenu.hidden = true;
+              if (mobileToggle) mobileToggle.setAttribute("aria-expanded", "false");
+            }
+          }
+          ticking = false;
+        });
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll, { passive: true });
+      onScroll();
+
+      // Mobile menu toggle
+      if (mobileToggle && mobileMenu) {
+        mobileToggle.addEventListener("click", () => {
+          const expanded = mobileToggle.getAttribute("aria-expanded") === "true";
+          mobileToggle.setAttribute("aria-expanded", expanded ? "false" : "true");
+          mobileMenu.hidden = expanded;
+        });
+      }
+
+      // X — collapse to a tiny pill (does NOT hide)
+      if (closeBtn) {
+        closeBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          nav.setAttribute("data-collapsed", "true");
+          // Collapsed pill stays visible regardless of scroll
+          nav.setAttribute("data-hidden", "false");
+          try {
+            sessionStorage.setItem(COLLAPSED_KEY, "1");
+          } catch (_) {}
+          if (mobileMenu && !mobileMenu.hidden) {
+            mobileMenu.hidden = true;
+            if (mobileToggle) mobileToggle.setAttribute("aria-expanded", "false");
+          }
+        });
+      }
+
+      // Click the collapsed pill to re-expand — capture-phase intercept so the
+      // brand <a href> doesn't navigate before our handler runs.
+      nav.addEventListener(
+        "click",
+        (e) => {
+          if (nav.getAttribute("data-collapsed") !== "true") return;
+          e.preventDefault();
+          e.stopPropagation();
+          nav.setAttribute("data-collapsed", "false");
+          try {
+            sessionStorage.removeItem(COLLAPSED_KEY);
+          } catch (_) {}
+        },
+        true
+      );
     })();
   </script>
 </body>
