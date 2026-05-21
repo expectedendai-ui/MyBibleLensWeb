@@ -1544,6 +1544,24 @@
         color: #9a6218;
         font-weight: 600;
       }
+      /* Small launch-pricing urgency notice — sits under the seats card, above tiers */
+      .launch-price-notice {
+        max-width: 480px;
+        margin: 0.9rem auto 0;
+        padding: 0.6rem 1rem;
+        border-radius: 12px;
+        background: rgba(212, 146, 31, 0.08);
+        border: 1px solid rgba(212, 146, 31, 0.55);
+        font-family: "Inter", sans-serif;
+        font-size: 0.82rem;
+        line-height: 1.5;
+        color: #3d2b1f;
+        text-align: center;
+      }
+      .launch-price-notice strong {
+        color: #9a6218;
+        font-weight: 700;
+      }
       /* Wide-row cards: Empire Plus + Custom Pricing span the full grid */
       .pricing-card-wrapper--wide {
         grid-column: 1 / -1;
@@ -3446,6 +3464,25 @@
       .mosaic-showcase__board {
         perspective: 1200px;
       }
+      .mosaic-showcase__video {
+        display: block;
+        width: 100%;
+        max-width: 320px;
+        aspect-ratio: 886 / 1920;
+        margin-inline: auto;
+        border-radius: 38px;
+        object-fit: cover;
+        background: #1a1008;
+        box-shadow:
+          0 0 0 1px rgba(212, 146, 31, 0.25),
+          0 36px 90px -22px rgba(26, 16, 8, 0.45),
+          0 10px 30px -12px rgba(212, 146, 31, 0.3);
+        transform: rotate(-2deg);
+        transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .mosaic-showcase:hover .mosaic-showcase__video {
+        transform: rotate(0deg) scale(1.02);
+      }
       .mosaic-board {
         position: relative;
         width: 100%;
@@ -4799,7 +4836,7 @@
         <p class="repo-coming-soon">Coming soon · iPhone, iPad &amp; Android</p>
 
         <div class="section-header">
-          <p class="repo-eyebrow">The world&rsquo;s first <strong>Bible Sanctuary App</strong> !!!</p>
+          <p class="repo-eyebrow">The world&rsquo;s first <strong>Sanctuary App</strong></p>
           <h2 class="section-title">Your Study Repository</h2>
           <p class="section-subtitle">Powerful tools to organize your spiritual journey — all in one repository.</p>
         </div>
@@ -5036,42 +5073,7 @@
           <a href="#pricing" class="mosaic-showcase__cta">Get Mosaic for life — from $14.99 →</a>
         </div>
         <div class="mosaic-showcase__board" aria-hidden="true">
-          <div class="mosaic-board">
-            <!-- Floating "presence" avatars -->
-            <div class="mosaic-board__presence">
-              <span class="mosaic-board__avatar" style="background: linear-gradient(135deg, #d4921f, #b6741d)">D</span>
-              <span class="mosaic-board__avatar" style="background: linear-gradient(135deg, #f0c850, #d4921f)">A</span>
-              <span class="mosaic-board__avatar" style="background: linear-gradient(135deg, #9a6218, #3d2b1f); color: #f0c850">+3</span>
-            </div>
-            <!-- Layered "sticker" tiles -->
-            <div class="mosaic-tile mosaic-tile--1">
-              <div class="mosaic-tile__inner">
-                <div class="mosaic-tile__quote">"Be still,<br />and know."</div>
-                <div class="mosaic-tile__ref">— Psalm 46:10</div>
-              </div>
-            </div>
-            <div class="mosaic-tile mosaic-tile--2">
-              <div class="mosaic-tile__glow"></div>
-              <span class="mosaic-tile__label">Glow</span>
-            </div>
-            <div class="mosaic-tile mosaic-tile--3">
-              <div class="mosaic-tile__inner mosaic-tile__inner--dark">
-                <div class="mosaic-tile__quote mosaic-tile__quote--small">"The Lord is my shepherd."</div>
-              </div>
-            </div>
-            <div class="mosaic-tile mosaic-tile--4">
-              <div class="mosaic-tile__cutout"></div>
-            </div>
-            <div class="mosaic-tile mosaic-tile--5">
-              <div class="mosaic-tile__inner">
-                <div class="mosaic-tile__verse-num">23</div>
-                <div class="mosaic-tile__verse-label">Psalm</div>
-              </div>
-            </div>
-            <div class="mosaic-tile mosaic-tile--6">
-              <div class="mosaic-tile__sticker">✦</div>
-            </div>
-          </div>
+          <video class="mosaic-showcase__video" src="assets/mosaic-preview.mp4" autoplay muted loop playsinline preload="metadata"></video>
         </div>
       </div>
     </section>
@@ -5116,6 +5118,9 @@
               user now holds that Tier, <strong>for life</strong>. Visit <em>'Subscription &amp; Manage Sanctuary'</em> in Settings.
             </p>
           </div>
+          <p class="launch-price-notice">
+            <strong>⏳ Launch pricing — Year 1 only.</strong> Prices double after our first anniversary. Lock in your seat now.
+          </p>
         </div>
         <div class="pricing-grid">
           <!-- CARD 0: Seeker (Free) -->
