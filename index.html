@@ -3461,6 +3461,70 @@
         box-shadow: 0 12px 32px -12px rgba(212, 146, 31, 0.4);
       }
 
+      /* S.O.A.P. explainer card — sits under the bullets in the Lens showcase */
+      .soap-explainer {
+        margin-top: 1.4rem;
+        padding: 1.1rem 1.3rem 1.2rem;
+        border-radius: 16px;
+        background: linear-gradient(135deg, rgba(212, 146, 31, 0.08) 0%, rgba(240, 200, 80, 0.06) 100%);
+        border: 1px solid rgba(212, 146, 31, 0.35);
+      }
+      .soap-explainer__title {
+        font-family: "Hammersmith One", sans-serif;
+        font-size: 1.1rem;
+        color: #1a1008;
+        margin: 0 0 0.4rem 0;
+        line-height: 1.2;
+      }
+      .soap-explainer__intro {
+        font-family: "Inter", sans-serif;
+        font-size: 0.88rem;
+        line-height: 1.55;
+        color: #3d2b1f;
+        margin: 0 0 0.85rem 0;
+      }
+      .soap-explainer__steps {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .soap-explainer__steps li {
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+      }
+      .soap-explainer__letter {
+        flex-shrink: 0;
+        width: 1.75rem;
+        height: 1.75rem;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Hammersmith One", sans-serif;
+        font-size: 0.95rem;
+        color: #fff8e0;
+        background: linear-gradient(135deg, #b6751d 0%, #9a6218 100%);
+        box-shadow: 0 2px 6px -2px rgba(154, 98, 24, 0.5);
+      }
+      .soap-explainer__step {
+        font-family: "Inter", sans-serif;
+        font-size: 0.88rem;
+        line-height: 1.55;
+        color: #3d2b1f;
+        padding-top: 0.15rem;
+      }
+      .soap-explainer__step strong {
+        color: #1a1008;
+        font-weight: 700;
+      }
+      .soap-explainer__step em {
+        font-style: italic;
+        color: #9a6218;
+      }
       .mosaic-showcase__board {
         perspective: 1200px;
       }
@@ -5057,20 +5121,53 @@
     <section class="mosaic-showcase section-padding" id="mosaic-showcase" aria-label="Mosaic — a vision board for your faith">
       <div class="container mosaic-showcase__inner">
         <div class="mosaic-showcase__copy">
-          <p class="mosaic-showcase__eyebrow">A vision board for your faith</p>
-          <h2 class="mosaic-showcase__title">Cut out images.<br />Layer scripture.<br />Build it with your fellowship — live.</h2>
+          <p class="mosaic-showcase__eyebrow">Point your camera. Unlock scripture.</p>
+          <h2 class="mosaic-showcase__title">Scan a page.<br />Tap a verse.<br />Go deeper — instantly.</h2>
           <p class="mosaic-showcase__body">
-            <strong>Mosaic</strong> is the freeform space where your reflections become visual. Pin verses, stickers, photos, and AI-painted
-            Glows onto an infinite gold canvas. Background removal is instant. Sharing is one tap. Two believers can edit the same board at
-            once — with presence avatars and per-layer locks so nothing collides.
+            Open <strong>Lens</strong> and point at any Bible page — printed, e-reader, even handwritten. MyBibleLens reads every verse on
+            the page and lays them out as tappable cards. Tap the verse that's speaking to you, then choose where it goes next: drop it into
+            <strong>S.O.A.P.</strong> for guided journaling, or into <strong>Scripture Glow</strong> to turn it into framable sacred art.
           </p>
           <ul class="mosaic-showcase__bullets" role="list">
-            <li>Instant background removal on any photo</li>
-            <li>Realtime collaboration with up to 14 seats</li>
-            <li>6 sacred theme gradients, infinite zoom</li>
-            <li>Auto-save · cloud-synced · private by default</li>
+            <li>Captures every verse on a page — printed, screen, or handwritten</li>
+            <li>One tap → <strong>S.O.A.P.</strong> journaling (Scripture · Observation · Application · Prayer)</li>
+            <li>One tap → <strong>Scripture Glow</strong> turns the verse into AI-painted art</li>
+            <li>Works on the free Seeker tier — ~5 scans / month, more on paid</li>
           </ul>
-          <a href="#pricing" class="mosaic-showcase__cta">Get Mosaic for life — from $14.99 →</a>
+          <div class="soap-explainer">
+            <p class="soap-explainer__title">What is S.O.A.P.?</p>
+            <p class="soap-explainer__intro">
+              A 4-step Bible study method — Lens guides you through each step with AI prompts. Here's the flow on Philippians 4:13:
+            </p>
+            <ul class="soap-explainer__steps" role="list">
+              <li>
+                <span class="soap-explainer__letter">S</span>
+                <span class="soap-explainer__step"
+                  ><strong>Scripture.</strong> <em>"I can do all things through Christ who strengthens me." — Philippians 4:13</em></span
+                >
+              </li>
+              <li>
+                <span class="soap-explainer__letter">O</span>
+                <span class="soap-explainer__step"
+                  ><strong>Observation.</strong> Paul wrote this from a prison cell. The strength isn't self-generated — it flows through
+                  Christ.</span
+                >
+              </li>
+              <li>
+                <span class="soap-explainer__letter">A</span>
+                <span class="soap-explainer__step"
+                  ><strong>Application.</strong> When today feels too heavy, lean on His strength, not your own.</span
+                >
+              </li>
+              <li>
+                <span class="soap-explainer__letter">P</span>
+                <span class="soap-explainer__step"
+                  ><strong>Prayer.</strong> <em>"Lord, when I'm at the end of myself, be my strength. Amen."</em></span
+                >
+              </li>
+            </ul>
+          </div>
+          <a href="#pricing" class="mosaic-showcase__cta">Try Lens free — included in Seeker →</a>
         </div>
         <div class="mosaic-showcase__board" aria-hidden="true">
           <video class="mosaic-showcase__video" src="assets/mosaic-preview.mp4" autoplay muted loop playsinline preload="metadata"></video>
