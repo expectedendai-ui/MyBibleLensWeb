@@ -110,7 +110,7 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     const section = page.locator("#mosaic-showcase");
     await expect(section).toBeVisible();
     await expect(section.locator(".mosaic-showcase__title")).toContainText("Scan a page");
-    await expect(section.locator(".mosaic-board")).toBeVisible();
+    await expect(section.locator(".mosaic-showcase__board")).toBeVisible();
   });
 
   test("FAQ section renders all questions and each item expands", async ({ page }) => {
