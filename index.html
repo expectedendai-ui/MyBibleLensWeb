@@ -2442,6 +2442,16 @@
           0 0 30px rgba(212, 146, 31, 0.15);
       }
 
+      /* Standalone tagline above the store badges — lives on parchment, so
+         drop the dark shadow and tighten spacing to act as a transitional intro.
+         Negative top margin pulls it up under the gold divider, cancelling
+         most of the section's top padding so it doesn't feel stranded. */
+      .hero-tagline--standalone {
+        text-shadow: 0 0 24px rgba(212, 146, 31, 0.12);
+        font-size: clamp(1.25rem, 1rem + 1.5vw, 2.1rem);
+        margin: clamp(-4.5rem, -2rem - 3vw, -1.5rem) auto clamp(1.5rem, 1rem + 1.5vw, 2.5rem);
+      }
+
       /* Refine the scroll-cue so it feels intentional, not stranded */
       .hero-scroll-cue {
         margin-top: clamp(2rem, 3vw, 3rem);
@@ -4842,13 +4852,6 @@
       <div class="hero-content">
         <div class="hero-orb" id="hero-orb" aria-hidden="true"></div>
         <h1 class="hero-title">MyBibleLens™</h1>
-        <p class="hero-tagline">Bringing people closer to God in an exciting and easy way!</p>
-
-        <!-- More-than-an-app scroll cue -->
-        <p class="hero-scroll-cue" aria-label="Scroll for more">
-          <span class="hero-scroll-cue__text">This isn&rsquo;t just another app. Scroll to see why.</span>
-          <span class="hero-scroll-cue__arrow" aria-hidden="true">↓</span>
-        </p>
       </div>
     </section>
 
@@ -4862,6 +4865,9 @@
     <!-- ===== SECTION 4: STUDY REPOSITORY ===== -->
     <section class="repo-section section-padding" id="repository">
       <div class="container">
+        <!-- Brand tagline — moved out of the hero canvas, sits above the store badges -->
+        <p class="hero-tagline hero-tagline--standalone">Bringing people closer to God in an exciting and easy way!</p>
+
         <!-- App Store / Google Play badges — moved ABOVE the section title -->
         <div class="repo-badges" aria-label="Download MyBibleLens">
           <a
