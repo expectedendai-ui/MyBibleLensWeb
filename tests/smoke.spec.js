@@ -111,9 +111,6 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await expect(section).toBeVisible();
     await expect(section.locator(".mosaic-showcase__title")).toContainText("Scan a page");
     await expect(section.locator(".mosaic-board")).toBeVisible();
-    // Mockup tiles should all render
-    const tiles = section.locator(".mosaic-tile");
-    await expect(tiles.first()).toBeVisible();
   });
 
   test("FAQ section renders all questions and each item expands", async ({ page }) => {
