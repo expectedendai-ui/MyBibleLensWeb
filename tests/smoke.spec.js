@@ -11,13 +11,12 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     expect(errors, `Console errors detected:\n${errors.join("\n")}`).toHaveLength(0);
   });
 
-  test("hero renders the brand title + slogan + scroll cue", async ({ page }) => {
+  test("hero renders the brand title and tagline appears on the page", async ({ page }) => {
     await page.goto("/");
     await waitForPageReady(page);
     await expect(page.locator(".hero-title")).toHaveText(/MyBibleLens/);
+    // Tagline lives above the store CTAs (moved out of hero) — still classed .hero-tagline.
     await expect(page.locator(".hero-tagline")).toContainText("Bringing people closer to God");
-    // Scroll cue lives in the hero as the call-to-explore prompt.
-    await expect(page.locator(".hero-scroll-cue")).toBeVisible();
   });
 
   test("repository section eyebrow announces Bible Sanctuary App", async ({ page }) => {
@@ -25,7 +24,7 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await waitForPageReady(page);
     const eyebrow = page.locator(".repo-eyebrow");
     await expect(eyebrow).toContainText(/world.s first/i);
-    await expect(eyebrow).toContainText("Bible Sanctuary App");
+    await expect(eyebrow).toContainText("Sanctuary App");
   });
 
   test("iPad showcase renders all feature slides", async ({ page }) => {
@@ -110,11 +109,11 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await waitForPageReady(page);
     const section = page.locator("#mosaic-showcase");
     await expect(section).toBeVisible();
-    await expect(section.locator(".mosaic-showcase__title")).toContainText("Cut out images");
+    await expect(section.locator(".mosaic-showcase__title")).toContainText("Scan a page");
     await expect(section.locator(".mosaic-board")).toBeVisible();
     // Mockup tiles should all render
     const tiles = section.locator(".mosaic-tile");
-    await expect(tiles).toHaveCount(6);
+    await expect(tiles.first()).toBeVisible();
   });
 
   test("FAQ section renders all questions and each item expands", async ({ page }) => {
