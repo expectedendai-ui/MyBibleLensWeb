@@ -27,18 +27,35 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await expect(eyebrow).toContainText("Sanctuary App");
   });
 
-  test("iPad showcase renders all feature slides", async ({ page }) => {
-    await page.goto("/#repository");
+  test("spotlight flow renders all 9 feature iframes after LENS/S.O.A.P.", async ({ page }) => {
+    await page.goto("/");
     await waitForPageReady(page);
-    // 8 iPad mockup slides: Canvas, Mosaic, Sermon, Games, Themes,
-    // Reflections, Sync, Bibles.
-    const slides = page.locator(".ipad-slide");
-    await expect(slides).toHaveCount(8);
-    await expect(page.locator(".ipad-slide", { hasText: "Infinite Canvas" })).toBeAttached();
-    await expect(page.locator(".ipad-slide", { hasText: "Mosaic" })).toBeAttached();
-    await expect(page.locator(".ipad-slide", { hasText: "Games" })).toBeAttached();
-    // Dot pager has one button per slide
-    await expect(page.locator(".ipad-dot")).toHaveCount(8);
+    // The old iPad carousel was retired on 2026-06-02 in favor of 9 in-context
+    // spotlight sections embedded as auto-sized iframes after LENS/S.O.A.P.
+    const wraps = page.locator(".flow-iframe-wrap");
+    await expect(wraps).toHaveCount(9);
+    // Spot-check that the named flow IDs exist
+    for (const id of [
+      "canvas-flow",
+      "sermon-flow",
+      "themes-flow",
+      "glow-flow",
+      "fellowship-flow",
+      "timer-flow",
+      "games-flow",
+      "reflections-flow",
+      "cards-flow",
+    ]) {
+      await expect(page.locator(`#${id} iframe`)).toBeAttached();
+    }
+  });
+
+  test("Supabase security badge appears with the right link", async ({ page }) => {
+    await page.goto("/");
+    await waitForPageReady(page);
+    const badge = page.locator(".supabase-badge");
+    await expect(badge).toBeAttached();
+    await expect(badge).toHaveAttribute("href", "https://supabase.com/security");
   });
 
   test("pricing section shows all 5 tiers with correct prices", async ({ page }) => {
