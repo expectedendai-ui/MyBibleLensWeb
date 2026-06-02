@@ -27,17 +27,18 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await expect(eyebrow).toContainText("Sanctuary App");
   });
 
-  test("spotlight flow renders all 9 feature iframes after LENS/S.O.A.P.", async ({ page }) => {
+  test("spotlight flow renders all 10 feature iframes after LENS/S.O.A.P.", async ({ page }) => {
     await page.goto("/");
     await waitForPageReady(page);
-    // The old iPad carousel was retired on 2026-06-02 in favor of 9 in-context
+    // The old iPad carousel was retired on 2026-06-02 in favor of in-context
     // spotlight sections embedded as auto-sized iframes after LENS/S.O.A.P.
+    // Mosaic was inserted between Sermon and Themes on the same day.
     const wraps = page.locator(".flow-iframe-wrap");
-    await expect(wraps).toHaveCount(9);
-    // Spot-check that the named flow IDs exist
+    await expect(wraps).toHaveCount(10);
     for (const id of [
       "canvas-flow",
       "sermon-flow",
+      "mosaic-flow",
       "themes-flow",
       "glow-flow",
       "fellowship-flow",

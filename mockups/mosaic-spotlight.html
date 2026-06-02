@@ -1,0 +1,1213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mosaic Spotlight — MyBibleLens Mockup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Inter:wght@400;500;600;700&family=Alegreya:ital,wght@0,500;0,700;1,500&family=Caveat:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --parchment: #f5f2ed;
+        --parchment-deep: #ece5d8;
+        --deep-brown: #3d2b1f;
+        --ink: #2a1e16;
+        --gold: #b6751d;
+        --gold-light: #d4921f;
+        --gold-pressed: #9a6218;
+        --ember: #d4921f;
+        --halo: #f0c850;
+        --sepia: #c9a978;
+        --font-display: "Hammersmith One", serif;
+        --font-body: "Inter", -apple-system, system-ui, sans-serif;
+        --font-verse: "Alegreya", Georgia, serif;
+        --font-hand: "Caveat", cursive;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        background: var(--parchment);
+        color: var(--deep-brown);
+      }
+      body {
+        font-family: var(--font-body);
+        min-height: 100vh;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      .container {
+        max-width: 1480px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+      .section-padding {
+        padding: 6rem 0;
+      }
+
+      /* ============================================================
+         MOSAIC-SHOWCASE pattern
+      ============================================================ */
+      .mosaic-showcase {
+        background:
+          radial-gradient(ellipse 60% 40% at 25% 30%, rgba(212, 146, 31, 0.06) 0%, transparent 65%),
+          radial-gradient(ellipse 60% 40% at 75% 70%, rgba(240, 200, 80, 0.04) 0%, transparent 65%), var(--parchment);
+        position: relative;
+        overflow: hidden;
+      }
+      .mosaic-showcase__inner {
+        display: grid;
+        grid-template-columns: 0.8fr auto 1.3fr;
+        gap: clamp(1.5rem, 3vw, 3rem);
+        align-items: center;
+      }
+      .mosaic-showcase__copy {
+        max-width: 540px;
+      }
+      .mosaic-showcase__eyebrow {
+        font-family: var(--font-display);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1.1rem;
+      }
+      .mosaic-showcase__title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 1.3rem + 2.5vw, 3.25rem);
+        line-height: 1.15;
+        color: var(--deep-brown);
+        letter-spacing: 0.005em;
+        margin-bottom: 1.4rem;
+      }
+      .mosaic-showcase__body {
+        font-family: var(--font-body);
+        font-size: clamp(1rem, 0.95rem + 0.25vw, 1.1rem);
+        line-height: 1.75;
+        color: rgba(61, 43, 31, 0.85);
+        margin-bottom: 1.5rem;
+      }
+      .mosaic-showcase__body strong {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .mosaic-showcase__bullets {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.6rem;
+        display: grid;
+        gap: 0.55rem;
+      }
+      .mosaic-showcase__bullets li {
+        font-family: var(--font-body);
+        font-size: 0.95rem;
+        color: rgba(61, 43, 31, 0.78);
+        padding-left: 1.5rem;
+        position: relative;
+        line-height: 1.55;
+      }
+      .mosaic-showcase__bullets li strong {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .mosaic-showcase__bullets li::before {
+        content: "✦";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--gold);
+        font-size: 0.85rem;
+      }
+      .mosaic-showcase__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        font-family: var(--font-display);
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: var(--gold);
+        padding: 0.85rem 1.4rem;
+        border-radius: 999px;
+        border: 1px solid rgba(182, 117, 29, 0.4);
+        background: linear-gradient(180deg, rgba(240, 200, 80, 0.06) 0%, rgba(212, 146, 31, 0.04) 100%);
+        transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .mosaic-showcase__cta:hover {
+        color: var(--gold-light);
+        border-color: rgba(212, 146, 31, 0.7);
+        background: rgba(240, 200, 80, 0.12);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px -12px rgba(212, 146, 31, 0.4);
+      }
+
+      /* ============================================================
+         MIDDLE — Empty phone mockup (placeholder for app screen)
+      ============================================================ */
+      .empty-phone {
+        position: relative;
+        width: 270px;
+        aspect-ratio: 9 / 19.5;
+        background: linear-gradient(180deg, #2a2a2e 0%, #1a1a1d 100%);
+        border-radius: 36px;
+        padding: 7px;
+        box-shadow:
+          0 0 0 1px rgba(212, 146, 31, 0.4),
+          0 36px 80px -22px rgba(26, 16, 8, 0.55),
+          0 16px 40px -12px rgba(212, 146, 31, 0.35),
+          0 0 60px -10px rgba(240, 200, 80, 0.3);
+        animation: phone-float 8s ease-in-out infinite alternate;
+      }
+      @keyframes phone-float {
+        0% {
+          translate: 0 0;
+        }
+        100% {
+          translate: 0 -8px;
+        }
+      }
+      .empty-phone__screen {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 30px;
+        background:
+          radial-gradient(ellipse at 50% 30%, rgba(240, 200, 80, 0.08), transparent 60%), linear-gradient(180deg, #fbf7ed 0%, #f0e9d4 100%);
+        overflow: hidden;
+      }
+      .empty-phone__island {
+        position: absolute;
+        top: 14px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30%;
+        height: 22px;
+        background: #050505;
+        border-radius: 12px;
+        z-index: 5;
+      }
+      .empty-phone__video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        z-index: 1;
+      }
+      /* Middle phone only — shift the video content down inside the phone screen */
+      .empty-phone:not(.empty-phone--bl) .empty-phone__video {
+        transform: translateY(0%);
+      }
+
+      /* ============================================================
+         RIGHT — Mosaic board (sepia-toned, layered cutouts)
+      ============================================================ */
+      .board-wrap {
+        position: relative;
+        width: 100%;
+        margin-top: -3.5rem; /* lift the whole mosaic board ~5 notches */
+      }
+      /* Second phone — bottom-RIGHT of the board, leans RIGHT, pushed further out + down */
+      .empty-phone--bl {
+        position: absolute;
+        bottom: -22%;
+        right: -38%;
+        left: auto;
+        width: 265px;
+        aspect-ratio: 9 / 19.5;
+        z-index: 15;
+        transform: rotate(10deg);
+        animation: phone-float 9s ease-in-out -3s infinite alternate;
+      }
+      .mosaic-board {
+        position: relative;
+        width: 100%;
+        max-width: 960px;
+        aspect-ratio: 1 / 0.95;
+        margin-inline: auto;
+        border-radius: 28px;
+        background:
+          radial-gradient(ellipse at 25% 25%, rgba(212, 146, 31, 0.15), transparent 55%),
+          radial-gradient(ellipse at 75% 75%, rgba(154, 98, 24, 0.18), transparent 60%), linear-gradient(135deg, #3d2b1f 0%, #1f1410 100%);
+        box-shadow:
+          0 0 0 1px rgba(212, 146, 31, 0.35),
+          0 40px 80px -22px rgba(0, 0, 0, 0.55),
+          0 16px 40px -10px rgba(212, 146, 31, 0.25);
+        overflow: hidden;
+      }
+      /* Cork-grain texture overlay */
+      .mosaic-board::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 15% 20%, rgba(240, 200, 80, 0.08), transparent 25%),
+          radial-gradient(circle at 80% 85%, rgba(212, 146, 31, 0.06), transparent 30%),
+          repeating-linear-gradient(60deg, transparent 0 4px, rgba(240, 200, 80, 0.02) 4px 5px);
+        pointer-events: none;
+      }
+
+      /* ---- Top chrome: layout selector ---- */
+      .mosaic-chrome {
+        position: absolute;
+        top: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 0.3rem;
+        padding: 0.3rem;
+        background: rgba(245, 242, 237, 0.92);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(212, 146, 31, 0.3);
+        border-radius: 999px;
+        box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.4);
+        z-index: 8;
+      }
+      .mosaic-layout {
+        font-family: var(--font-body);
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ink);
+        padding: 0.4rem 0.9rem;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: all 200ms ease;
+      }
+      .mosaic-layout:hover {
+        background: rgba(212, 146, 31, 0.1);
+      }
+      .mosaic-layout.is-active {
+        background: var(--gold);
+        color: #fffbf0;
+        box-shadow: 0 4px 12px -4px var(--gold);
+      }
+
+      /* ---- Smart Cut overlay button (on first photo) ---- */
+      .smart-cut-pill {
+        position: absolute;
+        z-index: 11;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.45rem 0.85rem;
+        background: linear-gradient(135deg, var(--gold) 0%, var(--ember) 100%);
+        color: #fff;
+        font-family: var(--font-body);
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        border-radius: 999px;
+        box-shadow:
+          0 6px 16px -4px rgba(0, 0, 0, 0.45),
+          0 0 0 1.5px rgba(240, 200, 80, 0.5);
+        animation: pulse-pill 2.4s ease-in-out infinite;
+      }
+      @keyframes pulse-pill {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      /* ---- Mosaic items ---- */
+      .mosaic-item {
+        position: absolute;
+        animation: item-bob 8s ease-in-out infinite alternate;
+        transition:
+          transform 360ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          box-shadow 360ms ease,
+          z-index 0ms;
+      }
+      .mosaic-item:hover {
+        transform: scale(1.05) rotate(0deg) !important;
+        z-index: 12 !important;
+        cursor: pointer;
+      }
+      @keyframes item-bob {
+        0% {
+          translate: 0 0;
+        }
+        100% {
+          translate: 0 -5px;
+        }
+      }
+
+      /* Polaroid photo */
+      .mosaic-polaroid {
+        background: #fffbf0;
+        padding: 8px 8px 24px;
+        border-radius: 4px;
+        box-shadow:
+          0 12px 30px -10px rgba(0, 0, 0, 0.55),
+          0 0 0 1px rgba(212, 146, 31, 0.18);
+      }
+      .mosaic-polaroid img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 2px;
+      }
+      .mosaic-polaroid__caption {
+        position: absolute;
+        bottom: 6px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-family: var(--font-hand);
+        font-size: 0.95rem;
+        color: var(--ink);
+        opacity: 0.78;
+      }
+
+      /* Verse card */
+      .mosaic-verse {
+        background: linear-gradient(180deg, #fdf6e0 0%, #f4e8c4 100%);
+        padding: 0.7rem 0.85rem;
+        border-radius: 12px;
+        box-shadow:
+          0 10px 24px -8px rgba(0, 0, 0, 0.45),
+          0 0 0 1px rgba(212, 146, 31, 0.3);
+      }
+      .mosaic-verse__ref {
+        font-family: var(--font-display);
+        font-size: 0.55rem;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 0.25rem;
+      }
+      .mosaic-verse__text {
+        font-family: var(--font-verse);
+        font-style: italic;
+        font-size: 0.78rem;
+        line-height: 1.4;
+        color: var(--ink);
+      }
+
+      /* Sanctuary symbol — gold emoji on a transparent halo backdrop */
+      .mosaic-symbol {
+        width: 56px;
+        height: 56px;
+        background: radial-gradient(circle at center, rgba(240, 200, 80, 0.45), transparent 65%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.7rem;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+      }
+      .mosaic-symbol--lg {
+        width: 80px;
+        height: 80px;
+        font-size: 2.6rem;
+      }
+
+      /* Hand-drawn sticker (gold marker) */
+      .mosaic-sticker {
+        font-family: var(--font-hand);
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--halo);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        transform-origin: center;
+      }
+
+      /* Washi tape strip */
+      .mosaic-tape {
+        position: absolute;
+        height: 18px;
+        background: repeating-linear-gradient(45deg, rgba(240, 200, 80, 0.75) 0 8px, rgba(212, 146, 31, 0.85) 8px 16px);
+        opacity: 0.85;
+        box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.35);
+      }
+
+      /* ---- Per-item positions, rotations, sizes ---- */
+      .item--p1 {
+        /* fellowship-circle polaroid, top-left big */
+        top: 10%;
+        left: 6%;
+        width: 28%;
+        aspect-ratio: 3 / 4;
+        transform: rotate(-7deg);
+        animation-delay: -0.5s;
+        z-index: 5;
+      }
+      .item--p2 {
+        /* testimony photo, middle */
+        top: 36%;
+        left: 38%;
+        width: 24%;
+        aspect-ratio: 4 / 5;
+        transform: rotate(3deg);
+        animation-delay: -2.4s;
+        z-index: 6;
+      }
+      .item--p3 {
+        /* cross photo, top-right */
+        top: 8%;
+        right: 8%;
+        width: 22%;
+        aspect-ratio: 3 / 4;
+        transform: rotate(6deg);
+        animation-delay: -3.6s;
+        z-index: 5;
+      }
+      .item--p4 {
+        /* ascension photo, bottom-left */
+        bottom: 6%;
+        left: 10%;
+        width: 22%;
+        aspect-ratio: 3 / 4;
+        transform: rotate(-4deg);
+        animation-delay: -4.8s;
+        z-index: 5;
+      }
+      .item--p5 {
+        /* benefits photo, bottom-right small */
+        bottom: 8%;
+        right: 6%;
+        width: 22%;
+        aspect-ratio: 1 / 1;
+        transform: rotate(8deg);
+        animation-delay: -5.6s;
+        z-index: 5;
+      }
+
+      .item--v1 {
+        /* Psalm verse, between p1 and p2 */
+        top: 14%;
+        left: 36%;
+        width: 22%;
+        transform: rotate(-3deg);
+        animation-delay: -1.4s;
+        z-index: 7;
+      }
+      .item--v2 {
+        /* Isaiah verse, mid-right */
+        top: 44%;
+        right: 4%;
+        width: 22%;
+        transform: rotate(4deg);
+        animation-delay: -3s;
+        z-index: 7;
+      }
+      .item--v3 {
+        /* Phil verse, bottom-center */
+        bottom: 4%;
+        left: 40%;
+        width: 22%;
+        transform: rotate(-2deg);
+        animation-delay: -4.4s;
+        z-index: 7;
+      }
+
+      .item--s1 {
+        top: 30%;
+        left: 1%;
+        transform: rotate(-10deg);
+        animation-delay: -1.2s;
+        z-index: 4;
+      }
+      .item--s2 {
+        top: 4%;
+        left: 42%;
+        transform: rotate(8deg);
+        animation-delay: -2s;
+        z-index: 8;
+      }
+      .item--s3 {
+        top: 68%;
+        left: 32%;
+        transform: rotate(-4deg);
+        animation-delay: -3.4s;
+        z-index: 4;
+      }
+      .item--s4 {
+        top: 58%;
+        right: 28%;
+        transform: rotate(12deg);
+        animation-delay: -4.8s;
+        z-index: 4;
+      }
+
+      .item--sticker1 {
+        top: 22%;
+        right: 38%;
+        transform: rotate(-12deg);
+        animation-delay: -2.2s;
+        z-index: 8;
+      }
+      .item--sticker2 {
+        bottom: 32%;
+        left: 6%;
+        transform: rotate(8deg);
+        animation-delay: -3.8s;
+        z-index: 8;
+      }
+      .item--sticker3 {
+        bottom: 18%;
+        right: 30%;
+        transform: rotate(-6deg);
+        animation-delay: -5.2s;
+        z-index: 8;
+      }
+
+      .tape--1 {
+        top: 8%;
+        left: 4%;
+        width: 100px;
+        transform: rotate(-22deg);
+      }
+      .tape--2 {
+        top: 6%;
+        right: 6%;
+        width: 90px;
+        transform: rotate(18deg);
+      }
+      .tape--3 {
+        bottom: 4%;
+        left: 12%;
+        width: 90px;
+        transform: rotate(-14deg);
+      }
+
+      /* Smart Cut pill — positioned on top of item--p1 */
+      .smart-cut-pill {
+        top: 11%;
+        left: 9%;
+      }
+
+      /* ---- Live cursors (2, drifting) ---- */
+      .mosaic-cursor {
+        position: absolute;
+        z-index: 13;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.3rem;
+        pointer-events: none;
+      }
+      .mosaic-cursor svg {
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.45));
+      }
+      .mosaic-cursor__name {
+        font-family: var(--font-body);
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: #fff;
+        padding: 0.2rem 0.5rem;
+        border-radius: 999px;
+        white-space: nowrap;
+        box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.5);
+      }
+      /* 5 named cursors — each with a unique color and drift path */
+      .cursor--quinn {
+        top: 20%;
+        left: 30%;
+        animation: quinn-drift 18s ease-in-out infinite alternate;
+      }
+      .cursor--katie {
+        top: 28%;
+        left: 70%;
+        animation: katie-drift 20s ease-in-out -6s infinite alternate;
+      }
+      .cursor--aiyana {
+        top: 55%;
+        left: 78%;
+        animation: aiyana-drift 19s ease-in-out -12s infinite alternate;
+      }
+      .cursor--kyle {
+        top: 72%;
+        left: 25%;
+        animation: kyle-drift 21s ease-in-out -4s infinite alternate;
+      }
+      .cursor--baker {
+        top: 78%;
+        left: 56%;
+        animation: baker-drift 17s ease-in-out -10s infinite alternate;
+      }
+
+      .cursor--quinn svg path {
+        fill: #6b8855;
+      }
+      .cursor--quinn .mosaic-cursor__name {
+        background: #6b8855;
+      }
+      .cursor--katie svg path {
+        fill: #e85d8a;
+      }
+      .cursor--katie .mosaic-cursor__name {
+        background: #e85d8a;
+      }
+      .cursor--aiyana svg path {
+        fill: #9a6cb8;
+      }
+      .cursor--aiyana .mosaic-cursor__name {
+        background: #9a6cb8;
+      }
+      .cursor--kyle svg path {
+        fill: #2563d0;
+      }
+      .cursor--kyle .mosaic-cursor__name {
+        background: #2563d0;
+      }
+      .cursor--baker svg path {
+        fill: var(--gold);
+      }
+      .cursor--baker .mosaic-cursor__name {
+        background: var(--gold);
+      }
+
+      @keyframes quinn-drift {
+        0% {
+          transform: translate(0, 0);
+        }
+        25% {
+          transform: translate(-30px, 20px);
+        }
+        50% {
+          transform: translate(40px, -25px);
+        }
+        75% {
+          transform: translate(-20px, 40px);
+        }
+        100% {
+          transform: translate(25px, -15px);
+        }
+      }
+      @keyframes katie-drift {
+        0% {
+          transform: translate(0, 0);
+        }
+        25% {
+          transform: translate(35px, -20px);
+        }
+        50% {
+          transform: translate(-25px, 30px);
+        }
+        75% {
+          transform: translate(20px, 35px);
+        }
+        100% {
+          transform: translate(-30px, -10px);
+        }
+      }
+      @keyframes aiyana-drift {
+        0% {
+          transform: translate(0, 0);
+        }
+        25% {
+          transform: translate(-25px, -30px);
+        }
+        50% {
+          transform: translate(30px, 25px);
+        }
+        75% {
+          transform: translate(-35px, 15px);
+        }
+        100% {
+          transform: translate(20px, -25px);
+        }
+      }
+      @keyframes kyle-drift {
+        0% {
+          transform: translate(0, 0);
+        }
+        25% {
+          transform: translate(40px, 15px);
+        }
+        50% {
+          transform: translate(-30px, -25px);
+        }
+        75% {
+          transform: translate(25px, -35px);
+        }
+        100% {
+          transform: translate(-15px, 30px);
+        }
+      }
+      @keyframes baker-drift {
+        0% {
+          transform: translate(0, 0);
+        }
+        25% {
+          transform: translate(-35px, 25px);
+        }
+        50% {
+          transform: translate(25px, -30px);
+        }
+        75% {
+          transform: translate(-15px, -20px);
+        }
+        100% {
+          transform: translate(30px, 20px);
+        }
+      }
+
+      /* ---- Presence chip (top-left, "3 LIVE") ---- */
+      .mosaic-presence {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        z-index: 9;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.35rem 0.7rem;
+        background: rgba(245, 242, 237, 0.92);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(212, 146, 31, 0.35);
+        border-radius: 999px;
+        font-family: var(--font-body);
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+      .mosaic-presence__dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #6b8855;
+        box-shadow: 0 0 6px #6b8855;
+        animation: live-pulse 1.6s ease-in-out infinite;
+      }
+      @keyframes live-pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(0.85);
+        }
+      }
+
+      /* ---- Sparkles ---- */
+      .mosaic-sparkles {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 2;
+      }
+      .mosaic-sparkles span {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background: var(--halo);
+        border-radius: 50%;
+        box-shadow:
+          0 0 8px var(--halo),
+          0 0 16px rgba(240, 200, 80, 0.6);
+        opacity: 0;
+        animation: sparkle 10s ease-in-out infinite;
+      }
+      .mosaic-sparkles span:nth-child(1) {
+        top: 22%;
+        left: 28%;
+        animation-delay: 0s;
+      }
+      .mosaic-sparkles span:nth-child(2) {
+        top: 32%;
+        right: 28%;
+        animation-delay: 2.1s;
+        width: 4px;
+        height: 4px;
+      }
+      .mosaic-sparkles span:nth-child(3) {
+        top: 70%;
+        left: 22%;
+        animation-delay: 4.3s;
+      }
+      .mosaic-sparkles span:nth-child(4) {
+        top: 76%;
+        right: 32%;
+        animation-delay: 6s;
+        width: 4px;
+        height: 4px;
+      }
+      .mosaic-sparkles span:nth-child(5) {
+        top: 48%;
+        left: 50%;
+        animation-delay: 7.6s;
+        width: 3px;
+        height: 3px;
+      }
+      @keyframes sparkle {
+        0%,
+        100% {
+          opacity: 0;
+          transform: translateY(0) scale(0.8);
+        }
+        15% {
+          opacity: 0.9;
+        }
+        50% {
+          opacity: 0.6;
+          transform: translateY(-22px) scale(1.05);
+        }
+        85% {
+          opacity: 0.3;
+        }
+      }
+
+      /* ============================================================
+         REVEAL
+      ============================================================ */
+      .reveal-fade {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 900ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .is-revealed .reveal-fade {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-fade--copy {
+        transition-delay: 80ms;
+      }
+      .reveal-fade--board {
+        transition-delay: 220ms;
+      }
+
+      .mosaic-item,
+      .smart-cut-pill {
+        opacity: 0;
+        transition: opacity 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .is-revealed .mosaic-item {
+        opacity: 1;
+      }
+      .is-revealed .smart-cut-pill {
+        opacity: 1;
+        transition-delay: 1300ms;
+      }
+      .is-revealed .item--p1 {
+        transition-delay: 300ms;
+      }
+      .is-revealed .item--p2 {
+        transition-delay: 380ms;
+      }
+      .is-revealed .item--p3 {
+        transition-delay: 460ms;
+      }
+      .is-revealed .item--p4 {
+        transition-delay: 540ms;
+      }
+      .is-revealed .item--p5 {
+        transition-delay: 620ms;
+      }
+      .is-revealed .item--v1 {
+        transition-delay: 700ms;
+      }
+      .is-revealed .item--v2 {
+        transition-delay: 780ms;
+      }
+      .is-revealed .item--v3 {
+        transition-delay: 860ms;
+      }
+      .is-revealed .item--s1 {
+        transition-delay: 940ms;
+      }
+      .is-revealed .item--s2 {
+        transition-delay: 1020ms;
+      }
+      .is-revealed .item--s3 {
+        transition-delay: 1100ms;
+      }
+      .is-revealed .item--s4 {
+        transition-delay: 1180ms;
+      }
+      .is-revealed .item--sticker1 {
+        transition-delay: 1260ms;
+      }
+      .is-revealed .item--sticker2 {
+        transition-delay: 1340ms;
+      }
+      .is-revealed .item--sticker3 {
+        transition-delay: 1420ms;
+      }
+
+      /* ============================================================
+         RESPONSIVE
+      ============================================================ */
+      @media (max-width: 1100px) {
+        .mosaic-showcase__inner {
+          grid-template-columns: 0.85fr 1.4fr;
+        }
+        .empty-phone {
+          display: none;
+        }
+      }
+      @media (max-width: 960px) {
+        .mosaic-showcase__inner {
+          grid-template-columns: 1fr;
+          gap: 4rem;
+        }
+        .mosaic-showcase__copy {
+          max-width: 100%;
+        }
+        .mosaic-board {
+          max-width: 560px;
+          aspect-ratio: 1 / 1;
+        }
+      }
+      @media (max-width: 600px) {
+        .section-padding {
+          padding: 4rem 0;
+        }
+        .mosaic-board {
+          max-width: 420px;
+        }
+        .mosaic-verse__text {
+          font-size: 0.65rem;
+        }
+        .mosaic-verse__ref {
+          font-size: 0.48rem;
+        }
+        .mosaic-symbol {
+          width: 40px;
+          height: 40px;
+          font-size: 1.2rem;
+        }
+        .mosaic-symbol--lg {
+          width: 56px;
+          height: 56px;
+          font-size: 1.8rem;
+        }
+        .smart-cut-pill {
+          font-size: 0.6rem;
+          padding: 0.35rem 0.65rem;
+        }
+        /* Hide noisier elements on small */
+        .mosaic-cursor,
+        .item--s3,
+        .item--s4,
+        .item--sticker2,
+        .item--sticker3,
+        .tape--3 {
+          display: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .mosaic-item,
+        .smart-cut-pill,
+        .mosaic-cursor,
+        .mosaic-sparkles span,
+        .mosaic-presence__dot,
+        .item-bob {
+          animation: none !important;
+        }
+        .reveal-fade {
+          transition: none !important;
+        }
+      }
+
+      /* Mockup banner */
+      .mockup-banner {
+        background: var(--deep-brown);
+        color: var(--parchment);
+        padding: 10px 24px;
+        font-size: 12px;
+        text-align: center;
+        letter-spacing: 0.04em;
+      }
+      .mockup-banner strong {
+        color: var(--halo);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mockup-banner">
+      <strong>MOCKUP</strong> — Mosaic vision board. Cut. Layer. Pray over it. Live cursors drift. Hover any item.
+    </div>
+
+    <section class="mosaic-showcase section-padding" id="mosaic-spotlight" data-spotlight>
+      <div class="container mosaic-showcase__inner">
+        <!-- LEFT — copy -->
+        <div class="mosaic-showcase__copy reveal-fade reveal-fade--copy">
+          <p class="mosaic-showcase__eyebrow">Pray with your hands.</p>
+          <h2 class="mosaic-showcase__title">A vision board<br />for your <span style="color: var(--gold)">faith.</span></h2>
+          <p class="mosaic-showcase__body">
+            Cut the subject out of any photo with one tap. Layer it with verses, sanctuary symbols, hand-drawn marks. Pick your layout
+            &mdash; <strong>Cross</strong>, <strong>Book</strong>, or <strong>Square</strong>. Pray over it. Then share with your fellowship
+            and watch them add to it <strong>in real time</strong>.
+          </p>
+          <ul class="mosaic-showcase__bullets" role="list">
+            <li><strong>Smart cutouts</strong> &mdash; tap any photo, pull the subject out cleanly</li>
+            <li><strong>3 layouts</strong> &mdash; Cross, Book, or Square boards</li>
+            <li><strong>Sanctuary symbols</strong> &mdash; drag from the palette, drop on the board</li>
+            <li><strong>Verses anchored</strong> &mdash; pin any verse to any cutout</li>
+            <li><strong>Live collab</strong> &mdash; your fellowship adds to the board in real time</li>
+            <li><strong>Friend-picker only</strong> &mdash; no public links. The sanctuary stays sacred.</li>
+          </ul>
+          <a href="#pricing" class="mosaic-showcase__cta">Build your first vision board &rarr;</a>
+        </div>
+
+        <!-- MIDDLE — phone with looping Mosaic demo (video 1) -->
+        <div class="empty-phone reveal-fade reveal-fade--board" aria-hidden="true">
+          <div class="empty-phone__screen">
+            <video class="empty-phone__video" autoplay muted loop playsinline preload="metadata">
+              <source src="assets/mosaic/phone-1.mp4" type="video/mp4" />
+            </video>
+            <span class="empty-phone__island"></span>
+          </div>
+        </div>
+
+        <!-- RIGHT — Mosaic board + secondary phone overlay -->
+        <div class="board-wrap reveal-fade reveal-fade--board" aria-hidden="true">
+          <!-- Second phone — overlaps the board's bottom-right corner (Mosaic collage screen) -->
+          <div class="empty-phone empty-phone--bl">
+            <div class="empty-phone__screen">
+              <img class="empty-phone__video" src="assets/mosaic/phone-2-mosaic.jpg" alt="" />
+              <span class="empty-phone__island"></span>
+            </div>
+          </div>
+
+          <div class="mosaic-board" aria-hidden="true">
+            <!-- Presence chip top-left -->
+            <div class="mosaic-presence"><span class="mosaic-presence__dot"></span>5 LIVE</div>
+
+            <!-- Layout selector top-center -->
+            <div class="mosaic-chrome">
+              <span class="mosaic-layout is-active">✦ Cross</span>
+              <span class="mosaic-layout">Book</span>
+              <span class="mosaic-layout">Square</span>
+            </div>
+
+            <!-- Sparkles -->
+            <div class="mosaic-sparkles"><span></span><span></span><span></span><span></span><span></span></div>
+
+            <!-- Washi tape strips (decorative corners) -->
+            <div class="mosaic-tape tape--1"></div>
+            <div class="mosaic-tape tape--2"></div>
+            <div class="mosaic-tape tape--3"></div>
+
+            <!-- ===== Photo polaroids (cutouts) ===== -->
+            <div class="mosaic-item mosaic-polaroid item--p1">
+              <img src="../assets/bibles.jpg" alt="" />
+              <span class="mosaic-polaroid__caption">fellowship</span>
+            </div>
+            <div class="mosaic-item mosaic-polaroid item--p2">
+              <img src="../assets/testimony.jpg" alt="" />
+              <span class="mosaic-polaroid__caption">my testimony</span>
+            </div>
+            <div class="mosaic-item mosaic-polaroid item--p3">
+              <img src="assets/mosaic/mosaic-1.jpg" alt="" />
+              <span class="mosaic-polaroid__caption">together</span>
+            </div>
+            <div class="mosaic-item mosaic-polaroid item--p4">
+              <img src="assets/mosaic/mosaic-2.jpg" alt="" />
+              <span class="mosaic-polaroid__caption">summer 26</span>
+            </div>
+            <div class="mosaic-item mosaic-polaroid item--p5">
+              <img src="../assets/benefits.jpg" alt="" />
+              <span class="mosaic-polaroid__caption">grace</span>
+            </div>
+
+            <!-- ===== Verse cards ===== -->
+            <div class="mosaic-item mosaic-verse item--v1">
+              <div class="mosaic-verse__ref">Psalm 100:2</div>
+              <p class="mosaic-verse__text">&ldquo;Serve the Lord with gladness; come before His presence with singing.&rdquo;</p>
+            </div>
+            <div class="mosaic-item mosaic-verse item--v2">
+              <div class="mosaic-verse__ref">Isaiah 43:19</div>
+              <p class="mosaic-verse__text">&ldquo;Behold, I am doing a new thing; now it springs forth, do you not perceive it?&rdquo;</p>
+            </div>
+            <div class="mosaic-item mosaic-verse item--v3">
+              <div class="mosaic-verse__ref">Philippians 4:13</div>
+              <p class="mosaic-verse__text">&ldquo;I can do all things through Christ who strengthens me.&rdquo;</p>
+            </div>
+
+            <!-- ===== Sanctuary symbols ===== -->
+            <div class="mosaic-item mosaic-symbol item--s1">✝️</div>
+            <div class="mosaic-item mosaic-symbol mosaic-symbol--lg item--s2">🕊️</div>
+            <div class="mosaic-item mosaic-symbol item--s3">🐟</div>
+            <div class="mosaic-item mosaic-symbol item--s4">🕯️</div>
+
+            <!-- ===== Hand-drawn stickers ===== -->
+            <div class="mosaic-item mosaic-sticker item--sticker1">✨ amen</div>
+            <div class="mosaic-item mosaic-sticker item--sticker2">grateful ♡</div>
+            <div class="mosaic-item mosaic-sticker item--sticker3">★ rise</div>
+
+            <!-- Smart Cut pill overlay on p1 -->
+            <div class="smart-cut-pill">✂️ Smart Cut</div>
+
+            <!-- ===== Live cursors (5) ===== -->
+            <div class="mosaic-cursor cursor--quinn">
+              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M 2 2 L 2 14 L 6 11 L 9 16 L 11 15 L 8 10 L 14 9 Z" /></svg>
+              <span class="mosaic-cursor__name">Quinn</span>
+            </div>
+            <div class="mosaic-cursor cursor--katie">
+              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M 2 2 L 2 14 L 6 11 L 9 16 L 11 15 L 8 10 L 14 9 Z" /></svg>
+              <span class="mosaic-cursor__name">Katie</span>
+            </div>
+            <div class="mosaic-cursor cursor--aiyana">
+              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M 2 2 L 2 14 L 6 11 L 9 16 L 11 15 L 8 10 L 14 9 Z" /></svg>
+              <span class="mosaic-cursor__name">Aiyana</span>
+            </div>
+            <div class="mosaic-cursor cursor--kyle">
+              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M 2 2 L 2 14 L 6 11 L 9 16 L 11 15 L 8 10 L 14 9 Z" /></svg>
+              <span class="mosaic-cursor__name">Kyle</span>
+            </div>
+            <div class="mosaic-cursor cursor--baker">
+              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M 2 2 L 2 14 L 6 11 L 9 16 L 11 15 L 8 10 L 14 9 Z" /></svg>
+              <span class="mosaic-cursor__name">Baker</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const sp = document.querySelector("[data-spotlight]");
+      const obs = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              sp.classList.add("is-revealed");
+              obs.disconnect();
+            }
+          }),
+        { threshold: 0.15 }
+      );
+      obs.observe(sp);
+      requestAnimationFrame(() => {
+        const r = sp.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.8) sp.classList.add("is-revealed");
+      });
+
+      // Layout selector — click to switch active
+      document.querySelectorAll(".mosaic-layout").forEach((el) => {
+        el.addEventListener("click", () => {
+          document.querySelectorAll(".mosaic-layout").forEach((x) => x.classList.remove("is-active"));
+          el.classList.add("is-active");
+        });
+      });
+    </script>
+  </body>
+</html>
