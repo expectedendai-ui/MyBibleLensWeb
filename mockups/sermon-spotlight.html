@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sermon Builder Spotlight — MyBibleLens Mockup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --parchment: #f5f2ed;
+        --deep-brown: #3d2b1f;
+        --ink: #2a1e16;
+        --gold: #b6751d;
+        --gold-light: #d4921f;
+        --gold-pressed: #9a6218;
+        --ember: #d4921f;
+        --halo: #f0c850;
+        --font-display: "Hammersmith One", serif;
+        --font-body: "Inter", -apple-system, system-ui, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        background: var(--parchment);
+        color: var(--deep-brown);
+      }
+      body {
+        font-family: var(--font-body);
+        min-height: 100vh;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+      .section-padding {
+        padding: 6rem 0;
+      }
+
+      /* ============================================================
+         MOSAIC-SHOWCASE pattern (site-matching)
+      ============================================================ */
+      .mosaic-showcase {
+        background:
+          radial-gradient(ellipse 60% 40% at 25% 30%, rgba(212, 146, 31, 0.06) 0%, transparent 65%),
+          radial-gradient(ellipse 60% 40% at 75% 70%, rgba(240, 200, 80, 0.04) 0%, transparent 65%), var(--parchment);
+        position: relative;
+        overflow: hidden;
+      }
+      .mosaic-showcase__inner {
+        display: grid;
+        grid-template-columns: 1fr 1.3fr;
+        gap: clamp(2rem, 5vw, 5rem);
+        align-items: center;
+      }
+      .mosaic-showcase__copy {
+        max-width: 540px;
+      }
+      .mosaic-showcase__eyebrow {
+        font-family: var(--font-display);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1.1rem;
+      }
+      .mosaic-showcase__title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 1.3rem + 2.5vw, 3.25rem);
+        line-height: 1.15;
+        color: var(--deep-brown);
+        letter-spacing: 0.005em;
+        margin-bottom: 1.4rem;
+      }
+      .mosaic-showcase__body {
+        font-family: var(--font-body);
+        font-size: clamp(1rem, 0.95rem + 0.25vw, 1.1rem);
+        line-height: 1.75;
+        color: rgba(61, 43, 31, 0.85);
+        margin-bottom: 1.5rem;
+      }
+      .mosaic-showcase__body strong {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .mosaic-showcase__bullets {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.6rem;
+        display: grid;
+        gap: 0.55rem;
+      }
+      .mosaic-showcase__bullets li {
+        font-family: var(--font-body);
+        font-size: 0.95rem;
+        color: rgba(61, 43, 31, 0.78);
+        padding-left: 1.5rem;
+        position: relative;
+        line-height: 1.55;
+      }
+      .mosaic-showcase__bullets li strong {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .mosaic-showcase__bullets li::before {
+        content: "✦";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--gold);
+        font-size: 0.85rem;
+      }
+      .mosaic-showcase__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        font-family: var(--font-display);
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: var(--gold);
+        padding: 0.85rem 1.4rem;
+        border-radius: 999px;
+        border: 1px solid rgba(182, 117, 29, 0.4);
+        background: linear-gradient(180deg, rgba(240, 200, 80, 0.06) 0%, rgba(212, 146, 31, 0.04) 100%);
+        transition:
+          color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+          border-color 220ms ease,
+          background 220ms ease,
+          transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 220ms ease;
+      }
+      .mosaic-showcase__cta:hover {
+        color: var(--gold-light);
+        border-color: rgba(212, 146, 31, 0.7);
+        background: rgba(240, 200, 80, 0.12);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px -12px rgba(212, 146, 31, 0.4);
+      }
+
+      /* ============================================================
+         RIGHT — iPad (video) center, phones tucked into corners
+      ============================================================ */
+      .sermon-board {
+        position: relative;
+        width: 100%;
+        max-width: 840px;
+        aspect-ratio: 1 / 0.95;
+        margin-inline: auto;
+        perspective: 1800px;
+      }
+      .sermon-board::before {
+        content: "";
+        position: absolute;
+        inset: 8% 4%;
+        background:
+          radial-gradient(ellipse at 50% 50%, rgba(240, 200, 80, 0.28), transparent 60%),
+          radial-gradient(ellipse at 30% 75%, rgba(212, 146, 31, 0.18), transparent 55%);
+        filter: blur(40px);
+        z-index: 0;
+        pointer-events: none;
+        animation: halo-pulse 6s ease-in-out infinite alternate;
+      }
+      @keyframes halo-pulse {
+        0% {
+          opacity: 0.8;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1.04);
+        }
+      }
+      .sermon-board::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 6%;
+        width: 60%;
+        height: 60px;
+        transform: translateX(-50%);
+        background: radial-gradient(ellipse at center, rgba(182, 117, 29, 0.3), transparent 70%);
+        filter: blur(18px);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      /* ---- Workflow stages (rail BELOW the iPad) ---- */
+      .sermon-rail {
+        position: absolute;
+        bottom: 0;
+        left: 8%;
+        right: 8%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0;
+        z-index: 8;
+        opacity: 0;
+        transform: translateY(8px);
+        transition:
+          opacity 800ms ease,
+          transform 800ms ease;
+        transition-delay: 600ms;
+      }
+      .is-revealed .sermon-rail {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .sermon-stage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        text-align: center;
+        flex: 1;
+        position: relative;
+      }
+      .sermon-stage__day {
+        font-family: var(--font-display);
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+      .sermon-stage__verb {
+        font-family: var(--font-display);
+        font-size: 1.2rem;
+        color: var(--ink);
+        letter-spacing: 0.005em;
+      }
+      /* Arrow connectors between stages */
+      .sermon-arrow {
+        flex: 0 0 auto;
+        width: 40px;
+        height: 1px;
+        background: linear-gradient(90deg, var(--gold), transparent);
+        position: relative;
+        opacity: 0.6;
+      }
+      .sermon-arrow::after {
+        content: "→";
+        position: absolute;
+        right: -8px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--gold);
+        font-size: 1rem;
+      }
+
+      /* ---- iPad (HERO, center, plays the sermon-builder video) ---- */
+      .ipad {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) rotate(-0.5deg);
+        width: 88%;
+        aspect-ratio: 2074 / 1554; /* exact video aspect */
+        background: linear-gradient(180deg, #2a2a2e 0%, #1a1a1d 100%);
+        border-radius: 26px;
+        padding: 14px;
+        box-shadow:
+          0 0 0 1px rgba(212, 146, 31, 0.5),
+          0 60px 120px -28px rgba(26, 16, 8, 0.65),
+          0 28px 70px -18px rgba(212, 146, 31, 0.55),
+          0 0 90px -10px rgba(240, 200, 80, 0.4);
+        z-index: 5;
+        animation: ipad-float 8s ease-in-out infinite alternate;
+      }
+      @keyframes ipad-float {
+        0% {
+          transform: translate(-50%, -50%) translateY(0) rotate(-0.5deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) translateY(-8px) rotate(0deg);
+        }
+      }
+      .ipad__camera {
+        position: absolute;
+        top: 50%;
+        left: 6px;
+        transform: translateY(-50%);
+        width: 5px;
+        height: 5px;
+        background: #0a0a0a;
+        border-radius: 50%;
+      }
+      .ipad__screen {
+        width: 100%;
+        height: 100%;
+        border-radius: 14px;
+        overflow: hidden;
+        background: var(--parchment);
+        position: relative;
+      }
+      .ipad__video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* ---- Phones ---- */
+      .phone {
+        position: absolute;
+        background: linear-gradient(180deg, #2a2a2e 0%, #1a1a1d 100%);
+        border-radius: 26px;
+        padding: 5px;
+        box-shadow:
+          0 0 0 1px rgba(212, 146, 31, 0.35),
+          0 26px 60px -18px rgba(26, 16, 8, 0.6),
+          0 12px 35px -10px rgba(182, 117, 29, 0.35);
+        overflow: hidden;
+        animation: phone-drift 8s ease-in-out infinite alternate;
+        z-index: 8;
+      }
+      .phone__screen {
+        width: 100%;
+        height: 100%;
+        border-radius: 22px;
+        overflow: hidden;
+        background: #1c100a;
+      }
+      .phone__screen img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .phone__island {
+        position: absolute;
+        top: 11px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 28%;
+        height: 14px;
+        background: #050505;
+        border-radius: 8px;
+        z-index: 4;
+      }
+      @keyframes phone-drift {
+        0% {
+          translate: 0 0;
+        }
+        100% {
+          translate: 0 -10px;
+        }
+      }
+
+      /* Phone 1 — Gallery: TOP-LEFT, pushed further left */
+      .phone--gallery {
+        left: -16%;
+        top: -22%;
+        width: 28%;
+        aspect-ratio: 9 / 19.5;
+        transform: rotate(0deg);
+        animation-delay: -1.5s;
+      }
+      /* Phone 2 — Editor: TOP-RIGHT, pushed further right */
+      .phone--editor {
+        right: -16%;
+        top: -24%;
+        width: 28%;
+        aspect-ratio: 9 / 19.5;
+        transform: rotate(0deg);
+        animation-delay: -3s;
+      }
+      /* Phone 3 — Present: BOTTOM-RIGHT, brought up + pushed right to clear "Sunday Preach" label */
+      .phone--present {
+        right: -22%;
+        bottom: -2%;
+        width: 28%;
+        aspect-ratio: 9 / 19.5;
+        transform: rotate(0deg);
+        animation-delay: -4.5s;
+      }
+      .phone--present::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -14px;
+        width: 80%;
+        height: 26px;
+        transform: translateX(-50%);
+        background: radial-gradient(ellipse at center, rgba(212, 146, 31, 0.5), transparent 70%);
+        filter: blur(10px);
+        z-index: -1;
+      }
+
+      /* ============================================================
+         FLOATING FEATURE CHIPS — orbit the editor phone
+      ============================================================ */
+      .sermon-chip {
+        position: absolute;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.85rem;
+        background: rgba(255, 252, 245, 0.9);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(212, 146, 31, 0.3);
+        border-radius: 999px;
+        font-family: var(--font-body);
+        font-size: 0.74rem;
+        font-weight: 600;
+        color: var(--ink);
+        letter-spacing: 0.02em;
+        white-space: nowrap;
+        box-shadow:
+          0 8px 24px -10px rgba(26, 16, 8, 0.3),
+          0 0 0 1px rgba(212, 146, 31, 0.1);
+        z-index: 7;
+        opacity: 0;
+        transform: translateY(8px) scale(0.92);
+        transition:
+          opacity 700ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+        animation: chip-bob 5s ease-in-out infinite alternate;
+      }
+      .sermon-chip__icon {
+        font-size: 0.95rem;
+        line-height: 1;
+        filter: drop-shadow(0 0 6px rgba(212, 146, 31, 0.4));
+      }
+      .is-revealed .sermon-chip {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      /* Chip positions hug the iPad edges where there's no phone */
+      .sermon-chip--collab {
+        left: 22%;
+        top: 26%;
+        transition-delay: 400ms;
+        animation-delay: -0.6s;
+      }
+      .sermon-chip--autotitle {
+        right: 22%;
+        top: 22%;
+        transition-delay: 520ms;
+        animation-delay: -1.4s;
+      }
+      .sermon-chip--pacing {
+        left: 0%;
+        top: 48%;
+        transition-delay: 640ms;
+        animation-delay: -2.2s;
+      }
+      .sermon-chip--notes {
+        left: 2%;
+        bottom: 24%;
+        transition-delay: 760ms;
+        animation-delay: -3s;
+      }
+      .sermon-chip--themes {
+        left: 6%;
+        top: 4%;
+        transition-delay: 880ms;
+        animation-delay: -3.8s;
+      }
+      .sermon-chip--layout {
+        left: 36%;
+        bottom: 6%;
+        transition-delay: 1000ms;
+        animation-delay: -4.6s;
+        display: none;
+      }
+
+      @keyframes chip-bob {
+        0% {
+          translate: 0 0;
+        }
+        100% {
+          translate: 0 -5px;
+        }
+      }
+
+      /* Sparkles */
+      .sb-sparkles {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 4;
+      }
+      .sb-sparkles span {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background: var(--halo);
+        border-radius: 50%;
+        box-shadow:
+          0 0 8px var(--halo),
+          0 0 16px rgba(240, 200, 80, 0.6);
+        opacity: 0;
+        animation: sparkle 10s ease-in-out infinite;
+      }
+      .sb-sparkles span:nth-child(1) {
+        top: 22%;
+        left: 36%;
+        animation-delay: 0s;
+      }
+      .sb-sparkles span:nth-child(2) {
+        top: 30%;
+        right: 30%;
+        animation-delay: 2.1s;
+        width: 4px;
+        height: 4px;
+      }
+      .sb-sparkles span:nth-child(3) {
+        top: 68%;
+        left: 28%;
+        animation-delay: 4.3s;
+      }
+      .sb-sparkles span:nth-child(4) {
+        top: 72%;
+        right: 32%;
+        animation-delay: 6s;
+        width: 4px;
+        height: 4px;
+      }
+      .sb-sparkles span:nth-child(5) {
+        top: 50%;
+        left: 50%;
+        animation-delay: 7.6s;
+        width: 3px;
+        height: 3px;
+      }
+      @keyframes sparkle {
+        0%,
+        100% {
+          opacity: 0;
+          transform: translateY(0) scale(0.8);
+        }
+        15% {
+          opacity: 0.9;
+        }
+        50% {
+          opacity: 0.6;
+          transform: translateY(-22px) scale(1.05);
+        }
+        85% {
+          opacity: 0.3;
+        }
+      }
+
+      /* Reveal */
+      .reveal-fade {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 900ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .is-revealed .reveal-fade {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-fade--copy {
+        transition-delay: 80ms;
+      }
+      .reveal-fade--board {
+        transition-delay: 220ms;
+      }
+
+      /* Responsive */
+      @media (max-width: 960px) {
+        .mosaic-showcase__inner {
+          grid-template-columns: 1fr;
+          gap: 4rem;
+        }
+        .mosaic-showcase__copy {
+          max-width: 100%;
+        }
+        .sermon-board {
+          max-width: 620px;
+          aspect-ratio: 1 / 0.92;
+        }
+      }
+      @media (max-width: 720px) {
+        .sermon-stage__verb {
+          font-size: 0.95rem;
+        }
+        .sermon-stage__day {
+          font-size: 0.55rem;
+          letter-spacing: 0.2em;
+        }
+        .sermon-arrow {
+          width: 18px;
+        }
+        .sermon-arrow::after {
+          font-size: 0.85rem;
+        }
+      }
+      @media (max-width: 600px) {
+        .section-padding {
+          padding: 4rem 0;
+        }
+        .sermon-board {
+          aspect-ratio: 1 / 1;
+          max-width: 420px;
+        }
+        .ipad {
+          width: 84%;
+        }
+        .phone--gallery,
+        .phone--editor,
+        .phone--present {
+          width: 28%;
+        }
+        .sermon-chip {
+          font-size: 0.66rem;
+          padding: 0.35rem 0.65rem;
+        }
+        .sermon-chip--themes,
+        .sermon-chip--notes {
+          display: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .phone,
+        .sermon-chip,
+        .sb-sparkles span {
+          animation: none !important;
+        }
+        .reveal-fade {
+          transition: none !important;
+        }
+      }
+
+      .mockup-banner {
+        background: var(--deep-brown);
+        color: var(--parchment);
+        padding: 10px 24px;
+        font-size: 12px;
+        text-align: center;
+        letter-spacing: 0.04em;
+      }
+      .mockup-banner strong {
+        color: var(--halo);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mockup-banner">
+      <strong>MOCKUP</strong> — Sermon Builder spotlight. Workflow: Write (Tue) → Polish (Sat) → Preach (Sun). All from your phone.
+    </div>
+
+    <section class="mosaic-showcase section-padding" id="sermon-spotlight" data-spotlight>
+      <div class="container mosaic-showcase__inner">
+        <!-- LEFT — copy -->
+        <div class="mosaic-showcase__copy reveal-fade reveal-fade--copy">
+          <p class="mosaic-showcase__eyebrow">Pastor in your pocket.</p>
+          <h2 class="mosaic-showcase__title">From kitchen table to<br /><span style="color: var(--gold)">standing pulpit.</span></h2>
+          <p class="mosaic-showcase__body">
+            <strong>Sermon Builder</strong> turns your phone into a teaching tool worthy of the Word. Write your slides Tuesday night.
+            Polish them Saturday morning with a fellow pastor in <strong>real-time COLLAB</strong>. Step up Sunday at 11 with your phone on
+            the pulpit &mdash; pacing timer running, speaker notes only you can see, next slide already on deck.
+          </p>
+          <ul class="mosaic-showcase__bullets" role="list">
+            <li><strong>Slide-by-slide</strong> &mdash; Title &amp; Scripture, image, body text, custom layouts</li>
+            <li><strong>COLLAB mode</strong> &mdash; your co-pastor edits with you in real time</li>
+            <li><strong>Auto-Title</strong> &mdash; the app names the sermon from the verse you anchor</li>
+            <li><strong>Present mode</strong> &mdash; Now / Up Next, pacing timer, speaker notes the audience never sees</li>
+            <li><strong>Deck Gallery</strong> &mdash; every sermon you&rsquo;ve ever preached, saved forever</li>
+            <li><strong>Font · Theme · Layout</strong> &mdash; make every deck feel like yours</li>
+          </ul>
+          <a href="#pricing" class="mosaic-showcase__cta">Build your first sermon &rarr;</a>
+        </div>
+
+        <!-- RIGHT — iPad (video) center, phones tucked into corners -->
+        <div class="sermon-board reveal-fade reveal-fade--board" aria-hidden="true">
+          <div class="sb-sparkles"><span></span><span></span><span></span><span></span><span></span></div>
+
+          <!-- iPad — HERO, plays the actual sermon-builder flow video -->
+          <div class="ipad">
+            <span class="ipad__camera"></span>
+            <div class="ipad__screen">
+              <video class="ipad__video" autoplay muted loop playsinline preload="metadata" poster="assets/sermon/IMG_2233.PNG">
+                <source src="assets/sermon/sermon-builder-flow.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+
+          <!-- Phone TOP-RIGHT corner: Editor -->
+          <div class="phone phone--editor">
+            <div class="phone__island"></div>
+            <div class="phone__screen">
+              <img src="assets/sermon/IMG_2233.PNG" alt="Sermon editor — Title & Scripture" />
+            </div>
+          </div>
+
+          <!-- Phone BOTTOM-RIGHT corner: Present mode -->
+          <div class="phone phone--present">
+            <div class="phone__island"></div>
+            <div class="phone__screen">
+              <img src="assets/sermon/IMG_2234.PNG" alt="Sermon Present mode — pacing timer" />
+            </div>
+          </div>
+
+          <!-- Orbiting feature chips -->
+          <div class="sermon-chip sermon-chip--collab"><span class="sermon-chip__icon">👥</span>Live COLLAB</div>
+          <div class="sermon-chip sermon-chip--autotitle"><span class="sermon-chip__icon">✨</span>Auto-Title</div>
+          <div class="sermon-chip sermon-chip--pacing"><span class="sermon-chip__icon">⏱️</span>Pacing timer</div>
+          <div class="sermon-chip sermon-chip--notes"><span class="sermon-chip__icon">📝</span>Speaker notes</div>
+          <div class="sermon-chip sermon-chip--themes"><span class="sermon-chip__icon">🎨</span>Themes</div>
+          <div class="sermon-chip sermon-chip--layout"><span class="sermon-chip__icon">▦</span>Layouts</div>
+
+          <!-- Workflow rail at the bottom -->
+          <div class="sermon-rail">
+            <div class="sermon-stage">
+              <div class="sermon-stage__day">Tuesday</div>
+              <div class="sermon-stage__verb">Draft</div>
+            </div>
+            <div class="sermon-arrow"></div>
+            <div class="sermon-stage">
+              <div class="sermon-stage__day">Saturday</div>
+              <div class="sermon-stage__verb">Polish</div>
+            </div>
+            <div class="sermon-arrow"></div>
+            <div class="sermon-stage">
+              <div class="sermon-stage__day">Sunday</div>
+              <div class="sermon-stage__verb">Preach</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const sp = document.querySelector("[data-spotlight]");
+      const obs = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              sp.classList.add("is-revealed");
+              obs.disconnect();
+            }
+          }),
+        { threshold: 0.15 }
+      );
+      obs.observe(sp);
+      requestAnimationFrame(() => {
+        const r = sp.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.8) sp.classList.add("is-revealed");
+      });
+    </script>
+  </body>
+</html>

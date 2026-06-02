@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reflections Spotlight — MyBibleLens Mockup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --parchment: #f5f2ed;
+        --deep-brown: #3d2b1f;
+        --ink: #2a1e16;
+        --gold: #b6751d;
+        --gold-light: #d4921f;
+        --gold-pressed: #9a6218;
+        --ember: #d4921f;
+        --halo: #f0c850;
+        --font-display: "Hammersmith One", serif;
+        --font-body: "Inter", -apple-system, system-ui, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        background: var(--parchment);
+        color: var(--deep-brown);
+      }
+      body {
+        font-family: var(--font-body);
+        min-height: 100vh;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+      .section-padding {
+        padding: 6rem 0;
+      }
+
+      /* ============================================================
+         MOSAIC-SHOWCASE pattern — site-matching left/right grid
+      ============================================================ */
+      .mosaic-showcase {
+        background:
+          radial-gradient(ellipse 60% 40% at 25% 30%, rgba(212, 146, 31, 0.06) 0%, transparent 65%),
+          radial-gradient(ellipse 60% 40% at 75% 70%, rgba(240, 200, 80, 0.04) 0%, transparent 65%), var(--parchment);
+        position: relative;
+        overflow: hidden;
+      }
+      .mosaic-showcase__inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(2rem, 5vw, 5rem);
+        align-items: center;
+      }
+      .mosaic-showcase__copy {
+        max-width: 540px;
+      }
+      .mosaic-showcase__eyebrow {
+        font-family: var(--font-display);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1.1rem;
+      }
+      .mosaic-showcase__title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 1.3rem + 2.5vw, 3.25rem);
+        line-height: 1.15;
+        color: var(--deep-brown);
+        letter-spacing: 0.005em;
+        margin-bottom: 1.4rem;
+      }
+      .mosaic-showcase__body {
+        font-family: var(--font-body);
+        font-size: clamp(1rem, 0.95rem + 0.25vw, 1.1rem);
+        line-height: 1.75;
+        color: rgba(61, 43, 31, 0.85);
+        margin-bottom: 1.5rem;
+      }
+      .mosaic-showcase__body strong {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .mosaic-showcase__bullets {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.6rem;
+        display: grid;
+        gap: 0.55rem;
+      }
+      .mosaic-showcase__bullets li {
+        font-family: var(--font-body);
+        font-size: 0.95rem;
+        color: rgba(61, 43, 31, 0.78);
+        padding-left: 1.5rem;
+        position: relative;
+        line-height: 1.55;
+      }
+      .mosaic-showcase__bullets li strong {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .mosaic-showcase__bullets li::before {
+        content: "✦";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--gold);
+        font-size: 0.85rem;
+      }
+      .mosaic-showcase__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        font-family: var(--font-display);
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: var(--gold);
+        padding: 0.85rem 1.4rem;
+        border-radius: 999px;
+        border: 1px solid rgba(182, 117, 29, 0.4);
+        background: linear-gradient(180deg, rgba(240, 200, 80, 0.06) 0%, rgba(212, 146, 31, 0.04) 100%);
+        transition:
+          color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+          border-color 220ms ease,
+          background 220ms ease,
+          transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 220ms ease;
+      }
+      .mosaic-showcase__cta:hover {
+        color: var(--gold-light);
+        border-color: rgba(212, 146, 31, 0.7);
+        background: rgba(240, 200, 80, 0.12);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px -12px rgba(212, 146, 31, 0.4);
+      }
+
+      /* ============================================================
+         RIGHT — auto-rotating phone + orbiting feature chips
+      ============================================================ */
+      .reflect-board {
+        position: relative;
+        width: 100%;
+        max-width: 580px;
+        aspect-ratio: 1 / 1.2;
+        margin-inline: auto;
+      }
+
+      /* Soft brand halo */
+      .reflect-board::before {
+        content: "";
+        position: absolute;
+        inset: 6% 8%;
+        background:
+          radial-gradient(ellipse at 50% 45%, rgba(240, 200, 80, 0.28), transparent 60%),
+          radial-gradient(ellipse at 30% 70%, rgba(212, 146, 31, 0.18), transparent 55%);
+        filter: blur(40px);
+        z-index: 0;
+        pointer-events: none;
+        animation: halo-pulse 6s ease-in-out infinite alternate;
+      }
+      @keyframes halo-pulse {
+        0% {
+          opacity: 0.8;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1.04);
+        }
+      }
+      /* Floor glow under phone */
+      .reflect-board::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 6%;
+        width: 50%;
+        height: 60px;
+        transform: translateX(-50%);
+        background: radial-gradient(ellipse at center, rgba(182, 117, 29, 0.35), transparent 70%);
+        filter: blur(18px);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      /* ---- iPhone frame with auto-rotating screenshots ---- */
+      .reflect-phone {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 46%;
+        aspect-ratio: 9 / 19.5;
+        background: #0a0a0c;
+        border-radius: 38px;
+        padding: 7px;
+        box-shadow:
+          0 0 0 1px rgba(212, 146, 31, 0.4),
+          0 50px 100px -22px rgba(26, 16, 8, 0.65),
+          0 22px 60px -16px rgba(212, 146, 31, 0.55),
+          0 0 80px -6px rgba(240, 200, 80, 0.4);
+        z-index: 5;
+        animation: phone-float 6s ease-in-out infinite alternate;
+      }
+      @keyframes phone-float {
+        0% {
+          transform: translate(-50%, -50%) translateY(0) rotate(0deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) translateY(-10px) rotate(0.4deg);
+        }
+      }
+      .reflect-phone__screen {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 32px;
+        overflow: hidden;
+        background: #f5f2ed;
+      }
+      .reflect-phone__island {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30%;
+        height: 22px;
+        background: #050505;
+        border-radius: 12px;
+        z-index: 5;
+      }
+      .reflect-slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition:
+          opacity 900ms cubic-bezier(0.4, 0, 0.2, 1),
+          transform 1400ms cubic-bezier(0.4, 0, 0.2, 1);
+        transform: scale(1.04);
+      }
+      .reflect-slide.is-active {
+        opacity: 1;
+        transform: scale(1);
+      }
+      .reflect-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* ---- Carousel progress dots ---- */
+      .reflect-dots {
+        position: absolute;
+        left: 50%;
+        bottom: -2.5rem;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 0.4rem;
+        z-index: 6;
+      }
+      .reflect-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(61, 43, 31, 0.2);
+        transition: all 400ms ease;
+      }
+      .reflect-dot.is-active {
+        background: var(--gold);
+        width: 24px;
+        border-radius: 4px;
+        box-shadow: 0 0 8px rgba(212, 146, 31, 0.5);
+      }
+
+      /* ============================================================
+         FEATURE CHIPS — orbit the phone, animate in stagger
+      ============================================================ */
+      .reflect-chip {
+        position: absolute;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.55rem 0.95rem;
+        background: rgba(255, 252, 245, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(212, 146, 31, 0.3);
+        border-radius: 999px;
+        font-family: var(--font-body);
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--ink);
+        letter-spacing: 0.02em;
+        white-space: nowrap;
+        box-shadow:
+          0 8px 24px -10px rgba(26, 16, 8, 0.3),
+          0 0 0 1px rgba(212, 146, 31, 0.1);
+        z-index: 6;
+        opacity: 0;
+        transform: translateY(8px) scale(0.92);
+        transition:
+          opacity 700ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+        animation: chip-bob 5s ease-in-out infinite alternate;
+      }
+      .reflect-chip__icon {
+        font-size: 1rem;
+        line-height: 1;
+        filter: drop-shadow(0 0 6px rgba(212, 146, 31, 0.4));
+      }
+      .reflect-chip__dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--gold);
+        box-shadow: 0 0 8px var(--halo);
+      }
+      .is-revealed .reflect-chip {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      /* Per-chip position + reveal delay + idle bob phase */
+      .reflect-chip--prayer {
+        left: -2%;
+        top: 14%;
+        transition-delay: 200ms;
+        animation-delay: -0.5s;
+      }
+      .reflect-chip--verse-anchor {
+        right: -4%;
+        top: 8%;
+        transition-delay: 320ms;
+        animation-delay: -1.2s;
+      }
+      .reflect-chip--guided {
+        left: -8%;
+        top: 38%;
+        transition-delay: 440ms;
+        animation-delay: -2s;
+      }
+      .reflect-chip--connected {
+        right: -10%;
+        top: 42%;
+        transition-delay: 560ms;
+        animation-delay: -2.8s;
+      }
+      .reflect-chip--collaborate {
+        left: -2%;
+        bottom: 24%;
+        transition-delay: 680ms;
+        animation-delay: -3.4s;
+      }
+      .reflect-chip--themes {
+        right: -4%;
+        bottom: 20%;
+        transition-delay: 800ms;
+        animation-delay: -4.2s;
+      }
+      .reflect-chip--pin {
+        left: 8%;
+        bottom: 6%;
+        transition-delay: 920ms;
+        animation-delay: -1.6s;
+      }
+      .reflect-chip--soap {
+        right: 10%;
+        bottom: 4%;
+        transition-delay: 1040ms;
+        animation-delay: -2.4s;
+      }
+
+      @keyframes chip-bob {
+        0% {
+          translate: 0 0;
+        }
+        100% {
+          translate: 0 -6px;
+        }
+      }
+
+      /* ---- "Connected Notes" knowledge-graph connector lines ---- */
+      .reflect-graph {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 4;
+        opacity: 0;
+        transition: opacity 1400ms ease;
+      }
+      .is-revealed .reflect-graph {
+        opacity: 0.4;
+      }
+      .reflect-graph line {
+        stroke: var(--gold);
+        stroke-width: 1;
+        stroke-dasharray: 2 4;
+        opacity: 0.5;
+      }
+
+      /* ---- Sparkles ---- */
+      .reflect-sparkles {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 3;
+      }
+      .reflect-sparkles span {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background: var(--halo);
+        border-radius: 50%;
+        box-shadow:
+          0 0 8px var(--halo),
+          0 0 16px rgba(240, 200, 80, 0.6);
+        opacity: 0;
+        animation: sparkle 10s ease-in-out infinite;
+      }
+      .reflect-sparkles span:nth-child(1) {
+        top: 12%;
+        left: 30%;
+        animation-delay: 0s;
+      }
+      .reflect-sparkles span:nth-child(2) {
+        top: 22%;
+        right: 22%;
+        animation-delay: 2.1s;
+        width: 4px;
+        height: 4px;
+      }
+      .reflect-sparkles span:nth-child(3) {
+        top: 70%;
+        left: 18%;
+        animation-delay: 4.3s;
+      }
+      .reflect-sparkles span:nth-child(4) {
+        top: 78%;
+        right: 24%;
+        animation-delay: 6s;
+        width: 4px;
+        height: 4px;
+      }
+      .reflect-sparkles span:nth-child(5) {
+        top: 50%;
+        left: 8%;
+        animation-delay: 7.6s;
+        width: 3px;
+        height: 3px;
+      }
+      @keyframes sparkle {
+        0%,
+        100% {
+          opacity: 0;
+          transform: translateY(0) scale(0.8);
+        }
+        15% {
+          opacity: 0.9;
+        }
+        50% {
+          opacity: 0.6;
+          transform: translateY(-22px) scale(1.05);
+        }
+        85% {
+          opacity: 0.3;
+        }
+      }
+
+      /* ============================================================
+         REVEAL on scroll
+      ============================================================ */
+      .reveal-fade {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 900ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .is-revealed .reveal-fade {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-fade--copy {
+        transition-delay: 80ms;
+      }
+      .reveal-fade--board {
+        transition-delay: 220ms;
+      }
+
+      /* ============================================================
+         RESPONSIVE
+      ============================================================ */
+      @media (max-width: 960px) {
+        .mosaic-showcase__inner {
+          grid-template-columns: 1fr;
+          gap: 4rem;
+        }
+        .mosaic-showcase__copy {
+          max-width: 100%;
+        }
+        .reflect-board {
+          max-width: 460px;
+          aspect-ratio: 1 / 1.15;
+        }
+        .reflect-phone {
+          width: 52%;
+        }
+      }
+      @media (max-width: 600px) {
+        .section-padding {
+          padding: 4rem 0;
+        }
+        .reflect-board {
+          aspect-ratio: 1 / 1.2;
+          max-width: 360px;
+        }
+        .reflect-phone {
+          width: 58%;
+        }
+        .reflect-chip {
+          font-size: 0.7rem;
+          padding: 0.45rem 0.8rem;
+        }
+        /* Hide some chips on tiny screens to avoid overlap */
+        .reflect-chip--soap,
+        .reflect-chip--themes {
+          display: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .reflect-phone,
+        .reflect-chip,
+        .reflect-sparkles span {
+          animation: none !important;
+        }
+        .reveal-fade {
+          transition: none !important;
+        }
+        .reflect-slide {
+          transition: opacity 400ms ease !important;
+          transform: none !important;
+        }
+      }
+
+      /* Mockup banner */
+      .mockup-banner {
+        background: var(--deep-brown);
+        color: var(--parchment);
+        padding: 10px 24px;
+        font-size: 12px;
+        text-align: center;
+        letter-spacing: 0.04em;
+      }
+      .mockup-banner strong {
+        color: var(--halo);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mockup-banner">
+      <strong>MOCKUP</strong> — Reflections spotlight. Auto-rotating phone (every 3.5s) + orbiting feature chips. Strip on integration.
+    </div>
+
+    <!-- ===== SECTION: REFLECTIONS SPOTLIGHT ===== -->
+    <section class="mosaic-showcase section-padding" id="reflections-spotlight" data-spotlight>
+      <div class="container mosaic-showcase__inner">
+        <!-- LEFT — copy block -->
+        <div class="mosaic-showcase__copy reveal-fade reveal-fade--copy">
+          <p class="mosaic-showcase__eyebrow">More than a notepad.</p>
+          <h2 class="mosaic-showcase__title">
+            The reflection platform<br />for <span style="color: var(--gold)">God-fearing minds.</span>
+          </h2>
+          <p class="mosaic-showcase__body">
+            Reflections isn&rsquo;t a journal app. It&rsquo;s a <strong>sanctuary for the inner life</strong> &mdash; built for people who
+            actually take their walk with God seriously. Eight emotional modes. Verse-anchored. AI-guided. Woven into a
+            <strong>connected web</strong> of every thought you&rsquo;ve ever saved. Shared with the people who walk alongside you.
+          </p>
+          <ul class="mosaic-showcase__bullets" role="list">
+            <li><strong>8 modes</strong> &mdash; Prayer, Reflection, Gratitude, Calling, Wisdom, Faith, Struggle, Let-Go</li>
+            <li><strong>Verse-anchored</strong> &mdash; every reflection pinned to the scripture that sparked it</li>
+            <li><strong>Guided Reflection</strong> &mdash; AI prompts that move you deeper, never tell you what to believe</li>
+            <li><strong>Connected Notes</strong> &mdash; your thoughts woven into a personal knowledge web</li>
+            <li><strong>Collaborate</strong> &mdash; share with your fellowship, reflect together</li>
+            <li><strong>Pin · Theme · Save</strong> &mdash; keep what matters in the room that matches your spirit</li>
+          </ul>
+          <a href="#pricing" class="mosaic-showcase__cta">Reflect like your soul depends on it &rarr;</a>
+        </div>
+
+        <!-- RIGHT — auto-rotating phone + orbit chips -->
+        <div class="reflect-board reveal-fade reveal-fade--board" aria-hidden="true">
+          <!-- Knowledge-graph connector lines (SVG, behind chips) -->
+          <svg class="reflect-graph" viewBox="0 0 100 120" preserveAspectRatio="none">
+            <line x1="50" y1="50" x2="6" y2="18" />
+            <line x1="50" y1="50" x2="94" y2="12" />
+            <line x1="50" y1="50" x2="2" y2="46" />
+            <line x1="50" y1="50" x2="98" y2="50" />
+            <line x1="50" y1="50" x2="6" y2="86" />
+            <line x1="50" y1="50" x2="94" y2="88" />
+            <line x1="50" y1="50" x2="14" y2="108" />
+            <line x1="50" y1="50" x2="86" y2="108" />
+          </svg>
+
+          <!-- Sparkles -->
+          <div class="reflect-sparkles"><span></span><span></span><span></span><span></span><span></span></div>
+
+          <!-- Phone with auto-rotating screenshots -->
+          <div class="reflect-phone">
+            <div class="reflect-phone__island"></div>
+            <div class="reflect-phone__screen" data-carousel>
+              <div class="reflect-slide is-active"><img src="assets/reflections/IMG_2226.PNG" alt="Prayer mode" /></div>
+              <div class="reflect-slide"><img src="assets/reflections/IMG_2228.PNG" alt="Wisdom mode — Faith, Calling, Wisdom tabs" /></div>
+              <div class="reflect-slide"><img src="assets/reflections/IMG_2224.PNG" alt="Isaiah 43:19 reflection" /></div>
+              <div class="reflect-slide"><img src="assets/reflections/IMG_2223.PNG" alt="Deep reflection — 7 virtues" /></div>
+              <div class="reflect-slide"><img src="assets/reflections/IMG_2227.PNG" alt="Mark 10:45 reflection" /></div>
+              <div class="reflect-slide"><img src="assets/reflections/IMG_2225.PNG" alt="Verse template" /></div>
+            </div>
+            <div class="reflect-dots" data-dots>
+              <span class="reflect-dot is-active"></span>
+              <span class="reflect-dot"></span>
+              <span class="reflect-dot"></span>
+              <span class="reflect-dot"></span>
+              <span class="reflect-dot"></span>
+              <span class="reflect-dot"></span>
+            </div>
+          </div>
+
+          <!-- Orbiting feature chips -->
+          <div class="reflect-chip reflect-chip--prayer"><span class="reflect-chip__icon">🙏</span>Prayer mode</div>
+          <div class="reflect-chip reflect-chip--verse-anchor"><span class="reflect-chip__icon">📖</span>Verse anchor</div>
+          <div class="reflect-chip reflect-chip--guided"><span class="reflect-chip__icon">💡</span>Guided reflection</div>
+          <div class="reflect-chip reflect-chip--connected"><span class="reflect-chip__icon">🕸️</span>Connected notes</div>
+          <div class="reflect-chip reflect-chip--collaborate"><span class="reflect-chip__icon">👥</span>Collaborate</div>
+          <div class="reflect-chip reflect-chip--themes"><span class="reflect-chip__icon">🎨</span>9 themes</div>
+          <div class="reflect-chip reflect-chip--pin"><span class="reflect-chip__icon">📌</span>Pin to keep</div>
+          <div class="reflect-chip reflect-chip--soap"><span class="reflect-chip__icon">✨</span>S.O.A.P. ready</div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // ============================================================
+      // Reveal on scroll
+      // ============================================================
+      const sp = document.querySelector("[data-spotlight]");
+      const obs = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              sp.classList.add("is-revealed");
+              startCarousel();
+              obs.disconnect();
+            }
+          }),
+        { threshold: 0.15 }
+      );
+      obs.observe(sp);
+      requestAnimationFrame(() => {
+        const r = sp.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.8) {
+          sp.classList.add("is-revealed");
+          startCarousel();
+        }
+      });
+
+      // ============================================================
+      // Auto-rotating carousel
+      // ============================================================
+      const slides = document.querySelectorAll(".reflect-slide");
+      const dots = document.querySelectorAll(".reflect-dot");
+      let active = 0;
+      let timer = null;
+
+      function go(next) {
+        slides[active].classList.remove("is-active");
+        dots[active].classList.remove("is-active");
+        active = (next + slides.length) % slides.length;
+        slides[active].classList.add("is-active");
+        dots[active].classList.add("is-active");
+      }
+
+      function startCarousel() {
+        if (timer) return;
+        timer = setInterval(() => go(active + 1), 3500);
+      }
+
+      // Click a dot to jump
+      dots.forEach((dot, i) => {
+        dot.addEventListener("click", () => {
+          go(i);
+          if (timer) {
+            clearInterval(timer);
+            timer = null;
+            startCarousel();
+          }
+        });
+      });
+
+      // Respect reduced motion
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        startCarousel = () => {};
+      }
+    </script>
+  </body>
+</html>

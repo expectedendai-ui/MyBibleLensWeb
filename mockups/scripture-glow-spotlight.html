@@ -1,0 +1,1240 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scripture Glow Spotlight — MyBibleLens Mockup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;600;700&family=Homemade+Apple&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --parchment: #f5f2ed;
+        --parchment-deep: #ece5d8;
+        --deep-brown: #3d2b1f;
+        --ink: #2a1e16;
+        --gold: #b6751d;
+        --gold-light: #d4921f;
+        --gold-pressed: #9a6218;
+        --ember: #d4921f;
+        --halo: #f0c850;
+        --font-display: "Hammersmith One", serif;
+        --font-body: "Inter", -apple-system, system-ui, sans-serif;
+        --font-hand: "Caveat", cursive;
+        --font-scribe: "Homemade Apple", cursive;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        background: var(--parchment);
+        color: var(--deep-brown);
+      }
+      body {
+        font-family: var(--font-body);
+        min-height: 100vh;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+      .section-padding {
+        padding: 6rem 0;
+      }
+
+      /* ============================================================
+         MOSAIC-SHOWCASE pattern
+      ============================================================ */
+      .mosaic-showcase {
+        background:
+          radial-gradient(ellipse 60% 40% at 25% 30%, rgba(212, 146, 31, 0.06) 0%, transparent 65%),
+          radial-gradient(ellipse 60% 40% at 75% 70%, rgba(240, 200, 80, 0.04) 0%, transparent 65%), var(--parchment);
+        position: relative;
+        overflow: hidden;
+      }
+      .mosaic-showcase__inner {
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: clamp(2rem, 5vw, 4rem);
+        align-items: center;
+      }
+      .mosaic-showcase__copy {
+        max-width: 540px;
+      }
+      .mosaic-showcase__eyebrow {
+        font-family: var(--font-display);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1.1rem;
+      }
+      .mosaic-showcase__title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 1.3rem + 2.5vw, 3.25rem);
+        line-height: 1.15;
+        color: var(--deep-brown);
+        letter-spacing: 0.005em;
+        margin-bottom: 1.4rem;
+      }
+      .mosaic-showcase__body {
+        font-family: var(--font-body);
+        font-size: clamp(1rem, 0.95rem + 0.25vw, 1.1rem);
+        line-height: 1.75;
+        color: rgba(61, 43, 31, 0.85);
+        margin-bottom: 1.5rem;
+      }
+      .mosaic-showcase__body strong {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .mosaic-showcase__bullets {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.6rem;
+        display: grid;
+        gap: 0.55rem;
+      }
+      .mosaic-showcase__bullets li {
+        font-family: var(--font-body);
+        font-size: 0.95rem;
+        color: rgba(61, 43, 31, 0.78);
+        padding-left: 1.5rem;
+        position: relative;
+        line-height: 1.55;
+      }
+      .mosaic-showcase__bullets li strong {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .mosaic-showcase__bullets li::before {
+        content: "✦";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--gold);
+        font-size: 0.85rem;
+      }
+      .mosaic-showcase__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        font-family: var(--font-display);
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: var(--gold);
+        padding: 0.85rem 1.4rem;
+        border-radius: 999px;
+        border: 1px solid rgba(182, 117, 29, 0.4);
+        background: linear-gradient(180deg, rgba(240, 200, 80, 0.06) 0%, rgba(212, 146, 31, 0.04) 100%);
+        transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .mosaic-showcase__cta:hover {
+        color: var(--gold-light);
+        border-color: rgba(212, 146, 31, 0.7);
+        background: rgba(240, 200, 80, 0.12);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px -12px rgba(212, 146, 31, 0.4);
+      }
+
+      /* ============================================================
+         RIGHT — Zoom Canvas surface
+      ============================================================ */
+      .glow-board {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        aspect-ratio: 1 / 0.72;
+        margin-left: auto;
+        margin-right: 0;
+        border-radius: 28px;
+        background:
+          radial-gradient(ellipse at 30% 25%, rgba(240, 200, 80, 0.1), transparent 55%),
+          radial-gradient(ellipse at 70% 75%, rgba(212, 146, 31, 0.08), transparent 55%), linear-gradient(180deg, #fbf7ed 0%, #f0e9d4 100%);
+        box-shadow:
+          0 0 0 1px rgba(212, 146, 31, 0.3),
+          0 40px 80px -22px rgba(26, 16, 8, 0.35),
+          0 16px 40px -10px rgba(212, 146, 31, 0.18);
+        overflow: hidden;
+      }
+      /* Paper texture — subtle paper noise via repeating gradient */
+      .glow-board::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          repeating-linear-gradient(0deg, transparent 0, transparent 26px, rgba(154, 98, 24, 0.04) 26px, rgba(154, 98, 24, 0.04) 27px),
+          radial-gradient(circle at 12% 18%, rgba(154, 98, 24, 0.04), transparent 20%),
+          radial-gradient(circle at 88% 82%, rgba(154, 98, 24, 0.05), transparent 22%);
+        pointer-events: none;
+      }
+
+      /* ---- The hand-drawn verse (center) ---- */
+      .glow-verse {
+        position: absolute;
+        inset: 18% 12% 22% 12%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        z-index: 3;
+      }
+      .glow-verse__line {
+        font-family: var(--font-scribe);
+        font-size: clamp(2rem, 5.5vw, 4rem);
+        line-height: 1.15;
+        color: var(--ink);
+        letter-spacing: -0.01em;
+        text-shadow: 0 1px 0 rgba(154, 98, 24, 0.06);
+      }
+      .glow-verse__line--small {
+        font-family: var(--font-hand);
+        font-size: clamp(1.1rem, 2.5vw, 1.7rem);
+        margin-top: 0.6rem;
+        color: rgba(61, 43, 31, 0.78);
+      }
+      .glow-verse__ref {
+        font-family: var(--font-display);
+        font-size: 0.7rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-top: 1rem;
+        padding: 0.3rem 0.7rem;
+        border: 1px solid rgba(182, 117, 29, 0.35);
+        border-radius: 999px;
+        background: rgba(255, 251, 240, 0.6);
+      }
+
+      /* Decorative hand-drawn flourishes (SVG) */
+      .glow-flourish {
+        position: absolute;
+        pointer-events: none;
+        z-index: 2;
+      }
+      .glow-flourish path {
+        fill: none;
+        stroke: var(--gold);
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        opacity: 0.55;
+      }
+      .flourish--top {
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30%;
+        height: 30px;
+      }
+      .flourish--bottom {
+        bottom: 12%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30%;
+        height: 30px;
+      }
+      .flourish--star-1 {
+        top: 14%;
+        left: 16%;
+        width: 24px;
+        height: 24px;
+      }
+      .flourish--star-2 {
+        top: 24%;
+        right: 16%;
+        width: 24px;
+        height: 24px;
+      }
+      .flourish--star-3 {
+        bottom: 26%;
+        left: 18%;
+        width: 20px;
+        height: 20px;
+      }
+      .flourish--star-4 {
+        bottom: 30%;
+        right: 20%;
+        width: 20px;
+        height: 20px;
+      }
+      .flourish--star path {
+        stroke-width: 1.6;
+      }
+
+      /* ---- Brush palette (vertical, left side) ---- */
+      .glow-tools {
+        position: absolute;
+        top: 50%;
+        left: 1rem;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        padding: 0.35rem;
+        background: rgba(255, 251, 240, 0.92);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(212, 146, 31, 0.3);
+        border-radius: 999px;
+        box-shadow: 0 12px 30px -10px rgba(26, 16, 8, 0.3);
+        z-index: 7;
+      }
+      .glow-tool {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        font-size: 1rem;
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 200ms ease;
+        font-family: var(--font-body);
+      }
+      .glow-tool:hover {
+        background: rgba(212, 146, 31, 0.12);
+      }
+      .glow-tool.is-active {
+        background: var(--gold);
+        color: #fffbf0;
+        box-shadow: 0 4px 12px -4px var(--gold);
+      }
+      .glow-tool__swatch {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+      }
+      .swatch--ink {
+        background: var(--ink);
+      }
+      .swatch--gold {
+        background: var(--gold);
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+      }
+      .swatch--ember {
+        background: var(--ember);
+      }
+      .swatch--halo {
+        background: var(--halo);
+      }
+
+      /* ---- Top chrome: canvas title + collaborators ---- */
+      .glow-chrome {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        right: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 7;
+      }
+      .glow-title {
+        font-family: var(--font-display);
+        font-size: 0.75rem;
+        letter-spacing: 0.04em;
+        color: var(--ink);
+        background: rgba(255, 251, 240, 0.85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        padding: 0.4rem 0.9rem;
+        border-radius: 999px;
+        border: 1px solid rgba(212, 146, 31, 0.3);
+      }
+      .glow-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: var(--font-body);
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--gold);
+        background: rgba(255, 251, 240, 0.85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        padding: 0.35rem 0.7rem;
+        border-radius: 999px;
+        border: 1px solid rgba(212, 146, 31, 0.3);
+      }
+      .glow-meta__dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--gold);
+        animation: pulse 2s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(0.8);
+        }
+      }
+
+      /* ---- Zoom widget (bottom-right) ---- */
+      .glow-zoom {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        z-index: 7;
+        background: rgba(255, 251, 240, 0.92);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(212, 146, 31, 0.3);
+        border-radius: 999px;
+        padding: 0.35rem 0.6rem;
+        font-family: var(--font-body);
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--ink);
+        box-shadow: 0 12px 30px -10px rgba(26, 16, 8, 0.3);
+      }
+      .glow-zoom button {
+        width: 22px;
+        height: 22px;
+        border: none;
+        background: transparent;
+        font-size: 1rem;
+        color: var(--gold);
+        cursor: pointer;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .glow-zoom button:hover {
+        background: rgba(212, 146, 31, 0.15);
+      }
+      .glow-zoom__pct {
+        font-family: var(--font-display);
+        color: var(--gold);
+        letter-spacing: 0.04em;
+        padding: 0 0.2rem;
+      }
+
+      /* ---- Minimap (bottom-left) — telegraphs infinite zoom ---- */
+      .glow-minimap {
+        position: absolute;
+        bottom: 1rem;
+        left: 1rem;
+        width: 110px;
+        aspect-ratio: 4 / 3;
+        background:
+          radial-gradient(ellipse at 50% 50%, rgba(240, 200, 80, 0.18), transparent 60%), linear-gradient(180deg, #fbf7ed 0%, #f0e9d4 100%);
+        border: 1px solid rgba(212, 146, 31, 0.3);
+        border-radius: 8px;
+        box-shadow: 0 10px 24px -10px rgba(26, 16, 8, 0.3);
+        z-index: 7;
+        padding: 0.35rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+      }
+      .glow-minimap__hint {
+        font-family: var(--font-hand);
+        font-size: 0.65rem;
+        color: var(--ink);
+        line-height: 1;
+        opacity: 0.45;
+        text-align: center;
+        max-width: 90%;
+      }
+      /* The viewport rect inside minimap */
+      .glow-minimap__view {
+        position: absolute;
+        left: 30%;
+        top: 30%;
+        width: 40%;
+        height: 38%;
+        border: 1.5px solid var(--gold);
+        border-radius: 3px;
+        background: rgba(240, 200, 80, 0.12);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4);
+      }
+      .glow-minimap__label {
+        position: absolute;
+        bottom: -1.4rem;
+        left: 0;
+        font-family: var(--font-body);
+        font-size: 0.55rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold);
+        opacity: 0.7;
+      }
+
+      /* ---- Light rays radiating from center (very slow rotation) ---- */
+      .glow-rays {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 90%;
+        aspect-ratio: 1;
+        transform: translate(-50%, -50%);
+        background: conic-gradient(
+          from 0deg,
+          rgba(240, 200, 80, 0.18) 0deg,
+          transparent 8deg,
+          transparent 28deg,
+          rgba(240, 200, 80, 0.13) 32deg,
+          transparent 38deg,
+          transparent 64deg,
+          rgba(240, 200, 80, 0.18) 70deg,
+          transparent 76deg,
+          transparent 102deg,
+          rgba(240, 200, 80, 0.1) 108deg,
+          transparent 114deg,
+          transparent 140deg,
+          rgba(240, 200, 80, 0.16) 146deg,
+          transparent 152deg,
+          transparent 184deg,
+          rgba(240, 200, 80, 0.18) 190deg,
+          transparent 196deg,
+          transparent 222deg,
+          rgba(240, 200, 80, 0.12) 228deg,
+          transparent 234deg,
+          transparent 260deg,
+          rgba(240, 200, 80, 0.16) 266deg,
+          transparent 272deg,
+          transparent 296deg,
+          rgba(240, 200, 80, 0.1) 302deg,
+          transparent 308deg,
+          transparent 332deg,
+          rgba(240, 200, 80, 0.18) 338deg,
+          transparent 344deg
+        );
+        mask: radial-gradient(circle at center, transparent 8%, black 18%, black 65%, transparent 90%);
+        -webkit-mask: radial-gradient(circle at center, transparent 8%, black 18%, black 65%, transparent 90%);
+        opacity: 0.55;
+        z-index: 1;
+        pointer-events: none;
+        animation: rays-spin 80s linear infinite;
+      }
+      @keyframes rays-spin {
+        to {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
+      }
+
+      /* ---- Static hand-drawn cross (the parchment artwork) ---- */
+      .glow-artwork {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) rotate(-1deg);
+        width: 60%;
+        height: 60%;
+        z-index: 2;
+        pointer-events: none;
+        opacity: 0.95;
+      }
+      .glow-artwork path,
+      .glow-artwork ellipse,
+      .glow-artwork circle {
+        fill: none;
+        stroke: #3d2b1f;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .glow-artwork .stroke-main {
+        stroke-width: 9;
+      }
+      .glow-artwork .stroke-shadow {
+        stroke-width: 13;
+        opacity: 0.14;
+        stroke: #2a1e16;
+      }
+      .glow-artwork .stroke-overlay {
+        stroke-width: 2;
+        opacity: 0.5;
+      }
+      .glow-artwork .stroke-highlight {
+        stroke-width: 1;
+        opacity: 0.6;
+        stroke: #5a3a1f;
+      }
+      .glow-artwork .ink-splash {
+        fill: #3d2b1f;
+        stroke: none;
+        opacity: 0.55;
+      }
+      .glow-artwork .ink-splash--soft {
+        fill: #5a3a1f;
+        stroke: none;
+        opacity: 0.35;
+      }
+
+      /* ---- Ink splatter dots scattered across parchment ---- */
+      .ink-splatter {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+      }
+      .ink-splatter span {
+        position: absolute;
+        background: #3d2b1f;
+        border-radius: 50%;
+        opacity: 0.25;
+      }
+      .ink-splatter span:nth-child(1) {
+        top: 12%;
+        left: 18%;
+        width: 4px;
+        height: 4px;
+        opacity: 0.32;
+      }
+      .ink-splatter span:nth-child(2) {
+        top: 18%;
+        left: 78%;
+        width: 3px;
+        height: 3px;
+        opacity: 0.28;
+      }
+      .ink-splatter span:nth-child(3) {
+        top: 26%;
+        left: 14%;
+        width: 2px;
+        height: 2px;
+        opacity: 0.22;
+      }
+      .ink-splatter span:nth-child(4) {
+        top: 30%;
+        left: 82%;
+        width: 5px;
+        height: 4px;
+        opacity: 0.3;
+        transform: rotate(20deg);
+        border-radius: 50% 60%;
+      }
+      .ink-splatter span:nth-child(5) {
+        top: 68%;
+        left: 12%;
+        width: 3px;
+        height: 3px;
+        opacity: 0.26;
+      }
+      .ink-splatter span:nth-child(6) {
+        top: 72%;
+        left: 80%;
+        width: 4px;
+        height: 4px;
+        opacity: 0.3;
+      }
+      .ink-splatter span:nth-child(7) {
+        top: 80%;
+        left: 22%;
+        width: 2px;
+        height: 2px;
+        opacity: 0.22;
+      }
+      .ink-splatter span:nth-child(8) {
+        top: 84%;
+        left: 72%;
+        width: 3px;
+        height: 3px;
+        opacity: 0.25;
+      }
+      .ink-splatter span:nth-child(9) {
+        top: 38%;
+        left: 6%;
+        width: 2px;
+        height: 2px;
+        opacity: 0.2;
+      }
+      .ink-splatter span:nth-child(10) {
+        top: 42%;
+        left: 92%;
+        width: 2px;
+        height: 2px;
+        opacity: 0.2;
+      }
+      .ink-splatter span:nth-child(11) {
+        top: 22%;
+        left: 50%;
+        width: 2px;
+        height: 2px;
+        opacity: 0.18;
+      }
+      .ink-splatter span:nth-child(12) {
+        top: 78%;
+        left: 48%;
+        width: 2px;
+        height: 2px;
+        opacity: 0.18;
+      }
+
+      /* ---- Hand-written verse caption under the cross ---- */
+      .glow-caption {
+        position: absolute;
+        left: 50%;
+        bottom: 10%;
+        transform: translateX(-50%) rotate(-0.5deg);
+        text-align: center;
+        z-index: 4;
+        max-width: 70%;
+        pointer-events: none;
+      }
+      .glow-caption__line {
+        font-family: var(--font-scribe);
+        font-size: clamp(0.9rem, 1.6vw, 1.3rem);
+        color: var(--ink);
+        line-height: 1.3;
+        opacity: 0.85;
+      }
+      .glow-caption__ref {
+        display: inline-block;
+        margin-top: 0.4rem;
+        font-family: var(--font-hand);
+        font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+        color: var(--gold-pressed);
+        letter-spacing: 0.04em;
+      }
+
+      /* ---- Floating gold motes ---- */
+      .glow-motes {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 6;
+      }
+      .glow-motes span {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--halo);
+        box-shadow:
+          0 0 6px var(--halo),
+          0 0 14px rgba(240, 200, 80, 0.5);
+        opacity: 0;
+        animation: mote-drift 11s ease-in-out infinite;
+      }
+      .glow-motes span:nth-child(1) {
+        top: 22%;
+        left: 28%;
+        animation-delay: 0s;
+      }
+      .glow-motes span:nth-child(2) {
+        top: 30%;
+        right: 26%;
+        animation-delay: 1.8s;
+        width: 3px;
+        height: 3px;
+      }
+      .glow-motes span:nth-child(3) {
+        top: 58%;
+        left: 22%;
+        animation-delay: 3.6s;
+      }
+      .glow-motes span:nth-child(4) {
+        top: 64%;
+        right: 24%;
+        animation-delay: 5.4s;
+        width: 3px;
+        height: 3px;
+      }
+      .glow-motes span:nth-child(5) {
+        top: 44%;
+        left: 50%;
+        animation-delay: 7.2s;
+        width: 5px;
+        height: 5px;
+      }
+      .glow-motes span:nth-child(6) {
+        top: 78%;
+        left: 44%;
+        animation-delay: 2.4s;
+        width: 3px;
+        height: 3px;
+      }
+      .glow-motes span:nth-child(7) {
+        top: 18%;
+        left: 56%;
+        animation-delay: 4.8s;
+        width: 3px;
+        height: 3px;
+      }
+      @keyframes mote-drift {
+        0%,
+        100% {
+          opacity: 0;
+          transform: translateY(0) scale(0.6);
+        }
+        15% {
+          opacity: 0.9;
+        }
+        50% {
+          opacity: 0.65;
+          transform: translateY(-28px) scale(1.1);
+        }
+        85% {
+          opacity: 0.3;
+        }
+      }
+
+      /* ---- Cascading zooming crosses (3 staggered, continuous loop) ---- */
+      .zoom-crosses {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 5;
+      }
+      .zoom-cross {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 55%;
+        height: 55%;
+        transform-origin: center center;
+        transform: translate(-50%, -50%) scale(0.08);
+        opacity: 0;
+        animation: single-cross-zoom 5.4s cubic-bezier(0.4, 0, 0.6, 1) infinite backwards;
+        pointer-events: none;
+      }
+      .zoom-cross--1 {
+        animation-delay: 0s;
+      }
+      .zoom-cross--2 {
+        animation-delay: 1.8s;
+      }
+      .zoom-cross--3 {
+        animation-delay: 3.6s;
+      }
+      .zoom-cross path {
+        fill: none;
+        stroke: var(--gold);
+        stroke-width: 2.4;
+        stroke-linecap: round;
+        filter: drop-shadow(0 0 10px rgba(240, 200, 80, 0.7));
+      }
+      @keyframes single-cross-zoom {
+        0% {
+          transform: translate(-50%, -50%) scale(0.05);
+          opacity: 0;
+        }
+        12% {
+          opacity: 1;
+        }
+        70% {
+          opacity: 0.85;
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(3.6);
+          opacity: 0;
+        }
+      }
+
+      /* ---- Live cursors (two) ---- */
+      .glow-cursor {
+        position: absolute;
+        z-index: 9;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.3rem;
+        pointer-events: none;
+      }
+      .glow-cursor__name {
+        font-family: var(--font-body);
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: #fff;
+        padding: 0.2rem 0.5rem;
+        border-radius: 999px;
+        white-space: nowrap;
+        box-shadow: 0 4px 12px -4px rgba(26, 16, 8, 0.3);
+      }
+      .cursor--marcus {
+        top: 25%;
+        left: 30%;
+        animation: marcus-drift 18s ease-in-out infinite alternate;
+      }
+      .cursor--marcus svg {
+        filter: drop-shadow(0 1px 3px rgba(37, 99, 208, 0.5));
+      }
+      .cursor--marcus svg path {
+        fill: #2563d0;
+      }
+      .cursor--marcus .glow-cursor__name {
+        background: #2563d0;
+      }
+
+      .cursor--ari {
+        top: 65%;
+        left: 70%;
+        animation: ari-drift 22s ease-in-out -9s infinite alternate;
+      }
+      .cursor--ari svg {
+        filter: drop-shadow(0 1px 3px rgba(232, 93, 138, 0.5));
+      }
+      .cursor--ari svg path {
+        fill: #e85d8a;
+      }
+      .cursor--ari .glow-cursor__name {
+        background: #e85d8a;
+      }
+
+      @keyframes marcus-drift {
+        0% {
+          transform: translate(0px, 0px);
+        }
+        20% {
+          transform: translate(40px, -25px);
+        }
+        40% {
+          transform: translate(-30px, 50px);
+        }
+        60% {
+          transform: translate(60px, 30px);
+        }
+        80% {
+          transform: translate(-20px, -40px);
+        }
+        100% {
+          transform: translate(10px, 15px);
+        }
+      }
+      @keyframes ari-drift {
+        0% {
+          transform: translate(0px, 0px);
+        }
+        25% {
+          transform: translate(-50px, 30px);
+        }
+        50% {
+          transform: translate(35px, -45px);
+        }
+        75% {
+          transform: translate(-25px, 55px);
+        }
+        100% {
+          transform: translate(40px, -20px);
+        }
+      }
+
+      /* ============================================================
+         REVEAL
+      ============================================================ */
+      .reveal-fade {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 900ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .is-revealed .reveal-fade {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-fade--copy {
+        transition-delay: 80ms;
+      }
+      .reveal-fade--board {
+        transition-delay: 220ms;
+      }
+
+      /* Ink drawing animation — the verse "writes itself" on reveal */
+      .glow-verse__line,
+      .glow-flourish path {
+        opacity: 0;
+        transition: opacity 1400ms ease;
+      }
+      .is-revealed .glow-verse__line {
+        opacity: 1;
+        transition-delay: 600ms;
+      }
+      .is-revealed .glow-verse__line--small {
+        transition-delay: 1000ms;
+      }
+      .is-revealed .glow-flourish path {
+        opacity: 0.55;
+        transition-delay: 1300ms;
+      }
+      .glow-verse__ref {
+        opacity: 0;
+        transition: opacity 800ms ease 1400ms;
+      }
+      .is-revealed .glow-verse__ref {
+        opacity: 1;
+      }
+
+      /* ============================================================
+         RESPONSIVE
+      ============================================================ */
+      @media (max-width: 960px) {
+        .mosaic-showcase__inner {
+          grid-template-columns: 1fr;
+          gap: 4rem;
+        }
+        .mosaic-showcase__copy {
+          max-width: 100%;
+        }
+        .glow-board {
+          max-width: 560px;
+          aspect-ratio: 1 / 0.9;
+        }
+      }
+      @media (max-width: 600px) {
+        .section-padding {
+          padding: 4rem 0;
+        }
+        .glow-board {
+          max-width: 420px;
+          aspect-ratio: 1 / 0.95;
+        }
+        .glow-tools {
+          left: 0.5rem;
+          padding: 0.25rem;
+        }
+        .glow-tool {
+          width: 28px;
+          height: 28px;
+          font-size: 0.85rem;
+        }
+        .glow-minimap {
+          width: 80px;
+        }
+        .glow-cursor {
+          display: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .glow-cursor,
+        .glow-meta__dot {
+          animation: none !important;
+        }
+        .reveal-fade {
+          transition: none !important;
+        }
+      }
+
+      /* Mockup banner */
+      .mockup-banner {
+        background: var(--deep-brown);
+        color: var(--parchment);
+        padding: 10px 24px;
+        font-size: 12px;
+        text-align: center;
+        letter-spacing: 0.04em;
+      }
+      .mockup-banner strong {
+        color: var(--halo);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mockup-banner">
+      <strong>MOCKUP</strong> — Scripture Glow (Zoom Canvas). Hand-drawn verse on an infinite zoomable parchment. Hover tools / cursor
+      drifts.
+    </div>
+
+    <section class="mosaic-showcase section-padding" id="scripture-glow-spotlight" data-spotlight>
+      <div class="container mosaic-showcase__inner">
+        <!-- LEFT — copy -->
+        <div class="mosaic-showcase__copy reveal-fade reveal-fade--copy">
+          <p class="mosaic-showcase__eyebrow">Sit with the Word.</p>
+          <h2 class="mosaic-showcase__title">Draw the verse.<br /><span style="color: var(--gold)">Inhale it.</span></h2>
+          <p class="mosaic-showcase__body">
+            Some scriptures are too important to skim. Open <strong>Scripture Glow</strong> and
+            <strong>draw the verse with your finger</strong>. Ink, marker, or brush. Layer flourishes. Zoom in until one word fills the
+            screen. Zoom out until the whole psalm fits on one beautiful page.
+            <strong>The sanctuary is the canvas. You bring the breath.</strong>
+          </p>
+          <ul class="mosaic-showcase__bullets" role="list">
+            <li><strong>Hand-drawn</strong> &mdash; ink, marker, brush, highlighter</li>
+            <li><strong>Infinite zoom</strong> &mdash; from one serif to a whole sermon</li>
+            <li><strong>12 themes</strong> &mdash; Parchment dawn to Aubergine midnight</li>
+            <li>Finger or Apple Pencil &mdash; pressure-sensitive ink</li>
+            <li>Save to your sanctuary &middot; share to your fellowship</li>
+            <li><strong>No AI between you and the Word.</strong> Just your hand and the verse.</li>
+          </ul>
+          <a href="#pricing" class="mosaic-showcase__cta">Open your first canvas &rarr;</a>
+        </div>
+
+        <!-- RIGHT — the zoom canvas surface -->
+        <div class="glow-board reveal-fade reveal-fade--board" aria-hidden="true">
+          <!-- Top chrome -->
+          <div class="glow-chrome">
+            <div class="glow-title">Psalm 46:10 · Be Still</div>
+            <div class="glow-meta">
+              <span class="glow-meta__dot"></span>
+              Auto-saved
+            </div>
+          </div>
+
+          <!-- Decorative hand-drawn flourishes -->
+          <svg class="glow-flourish flourish--top" viewBox="0 0 200 30">
+            <path d="M 10 22 C 30 6, 50 28, 70 14 C 90 4, 110 24, 130 14 C 150 4, 170 22, 190 12" />
+          </svg>
+          <svg class="glow-flourish flourish--bottom" viewBox="0 0 200 30">
+            <path d="M 10 14 C 30 24, 50 6, 70 18 C 90 28, 110 8, 130 18 C 150 28, 170 10, 190 22" />
+          </svg>
+          <svg class="glow-flourish flourish--star glow-flourish--star-1" viewBox="0 0 24 24">
+            <path d="M 12 4 L 12 20 M 4 12 L 20 12 M 7 7 L 17 17 M 17 7 L 7 17" />
+          </svg>
+          <svg class="glow-flourish flourish--star glow-flourish--star-2" viewBox="0 0 24 24">
+            <path d="M 12 4 L 12 20 M 4 12 L 20 12" />
+          </svg>
+          <svg class="glow-flourish flourish--star glow-flourish--star-3" viewBox="0 0 24 24">
+            <path d="M 12 4 L 12 20 M 4 12 L 20 12 M 7 7 L 17 17 M 17 7 L 7 17" />
+          </svg>
+          <svg class="glow-flourish flourish--star glow-flourish--star-4" viewBox="0 0 24 24">
+            <path d="M 12 4 L 12 20 M 4 12 L 20 12" />
+          </svg>
+
+          <!-- Light rays radiating from center (slow rotation) -->
+          <div class="glow-rays"></div>
+
+          <!-- Ink splatter dots scattered across parchment -->
+          <div class="ink-splatter" aria-hidden="true">
+            <span></span><span></span><span></span><span></span> <span></span><span></span><span></span><span></span> <span></span
+            ><span></span><span></span><span></span>
+          </div>
+
+          <!-- Static hand-drawn cross — the parchment artwork (does NOT animate) -->
+          <svg class="glow-artwork" viewBox="0 0 100 100" aria-hidden="true">
+            <!-- soft shadow underlay -->
+            <path class="stroke-shadow" d="M 50 9 L 50 91" />
+            <path class="stroke-shadow" d="M 13 50 L 87 50" />
+            <!-- main ink strokes -->
+            <path class="stroke-main" d="M 50 9 C 50.6 30, 49.4 70, 50.3 91" />
+            <path class="stroke-main" d="M 13 50 C 30 49.5, 70 50.5, 87 49.7" />
+            <!-- subtle overlay strokes for hand-drawn texture -->
+            <path class="stroke-overlay" d="M 50.6 12 C 51 32, 49.5 68, 50.4 89" />
+            <path class="stroke-overlay" d="M 15 49.4 C 32 50, 68 49.4, 85 50.4" />
+            <path class="stroke-highlight" d="M 49.6 14 C 50 34, 49.6 66, 49.8 88" />
+            <path class="stroke-highlight" d="M 16 50.6 C 34 50.2, 66 49.4, 84 50.2" />
+            <!-- ink splotches at brush ends -->
+            <ellipse class="ink-splash" cx="50" cy="9.5" rx="2.6" ry="1.4" transform="rotate(-12 50 9.5)" />
+            <ellipse class="ink-splash" cx="50" cy="91" rx="2.4" ry="1.2" transform="rotate(8 50 91)" />
+            <ellipse class="ink-splash" cx="13" cy="50" rx="1.4" ry="2.4" transform="rotate(6 13 50)" />
+            <ellipse class="ink-splash" cx="87" cy="50" rx="1.2" ry="2.2" transform="rotate(-10 87 50)" />
+            <!-- center bleed -->
+            <circle class="ink-splash--soft" cx="50" cy="50" r="3" />
+          </svg>
+
+          <!-- Floating gold motes -->
+          <div class="glow-motes"><span></span><span></span><span></span><span></span> <span></span><span></span><span></span></div>
+
+          <!-- Hand-written verse caption -->
+          <div class="glow-caption">
+            <div class="glow-caption__line">Be still, and know that I am God.</div>
+            <span class="glow-caption__ref">— Psalm 46:10</span>
+          </div>
+
+          <!-- Cascading zooming crosses (3, staggered, continuous) -->
+          <div class="zoom-crosses">
+            <svg class="zoom-cross zoom-cross--1" viewBox="0 0 100 100">
+              <path d="M 50 6 L 50 94 M 6 50 L 94 50" />
+            </svg>
+            <svg class="zoom-cross zoom-cross--2" viewBox="0 0 100 100">
+              <path d="M 50 6 L 50 94 M 6 50 L 94 50" />
+            </svg>
+            <svg class="zoom-cross zoom-cross--3" viewBox="0 0 100 100">
+              <path d="M 50 6 L 50 94 M 6 50 L 94 50" />
+            </svg>
+          </div>
+
+          <!-- Live cursors -->
+          <div class="glow-cursor cursor--marcus">
+            <svg width="18" height="18" viewBox="0 0 18 18">
+              <path d="M 2 2 L 2 14 L 6 11 L 9 16 L 11 15 L 8 10 L 14 9 Z" />
+            </svg>
+            <span class="glow-cursor__name">Marcus</span>
+          </div>
+          <div class="glow-cursor cursor--ari">
+            <svg width="18" height="18" viewBox="0 0 18 18">
+              <path d="M 2 2 L 2 14 L 6 11 L 9 16 L 11 15 L 8 10 L 14 9 Z" />
+            </svg>
+            <span class="glow-cursor__name">Ari</span>
+          </div>
+
+          <!-- Left: brush palette -->
+          <div class="glow-tools">
+            <button class="glow-tool is-active" title="Pen">✒️</button>
+            <button class="glow-tool" title="Marker">🖊️</button>
+            <button class="glow-tool" title="Brush">🖌️</button>
+            <button class="glow-tool" title="Highlighter">🖍️</button>
+            <button class="glow-tool" title="Eraser">⌫</button>
+            <button class="glow-tool" title="Ink"><span class="glow-tool__swatch swatch--ink"></span></button>
+            <button class="glow-tool" title="Gold"><span class="glow-tool__swatch swatch--gold"></span></button>
+            <button class="glow-tool" title="Ember"><span class="glow-tool__swatch swatch--ember"></span></button>
+            <button class="glow-tool" title="Halo"><span class="glow-tool__swatch swatch--halo"></span></button>
+          </div>
+
+          <!-- Bottom-right: zoom widget -->
+          <div class="glow-zoom">
+            <button title="Zoom out">−</button>
+            <span class="glow-zoom__pct">320%</span>
+            <button title="Zoom in">+</button>
+            <span
+              style="
+                font-size: 0.55rem;
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+                color: var(--gold);
+                opacity: 0.7;
+                margin-left: 0.4rem;
+              "
+              >∞ canvas</span
+            >
+          </div>
+
+          <!-- Bottom-left: minimap -->
+          <div class="glow-minimap">
+            <span class="glow-minimap__view"></span>
+            <span class="glow-minimap__hint">Be still…</span>
+            <span class="glow-minimap__label">Bird's-eye</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const sp = document.querySelector("[data-spotlight]");
+      const obs = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              sp.classList.add("is-revealed");
+              obs.disconnect();
+            }
+          }),
+        { threshold: 0.15 }
+      );
+      obs.observe(sp);
+      requestAnimationFrame(() => {
+        const r = sp.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.8) sp.classList.add("is-revealed");
+      });
+    </script>
+  </body>
+</html>

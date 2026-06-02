@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Themes Spotlight — MyBibleLens Mockup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;600;700&family=Alegreya:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --parchment: #f5f2ed;
+        --deep-brown: #3d2b1f;
+        --ink: #2a1e16;
+        --gold: #b6751d;
+        --gold-light: #d4921f;
+        --gold-pressed: #9a6218;
+        --ember: #d4921f;
+        --halo: #f0c850;
+        --font-display: "Hammersmith One", serif;
+        --font-body: "Inter", -apple-system, system-ui, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        background: var(--parchment);
+        color: var(--deep-brown);
+      }
+      body {
+        font-family: var(--font-body);
+        min-height: 100vh;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+      .section-padding {
+        padding: 6rem 0;
+      }
+
+      /* ============================================================
+         MOSAIC-SHOWCASE pattern (copied from index.html so the
+         mockup matches the site exactly — left copy / right visual)
+      ============================================================ */
+      .mosaic-showcase {
+        background:
+          radial-gradient(ellipse 60% 40% at 25% 30%, rgba(212, 146, 31, 0.06) 0%, transparent 65%),
+          radial-gradient(ellipse 60% 40% at 75% 70%, rgba(240, 200, 80, 0.04) 0%, transparent 65%), var(--parchment);
+        position: relative;
+        overflow: hidden;
+      }
+      .mosaic-showcase__inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(2rem, 5vw, 5rem);
+        align-items: center;
+      }
+      .mosaic-showcase__copy {
+        max-width: 540px;
+      }
+      .mosaic-showcase__eyebrow {
+        font-family: var(--font-display);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1.1rem;
+      }
+      .mosaic-showcase__title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 1.3rem + 2.5vw, 3.25rem);
+        line-height: 1.15;
+        color: var(--deep-brown);
+        letter-spacing: 0.005em;
+        margin-bottom: 1.4rem;
+      }
+      .mosaic-showcase__body {
+        font-family: var(--font-body);
+        font-size: clamp(1rem, 0.95rem + 0.25vw, 1.1rem);
+        line-height: 1.75;
+        color: rgba(61, 43, 31, 0.85);
+        margin-bottom: 1.5rem;
+      }
+      .mosaic-showcase__bullets {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.6rem;
+        display: grid;
+        gap: 0.5rem;
+      }
+      .mosaic-showcase__bullets li {
+        font-family: var(--font-body);
+        font-size: 0.95rem;
+        color: rgba(61, 43, 31, 0.78);
+        padding-left: 1.5rem;
+        position: relative;
+        line-height: 1.55;
+      }
+      .mosaic-showcase__bullets li::before {
+        content: "✦";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--gold);
+        font-size: 0.85rem;
+      }
+      .mosaic-showcase__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        font-family: var(--font-display);
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: var(--gold);
+        padding: 0.85rem 1.4rem;
+        border-radius: 999px;
+        border: 1px solid rgba(182, 117, 29, 0.4);
+        background: linear-gradient(180deg, rgba(240, 200, 80, 0.06) 0%, rgba(212, 146, 31, 0.04) 100%);
+        transition:
+          color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+          border-color 220ms ease,
+          background 220ms ease,
+          transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 220ms ease;
+      }
+      .mosaic-showcase__cta:hover {
+        color: var(--gold-light);
+        border-color: rgba(212, 146, 31, 0.7);
+        background: rgba(240, 200, 80, 0.12);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px -12px rgba(212, 146, 31, 0.4);
+      }
+
+      /* ============================================================
+         FONT PREVIEW CARD — shows the 3 typefaces, click to swap
+      ============================================================ */
+      .font-preview {
+        margin: 0 0 1.6rem;
+        padding: 1.1rem 1.3rem 1.2rem;
+        border-radius: 16px;
+        background: linear-gradient(135deg, rgba(212, 146, 31, 0.08) 0%, rgba(240, 200, 80, 0.06) 100%);
+        border: 1px solid rgba(212, 146, 31, 0.35);
+      }
+      .font-preview__label {
+        font-family: var(--font-display);
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 0.7rem;
+      }
+      .font-preview__row {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 0.9rem;
+        flex-wrap: wrap;
+      }
+      .font-chip {
+        flex: 1;
+        min-width: 0;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.2rem;
+        padding: 0.7rem 0.6rem 0.55rem;
+        border-radius: 12px;
+        border: 1px solid rgba(182, 117, 29, 0.3);
+        background: rgba(255, 252, 245, 0.6);
+        cursor: pointer;
+        transition: all 240ms cubic-bezier(0.2, 0.7, 0.2, 1);
+        font-family: inherit;
+        color: var(--ink);
+      }
+      .font-chip:hover {
+        border-color: rgba(212, 146, 31, 0.6);
+        background: rgba(240, 200, 80, 0.1);
+        transform: translateY(-1px);
+      }
+      .font-chip.is-active {
+        border-color: var(--gold);
+        background: linear-gradient(135deg, rgba(212, 146, 31, 0.15) 0%, rgba(240, 200, 80, 0.1) 100%);
+        box-shadow: 0 6px 18px -8px rgba(212, 146, 31, 0.5);
+      }
+      .font-chip__aa {
+        font-size: 1.5rem;
+        line-height: 1;
+        color: var(--ink);
+      }
+      .font-chip__name {
+        font-family: "Inter", sans-serif;
+        font-size: 0.65rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: rgba(61, 43, 31, 0.7);
+      }
+      .font-chip--hammersmith .font-chip__aa {
+        font-family: "Hammersmith One", serif;
+      }
+      .font-chip--montserrat .font-chip__aa {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 700;
+      }
+      .font-chip--alegreya .font-chip__aa {
+        font-family: "Alegreya", serif;
+        font-weight: 700;
+      }
+
+      .font-preview__sample {
+        font-size: 1.05rem;
+        line-height: 1.4;
+        color: var(--ink);
+        margin: 0;
+        transition:
+          font-family 360ms ease,
+          letter-spacing 360ms ease;
+      }
+      .font-sample--hammersmith {
+        font-family: "Hammersmith One", serif;
+        letter-spacing: 0.005em;
+      }
+      .font-sample--montserrat {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+        letter-spacing: -0.005em;
+      }
+      .font-sample--alegreya {
+        font-family: "Alegreya", serif;
+        font-weight: 500;
+        letter-spacing: 0.005em;
+      }
+
+      /* ============================================================
+         RIGHT SIDE — Floating Phones Collage
+      ============================================================ */
+      .themes-board {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        max-width: 620px;
+        margin-inline: auto;
+        perspective: 1600px;
+        transform-style: preserve-3d;
+      }
+
+      /* Soft brand halo behind everything */
+      .themes-board::before {
+        content: "";
+        position: absolute;
+        inset: 8% 12%;
+        background:
+          radial-gradient(ellipse at 50% 45%, rgba(240, 200, 80, 0.22), transparent 60%),
+          radial-gradient(ellipse at 30% 70%, rgba(212, 146, 31, 0.18), transparent 55%);
+        filter: blur(40px);
+        z-index: 0;
+        pointer-events: none;
+      }
+      /* Floor glow under the hero phone */
+      .themes-board::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 4%;
+        width: 60%;
+        height: 60px;
+        transform: translateX(-50%);
+        background: radial-gradient(ellipse at center, rgba(182, 117, 29, 0.35), transparent 70%);
+        filter: blur(18px);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      /* Phone "ghost" frame — black bezel, dynamic island, screen container */
+      .phone {
+        position: absolute;
+        background: #0a0a0c;
+        border-radius: 32px;
+        padding: 6px;
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.04),
+          0 28px 60px -18px rgba(26, 16, 8, 0.55),
+          0 12px 30px -10px rgba(182, 117, 29, 0.25);
+        overflow: hidden;
+        transition:
+          transform 600ms cubic-bezier(0.16, 1, 0.3, 1),
+          filter 600ms cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 400ms ease;
+        will-change: transform;
+      }
+      .phone__screen {
+        width: 100%;
+        height: 100%;
+        border-radius: 26px;
+        overflow: hidden;
+        background: #1c100a;
+        position: relative;
+      }
+      .phone__screen img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* HERO phone — center front, crisp, large */
+      .phone--hero {
+        width: 38%;
+        aspect-ratio: 9 / 19.5;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) translateZ(80px) rotate(0deg);
+        z-index: 10;
+        box-shadow:
+          0 0 0 1px rgba(212, 146, 31, 0.4),
+          0 40px 80px -20px rgba(26, 16, 8, 0.65),
+          0 18px 50px -16px rgba(212, 146, 31, 0.5),
+          0 0 60px -6px rgba(240, 200, 80, 0.35);
+        animation: hero-float 6s ease-in-out infinite alternate;
+      }
+      @keyframes hero-float {
+        0% {
+          transform: translate(-50%, -50%) translateZ(80px) translateY(0) rotate(0deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) translateZ(80px) translateY(-10px) rotate(0.5deg);
+        }
+      }
+
+      /* SUPPORTING phones — depth-staged around the hero, tilted, blurred */
+      .phone--bg {
+        width: 24%;
+        aspect-ratio: 9 / 19.5;
+        z-index: 1;
+        opacity: 0.92;
+      }
+
+      /* Position each supporting phone via individual rules.
+         Numbers reference the IMG_<num>.PNG basenames so it's easy to tweak. */
+      .phone--p1 {
+        left: 4%;
+        top: 8%;
+        transform: rotate(-14deg) translateZ(-60px) scale(0.95);
+        filter: blur(0.6px);
+        z-index: 4;
+      }
+      .phone--p2 {
+        left: 22%;
+        top: -2%;
+        transform: rotate(-6deg) translateZ(-30px) scale(0.92);
+        filter: blur(0.4px);
+        z-index: 5;
+      }
+      .phone--p3 {
+        right: 22%;
+        top: -2%;
+        transform: rotate(6deg) translateZ(-30px) scale(0.92);
+        filter: blur(0.4px);
+        z-index: 5;
+      }
+      .phone--p4 {
+        right: 4%;
+        top: 8%;
+        transform: rotate(14deg) translateZ(-60px) scale(0.95);
+        filter: blur(0.6px);
+        z-index: 4;
+      }
+      .phone--p5 {
+        left: 0%;
+        top: 42%;
+        transform: rotate(-18deg) translateZ(-120px) scale(0.82);
+        filter: blur(1.4px);
+        z-index: 2;
+        opacity: 0.75;
+      }
+      .phone--p6 {
+        right: 0%;
+        top: 42%;
+        transform: rotate(18deg) translateZ(-120px) scale(0.82);
+        filter: blur(1.4px);
+        z-index: 2;
+        opacity: 0.75;
+      }
+      .phone--p7 {
+        left: 6%;
+        bottom: 6%;
+        transform: rotate(-10deg) translateZ(-50px) scale(0.92);
+        filter: blur(0.5px);
+        z-index: 3;
+      }
+      .phone--p8 {
+        right: 6%;
+        bottom: 6%;
+        transform: rotate(10deg) translateZ(-50px) scale(0.92);
+        filter: blur(0.5px);
+        z-index: 3;
+      }
+      .phone--p9 {
+        left: 24%;
+        bottom: -2%;
+        transform: rotate(-4deg) translateZ(-20px) scale(0.94);
+        filter: blur(0.3px);
+        z-index: 6;
+      }
+      .phone--p10 {
+        right: 24%;
+        bottom: -2%;
+        transform: rotate(4deg) translateZ(-20px) scale(0.94);
+        filter: blur(0.3px);
+        z-index: 6;
+      }
+      .phone--p11 {
+        left: 50%;
+        top: 12%;
+        transform: translateX(-50%) rotate(0deg) translateZ(-180px) scale(0.7);
+        filter: blur(2px);
+        z-index: 1;
+        opacity: 0.55;
+      }
+
+      /* Subtle floating sway per supporting phone */
+      .phone--bg {
+        animation: bg-drift 9s ease-in-out infinite alternate;
+      }
+      .phone--p2 {
+        animation-delay: -1.4s;
+      }
+      .phone--p3 {
+        animation-delay: -2.2s;
+      }
+      .phone--p4 {
+        animation-delay: -3.6s;
+      }
+      .phone--p5 {
+        animation-delay: -4.1s;
+      }
+      .phone--p6 {
+        animation-delay: -5s;
+      }
+      .phone--p7 {
+        animation-delay: -1s;
+      }
+      .phone--p8 {
+        animation-delay: -2.8s;
+      }
+      .phone--p9 {
+        animation-delay: -3.4s;
+      }
+      .phone--p10 {
+        animation-delay: -4.6s;
+      }
+      .phone--p11 {
+        animation-delay: -5.6s;
+      }
+
+      @keyframes bg-drift {
+        0% {
+          translate: 0 0;
+        }
+        100% {
+          translate: 0 -8px;
+        }
+      }
+
+      /* Hover the whole board — slight 3D tilt + supporting phones spread */
+      .themes-board:hover .phone--hero {
+        box-shadow:
+          0 0 0 1px rgba(212, 146, 31, 0.6),
+          0 48px 100px -20px rgba(26, 16, 8, 0.7),
+          0 22px 60px -16px rgba(212, 146, 31, 0.65),
+          0 0 80px -6px rgba(240, 200, 80, 0.5);
+      }
+
+      /* Sparkles for ambience */
+      .themes-sparkles {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 9;
+      }
+      .themes-sparkles span {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background: var(--halo);
+        border-radius: 50%;
+        box-shadow:
+          0 0 8px var(--halo),
+          0 0 16px rgba(240, 200, 80, 0.6);
+        opacity: 0;
+        animation: sparkle 9s ease-in-out infinite;
+      }
+      .themes-sparkles span:nth-child(1) {
+        top: 14%;
+        left: 18%;
+        animation-delay: 0s;
+      }
+      .themes-sparkles span:nth-child(2) {
+        top: 26%;
+        right: 16%;
+        animation-delay: 1.6s;
+        width: 4px;
+        height: 4px;
+      }
+      .themes-sparkles span:nth-child(3) {
+        top: 62%;
+        left: 12%;
+        animation-delay: 3.4s;
+      }
+      .themes-sparkles span:nth-child(4) {
+        top: 70%;
+        right: 14%;
+        animation-delay: 5s;
+        width: 4px;
+        height: 4px;
+      }
+      .themes-sparkles span:nth-child(5) {
+        top: 48%;
+        left: 50%;
+        animation-delay: 6.5s;
+        width: 3px;
+        height: 3px;
+      }
+      @keyframes sparkle {
+        0%,
+        100% {
+          opacity: 0;
+          transform: translateY(0) scale(0.8);
+        }
+        15% {
+          opacity: 0.9;
+        }
+        50% {
+          opacity: 0.55;
+          transform: translateY(-24px) scale(1.05);
+        }
+        85% {
+          opacity: 0.3;
+        }
+      }
+
+      /* ============================================================
+         REVEAL on scroll
+      ============================================================ */
+      .reveal-fade {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 900ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .is-revealed .reveal-fade {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-fade--copy {
+        transition-delay: 80ms;
+      }
+      .reveal-fade--board {
+        transition-delay: 220ms;
+      }
+
+      /* ============================================================
+         RESPONSIVE
+      ============================================================ */
+      @media (max-width: 960px) {
+        .mosaic-showcase__inner {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+        .mosaic-showcase__copy {
+          max-width: 100%;
+        }
+        .themes-board {
+          max-width: 480px;
+          aspect-ratio: 1 / 1.05;
+        }
+      }
+      @media (max-width: 600px) {
+        .section-padding {
+          padding: 4rem 0;
+        }
+        .themes-board {
+          aspect-ratio: 1 / 1;
+        }
+        .phone--hero {
+          width: 42%;
+        }
+        .phone--bg {
+          width: 28%;
+        }
+        .phone--p11 {
+          display: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .phone,
+        .themes-sparkles span {
+          animation: none !important;
+        }
+        .reveal-fade {
+          transition: none !important;
+        }
+      }
+
+      /* Mockup banner — strip on integration */
+      .mockup-banner {
+        background: var(--deep-brown);
+        color: var(--parchment);
+        padding: 10px 24px;
+        font-size: 12px;
+        text-align: center;
+        letter-spacing: 0.04em;
+      }
+      .mockup-banner strong {
+        color: var(--halo);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mockup-banner">
+      <strong>MOCKUP</strong> — Themes spotlight. Left copy matches site voice. Right collage = floating phones, depth-staged.
+    </div>
+
+    <!-- ===== SECTION: THEMES SPOTLIGHT ===== -->
+    <section class="mosaic-showcase section-padding" id="themes-spotlight" data-spotlight>
+      <div class="container mosaic-showcase__inner">
+        <!-- LEFT — copy block, mirrors site's mosaic-showcase API -->
+        <div class="mosaic-showcase__copy reveal-fade reveal-fade--copy">
+          <p class="mosaic-showcase__eyebrow">Pick your sanctuary.</p>
+          <h2 class="mosaic-showcase__title">
+            Twelve sanctuaries.<br />One scripture.<br />
+            <span style="color: var(--gold)">Yours to choose.</span>
+          </h2>
+          <p class="mosaic-showcase__body">
+            Open MyBibleLens in the mood you're already in. <strong>Twelve hand-tuned themes</strong> — from Parchment morning calm to
+            Aubergine late-night study — change every screen, button, glow, and shadow in the app. Pair them with the typography that reads
+            best to your eye. Same scripture. Same tools. Different room.
+          </p>
+          <ul class="mosaic-showcase__bullets" role="list">
+            <li>
+              <strong>12 palettes</strong> — Parchment, Sanctuary, Sky, Sage, Lilac, Halo, Ember, Bronze, Espresso, Midnight, Forest,
+              Aubergine
+            </li>
+            <li><strong>3 typefaces</strong> — Hammersmith One, Montserrat, Alegreya. Switch the whole app to read in your voice.</li>
+            <li>Tuned by hand — every shadow, every gold accent, every glow</li>
+            <li>Switch in one tap. The whole app re-skins instantly.</li>
+            <li>Included in every tier — even free Seeker</li>
+          </ul>
+
+          <!-- Font preview card -->
+          <div class="font-preview" role="group" aria-label="Font options">
+            <p class="font-preview__label">Pick your voice</p>
+            <div class="font-preview__row">
+              <button type="button" class="font-chip font-chip--hammersmith is-active">
+                <span class="font-chip__aa">Aa</span>
+                <span class="font-chip__name">Hammersmith</span>
+              </button>
+              <button type="button" class="font-chip font-chip--montserrat">
+                <span class="font-chip__aa">Aa</span>
+                <span class="font-chip__name">Montserrat</span>
+              </button>
+              <button type="button" class="font-chip font-chip--alegreya">
+                <span class="font-chip__aa">Aa</span>
+                <span class="font-chip__name">Alegreya</span>
+              </button>
+            </div>
+            <p class="font-preview__sample font-sample--hammersmith" data-sample="hammersmith">
+              Bringing people closer to God in an exciting and easy way!
+            </p>
+          </div>
+
+          <a href="#pricing" class="mosaic-showcase__cta">Pick the room that fits your spirit →</a>
+        </div>
+
+        <!-- RIGHT — floating phones collage -->
+        <div class="themes-board reveal-fade reveal-fade--board" aria-hidden="true">
+          <!-- Far back, blurred most -->
+          <div class="phone phone--bg phone--p11">
+            <div class="phone__screen"><img src="assets/themes/IMG_1808.PNG" alt="" /></div>
+          </div>
+
+          <!-- Side wings (most blurred) -->
+          <div class="phone phone--bg phone--p5">
+            <div class="phone__screen"><img src="assets/themes/IMG_1816.PNG" alt="" /></div>
+          </div>
+          <div class="phone phone--bg phone--p6">
+            <div class="phone__screen"><img src="assets/themes/IMG_1810.PNG" alt="" /></div>
+          </div>
+
+          <!-- Outer tilted top -->
+          <div class="phone phone--bg phone--p1">
+            <div class="phone__screen"><img src="assets/themes/IMG_1797.PNG" alt="" /></div>
+          </div>
+          <div class="phone phone--bg phone--p4">
+            <div class="phone__screen"><img src="assets/themes/IMG_1812.PNG" alt="" /></div>
+          </div>
+
+          <!-- Inner tilted top -->
+          <div class="phone phone--bg phone--p2">
+            <div class="phone__screen"><img src="assets/themes/IMG_1799.PNG" alt="" /></div>
+          </div>
+          <div class="phone phone--bg phone--p3">
+            <div class="phone__screen"><img src="assets/themes/IMG_1806.PNG" alt="" /></div>
+          </div>
+
+          <!-- Bottom corners -->
+          <div class="phone phone--bg phone--p7">
+            <div class="phone__screen"><img src="assets/themes/IMG_1803.PNG" alt="" /></div>
+          </div>
+          <div class="phone phone--bg phone--p8">
+            <div class="phone__screen"><img src="assets/themes/IMG_1814.PNG" alt="" /></div>
+          </div>
+
+          <!-- Inner bottom -->
+          <div class="phone phone--bg phone--p9">
+            <div class="phone__screen"><img src="assets/themes/IMG_1801.PNG" alt="" /></div>
+          </div>
+          <div class="phone phone--bg phone--p10">
+            <div class="phone__screen"><img src="assets/themes/IMG_1794.PNG" alt="" /></div>
+          </div>
+
+          <!-- HERO — front center -->
+          <div class="phone phone--hero">
+            <div class="phone__screen"><img src="assets/themes/IMG_1792.PNG" alt="MyBibleLens — Parchment theme" /></div>
+          </div>
+
+          <!-- Sparkles -->
+          <div class="themes-sparkles" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const sp = document.querySelector("[data-spotlight]");
+      const obs = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              sp.classList.add("is-revealed");
+              obs.disconnect();
+            }
+          }),
+        { threshold: 0.15 }
+      );
+      obs.observe(sp);
+      requestAnimationFrame(() => {
+        const r = sp.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.8) sp.classList.add("is-revealed");
+      });
+
+      // Font picker — chip click swaps the sample font + auto-rotates every 4s
+      const fontChips = document.querySelectorAll(".font-chip");
+      const fontSample = document.querySelector(".font-preview__sample");
+      const FONTS = ["hammersmith", "montserrat", "alegreya"];
+
+      function setFont(name) {
+        fontChips.forEach((c) => c.classList.toggle("is-active", c.classList.contains("font-chip--" + name)));
+        FONTS.forEach((f) => fontSample.classList.toggle("font-sample--" + f, f === name));
+      }
+
+      fontChips.forEach((chip, i) => {
+        chip.addEventListener("click", () => {
+          setFont(FONTS[i]);
+          if (autoFontTimer) {
+            clearInterval(autoFontTimer);
+            autoFontTimer = null;
+          }
+        });
+      });
+
+      let fontIdx = 0;
+      let autoFontTimer = setInterval(() => {
+        fontIdx = (fontIdx + 1) % FONTS.length;
+        setFont(FONTS[fontIdx]);
+      }, 3200);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lens / S.O.A.P. — MyBibleLens</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --parchment: #f5f2ed;
+        --deep-brown: #3d2b1f;
+        --ink: #2a1e16;
+        --gold: #b6751d;
+        --gold-light: #d4921f;
+        --ember: #d4921f;
+        --halo: #f0c850;
+        --font-display: "Hammersmith One", serif;
+        --font-body: "Inter", -apple-system, system-ui, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        background: var(--parchment);
+        color: var(--deep-brown);
+      }
+      body {
+        font-family: var(--font-body);
+        -webkit-font-smoothing: antialiased;
+      }
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+      .section-padding {
+        padding: 6rem 0;
+      }
+
+      .mosaic-showcase {
+        background:
+          radial-gradient(ellipse 60% 40% at 25% 30%, rgba(212, 146, 31, 0.06) 0%, transparent 65%),
+          radial-gradient(ellipse 60% 40% at 75% 70%, rgba(240, 200, 80, 0.04) 0%, transparent 65%), var(--parchment);
+        position: relative;
+        overflow: hidden;
+      }
+      .mosaic-showcase__inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(2rem, 5vw, 5rem);
+        align-items: center;
+      }
+      .mosaic-showcase__copy {
+        max-width: 540px;
+      }
+      .mosaic-showcase__eyebrow {
+        font-family: var(--font-display);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1.1rem;
+      }
+      .mosaic-showcase__title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 1.3rem + 2.5vw, 3.25rem);
+        line-height: 1.15;
+        color: var(--deep-brown);
+        margin-bottom: 1.4rem;
+      }
+      .mosaic-showcase__body {
+        font-size: clamp(1rem, 0.95rem + 0.25vw, 1.1rem);
+        line-height: 1.75;
+        color: rgba(61, 43, 31, 0.85);
+        margin-bottom: 1.5rem;
+      }
+      .mosaic-showcase__bullets {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.6rem;
+        display: grid;
+        gap: 0.5rem;
+      }
+      .mosaic-showcase__bullets li {
+        font-size: 0.95rem;
+        color: rgba(61, 43, 31, 0.78);
+        padding-left: 1.5rem;
+        position: relative;
+        line-height: 1.55;
+      }
+      .mosaic-showcase__bullets li::before {
+        content: "✦";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--gold);
+        font-size: 0.85rem;
+      }
+      .mosaic-showcase__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        font-family: var(--font-display);
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: var(--gold);
+        padding: 0.85rem 1.4rem;
+        border-radius: 999px;
+        border: 1px solid rgba(182, 117, 29, 0.4);
+        background: linear-gradient(180deg, rgba(240, 200, 80, 0.06) 0%, rgba(212, 146, 31, 0.04) 100%);
+        transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .mosaic-showcase__cta:hover {
+        color: var(--gold-light);
+        border-color: rgba(212, 146, 31, 0.7);
+        background: rgba(240, 200, 80, 0.12);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px -12px rgba(212, 146, 31, 0.4);
+      }
+      .soap-explainer {
+        margin-top: 1.4rem;
+        padding: 1.1rem 1.3rem 1.2rem;
+        border-radius: 16px;
+        background: linear-gradient(135deg, rgba(212, 146, 31, 0.08) 0%, rgba(240, 200, 80, 0.06) 100%);
+        border: 1px solid rgba(212, 146, 31, 0.35);
+      }
+      .soap-explainer__title {
+        font-family: "Hammersmith One", sans-serif;
+        font-size: 1.1rem;
+        color: #1a1008;
+        margin: 0 0 0.4rem 0;
+        line-height: 1.2;
+      }
+      .soap-explainer__intro {
+        font-size: 0.88rem;
+        line-height: 1.55;
+        color: #3d2b1f;
+        margin: 0 0 0.85rem 0;
+      }
+      .soap-explainer__steps {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .soap-explainer__steps li {
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+      }
+      .soap-explainer__letter {
+        flex-shrink: 0;
+        width: 1.75rem;
+        height: 1.75rem;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Hammersmith One", sans-serif;
+        font-size: 0.95rem;
+        color: #fff8e0;
+        background: linear-gradient(135deg, #b6751d 0%, #9a6218 100%);
+        box-shadow: 0 2px 6px -2px rgba(154, 98, 24, 0.5);
+      }
+      .soap-explainer__step {
+        font-size: 0.88rem;
+        line-height: 1.55;
+        color: #3d2b1f;
+        padding-top: 0.15rem;
+      }
+      .soap-explainer__step strong {
+        color: #1a1008;
+        font-weight: 700;
+      }
+      .soap-explainer__step em {
+        font-style: italic;
+        color: #9a6218;
+      }
+
+      .mosaic-showcase__board {
+        perspective: 1200px;
+      }
+      .mosaic-showcase__video {
+        display: block;
+        width: 100%;
+        max-width: 320px;
+        aspect-ratio: 886 / 1920;
+        margin-inline: auto;
+        border-radius: 38px;
+        object-fit: cover;
+        background: #1a1008;
+        box-shadow:
+          0 0 0 1px rgba(212, 146, 31, 0.25),
+          0 36px 90px -22px rgba(26, 16, 8, 0.45),
+          0 10px 30px -12px rgba(212, 146, 31, 0.3);
+        transform: rotate(-2deg);
+        transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .mosaic-showcase:hover .mosaic-showcase__video {
+        transform: rotate(0deg) scale(1.02);
+      }
+      @media (max-width: 960px) {
+        .mosaic-showcase__inner {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+        .mosaic-showcase__copy {
+          max-width: 100%;
+        }
+      }
+      @media (max-width: 600px) {
+        .section-padding {
+          padding: 4rem 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="mosaic-showcase section-padding">
+      <div class="container mosaic-showcase__inner">
+        <div class="mosaic-showcase__copy">
+          <p class="mosaic-showcase__eyebrow">Point your camera. Unlock scripture.</p>
+          <h2 class="mosaic-showcase__title">Scan a page.<br />Tap a verse.<br />Go deeper &mdash; instantly.</h2>
+          <p class="mosaic-showcase__body">
+            Open <strong>Lens</strong> and point at any Bible page &mdash; printed, e-reader, even handwritten. MyBibleLens reads every
+            verse on the page and lays them out as tappable cards. Tap the verse that&rsquo;s speaking to you, then choose where it goes
+            next: drop it into <strong>S.O.A.P.</strong> for guided journaling, or into <strong>Scripture Glow</strong> to sit with it on an
+            infinite zoom canvas.
+          </p>
+          <ul class="mosaic-showcase__bullets" role="list">
+            <li>Captures every verse on a page &mdash; printed, screen, or handwritten</li>
+            <li>
+              One tap &rarr; <strong>S.O.A.P.</strong> journaling (Scripture &middot; Observation &middot; Application &middot; Prayer)
+            </li>
+            <li>One tap &rarr; <strong>Scripture Glow</strong> opens the hand-drawn zoom canvas</li>
+            <li>Works on the free Seeker tier &mdash; ~5 scans / month, more on paid</li>
+          </ul>
+          <div class="soap-explainer">
+            <p class="soap-explainer__title">What is S.O.A.P.?</p>
+            <p class="soap-explainer__intro">
+              A 4-step Bible study method &mdash; Lens guides you through each step with AI prompts. Here&rsquo;s the flow on Philippians
+              4:13:
+            </p>
+            <ul class="soap-explainer__steps" role="list">
+              <li>
+                <span class="soap-explainer__letter">S</span>
+                <span class="soap-explainer__step"
+                  ><strong>Scripture.</strong>
+                  <em>&ldquo;I can do all things through Christ who strengthens me.&rdquo; &mdash; Philippians 4:13</em></span
+                >
+              </li>
+              <li>
+                <span class="soap-explainer__letter">O</span>
+                <span class="soap-explainer__step"
+                  ><strong>Observation.</strong> Paul wrote this from a prison cell. The strength isn&rsquo;t self-generated &mdash; it
+                  flows through Christ.</span
+                >
+              </li>
+              <li>
+                <span class="soap-explainer__letter">A</span>
+                <span class="soap-explainer__step"
+                  ><strong>Application.</strong> When today feels too heavy, lean on His strength, not your own.</span
+                >
+              </li>
+              <li>
+                <span class="soap-explainer__letter">P</span>
+                <span class="soap-explainer__step"
+                  ><strong>Prayer.</strong> <em>&ldquo;Lord, when I&rsquo;m at the end of myself, be my strength. Amen.&rdquo;</em></span
+                >
+              </li>
+            </ul>
+          </div>
+          <a href="#pricing" class="mosaic-showcase__cta">Try Lens free &mdash; included in Seeker &rarr;</a>
+        </div>
+        <div class="mosaic-showcase__board" aria-hidden="true">
+          <video
+            class="mosaic-showcase__video"
+            src="../assets/mosaic-preview.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          ></video>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

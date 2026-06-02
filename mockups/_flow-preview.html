@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyBibleLens — Full Flow Preview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --parchment: #f5f2ed;
+        --deep-brown: #3d2b1f;
+        --ink: #2a1e16;
+        --gold: #b6751d;
+        --halo: #f0c850;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        background: var(--parchment);
+        color: var(--deep-brown);
+        font-family:
+          "Inter",
+          -apple-system,
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ============================================================
+         PREVIEW CHROME
+      ============================================================ */
+      .preview-bar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: var(--deep-brown);
+        color: var(--parchment);
+        padding: 0.7rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        font-size: 0.85rem;
+        letter-spacing: 0.03em;
+        box-shadow: 0 6px 16px -8px rgba(0, 0, 0, 0.4);
+      }
+      .preview-bar__title {
+        font-family: "Hammersmith One", serif;
+        font-size: 0.95rem;
+        color: var(--halo);
+        letter-spacing: 0.08em;
+      }
+      .preview-bar__title strong {
+        color: var(--parchment);
+      }
+      .preview-bar__nav {
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+      }
+      .preview-bar__nav a {
+        font-family: "Inter", sans-serif;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(245, 242, 237, 0.78);
+        text-decoration: none;
+        padding: 0.3rem 0.6rem;
+        border-radius: 999px;
+        border: 1px solid rgba(245, 242, 237, 0.2);
+        transition: all 200ms ease;
+      }
+      .preview-bar__nav a:hover {
+        color: var(--halo);
+        border-color: var(--halo);
+        background: rgba(240, 200, 80, 0.08);
+      }
+
+      /* ============================================================
+         SECTION DIVIDER (gold ornament between sections)
+      ============================================================ */
+      .section-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        padding: 2rem 1rem;
+        background: var(--parchment);
+      }
+      .section-divider span:first-child,
+      .section-divider span:last-child {
+        flex: 0 0 60px;
+        max-width: 120px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      }
+      .section-divider__label {
+        font-family: "Hammersmith One", serif;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+
+      /* ============================================================
+         IFRAME WRAPPER — each section
+      ============================================================ */
+      .flow-section {
+        position: relative;
+        width: 100%;
+        background: var(--parchment);
+      }
+      .flow-section iframe {
+        display: block;
+        width: 100%;
+        border: 0;
+        background: var(--parchment);
+        transition: height 200ms ease;
+      }
+      .flow-section__label {
+        position: absolute;
+        top: 0.7rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 5;
+        font-family: "Inter", sans-serif;
+        font-size: 0.55rem;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        background: rgba(245, 242, 237, 0.85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        padding: 0.3rem 0.7rem;
+        border-radius: 999px;
+        border: 1px solid rgba(212, 146, 31, 0.25);
+        opacity: 0.55;
+        pointer-events: none;
+      }
+
+      /* Faux hero header so the page feels like the site */
+      .preview-hero {
+        text-align: center;
+        padding: 5rem 1.5rem 3rem;
+        background:
+          radial-gradient(ellipse at 50% 30%, rgba(240, 200, 80, 0.18), transparent 65%),
+          radial-gradient(ellipse at 20% 80%, rgba(182, 117, 29, 0.1), transparent 60%), var(--parchment);
+      }
+      .preview-hero__eyebrow {
+        font-family: "Hammersmith One", serif;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1rem;
+      }
+      .preview-hero__title {
+        font-family: "Hammersmith One", serif;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        line-height: 1.1;
+        color: var(--ink);
+        margin-bottom: 1rem;
+      }
+      .preview-hero__sub {
+        font-family: "Inter", sans-serif;
+        font-size: 1.05rem;
+        line-height: 1.65;
+        color: rgba(61, 43, 31, 0.78);
+        max-width: 640px;
+        margin: 0 auto;
+      }
+      .preview-hero__sub em {
+        font-style: normal;
+        color: var(--gold);
+      }
+
+      /* ============================================================
+         BOTTOM — "What this app will never have" box
+      ============================================================ */
+      .never-have-wrap {
+        padding: 5rem 1.5rem 3rem;
+        background: radial-gradient(ellipse at 50% 30%, rgba(240, 200, 80, 0.1), transparent 60%), var(--parchment);
+      }
+      .never-have {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 2.2rem 2rem 2.4rem;
+        border-radius: 22px;
+        background: linear-gradient(180deg, #fdf8e8 0%, #f4e8c4 100%);
+        border: 1px solid rgba(212, 146, 31, 0.35);
+        box-shadow:
+          0 30px 60px -22px rgba(26, 16, 8, 0.25),
+          0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+      }
+      .never-have__title {
+        font-family: "Hammersmith One", serif;
+        font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+        color: var(--ink);
+        margin-bottom: 1.3rem;
+      }
+      .never-have__list {
+        list-style: none;
+        padding: 0;
+        display: grid;
+        gap: 1rem;
+      }
+      .never-have__list li {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.8rem;
+        align-items: start;
+        font-family: "Inter", sans-serif;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: rgba(61, 43, 31, 0.85);
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(212, 146, 31, 0.18);
+      }
+      .never-have__list li:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
+      .never-have__list .x {
+        flex-shrink: 0;
+        font-family: "Hammersmith One", serif;
+        color: #c46680;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+      .never-have__list strong {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .never-have__list em {
+        font-style: italic;
+        color: var(--gold-pressed, #9a6218);
+      }
+      .never-have__closer {
+        font-family: "Hammersmith One", serif;
+        font-size: 1.1rem;
+        text-align: center;
+        color: var(--gold);
+        margin-top: 1.5rem;
+      }
+
+      /* ============================================================
+         SUPABASE SECURITY BADGE — Supabase brand colors (stands out)
+      ============================================================ */
+      .supabase-badge-wrap {
+        padding: 2.5rem 1.5rem 4rem;
+        background: var(--parchment);
+        text-align: center;
+      }
+      .supabase-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 0.9rem 1.3rem;
+        border-radius: 999px;
+        background: #1c1c1c;
+        border: 1.5px solid #3ecf8e;
+        box-shadow:
+          0 0 0 4px rgba(62, 207, 142, 0.12),
+          0 16px 40px -14px rgba(62, 207, 142, 0.5),
+          0 0 30px -6px rgba(62, 207, 142, 0.35);
+        color: #ffffff;
+        font-family: "Inter", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        text-decoration: none;
+        transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .supabase-badge:hover {
+        transform: translateY(-2px);
+        box-shadow:
+          0 0 0 5px rgba(62, 207, 142, 0.18),
+          0 22px 48px -14px rgba(62, 207, 142, 0.6),
+          0 0 40px -4px rgba(62, 207, 142, 0.5);
+      }
+      .supabase-badge__shield {
+        width: 22px;
+        height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #3ecf8e;
+        filter: drop-shadow(0 0 6px rgba(62, 207, 142, 0.7));
+      }
+      .supabase-badge__shield svg {
+        width: 100%;
+        height: 100%;
+      }
+      .supabase-badge__title {
+        color: #ffffff;
+      }
+      .supabase-badge__brand {
+        color: #3ecf8e;
+        font-weight: 700;
+        text-shadow: 0 0 8px rgba(62, 207, 142, 0.5);
+      }
+      .supabase-badge__divider {
+        width: 1px;
+        height: 14px;
+        background: rgba(255, 255, 255, 0.2);
+        margin: 0 0.2rem;
+      }
+      .supabase-badge__pills {
+        display: inline-flex;
+        gap: 0.4rem;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #3ecf8e;
+      }
+      .supabase-badge__pills span {
+        opacity: 0.9;
+      }
+      .supabase-badge__pills span + span::before {
+        content: "·";
+        margin: 0 0.35rem;
+        color: rgba(62, 207, 142, 0.5);
+      }
+      .supabase-badge-tag {
+        margin-top: 0.8rem;
+        font-family: "Inter", sans-serif;
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        color: rgba(61, 43, 31, 0.45);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sticky preview bar — strip when integrating into real index.html -->
+    <div class="preview-bar">
+      <div class="preview-bar__title"><strong>MyBibleLens</strong> · Full Flow Preview</div>
+      <nav class="preview-bar__nav">
+        <a href="#lens">Lens</a>
+        <a href="#canvas">Canvas</a>
+        <a href="#sermon">Sermon</a>
+        <a href="#themes">Themes</a>
+        <a href="#glow">Glow</a>
+        <a href="#fellowship">Fellowship</a>
+        <a href="#timer">Timer</a>
+        <a href="#games">Games</a>
+        <a href="#reflections">Reflections</a>
+        <a href="#cards">Cards</a>
+      </nav>
+    </div>
+
+    <!-- Faux hero -->
+    <header class="preview-hero">
+      <p class="preview-hero__eyebrow">Bringing people closer to God in an exciting and easy way!</p>
+      <h1 class="preview-hero__title">MyBibleLens</h1>
+      <p class="preview-hero__sub">
+        Scroll through the new flow — <em>Lens · Canvas · Sermon · Themes · Glow · Fellowship · Timer · Games · Reflections · Cards.</em>
+      </p>
+    </header>
+
+    <!-- 1. LENS / S.O.A.P. -->
+    <section class="flow-section" id="lens">
+      <span class="flow-section__label">1 · Lens / S.O.A.P.</span>
+      <iframe src="_lens-soap-snippet.html" loading="lazy" title="Lens / S.O.A.P."></iframe>
+    </section>
+
+    <div class="section-divider"><span></span><span class="section-divider__label">Canvas</span><span></span></div>
+
+    <!-- 2. INFINITE CANVAS -->
+    <section class="flow-section" id="canvas">
+      <span class="flow-section__label">2 · Infinite Canvas</span>
+      <iframe src="canvas-spotlight.html" loading="lazy" title="Infinite Canvas"></iframe>
+    </section>
+
+    <div class="section-divider"><span></span><span class="section-divider__label">Sermon</span><span></span></div>
+
+    <!-- 3. SERMON DECK -->
+    <section class="flow-section" id="sermon">
+      <span class="flow-section__label">3 · Sermon Deck</span>
+      <iframe src="sermon-spotlight.html" loading="lazy" title="Sermon Deck"></iframe>
+    </section>
+
+    <div class="section-divider"><span></span><span class="section-divider__label">Themes</span><span></span></div>
+
+    <!-- 4. THEMES -->
+    <section class="flow-section" id="themes">
+      <span class="flow-section__label">4 · Themes</span>
+      <iframe src="themes-spotlight.html" loading="lazy" title="Themes"></iframe>
+    </section>
+
+    <div class="section-divider"><span></span><span class="section-divider__label">Scripture Glow</span><span></span></div>
+
+    <!-- 5. SCRIPTURE GLOW -->
+    <section class="flow-section" id="glow">
+      <span class="flow-section__label">5 · Scripture Glow</span>
+      <iframe src="scripture-glow-spotlight.html" loading="lazy" title="Scripture Glow"></iframe>
+    </section>
+
+    <div class="section-divider"><span></span><span class="section-divider__label">Fellowship</span><span></span></div>
+
+    <!-- 6. FELLOWSHIP -->
+    <section class="flow-section" id="fellowship">
+      <span class="flow-section__label">6 · Fellowship / Sanctuary</span>
+      <iframe src="fellowship-spotlight.html" loading="lazy" title="Fellowship"></iframe>
+    </section>
+
+    <div class="section-divider"><span></span><span class="section-divider__label">Timer</span><span></span></div>
+
+    <!-- 7. FOCUS TIMER -->
+    <section class="flow-section" id="timer">
+      <span class="flow-section__label">7 · Focus Timer</span>
+      <iframe src="timer-spotlight.html" loading="lazy" title="Focus Timer"></iframe>
+    </section>
+
+    <div class="section-divider"><span></span><span class="section-divider__label">Games</span><span></span></div>
+
+    <!-- 8. GAMES -->
+    <section class="flow-section" id="games">
+      <span class="flow-section__label">8 · Games</span>
+      <iframe src="games-spotlight.html" loading="lazy" title="Games"></iframe>
+    </section>
+
+    <div class="section-divider"><span></span><span class="section-divider__label">Reflections</span><span></span></div>
+
+    <!-- 9. REFLECTIONS -->
+    <section class="flow-section" id="reflections">
+      <span class="flow-section__label">9 · Reflections</span>
+      <iframe src="reflections-spotlight.html" loading="lazy" title="Reflections"></iframe>
+    </section>
+
+    <div class="section-divider"><span></span><span class="section-divider__label">Study Cards</span><span></span></div>
+
+    <!-- 10. STUDY CARDS -->
+    <section class="flow-section" id="cards">
+      <span class="flow-section__label">10 · Study Cards</span>
+      <iframe src="study-cards-spotlight.html" loading="lazy" title="Study Cards"></iframe>
+    </section>
+
+    <div class="section-divider"><span></span><span class="section-divider__label">What this app will never have</span><span></span></div>
+
+    <!-- "What this app will never have" -->
+    <div class="never-have-wrap">
+      <div class="never-have">
+        <h2 class="never-have__title">What this app will never have:</h2>
+        <ul class="never-have__list" role="list">
+          <li>
+            <span class="x">✕</span>
+            <span
+              ><strong>No Gamification</strong> &mdash; your faith isn&rsquo;t a game. Gamification limits you to the worth of that
+              software&hellip; This app isn&rsquo;t your limit. God is.</span
+            >
+          </li>
+          <li>
+            <span class="x">✕</span>
+            <span><strong>No AI Voice</strong> &mdash; God already speaks. You don&rsquo;t need a robot to.</span>
+          </li>
+          <li>
+            <span class="x">✕</span>
+            <span><strong>No Algorithm</strong> &mdash; nothing deciding what you see or when you see it.</span>
+          </li>
+          <li>
+            <span class="x">✕</span>
+            <span><strong>No Explore Feed</strong> &mdash; no rabbit holes. No comparison traps.</span>
+          </li>
+          <li>
+            <span class="x">✕</span>
+            <span>
+              <strong>No Scripture in-app</strong> &mdash; because it&rsquo;s for your <em>journal</em> and your <em>physical Bible.</em>
+              The Word belongs in your hands, not behind a screen.
+            </span>
+          </li>
+          <li>
+            <span class="x">✕</span>
+            <span>
+              <strong>No Companion</strong> &mdash; &ldquo;Companion&rdquo; is a sugarcoat.<br /><br />
+              This app isn&rsquo;t your friend. God is.<br /><br />
+              Go to your church. Your pastor. Your friends and family &mdash; the people who actually love you.
+            </span>
+          </li>
+          <li>
+            <span class="x">✕</span>
+            <span><strong>No Selling Your Data</strong> &mdash; your prayers aren&rsquo;t a product.</span>
+          </li>
+        </ul>
+        <p class="never-have__closer">Just an efficient tool to grow your faith with God.</p>
+      </div>
+    </div>
+
+    <!-- Supabase security badge — Supabase brand colors, stands out on purpose -->
+    <div class="supabase-badge-wrap">
+      <a href="https://supabase.com" target="_blank" rel="noopener" class="supabase-badge">
+        <span class="supabase-badge__shield" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 2 L20 5 L20 11 C20 16 16.5 20 12 22 C7.5 20 4 16 4 11 L4 5 Z" fill="#3ECF8E" opacity="0.18" />
+            <path
+              d="M12 2 L20 5 L20 11 C20 16 16.5 20 12 22 C7.5 20 4 16 4 11 L4 5 Z"
+              stroke="#3ECF8E"
+              stroke-width="1.6"
+              stroke-linejoin="round"
+              fill="none"
+            />
+            <path
+              d="M8.5 12 L11 14.5 L15.5 9.5"
+              stroke="#3ECF8E"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              fill="none"
+            />
+          </svg>
+        </span>
+        <span class="supabase-badge__title"> Protected by <span class="supabase-badge__brand">Supabase</span> </span>
+        <span class="supabase-badge__divider"></span>
+        <span class="supabase-badge__pills"> <span>RLS</span><span>Encrypted</span><span>SOC&nbsp;2</span> </span>
+      </a>
+      <p class="supabase-badge-tag">Row-level security &middot; AES-256 encryption &middot; Enterprise-grade infrastructure</p>
+    </div>
+
+    <footer style="padding: 4rem 1.5rem; text-align: center; color: rgba(61, 43, 31, 0.6); font-size: 0.85rem">
+      End of flow preview · ten sections · MyBibleLens
+    </footer>
+
+    <script>
+      // Auto-resize each iframe to its content's height
+      function sizeFrame(f) {
+        try {
+          const doc = f.contentDocument || f.contentWindow.document;
+          if (!doc || !doc.body) return;
+          // Strip the orange MOCKUP banner inside each iframe so the preview reads clean
+          const banner = doc.querySelector(".mockup-banner");
+          if (banner) banner.style.display = "none";
+          f.style.height = doc.body.scrollHeight + "px";
+        } catch (e) {
+          // cross-origin or not ready
+        }
+      }
+
+      function sizeAll() {
+        document.querySelectorAll(".flow-section iframe").forEach(sizeFrame);
+      }
+
+      // Initial pass + retries (animations and reveals can change layout)
+      window.addEventListener("load", () => {
+        sizeAll();
+        [200, 600, 1200, 2200].forEach((t) => setTimeout(sizeAll, t));
+      });
+
+      // Resize on window resize (debounced)
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(sizeAll, 150);
+      });
+
+      // Resize when each iframe individually finishes loading
+      document.querySelectorAll(".flow-section iframe").forEach((f) => {
+        f.addEventListener("load", () => {
+          sizeFrame(f);
+          [400, 1200].forEach((t) => setTimeout(() => sizeFrame(f), t));
+        });
+      });
+    </script>
+  </body>
+</html>

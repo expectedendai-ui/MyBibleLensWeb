@@ -1,0 +1,1037 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Games Spotlight — MyBibleLens Mockup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      /* ============================================================
+         BRAND TOKENS — DO NOT CHANGE
+      ============================================================ */
+      :root {
+        --parchment: #f5f2ed;
+        --parchment-deep: #ece5d8;
+        --deep-brown: #3d2b1f;
+        --ink: #2a1e16;
+        --gold: #b6751d;
+        --gold-pressed: #9a6218;
+        --ember: #d4921f;
+        --halo: #f0c850;
+        --sanctuary-dark: #1c100a;
+        --sanctuary-darker: #130a06;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        background: var(--parchment);
+        color: var(--deep-brown);
+      }
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          system-ui,
+          sans-serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ============================================================
+         SECTION — Games Spotlight
+      ============================================================ */
+      .games-spotlight {
+        position: relative;
+        padding: 120px 24px 160px;
+        background:
+          radial-gradient(ellipse at 50% 30%, rgba(240, 200, 80, 0.12), transparent 65%),
+          radial-gradient(ellipse at 20% 80%, rgba(182, 117, 29, 0.08), transparent 60%), var(--parchment);
+        overflow: hidden;
+        isolation: isolate;
+      }
+
+      /* Decorative top divider with gold dot */
+      .games-spotlight::before {
+        content: "";
+        position: absolute;
+        top: 70px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        opacity: 0.5;
+      }
+
+      .gs-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      /* ---- Copy block ---- */
+      .gs-copy {
+        text-align: center;
+        max-width: 720px;
+        margin: 0 auto 80px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 800ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 800ms cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .games-spotlight.is-revealed .gs-copy {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .gs-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 18px;
+      }
+      .gs-eyebrow::before,
+      .gs-eyebrow::after {
+        content: "";
+        display: inline-block;
+        width: 28px;
+        height: 1px;
+        background: var(--gold);
+        opacity: 0.5;
+      }
+      .gs-headline {
+        font-family: "Hammersmith One", serif;
+        font-size: clamp(34px, 5vw, 58px);
+        line-height: 1.08;
+        color: var(--ink);
+        margin-bottom: 18px;
+        letter-spacing: -0.01em;
+      }
+      .gs-headline em {
+        font-style: normal;
+        color: var(--gold);
+        position: relative;
+        display: inline-block;
+      }
+      .gs-headline em::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 2px;
+        height: 8px;
+        background: linear-gradient(90deg, transparent, rgba(240, 200, 80, 0.35), transparent);
+        z-index: -1;
+        border-radius: 4px;
+      }
+      .gs-sub {
+        font-size: clamp(16px, 1.4vw, 19px);
+        line-height: 1.55;
+        color: rgba(61, 43, 31, 0.78);
+        max-width: 560px;
+        margin: 0 auto;
+      }
+      .gs-sub strong {
+        color: var(--gold);
+        font-weight: 700;
+      }
+
+      /* ============================================================
+         STAGE — 3 device composition
+      ============================================================ */
+      .gs-stage {
+        position: relative;
+        height: 920px;
+        max-width: 1400px;
+        margin: 0 auto;
+        perspective: 1600px;
+      }
+
+      /* ---- Ambient floor glow ---- */
+      .gs-stage::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 40px;
+        width: 70%;
+        height: 80px;
+        transform: translateX(-50%);
+        background: radial-gradient(ellipse at center, rgba(182, 117, 29, 0.22), transparent 70%);
+        filter: blur(20px);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      /* ---- Sparkles ---- */
+      .gs-sparkles {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+      }
+      .gs-sparkle {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: var(--halo);
+        border-radius: 50%;
+        box-shadow:
+          0 0 8px var(--halo),
+          0 0 16px rgba(240, 200, 80, 0.6);
+        opacity: 0;
+        animation: sparkle-drift 8s ease-in-out infinite;
+      }
+      .gs-sparkle--1 {
+        top: 18%;
+        left: 12%;
+        animation-delay: 0s;
+      }
+      .gs-sparkle--2 {
+        top: 30%;
+        right: 14%;
+        animation-delay: 1.4s;
+        width: 4px;
+        height: 4px;
+      }
+      .gs-sparkle--3 {
+        top: 60%;
+        left: 8%;
+        animation-delay: 2.8s;
+        width: 5px;
+        height: 5px;
+      }
+      .gs-sparkle--4 {
+        top: 12%;
+        left: 50%;
+        animation-delay: 4.2s;
+        width: 4px;
+        height: 4px;
+      }
+      .gs-sparkle--5 {
+        top: 70%;
+        right: 8%;
+        animation-delay: 5.6s;
+      }
+      .gs-sparkle--6 {
+        top: 45%;
+        left: 45%;
+        animation-delay: 3.4s;
+        width: 4px;
+        height: 4px;
+      }
+      @keyframes sparkle-drift {
+        0%,
+        100% {
+          opacity: 0;
+          transform: translateY(0) scale(0.8);
+        }
+        15% {
+          opacity: 0.9;
+        }
+        50% {
+          opacity: 0.6;
+          transform: translateY(-30px) scale(1.1);
+        }
+        85% {
+          opacity: 0.4;
+        }
+      }
+
+      /* ============================================================
+         DEVICES
+      ============================================================ */
+      .gs-device {
+        position: absolute;
+        opacity: 0;
+        transform: translateY(40px) scale(0.96);
+        transition:
+          opacity 1000ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 1000ms cubic-bezier(0.2, 0.7, 0.2, 1);
+        will-change: transform, opacity;
+      }
+      .games-spotlight.is-revealed .gs-device {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      .games-spotlight.is-revealed .gs-laptop {
+        transition-delay: 80ms;
+      }
+      .games-spotlight.is-revealed .gs-ipad {
+        transition-delay: 260ms;
+      }
+      .games-spotlight.is-revealed .gs-iphone {
+        transition-delay: 440ms;
+      }
+
+      .gs-halo {
+        position: absolute;
+        inset: -60px;
+        border-radius: 50%;
+        background: radial-gradient(ellipse at center, rgba(240, 200, 80, 0.35), rgba(212, 146, 31, 0.18) 35%, transparent 70%);
+        filter: blur(28px);
+        opacity: 0.85;
+        z-index: -1;
+        animation: halo-pulse 5s ease-in-out infinite alternate;
+        pointer-events: none;
+      }
+      @keyframes halo-pulse {
+        0% {
+          opacity: 0.65;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1.06);
+        }
+      }
+
+      /* ---- LAPTOP (MacBook-style) ---- */
+      .gs-laptop {
+        left: 50%;
+        top: 0;
+        width: 920px;
+        transform-origin: center bottom;
+        animation: float-laptop 9s ease-in-out infinite alternate;
+        z-index: 2;
+        margin-left: -460px;
+      }
+      .games-spotlight.is-revealed .gs-laptop {
+        animation: float-laptop 9s ease-in-out infinite alternate;
+      }
+      @keyframes float-laptop {
+        0% {
+          transform: translateY(0) rotateX(0deg);
+        }
+        100% {
+          transform: translateY(-12px) rotateX(-1deg);
+        }
+      }
+      .gs-laptop__body {
+        position: relative;
+        background: linear-gradient(180deg, #2a2a2e 0%, #1a1a1d 100%);
+        border-radius: 22px 22px 8px 8px;
+        padding: 22px 22px 14px;
+        box-shadow:
+          0 30px 60px -20px rgba(0, 0, 0, 0.35),
+          0 18px 40px -12px rgba(182, 117, 29, 0.15),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      }
+      .gs-laptop__camera {
+        position: absolute;
+        top: 9px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 6px;
+        height: 6px;
+        background: #0a0a0a;
+        border-radius: 50%;
+        box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.15);
+      }
+      .gs-laptop__screen {
+        background: var(--sanctuary-dark);
+        border-radius: 6px;
+        overflow: hidden;
+        aspect-ratio: 16 / 10;
+        position: relative;
+      }
+      .gs-laptop__chin {
+        height: 12px;
+        background: linear-gradient(180deg, #c8c8cc 0%, #a8a8ac 50%, #88888c 100%);
+        border-radius: 0 0 14px 14px;
+        margin: 0 -18px -2px;
+        position: relative;
+      }
+      .gs-laptop__chin::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(180deg, #6a6a6e, #888);
+        border-radius: 0 0 6px 6px;
+      }
+
+      /* ---- IPAD ---- */
+      .gs-ipad {
+        left: 2%;
+        bottom: 30px;
+        width: 360px;
+        animation: float-ipad 7s ease-in-out infinite alternate;
+        z-index: 3;
+      }
+      @keyframes float-ipad {
+        0% {
+          transform: translateY(0) rotate(-1.5deg);
+        }
+        100% {
+          transform: translateY(-14px) rotate(-2.5deg);
+        }
+      }
+      .gs-ipad__body {
+        background: linear-gradient(180deg, #2a2a2e 0%, #1a1a1d 100%);
+        border-radius: 22px;
+        padding: 12px;
+        box-shadow:
+          0 24px 50px -16px rgba(0, 0, 0, 0.4),
+          0 12px 30px -10px rgba(182, 117, 29, 0.18),
+          inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        position: relative;
+      }
+      .gs-ipad__camera {
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 4px;
+        background: #0a0a0a;
+        border-radius: 50%;
+      }
+      .gs-ipad__screen {
+        background: var(--sanctuary-dark);
+        border-radius: 12px;
+        overflow: hidden;
+        aspect-ratio: 3 / 4;
+        position: relative;
+      }
+
+      /* ---- IPHONE ---- */
+      .gs-iphone {
+        right: 2%;
+        bottom: 60px;
+        width: 300px;
+        animation: float-iphone 8s ease-in-out infinite alternate;
+        z-index: 4;
+      }
+      @keyframes float-iphone {
+        0% {
+          transform: translateY(0) rotate(2deg);
+        }
+        100% {
+          transform: translateY(-18px) rotate(3deg);
+        }
+      }
+      .gs-iphone__body {
+        background: linear-gradient(180deg, #2a2a2e 0%, #1a1a1d 100%);
+        border-radius: 36px;
+        padding: 8px;
+        box-shadow:
+          0 28px 50px -14px rgba(0, 0, 0, 0.45),
+          0 14px 30px -10px rgba(182, 117, 29, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        position: relative;
+      }
+      .gs-iphone__screen {
+        background: var(--sanctuary-dark);
+        border-radius: 30px;
+        overflow: hidden;
+        aspect-ratio: 9 / 19.5;
+        position: relative;
+      }
+      .gs-iphone__island {
+        position: absolute;
+        top: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 92px;
+        height: 28px;
+        background: #050505;
+        border-radius: 14px;
+        z-index: 10;
+      }
+
+      /* ============================================================
+         GAMES SCREEN UI (rendered live inside each device)
+      ============================================================ */
+      .games-ui {
+        height: 100%;
+        width: 100%;
+        background: radial-gradient(ellipse at 50% 0%, rgba(212, 146, 31, 0.06), transparent 60%), var(--sanctuary-dark);
+        color: #f5f2ed;
+        font-family: "Inter", sans-serif;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .games-ui__topbar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 10px 12px 6px;
+        position: relative;
+      }
+      .games-ui__back {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(245, 242, 237, 0.6);
+        font-size: 14px;
+      }
+      .games-ui__title {
+        font-family: "Hammersmith One", serif;
+        color: var(--gold);
+        font-size: 13px;
+        letter-spacing: 0.02em;
+      }
+      .games-ui__info {
+        font-size: 9px;
+        color: var(--gold);
+        opacity: 0.7;
+        border: 1px solid currentColor;
+        border-radius: 50%;
+        width: 11px;
+        height: 11px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-style: italic;
+        font-family: serif;
+      }
+      .games-ui__count {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 6px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        background: linear-gradient(135deg, var(--gold), var(--ember));
+        color: #1a0f08;
+        padding: 3px 6px;
+        border-radius: 5px;
+        text-transform: uppercase;
+        box-shadow: 0 0 8px rgba(240, 200, 80, 0.4);
+      }
+
+      .games-ui__sub {
+        text-align: center;
+        font-size: 7px;
+        line-height: 1.5;
+        color: rgba(245, 242, 237, 0.7);
+        padding: 0 14px 8px;
+      }
+
+      .games-ui__category {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 6px 12px 4px;
+        font-size: 6px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ember);
+      }
+      .games-ui__category::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(212, 146, 31, 0.4), transparent);
+      }
+
+      .games-ui__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 4px;
+        padding: 0 10px;
+      }
+
+      .game-card {
+        background: linear-gradient(180deg, rgba(40, 22, 12, 0.85), rgba(28, 16, 10, 0.85));
+        border: 1px solid rgba(212, 146, 31, 0.18);
+        border-radius: 5px;
+        padding: 4px 5px 4px 5px;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        min-width: 0;
+        transition: border-color 0.4s ease;
+      }
+      .game-card__icon {
+        font-size: 8px;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+      .game-card__title {
+        font-size: 5.5px;
+        font-weight: 600;
+        color: #f5f2ed;
+        line-height: 1.15;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-width: 0;
+      }
+
+      .games-ui__footer {
+        margin-top: auto;
+        padding: 8px 12px 10px;
+        text-align: center;
+        font-size: 6px;
+        color: var(--gold);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.8;
+      }
+
+      /* ============================================================
+         PER-DEVICE UI SCALING
+      ============================================================ */
+
+      /* ---- LAPTOP: large fonts, 5-col dense grid, ~30 visible games ---- */
+      .gs-laptop .games-ui__topbar {
+        padding: 14px 18px 8px;
+      }
+      .gs-laptop .games-ui__title {
+        font-size: 18px;
+      }
+      .gs-laptop .games-ui__info {
+        width: 14px;
+        height: 14px;
+        font-size: 11px;
+      }
+      .gs-laptop .games-ui__count {
+        font-size: 9px;
+        padding: 4px 9px;
+        border-radius: 7px;
+      }
+      .gs-laptop .games-ui__sub {
+        font-size: 10px;
+        padding: 0 22px 10px;
+      }
+      .gs-laptop .games-ui__category {
+        font-size: 9px;
+        padding: 8px 18px 6px;
+        gap: 8px;
+      }
+      .gs-laptop .games-ui__grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 6px;
+        padding: 0 18px;
+      }
+      .gs-laptop .game-card {
+        padding: 7px 8px;
+        border-radius: 7px;
+        gap: 5px;
+      }
+      .gs-laptop .game-card__icon {
+        font-size: 12px;
+      }
+      .gs-laptop .game-card__title {
+        font-size: 8.5px;
+      }
+      .gs-laptop .games-ui__footer {
+        font-size: 8px;
+        padding: 12px 18px 14px;
+      }
+
+      /* ---- IPAD: medium fonts, 3-col grid ---- */
+      .gs-ipad .games-ui__topbar {
+        padding: 12px 14px 6px;
+      }
+      .gs-ipad .games-ui__title {
+        font-size: 13px;
+      }
+      .gs-ipad .games-ui__count {
+        font-size: 7px;
+        padding: 3px 7px;
+      }
+      .gs-ipad .games-ui__sub {
+        font-size: 7.5px;
+        padding: 0 14px 8px;
+      }
+      .gs-ipad .games-ui__category {
+        font-size: 7px;
+        padding: 6px 12px 4px;
+      }
+      .gs-ipad .games-ui__grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px;
+        padding: 0 12px;
+      }
+      .gs-ipad .game-card {
+        padding: 5px 6px;
+        border-radius: 6px;
+        gap: 4px;
+      }
+      .gs-ipad .game-card__icon {
+        font-size: 9px;
+      }
+      .gs-ipad .game-card__title {
+        font-size: 6.5px;
+      }
+      .gs-ipad .games-ui__footer {
+        font-size: 6.5px;
+      }
+
+      /* ---- IPHONE: smallest, 2-col grid, reserves Dynamic Island ---- */
+      .gs-iphone .games-ui {
+        padding-top: 44px;
+      }
+      .gs-iphone .games-ui__topbar {
+        padding: 4px 12px 6px;
+      }
+      .gs-iphone .games-ui__title {
+        font-size: 11px;
+      }
+      .gs-iphone .games-ui__count {
+        font-size: 5.5px;
+        padding: 2px 5px;
+        right: 8px;
+      }
+      .gs-iphone .games-ui__sub {
+        font-size: 6.5px;
+        padding: 0 12px 6px;
+      }
+      .gs-iphone .games-ui__category {
+        font-size: 6px;
+        padding: 4px 10px 3px;
+      }
+      .gs-iphone .games-ui__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 3px;
+        padding: 0 10px;
+      }
+      .gs-iphone .game-card {
+        padding: 4px 5px;
+        border-radius: 5px;
+        gap: 3px;
+      }
+      .gs-iphone .game-card__icon {
+        font-size: 7px;
+      }
+      .gs-iphone .game-card__title {
+        font-size: 5.5px;
+      }
+      .gs-iphone .games-ui__footer {
+        font-size: 5.5px;
+        padding: 6px 10px 10px;
+      }
+
+      /* ============================================================
+         RESPONSIVE
+      ============================================================ */
+      @media (max-width: 1100px) {
+        .gs-stage {
+          height: 640px;
+        }
+        .gs-laptop {
+          width: 600px;
+          margin-left: -300px;
+        }
+        .gs-ipad {
+          width: 240px;
+          left: 2%;
+        }
+        .gs-iphone {
+          width: 200px;
+          right: 2%;
+        }
+      }
+      @media (max-width: 840px) {
+        .games-spotlight {
+          padding: 80px 16px 100px;
+        }
+        .gs-stage {
+          height: auto;
+          display: flex;
+          flex-direction: column-reverse;
+          align-items: center;
+          gap: 40px;
+          perspective: none;
+        }
+        .gs-device {
+          position: relative;
+          left: auto;
+          right: auto;
+          top: auto;
+          bottom: auto;
+          margin-left: 0 !important;
+          animation: none;
+        }
+        .gs-laptop {
+          width: 100%;
+          max-width: 440px;
+        }
+        .gs-ipad {
+          width: 240px;
+        }
+        .gs-iphone {
+          width: 200px;
+        }
+        .gs-iphone__island {
+          top: 14px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .gs-device,
+        .gs-halo,
+        .gs-sparkle {
+          animation: none !important;
+        }
+        .gs-copy,
+        .gs-device {
+          transition: none !important;
+        }
+      }
+
+      /* ============================================================
+         MOCKUP HEADER (preview only — strip when integrating)
+      ============================================================ */
+      .mockup-banner {
+        background: var(--deep-brown);
+        color: var(--parchment);
+        padding: 10px 24px;
+        font-size: 12px;
+        text-align: center;
+        letter-spacing: 0.04em;
+      }
+      .mockup-banner strong {
+        color: var(--halo);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mockup-banner">
+      <strong>MOCKUP</strong> — Games multi-device hero. Hover devices for lift. Move trim before integrating into index.html.
+    </div>
+
+    <section class="games-spotlight" data-spotlight>
+      <div class="gs-inner">
+        <header class="gs-copy">
+          <span class="gs-eyebrow">Phone-free</span>
+          <h2 class="gs-headline">Bible games, <em>without the screen.</em></h2>
+          <p class="gs-sub">
+            <strong>75 group games.</strong> Four Corners. Jonah&rsquo;s Run. Burning Bush. Read the card, close the app, go play with
+            humans.
+          </p>
+        </header>
+
+        <div class="gs-stage">
+          <div class="gs-sparkles" aria-hidden="true">
+            <span class="gs-sparkle gs-sparkle--1"></span>
+            <span class="gs-sparkle gs-sparkle--2"></span>
+            <span class="gs-sparkle gs-sparkle--3"></span>
+            <span class="gs-sparkle gs-sparkle--4"></span>
+            <span class="gs-sparkle gs-sparkle--5"></span>
+            <span class="gs-sparkle gs-sparkle--6"></span>
+          </div>
+
+          <!-- LAPTOP (center back) -->
+          <div class="gs-device gs-laptop">
+            <span class="gs-halo"></span>
+            <div class="gs-laptop__body">
+              <span class="gs-laptop__camera"></span>
+              <div class="gs-laptop__screen">
+                <div class="games-ui" data-ui="laptop"></div>
+              </div>
+            </div>
+            <div class="gs-laptop__chin"></div>
+          </div>
+
+          <!-- IPAD (front left) -->
+          <div class="gs-device gs-ipad">
+            <span class="gs-halo"></span>
+            <div class="gs-ipad__body">
+              <span class="gs-ipad__camera"></span>
+              <div class="gs-ipad__screen">
+                <div class="games-ui" data-ui="ipad"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- IPHONE (front right) -->
+          <div class="gs-device gs-iphone">
+            <span class="gs-halo"></span>
+            <div class="gs-iphone__body">
+              <div class="gs-iphone__screen">
+                <span class="gs-iphone__island"></span>
+                <div class="games-ui" data-ui="iphone"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // ============================================================
+      // Games UI content — 75+ Bible-study group games
+      // ============================================================
+      const GAMES = {
+        action: [
+          { i: "🏃", t: "Four Corners" },
+          { i: "🐋", t: "Jonah's Run" },
+          { i: "🔥", t: "Burning Bush" },
+          { i: "🪨", t: "Goliath Down" },
+          { i: "🚶", t: "Faith Walk" },
+          { i: "🏹", t: "David's Sling" },
+          { i: "🦁", t: "Lion's Den Tag" },
+          { i: "🌊", t: "Red Sea Race" },
+          { i: "🎺", t: "Walls of Jericho" },
+          { i: "⚓", t: "Fishers of Men" },
+          { i: "🔨", t: "Ark Build Relay" },
+          { i: "🌾", t: "Ruth's Field" },
+          { i: "🐑", t: "Lost Sheep" },
+          { i: "⚡", t: "Elijah's Race" },
+          { i: "🪜", t: "Jacob's Ladder" },
+          { i: "🏔️", t: "Joshua's March" },
+          { i: "🍞", t: "Manna Hunt" },
+          { i: "💪", t: "Samson Strength" },
+        ],
+        imagination: [
+          { i: "🎭", t: "Solomon Says" },
+          { i: "🗣️", t: "Apostle Charades" },
+          { i: "👑", t: "Esther's Whisper" },
+          { i: "🎨", t: "Ezekiel Sketch" },
+          { i: "📜", t: "Parable Pitch" },
+          { i: "🤲", t: "Prodigal Path" },
+          { i: "🌅", t: "Road to Emmaus" },
+          { i: "🕊️", t: "Pentecost Fire" },
+          { i: "🌟", t: "Bethlehem Star" },
+          { i: "🎬", t: "Acts in 60 Seconds" },
+          { i: "🎭", t: "Disciple Mime" },
+          { i: "🏺", t: "Tabernacle Build" },
+          { i: "🎤", t: "Sermon on Mount" },
+          { i: "🔮", t: "Revelation Trumpet" },
+          { i: "🎻", t: "David's Harp" },
+        ],
+        mind: [
+          { i: "🧠", t: "Verse Sprint" },
+          { i: "📖", t: "Book Order Race" },
+          { i: "🔡", t: "Psalm Echo" },
+          { i: "🧩", t: "Beatitudes Puzzle" },
+          { i: "🗝️", t: "10 Commandments" },
+          { i: "⚖️", t: "Job's Trial" },
+          { i: "🪨", t: "Pearl of Great Price" },
+          { i: "🌱", t: "Mustard Seed" },
+          { i: "👴", t: "Methuselah Memory" },
+          { i: "📊", t: "Genealogy Chain" },
+          { i: "🔢", t: "Plagues Count" },
+          { i: "🗺️", t: "Holy Land Map" },
+          { i: "✝️", t: "I Am Statements" },
+          { i: "🍞", t: "Bread of Life" },
+        ],
+        conversation: [
+          { i: "💬", t: "Hagar's Path" },
+          { i: "🤝", t: "Abraham's Bargain" },
+          { i: "😢", t: "Jeremiah Tears" },
+          { i: "🌹", t: "Hosea's Mercy" },
+          { i: "🌾", t: "Naomi's Return" },
+          { i: "🙏", t: "Hannah's Vow" },
+          { i: "😂", t: "Sarah's Laugh" },
+          { i: "👀", t: "Lot's Look Back" },
+          { i: "💔", t: "Garden of Gethsemane" },
+          { i: "⛅", t: "Sermon's Reach" },
+          { i: "🕯️", t: "Light of World" },
+          { i: "🧂", t: "Salt of Earth" },
+          { i: "🌳", t: "Eden Lost" },
+          { i: "🍷", t: "Last Supper Round" },
+        ],
+        ice: [
+          { i: "🧊", t: "Two Truths, One Lie" },
+          { i: "⏱️", t: "Five-Minute Faith" },
+          { i: "🎯", t: "My Calling Story" },
+          { i: "📿", t: "Favorite Verse" },
+          { i: "🤔", t: "Would You Rather" },
+          { i: "🌅", t: "First Bible Memory" },
+          { i: "🙌", t: "Where I Saw God" },
+          { i: "💡", t: "What I'm Learning" },
+          { i: "🌍", t: "If I Had One Day" },
+          { i: "✨", t: "Highlight of Week" },
+          { i: "☕", t: "Coffee Confessions" },
+          { i: "🧓", t: "Faith of My Family" },
+          { i: "📷", t: "Snapshot Prayer" },
+        ],
+        surprise: [{ i: "🎲", t: "Surprise Me" }],
+      };
+
+      const CATEGORIES = [
+        { key: "action", label: "🏃  Action", list: GAMES.action },
+        { key: "imagination", label: "🎭  Imagination", list: GAMES.imagination },
+        { key: "mind", label: "🧠  Mind", list: GAMES.mind },
+        { key: "conversation", label: "💬  Conversation", list: GAMES.conversation },
+        { key: "ice", label: "🔥  Icebreakers", list: GAMES.ice },
+      ];
+
+      const TOTAL_GAMES =
+        GAMES.action.length +
+        GAMES.imagination.length +
+        GAMES.mind.length +
+        GAMES.conversation.length +
+        GAMES.ice.length +
+        GAMES.surprise.length;
+
+      function gameCard(g) {
+        return `<div class="game-card"><span class="game-card__icon">${g.i}</span><div class="game-card__title">${g.t}</div></div>`;
+      }
+
+      function categoryBlock(cat) {
+        return `
+          <div class="games-ui__category">${cat.label}</div>
+          <div class="games-ui__grid">${cat.list.map(gameCard).join("")}</div>
+        `;
+      }
+
+      const uiHTML = `
+        <div class="games-ui__topbar">
+          <span class="games-ui__back">‹</span>
+          <span class="games-ui__title">Games</span>
+          <span class="games-ui__count">${TOTAL_GAMES}+ Games</span>
+        </div>
+        <p class="games-ui__sub">
+          Phone-free games for your next Bible study. Read the card, close the app, go play.
+        </p>
+        ${CATEGORIES.map(categoryBlock).join("")}
+        <div class="games-ui__footer">📌 Pin favorites · Build your kit</div>
+      `;
+
+      document.querySelectorAll(".games-ui").forEach((el) => {
+        el.innerHTML = uiHTML;
+      });
+
+      // ============================================================
+      // Reveal on scroll
+      // ============================================================
+      const spotlight = document.querySelector("[data-spotlight]");
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              spotlight.classList.add("is-revealed");
+              obs.disconnect();
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      obs.observe(spotlight);
+
+      // Reveal immediately if already in view on load
+      requestAnimationFrame(() => {
+        const r = spotlight.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.8) spotlight.classList.add("is-revealed");
+      });
+    </script>
+  </body>
+</html>
