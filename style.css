@@ -670,7 +670,7 @@ a:hover {
 /* ─── About Grid ─── */
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 340px;
+  grid-template-columns: 480px 1fr;
   gap: var(--space-10);
   align-items: start;
 }
@@ -1037,13 +1037,14 @@ a:hover {
 .footer-top {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .footer-brand {
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  transform: translate(-1.25rem, 0.15rem);
 }
 
 .footer-logo-icon {
