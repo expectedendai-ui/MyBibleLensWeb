@@ -623,7 +623,9 @@
             <div class="reflect-phone__island"></div>
             <div class="reflect-phone__screen" data-carousel>
               <div class="reflect-slide is-active"><img src="assets/reflections/IMG_2226.PNG" alt="Prayer mode" /></div>
-              <div class="reflect-slide"><img src="assets/reflections/IMG_2228.PNG" alt="Wisdom mode — Faith, Calling, Wisdom tabs" /></div>
+              <div class="reflect-slide" data-extra-dwell="1800">
+                <img src="assets/reflections/IMG_matthew633.PNG" alt="Wisdom mode — Matthew 6:33 reflection" />
+              </div>
               <div class="reflect-slide"><img src="assets/reflections/IMG_2224.PNG" alt="Isaiah 43:19 reflection" /></div>
               <div class="reflect-slide"><img src="assets/reflections/IMG_2223.PNG" alt="Deep reflection — 7 virtues" /></div>
               <div class="reflect-slide"><img src="assets/reflections/IMG_2227.PNG" alt="Mark 10:45 reflection" /></div>
@@ -679,11 +681,19 @@
 
       // ============================================================
       // Auto-rotating carousel
+      // Base dwell is 3500ms; any slide with data-extra-dwell adds that
+      // many extra milliseconds (e.g. the Matthew 6:33 slide gets +1800ms).
       // ============================================================
       const slides = document.querySelectorAll(".reflect-slide");
       const dots = document.querySelectorAll(".reflect-dot");
+      const BASE_DWELL = 3500;
       let active = 0;
       let timer = null;
+
+      function dwellFor(idx) {
+        const extra = parseInt(slides[idx].getAttribute("data-extra-dwell") || "0", 10);
+        return BASE_DWELL + (Number.isFinite(extra) ? extra : 0);
+      }
 
       function go(next) {
         slides[active].classList.remove("is-active");
@@ -693,20 +703,31 @@
         dots[active].classList.add("is-active");
       }
 
-      function startCarousel() {
-        if (timer) return;
-        timer = setInterval(() => go(active + 1), 3500);
+      function scheduleNext() {
+        timer = setTimeout(() => {
+          go(active + 1);
+          scheduleNext();
+        }, dwellFor(active));
       }
 
-      // Click a dot to jump
+      function startCarousel() {
+        if (timer) return;
+        scheduleNext();
+      }
+
+      function restartCarousel() {
+        if (timer) {
+          clearTimeout(timer);
+          timer = null;
+        }
+        scheduleNext();
+      }
+
+      // Click a dot to jump (resets the per-slide dwell timer)
       dots.forEach((dot, i) => {
         dot.addEventListener("click", () => {
           go(i);
-          if (timer) {
-            clearInterval(timer);
-            timer = null;
-            startCarousel();
-          }
+          restartCarousel();
         });
       });
 
