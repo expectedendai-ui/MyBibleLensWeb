@@ -208,6 +208,11 @@
       .empty-phone:not(.empty-phone--bl) .empty-phone__video {
         transform: translateY(0%);
       }
+      /* Middle phone — nudge left so it sits closer to the copy */
+      .empty-phone:not(.empty-phone--bl) {
+        margin-right: 1.5rem;
+        transform: translateX(-1.5rem);
+      }
 
       /* ============================================================
          RIGHT — Mosaic board (sepia-toned, layered cutouts)
@@ -216,14 +221,15 @@
         position: relative;
         width: 100%;
         margin-top: -3.5rem; /* lift the whole mosaic board ~5 notches */
+        margin-left: -3.5rem; /* shift board further left */
       }
-      /* Second phone — bottom-RIGHT of the board, leans RIGHT, pushed further out + down */
+      /* Second phone — bottom-RIGHT of the board, leans RIGHT */
       .empty-phone--bl {
         position: absolute;
-        bottom: -22%;
-        right: -38%;
+        bottom: -16%;
+        right: -19%;
         left: auto;
-        width: 265px;
+        width: 240px;
         aspect-ratio: 9 / 19.5;
         z-index: 15;
         transform: rotate(10deg);
@@ -232,8 +238,8 @@
       .mosaic-board {
         position: relative;
         width: 100%;
-        max-width: 960px;
-        aspect-ratio: 1 / 0.95;
+        max-width: 620px;
+        aspect-ratio: 1 / 1.15;
         margin-inline: auto;
         border-radius: 28px;
         background:
