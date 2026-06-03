@@ -15,7 +15,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="./style.css">
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -156,6 +155,7 @@
           <div class="about-grid">
             <div class="about-aside">
               <div class="callout-card">
+                <p style="font-weight:700; font-size:1.15rem; line-height:1.65; color:var(--parchment); margin-bottom:1.2rem;">I'm a builder. A tool maker. A guy with a phone, a laptop, and a calling to make Scripture come alive for people who scroll faster than they pray. If MyBibleLens does what I hope, it won't be because I'm special &mdash; it'll be because I got out of the way long enough for God to use a small app to do a big thing.</p>
                 <p>I just want to bring people closer to God. This app is exactly what I needed when I was younger—and it's exactly what my sister and the friends around me need right now. We need a space to sit down, learn about a faithful life, actually have fun, and share our ideas and testimonies with family and friends.</p>
                 <p>Let's be honest: being on social media these days is just eeehhhh. And while I deeply respect every Bible app out there because we are all doing the same job at the end of the day, I feel like they only do one thing: give you scriptures. That's it. And honestly? It's booooooooooringgggg. I believe your Scripture and your journal should be physical, and technology should just be the tool that elevates it.</p>
                 <p>It's time to show God in a visual light. It's time to show this generation how fun and how cool faith can actually be, because this is the future. We always say 'One Nation Under God,' but if we really want to bring God back into the nation, where is the tool to actually help us do it? Where is the tool to spark our imagination and bring Christ alive in our minds? Where is the tool to help us study the Word and seamlessly share it? Where are the interactive sermon decks? Why don't pastors have a dedicated visual index just for them? And why can't we make this fun? Where are the games to make studying engaging?</p>
@@ -182,21 +182,44 @@
                     rel="noopener noreferrer"
                     class="ig-handle-btn"
                     style="margin-top:0;"
-                    aria-label="Visit Denzel Rigaud's personable website"
+                    aria-label="Visit Denzel Rigaud's personal website"
                   >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                       <circle cx="12" cy="12" r="10" />
                       <line x1="2" y1="12" x2="22" y2="12" />
                       <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                     </svg>
-                    Personable Website
+                    Personal Website
                   </a>
+                  <button
+                    type="button"
+                    class="ig-handle-btn"
+                    style="margin-top:0; cursor:pointer;"
+                    aria-expanded="false"
+                    aria-controls="novella-soon"
+                    onclick="var m=document.getElementById('novella-soon');var open=m.style.display==='flex';m.style.display=open?'none':'flex';this.setAttribute('aria-expanded',String(!open));"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                    </svg>
+                    Inside My Mind
+                  </button>
                 </div>
+                <p
+                  id="novella-soon"
+                  role="status"
+                  style="display:none; align-items:center; gap:0.4rem; margin:0.85rem 0 0; font-family:'Hammersmith One', sans-serif; font-style:italic; font-size:0.95rem; color:#b6751d; letter-spacing:0.02em; text-shadow:0 0 14px rgba(240, 200, 80, 0.45);"
+                >
+                  <span aria-hidden="true">✦</span> Memoir coming soon&hellip; the real story behind MyBibleLens.
+                </p>
               </div>
             </div>
             <div class="about-main">
-              <h2 class="section-heading">What is the People Era?</h2>
-              <p style="margin-bottom:1.25rem;">As MyBibleLens grows, the founder's vision is to direct a meaningful share of profits into community giveback through the <strong>MyBibleLens Foundation</strong>. Causes include:</p>
+              <h2 class="section-heading">My plan with all the money?</h2>
+              <p style="margin-bottom:1.25rem;">I'm blessed to say I built all of this by myself. I asked for help at one point, got it, and then later ripped out the entire codebase because I knew God wanted better. Doing it this way means I retain 100% of the profit.</p>
+              <p style="margin-bottom:1.25rem;">My upbringing taught me a lot. From being homeless, hustling, and hacking just to make a difference in my life, I know exactly what my generation is going through. But to summarize it simply: I don't put money over God. I can't bear to look at the younger generation and withhold what I desperately needed as a kid.</p>
+              <p style="margin-bottom:1.25rem;">Yeah, I'm going to buy myself a Truck and upgrade my workspace so I can build faster&hellip; and yeaaa, a Lava Orange Marlin Trek bike, that's all. But I refuse to turn my back on the kid I once was who just needed a little help. That's why, as MyBibleLens grows, my ultimate vision is to direct a meaningful share of our profits straight into community giveback.</p>
 
               <ul style="list-style:none; padding:0; margin:0 0 1.5rem 0; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:0.55rem; font-family:'Inter', sans-serif;">
                 <li style="padding-left:1.25rem; position:relative;"><span style="position:absolute; left:0; color:#b6741d;">✦</span> Donations to churches</li>
@@ -205,8 +228,7 @@
                 <li style="padding-left:1.25rem; position:relative;"><span style="position:absolute; left:0; color:#b6741d;">✦</span> Free journal giveaways</li>
                 <li style="padding-left:1.25rem; position:relative;"><span style="position:absolute; left:0; color:#b6741d;">✦</span> Scholarships for teens</li>
                 <li style="padding-left:1.25rem; position:relative;"><span style="position:absolute; left:0; color:#b6741d;">✦</span> Coding &amp; tech bootcamp support</li>
-                <li style="padding-left:1.25rem; position:relative;"><span style="position:absolute; left:0; color:#b6741d;">✦</span> Direct aid to families in need</li>
-                <li style="padding-left:1.25rem; position:relative;"><span style="position:absolute; left:0; color:#b6741d;">✦</span> Calisthenics &amp; workout parks</li>
+                <li style="padding-left:1.25rem; position:relative;"><span style="position:absolute; left:0; color:#b6741d;">✦</span> Calisthenics &amp; workout parks&hellip;so gym can be free outside in the beautiful sun</li>
                 <li style="padding-left:1.25rem; position:relative;"><span style="position:absolute; left:0; color:#b6741d;">✦</span> Supporting local farmers</li>
                 <li style="padding-left:1.25rem; position:relative; font-style:italic; color:rgba(61,43,31,0.7);">And much, much more…</li>
                 <li
@@ -222,16 +244,12 @@
                     text-shadow: 0 0 14px rgba(240, 200, 80, 0.45);
                   "
                 >
-                  (Just you watch!)
+                  Just you watch!
                 </li>
               </ul>
 
               <div style="text-align:center; color:#b6741d; letter-spacing:0.6em; font-size:0.9rem; margin:1.5rem 0 0.25rem 0;">✦ ✦ ✦ ✦ ✦</div>
               <div style="text-align:center; color:#b6741d; letter-spacing:0.6em; font-size:0.9rem; margin:0 0 1.5rem 0;">✦ ✦ ✦ ✦ ✦</div>
-
-              <blockquote style="font-style:italic; font-family:'Inter', Georgia, serif; font-size:1.05rem; line-height:1.7; color:rgba(61,43,31,0.92); border-left:4px solid #b6741d; padding:0.5rem 0 0.5rem 1.25rem; margin:0 0 1.75rem 0;">
-                "The era of soul-draining algorithms and digital chaos ends here. We are reclaiming our focus, our community, our friends, and our families. This isn't just another app — it's the dawn of The People's Era."
-              </blockquote>
 
               <div style="text-align:center; padding:1rem 0 0.25rem 0;">
                 <p style="font-family:'Inter', Georgia, serif; font-style:italic; font-size:1rem; line-height:1.7; color:rgba(61,43,31,0.85); max-width:560px; margin:0 auto 0.6rem auto;">"For even the Son of Man came not to be served but to serve, and to give His life as a ransom for many."</p>
@@ -281,7 +299,27 @@
               </li>
               <li style="display:flex; align-items:baseline; gap:0.5rem; font-family:'Inter',sans-serif; font-size:0.95rem; line-height:1.6;">
                 <span aria-hidden="true" style="color:#b6741d;">·</span>
-                <span><strong style="color:#b6741d;">Technical Product Manager</strong> — Denzel Rigaud</span>
+                <span><strong style="color:#b6741d;">Designer &amp; Brand</strong> — Denzel Rigaud</span>
+              </li>
+              <li style="display:flex; align-items:baseline; gap:0.5rem; font-family:'Inter',sans-serif; font-size:0.95rem; line-height:1.6;">
+                <span aria-hidden="true" style="color:#b6741d;">·</span>
+                <span><strong style="color:#b6741d;">Backend &amp; Infrastructure</strong> — Denzel Rigaud</span>
+              </li>
+              <li style="display:flex; align-items:baseline; gap:0.5rem; font-family:'Inter',sans-serif; font-size:0.95rem; line-height:1.6;">
+                <span aria-hidden="true" style="color:#b6741d;">·</span>
+                <span><strong style="color:#b6741d;">iOS Release Engineer</strong> — Denzel Rigaud</span>
+              </li>
+              <li style="display:flex; align-items:baseline; gap:0.5rem; font-family:'Inter',sans-serif; font-size:0.95rem; line-height:1.6;">
+                <span aria-hidden="true" style="color:#b6741d;">·</span>
+                <span><strong style="color:#b6741d;">Security &amp; Privacy Officer</strong> — Denzel Rigaud</span>
+              </li>
+              <li style="display:flex; align-items:baseline; gap:0.5rem; font-family:'Inter',sans-serif; font-size:0.95rem; line-height:1.6;">
+                <span aria-hidden="true" style="color:#b6741d;">·</span>
+                <span><strong style="color:#b6741d;">QA &amp; Testing</strong> — Denzel Rigaud</span>
+              </li>
+              <li style="display:flex; align-items:baseline; gap:0.5rem; font-family:'Inter',sans-serif; font-size:0.95rem; line-height:1.6;">
+                <span aria-hidden="true" style="color:#b6741d;">·</span>
+                <span><strong style="color:#b6741d;">Content &amp; Copywriter</strong> — Denzel Rigaud</span>
               </li>
               <li style="display:flex; align-items:baseline; gap:0.5rem; font-family:'Inter',sans-serif; font-size:0.95rem; line-height:1.6;">
                 <span aria-hidden="true" style="color:#b6741d;">·</span>
@@ -298,6 +336,10 @@
               <li style="display:flex; align-items:baseline; gap:0.5rem; font-family:'Inter',sans-serif; font-size:0.95rem; line-height:1.6;">
                 <span aria-hidden="true" style="color:#b6741d;">·</span>
                 <span><strong style="color:#b6741d;">Head of Counsel</strong> — The Holy Spirit</span>
+              </li>
+              <li style="display:flex; align-items:baseline; gap:0.5rem; font-family:'Inter',sans-serif; font-size:0.95rem; line-height:1.6;">
+                <span aria-hidden="true" style="color:#b6741d;">·</span>
+                <span><strong style="color:#b6741d;">Chief Coffee Officer</strong> — Denzel Rigaud <em style="color:#7a5c3a; font-size:0.85rem;">(fueled by 4:30 AM wakeups and grace)</em></span>
               </li>
             </ul>
             <p style="text-align:center; font-style:italic; color:#7a5c3a; font-size:0.85rem; margin-top:1.25rem; opacity:0.85;">I'm just having fun at this point haha</p>
@@ -358,7 +400,6 @@
                 <textarea id="partner-message" name="message" class="form-textarea" rows="5" placeholder="Tell us about your vision and how you'd like to partner with MyBibleLens™." required></textarea>
               </div>
 
-              <div class="g-recaptcha" data-sitekey="6LcmjMAsAAAAAO7vwrqLK8gyoJl4JcQKZKWG3UoN" style="margin-bottom:1rem;"></div>
               <button type="submit" class="form-submit" id="partner-submit-btn">Send Message</button>
               <p id="partner-success-msg" style="display:none;color:#2e7d32;font-weight:600;margin-top:1rem;font-size:0.95rem;">Thank you &mdash; we'll be in touch soon. God bless your vision.</p>
               <p id="partner-error-msg" style="display:none;color:#b22222;font-weight:500;margin-top:1rem;font-size:0.9rem;">Something went wrong. Please try again.</p>
@@ -410,7 +451,6 @@
               <label class="form-label" for="support-message">Message</label>
               <textarea id="support-message" name="message" class="form-input form-textarea" placeholder="Describe your issue or question in detail. Include your account email, any error messages, and screenshots if relevant." rows="6" required></textarea>
             </div>
-            <div class="g-recaptcha" data-sitekey="6LcmjMAsAAAAAO7vwrqLK8gyoJl4JcQKZKWG3UoN" style="margin-bottom:1rem;"></div>
             <button type="submit" class="form-submit-btn" id="form-submit-btn">Send Message</button>
             <div id="form-success" class="form-success" style="display:none;">
               <p>&#10003; Your message has been received. We'll be in touch within 24–48 hours.</p>
@@ -2572,6 +2612,7 @@
       <div class="footer-socials">
         <a href="https://www.instagram.com/smiledenzel?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="footer-social-link">@smiledenzel</a>
         <a href="https://www.instagram.com/mybiblelens/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" class="footer-social-link">@mybiblelens</a>
+        <a href="https://www.instagram.com/thewatercheck/" target="_blank" rel="noopener noreferrer" class="footer-social-link">@thewatercheck</a>
       </div>
       <div class="footer-divider"></div>
       <div class="footer-privacy-rights" style="text-align:center;padding:0.75rem 0;font-size:0.85rem;line-height:1.6;">

@@ -670,7 +670,7 @@ a:hover {
 /* ─── About Grid ─── */
 .about-grid {
   display: grid;
-  grid-template-columns: 480px 1fr;
+  grid-template-columns: 655px 1fr;
   gap: var(--space-10);
   align-items: start;
 }
