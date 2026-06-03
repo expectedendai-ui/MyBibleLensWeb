@@ -204,6 +204,22 @@
         display: block;
         z-index: 1;
       }
+      /* Tappable phone — links the featured collage to its creator's Instagram */
+      .phone-link {
+        position: absolute;
+        inset: 0;
+        z-index: 6;
+        display: block;
+        border-radius: 30px;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        transition: box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .phone-link:hover,
+      .phone-link:focus-visible {
+        box-shadow: inset 0 0 0 2px rgba(240, 200, 80, 0.85);
+        outline: none;
+      }
       /* Middle phone only — shift the video content down inside the phone screen */
       .empty-phone:not(.empty-phone--bl) .empty-phone__video {
         transform: translateY(0%);
@@ -1074,13 +1090,18 @@
           <a href="#pricing" class="mosaic-showcase__cta">Build your first vision board &rarr;</a>
         </div>
 
-        <!-- MIDDLE — phone with looping Mosaic demo (video 1) -->
-        <div class="empty-phone reveal-fade reveal-fade--board" aria-hidden="true">
+        <!-- MIDDLE — phone (girls collage) → links to Quinn's Instagram -->
+        <div class="empty-phone reveal-fade reveal-fade--board">
           <div class="empty-phone__screen">
-            <video class="empty-phone__video" autoplay muted loop playsinline preload="metadata">
-              <source src="assets/mosaic/phone-1.mp4" type="video/mp4" />
-            </video>
+            <img class="empty-phone__video" src="assets/mosaic/phone-1-mosaic.jpg" alt="" />
             <span class="empty-phone__island"></span>
+            <a
+              class="phone-link"
+              href="https://www.instagram.com/quinnlockharttt/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Quinn on Instagram (@quinnlockharttt)"
+            ></a>
           </div>
         </div>
 
@@ -1091,6 +1112,13 @@
             <div class="empty-phone__screen">
               <img class="empty-phone__video" src="assets/mosaic/phone-2-mosaic.jpg" alt="" />
               <span class="empty-phone__island"></span>
+              <a
+                class="phone-link"
+                href="https://www.instagram.com/jj.takeflight/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="JJ on Instagram (@jj.takeflight)"
+              ></a>
             </div>
           </div>
 
