@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deep Study Spotlight — MyBibleLens Mockup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      /* ============================================================
+         BRAND TOKENS — DO NOT CHANGE
+      ============================================================ */
+      :root {
+        --parchment: #f5f2ed;
+        --parchment-deep: #ece5d8;
+        --deep-brown: #3d2b1f;
+        --ink: #2a1e16;
+        --gold: #b6751d;
+        --gold-pressed: #9a6218;
+        --ember: #d4921f;
+        --halo: #f0c850;
+        --sanctuary-dark: #1c100a;
+        --font-display: "Hammersmith One", sans-serif;
+        --font-body: "Inter", -apple-system, system-ui, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        background: var(--parchment);
+        color: var(--deep-brown);
+      }
+      body {
+        font-family: var(--font-body);
+        min-height: 100vh;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      /* ============================================================
+         SECTION — Deep Study Spotlight
+      ============================================================ */
+      .ds-spotlight {
+        position: relative;
+        padding: 120px 0 150px;
+        background:
+          radial-gradient(ellipse at 75% 30%, rgba(240, 200, 80, 0.12), transparent 60%),
+          radial-gradient(ellipse at 15% 80%, rgba(182, 117, 29, 0.08), transparent 60%), var(--parchment);
+        overflow: hidden;
+        isolation: isolate;
+      }
+      .ds-spotlight__inner {
+        display: grid;
+        grid-template-columns: 0.95fr 1fr;
+        gap: clamp(2rem, 5vw, 5rem);
+        align-items: center;
+      }
+
+      /* ---- Copy column ---- */
+      .ds-copy {
+        max-width: 540px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 900ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .ds-spotlight.is-revealed .ds-copy {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .ds-eyebrow {
+        font-family: var(--font-display);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1.1rem;
+      }
+      .ds-title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 1.3rem + 2.5vw, 3.25rem);
+        line-height: 1.15;
+        color: var(--deep-brown);
+        text-wrap: balance;
+        margin-bottom: 1.4rem;
+      }
+      .ds-title span {
+        color: var(--gold);
+      }
+      .ds-body {
+        font-size: clamp(1rem, 0.95rem + 0.25vw, 1.1rem);
+        line-height: 1.75;
+        color: rgba(61, 43, 31, 0.85);
+        margin-bottom: 1.5rem;
+      }
+      .ds-body strong {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .ds-bullets {
+        list-style: none;
+        display: grid;
+        gap: 0.55rem;
+        margin-bottom: 1.6rem;
+      }
+      .ds-bullets li {
+        font-size: 0.95rem;
+        color: rgba(61, 43, 31, 0.78);
+        padding-left: 1.5rem;
+        position: relative;
+        line-height: 1.55;
+      }
+      .ds-bullets li strong {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .ds-bullets li::before {
+        content: "✦";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--gold);
+        font-size: 0.85rem;
+      }
+      .ds-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        font-family: var(--font-display);
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: var(--gold);
+        padding: 0.85rem 1.4rem;
+        border-radius: 999px;
+        border: 1px solid rgba(182, 117, 29, 0.4);
+        background: linear-gradient(180deg, rgba(240, 200, 80, 0.06) 0%, rgba(212, 146, 31, 0.04) 100%);
+        transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .ds-cta:hover {
+        color: var(--ember);
+        border-color: rgba(212, 146, 31, 0.7);
+        background: rgba(240, 200, 80, 0.12);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px -12px rgba(212, 146, 31, 0.4);
+      }
+      .ds-disclaimer {
+        margin-top: 1.4rem;
+        font-size: 0.78rem;
+        line-height: 1.5;
+        color: rgba(61, 43, 31, 0.55);
+        font-style: italic;
+        max-width: 30rem;
+      }
+
+      /* ---- Visual: two AI lens cards ---- */
+      .ds-stage {
+        position: relative;
+        display: grid;
+        gap: 1.1rem;
+        place-content: center;
+        min-height: 460px;
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 1000ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 1000ms cubic-bezier(0.2, 0.7, 0.2, 1);
+        transition-delay: 160ms;
+      }
+      .ds-spotlight.is-revealed .ds-stage {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .ds-card {
+        width: min(420px, 100%);
+        border-radius: 22px;
+        padding: 1.3rem 1.4rem;
+        background: linear-gradient(180deg, #fffdf8 0%, #f5efe3 100%);
+        border: 1px solid rgba(212, 146, 31, 0.3);
+        box-shadow:
+          0 26px 60px -22px rgba(26, 16, 8, 0.4),
+          0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+        animation: ds-float 8s ease-in-out infinite alternate;
+      }
+      .ds-card--neuro {
+        animation-delay: -3s;
+        margin-left: auto;
+      }
+      @keyframes ds-float {
+        from {
+          translate: 0 0;
+        }
+        to {
+          translate: 0 -8px;
+        }
+      }
+      .ds-card__lens {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 0.7rem;
+      }
+      .ds-card__lens::before {
+        content: "✦";
+      }
+      .ds-card__word {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        color: var(--ink);
+        line-height: 1.2;
+      }
+      .ds-card__translit {
+        font-size: 0.85rem;
+        color: rgba(61, 43, 31, 0.6);
+        font-style: italic;
+        margin-bottom: 0.6rem;
+      }
+      .ds-card__meaning {
+        font-size: 0.9rem;
+        line-height: 1.55;
+        color: rgba(61, 43, 31, 0.85);
+      }
+      .ds-card__meaning b {
+        color: var(--ink);
+      }
+      .ds-tag {
+        display: inline-block;
+        margin-top: 0.8rem;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--gold-pressed);
+        background: rgba(182, 117, 29, 0.12);
+        border: 1px solid rgba(182, 117, 29, 0.3);
+        border-radius: 999px;
+        padding: 0.25rem 0.6rem;
+      }
+      /* Neuroscience recall bar */
+      .ds-recall {
+        font-size: 0.9rem;
+        color: rgba(61, 43, 31, 0.85);
+        line-height: 1.55;
+        margin-bottom: 0.7rem;
+      }
+      .ds-recall b {
+        color: var(--ink);
+      }
+      .ds-bar {
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(61, 43, 31, 0.1);
+        overflow: hidden;
+      }
+      .ds-bar__fill {
+        height: 100%;
+        width: 78%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--gold), var(--ember));
+      }
+      .ds-bar__label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.62rem;
+        font-weight: 600;
+        color: rgba(61, 43, 31, 0.6);
+        margin-top: 0.4rem;
+      }
+
+      /* ============================================================
+         RESPONSIVE
+      ============================================================ */
+      @media (max-width: 960px) {
+        .ds-spotlight {
+          padding: 90px 0 120px;
+        }
+        .ds-spotlight__inner {
+          grid-template-columns: 1fr;
+          gap: 4rem;
+        }
+        .ds-copy {
+          max-width: 100%;
+        }
+        .ds-stage {
+          min-height: auto;
+        }
+        .ds-card--neuro {
+          margin-left: 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .ds-card {
+          animation: none !important;
+        }
+        .ds-copy,
+        .ds-stage {
+          transition: none !important;
+        }
+      }
+
+      /* Mockup banner (hidden by index.html when embedded) */
+      .mockup-banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 0.5rem 1rem;
+        text-align: center;
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        background: var(--sanctuary-dark);
+        color: rgba(245, 242, 237, 0.8);
+      }
+      .mockup-banner strong {
+        color: var(--halo);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mockup-banner"><strong>MOCKUP</strong> — Deep Study · Etymology &amp; Neuroscience AI lenses.</div>
+
+    <section class="ds-spotlight" data-spotlight aria-label="Deep Study — study even harder with AI">
+      <div class="container ds-spotlight__inner">
+        <!-- COPY -->
+        <div class="ds-copy">
+          <p class="ds-eyebrow">Study even harder</p>
+          <h2 class="ds-title">Make it <span>stick</span>.</h2>
+          <p class="ds-body">
+            Right after your Study Cards, take any verse or word deeper with AI. <strong>Etymology</strong> traces it back to the original
+            Greek and Hebrew. <strong>Neuroscience</strong> turns what you just learned into long-term memory with science-backed, spaced
+            recall. Study smarter &mdash; remember it for good.
+          </p>
+          <ul class="ds-bullets" role="list">
+            <li><strong>Etymology</strong> &mdash; trace any word to its Greek &amp; Hebrew roots</li>
+            <li><strong>Neuroscience</strong> &mdash; spaced-recall prompts engineered to make scripture stick</li>
+            <li><strong>Built on your cards</strong> &mdash; turns Study Cards into deep study sessions</li>
+          </ul>
+          <a href="#pricing" class="ds-cta">Study deeper &rarr;</a>
+          <p class="ds-disclaimer">AI may interpret scripture imperfectly. Output is for study &mdash; not doctrine.</p>
+        </div>
+
+        <!-- VISUAL: two lens cards -->
+        <div class="ds-stage" aria-hidden="true">
+          <div class="ds-card ds-card--etymology">
+            <div class="ds-card__lens">Etymology</div>
+            <div class="ds-card__word">ἀγάπη</div>
+            <div class="ds-card__translit">agápē &middot; Greek</div>
+            <div class="ds-card__meaning">
+              <b>Self-giving, sacrificial love</b> &mdash; chosen love that acts for another&rsquo;s good, the love God shows us in John
+              3:16.
+            </div>
+            <span class="ds-tag">Original root</span>
+          </div>
+
+          <div class="ds-card ds-card--neuro">
+            <div class="ds-card__lens">Neuroscience</div>
+            <div class="ds-recall">You learned <b>Philippians 4:13</b> on Tuesday. A quick recall now locks it into long-term memory.</div>
+            <div class="ds-bar"><div class="ds-bar__fill"></div></div>
+            <div class="ds-bar__label"><span>Retention 78%</span><span>Review in 2 days</span></div>
+            <span class="ds-tag">Spaced recall</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      (function () {
+        const spotlight = document.querySelector("[data-spotlight]");
+        if (!spotlight) return;
+        if ("IntersectionObserver" in window) {
+          const obs = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  spotlight.classList.add("is-revealed");
+                  obs.disconnect();
+                }
+              });
+            },
+            { threshold: 0.2 }
+          );
+          obs.observe(spotlight);
+        } else {
+          spotlight.classList.add("is-revealed");
+        }
+        const r = spotlight.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.8) spotlight.classList.add("is-revealed");
+      })();
+    </script>
+  </body>
+</html>

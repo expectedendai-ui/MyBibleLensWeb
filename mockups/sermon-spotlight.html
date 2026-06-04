@@ -587,6 +587,18 @@
           max-width: 620px;
           aspect-ratio: 1 / 0.92;
         }
+        /* Pull both phones back into the frame — desktop offsets hang them off the right */
+        .phone--editor {
+          right: -2%;
+          top: -40%;
+        }
+        /* present phone: RIGHT side of the iPad, below the editor phone, lifted above
+           the Draft/Polish/Preach rail */
+        .phone--present {
+          left: auto;
+          right: -2%;
+          bottom: 10%;
+        }
       }
       @media (max-width: 720px) {
         .sermon-stage__verb {

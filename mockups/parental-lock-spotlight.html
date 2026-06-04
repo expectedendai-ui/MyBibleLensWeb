@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parental Lock Spotlight — MyBibleLens Mockup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      /* ============================================================
+         BRAND TOKENS — DO NOT CHANGE
+      ============================================================ */
+      :root {
+        --parchment: #f5f2ed;
+        --parchment-deep: #ece5d8;
+        --deep-brown: #3d2b1f;
+        --ink: #2a1e16;
+        --gold: #b6751d;
+        --gold-pressed: #9a6218;
+        --ember: #d4921f;
+        --halo: #f0c850;
+        --sanctuary-dark: #1c100a;
+        --font-display: "Hammersmith One", sans-serif;
+        --font-body: "Inter", -apple-system, system-ui, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        background: var(--parchment);
+        color: var(--deep-brown);
+      }
+      body {
+        font-family: var(--font-body);
+        min-height: 100vh;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      /* ============================================================
+         SECTION — Parental Lock Spotlight
+      ============================================================ */
+      .pl-spotlight {
+        position: relative;
+        padding: 120px 0 150px;
+        background:
+          radial-gradient(ellipse at 30% 30%, rgba(240, 200, 80, 0.12), transparent 60%),
+          radial-gradient(ellipse at 80% 80%, rgba(182, 117, 29, 0.08), transparent 60%), var(--parchment);
+        overflow: hidden;
+        isolation: isolate;
+      }
+      .pl-spotlight__inner {
+        display: grid;
+        grid-template-columns: 0.95fr 1fr;
+        gap: clamp(2rem, 5vw, 5rem);
+        align-items: center;
+      }
+
+      /* ---- Copy column (visual on LEFT, copy on RIGHT) ---- */
+      .pl-copy {
+        max-width: 540px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 900ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .pl-spotlight.is-revealed .pl-copy {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .pl-eyebrow {
+        font-family: var(--font-display);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1.1rem;
+      }
+      .pl-title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 1.3rem + 2.5vw, 3.25rem);
+        line-height: 1.15;
+        color: var(--deep-brown);
+        text-wrap: balance;
+        margin-bottom: 1.4rem;
+      }
+      .pl-title span {
+        color: var(--gold);
+      }
+      .pl-body {
+        font-size: clamp(1rem, 0.95rem + 0.25vw, 1.1rem);
+        line-height: 1.75;
+        color: rgba(61, 43, 31, 0.85);
+        margin-bottom: 1.5rem;
+      }
+      .pl-body strong {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .pl-bullets {
+        list-style: none;
+        display: grid;
+        gap: 0.55rem;
+        margin-bottom: 1.6rem;
+      }
+      .pl-bullets li {
+        font-size: 0.95rem;
+        color: rgba(61, 43, 31, 0.78);
+        padding-left: 1.5rem;
+        position: relative;
+        line-height: 1.55;
+      }
+      .pl-bullets li strong {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .pl-bullets li::before {
+        content: "✦";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--gold);
+        font-size: 0.85rem;
+      }
+      .pl-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        font-family: var(--font-display);
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: var(--gold);
+        padding: 0.85rem 1.4rem;
+        border-radius: 999px;
+        border: 1px solid rgba(182, 117, 29, 0.4);
+        background: linear-gradient(180deg, rgba(240, 200, 80, 0.06) 0%, rgba(212, 146, 31, 0.04) 100%);
+        transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .pl-cta:hover {
+        color: var(--ember);
+        border-color: rgba(212, 146, 31, 0.7);
+        background: rgba(240, 200, 80, 0.12);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px -12px rgba(212, 146, 31, 0.4);
+      }
+
+      /* ---- Device visual (phone showing the lock sheet) ---- */
+      .pl-stage {
+        position: relative;
+        display: grid;
+        place-items: center;
+        min-height: 520px;
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 1000ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 1000ms cubic-bezier(0.2, 0.7, 0.2, 1);
+        transition-delay: 160ms;
+      }
+      .pl-spotlight.is-revealed .pl-stage {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .pl-phone {
+        position: relative;
+        width: clamp(248px, 30vw, 300px);
+        aspect-ratio: 9 / 19.5;
+        background: linear-gradient(180deg, #2a2a2e 0%, #1a1a1d 100%);
+        border-radius: 40px;
+        padding: 8px;
+        box-shadow:
+          0 0 0 1px rgba(212, 146, 31, 0.4),
+          0 40px 90px -24px rgba(26, 16, 8, 0.6),
+          0 18px 44px -14px rgba(212, 146, 31, 0.35),
+          0 0 70px -10px rgba(240, 200, 80, 0.3);
+        animation: pl-float 8s ease-in-out infinite alternate;
+      }
+      @keyframes pl-float {
+        from {
+          translate: 0 0;
+        }
+        to {
+          translate: 0 -10px;
+        }
+      }
+      .pl-phone__screen {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 32px;
+        overflow: hidden;
+        background:
+          radial-gradient(ellipse at 50% 0%, rgba(240, 200, 80, 0.1), transparent 55%), linear-gradient(180deg, #fbf7ed 0%, #f0e9d4 100%);
+        padding: 1.6rem 1.1rem;
+        display: flex;
+        flex-direction: column;
+      }
+      .pl-phone__island {
+        position: absolute;
+        top: 14px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30%;
+        height: 22px;
+        background: #050505;
+        border-radius: 12px;
+        z-index: 5;
+      }
+      .pl-sheet-title {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        color: var(--ink);
+        margin: 1.4rem 0 0.25rem;
+      }
+      .pl-sheet-title .pl-lock-ico {
+        font-size: 1rem;
+      }
+      .pl-sheet-sub {
+        font-size: 0.72rem;
+        color: rgba(61, 43, 31, 0.6);
+        margin-bottom: 1rem;
+      }
+      .pl-module {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.6rem 0.7rem;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(212, 146, 31, 0.2);
+        margin-bottom: 0.5rem;
+      }
+      .pl-module__ico {
+        width: 26px;
+        height: 26px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        background: rgba(182, 117, 29, 0.12);
+        font-size: 0.85rem;
+      }
+      .pl-module__name {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--ink);
+        flex: 1;
+      }
+      .pl-module__state {
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        padding: 0.2rem 0.5rem;
+        border-radius: 999px;
+      }
+      .pl-module--locked {
+        background: rgba(182, 117, 29, 0.1);
+        border-color: rgba(182, 117, 29, 0.4);
+      }
+      .pl-module--locked .pl-module__state {
+        background: var(--gold);
+        color: #fffbf0;
+      }
+      .pl-module--open .pl-module__state {
+        background: rgba(156, 175, 136, 0.25);
+        color: #4a5b3a;
+      }
+      .pl-presets {
+        margin-top: auto;
+        padding-top: 0.9rem;
+        border-top: 1px solid rgba(212, 146, 31, 0.2);
+      }
+      .pl-presets__label {
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(61, 43, 31, 0.55);
+        margin-bottom: 0.5rem;
+      }
+      .pl-presets__row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+      }
+      .pl-preset {
+        font-size: 0.66rem;
+        font-weight: 600;
+        padding: 0.32rem 0.6rem;
+        border-radius: 999px;
+        border: 1px solid rgba(212, 146, 31, 0.35);
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.5);
+      }
+      .pl-preset--active {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: #fffbf0;
+      }
+
+      /* Hidden long-press hint bubble */
+      .pl-hint {
+        position: absolute;
+        top: 8%;
+        right: -4%;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.45rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(245, 242, 237, 0.95);
+        border: 1px solid rgba(212, 146, 31, 0.4);
+        box-shadow: 0 12px 30px -12px rgba(26, 16, 8, 0.45);
+        font-size: 0.68rem;
+        font-weight: 700;
+        line-height: 1.3;
+        color: var(--ink);
+        max-width: 168px;
+        text-align: left;
+        animation: chip-bob 6s ease-in-out infinite alternate;
+      }
+      .pl-hint strong {
+        color: var(--gold);
+      }
+      @keyframes chip-bob {
+        from {
+          translate: 0 0;
+        }
+        to {
+          translate: 0 -8px;
+        }
+      }
+
+      /* ============================================================
+         RESPONSIVE
+      ============================================================ */
+      @media (max-width: 960px) {
+        .pl-spotlight {
+          padding: 90px 0 120px;
+        }
+        .pl-spotlight__inner {
+          grid-template-columns: 1fr;
+          gap: 4rem;
+        }
+        .pl-copy {
+          max-width: 100%;
+          order: 2;
+        }
+        .pl-stage {
+          order: 1;
+          min-height: 470px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .pl-phone,
+        .pl-hint {
+          animation: none !important;
+        }
+        .pl-copy,
+        .pl-stage {
+          transition: none !important;
+        }
+      }
+
+      /* Mockup banner (hidden by index.html when embedded) */
+      .mockup-banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 0.5rem 1rem;
+        text-align: center;
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        background: var(--sanctuary-dark);
+        color: rgba(245, 242, 237, 0.8);
+      }
+      .mockup-banner strong {
+        color: var(--halo);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mockup-banner"><strong>MOCKUP</strong> — Parental Lock · hidden in the personalize plate.</div>
+
+    <section class="pl-spotlight" data-spotlight aria-label="Parental Lock — keep the sanctuary safe on a shared device">
+      <div class="container pl-spotlight__inner">
+        <!-- DEVICE VISUAL -->
+        <div class="pl-stage" aria-hidden="true">
+          <div class="pl-phone">
+            <div class="pl-phone__screen">
+              <span class="pl-phone__island"></span>
+              <div class="pl-sheet-title"><span class="pl-lock-ico">🔒</span> Parental Lock</div>
+              <div class="pl-sheet-sub">Choose what waits while they study.</div>
+
+              <div class="pl-module pl-module--locked">
+                <span class="pl-module__ico">🎮</span><span class="pl-module__name">Games</span
+                ><span class="pl-module__state">Unlocks in 2h</span>
+              </div>
+              <div class="pl-module pl-module--locked">
+                <span class="pl-module__ico">🎨</span><span class="pl-module__name">Infinite Canvas</span
+                ><span class="pl-module__state">Until 7am</span>
+              </div>
+              <div class="pl-module pl-module--open">
+                <span class="pl-module__ico">📖</span><span class="pl-module__name">Reflections</span
+                ><span class="pl-module__state">Open</span>
+              </div>
+              <div class="pl-module pl-module--open">
+                <span class="pl-module__ico">🗂️</span><span class="pl-module__name">Study Cards</span
+                ><span class="pl-module__state">Open</span>
+              </div>
+
+              <div class="pl-presets">
+                <div class="pl-presets__label">Lock for</div>
+                <div class="pl-presets__row">
+                  <span class="pl-preset">1 hour</span>
+                  <span class="pl-preset pl-preset--active">2 hours</span>
+                  <span class="pl-preset">4 hours</span>
+                  <span class="pl-preset">Until 7am</span>
+                  <span class="pl-preset">Indefinitely</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="pl-hint">👆 Parents: <strong>press &amp; hold</strong> the gear in the personalize plate to reveal the lock.</span>
+        </div>
+
+        <!-- COPY -->
+        <div class="pl-copy">
+          <p class="pl-eyebrow">For the whole household</p>
+          <h2 class="pl-title">Hand them the iPad.<br />Keep the <span>sanctuary</span> safe.</h2>
+          <p class="pl-body">
+            <strong>Parental Lock</strong> lets you put any study module on pause for your child. The app stays open &mdash; the locked
+            tiles simply wait. Set it for an hour or until morning, and it <strong>unlocks itself</strong> when the time is up. It lives
+            quietly inside the personalize plate, revealed with a long-press, so curious little hands never find it.
+          </p>
+          <ul class="pl-bullets" role="list">
+            <li><strong>Lock any module</strong> &mdash; Games, Canvas, anything in the Study Repository</li>
+            <li><strong>Timed or indefinite</strong> &mdash; 1h · 2h · 4h · until 7am · or off completely</li>
+            <li><strong>Auto-unlocks</strong> &mdash; no need to remember to undo it</li>
+            <li><strong>On-device &amp; private</strong> &mdash; nothing leaves the iPad, no account needed</li>
+            <li><strong>Hidden by design</strong> &mdash; revealed with a long-press in the personalize plate</li>
+          </ul>
+          <a href="#pricing" class="pl-cta">Included on every tier &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      (function () {
+        const spotlight = document.querySelector("[data-spotlight]");
+        if (!spotlight) return;
+        if ("IntersectionObserver" in window) {
+          const obs = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  spotlight.classList.add("is-revealed");
+                  obs.disconnect();
+                }
+              });
+            },
+            { threshold: 0.2 }
+          );
+          obs.observe(spotlight);
+        } else {
+          spotlight.classList.add("is-revealed");
+        }
+        const r = spotlight.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.8) spotlight.classList.add("is-revealed");
+      })();
+    </script>
+  </body>
+</html>

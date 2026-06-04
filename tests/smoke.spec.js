@@ -27,27 +27,36 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await expect(eyebrow).toContainText("Sanctuary App");
   });
 
-  test("spotlight flow renders all 10 feature iframes after LENS/S.O.A.P.", async ({ page }) => {
+  test("spotlight flow renders all 13 feature iframes in order after LENS/S.O.A.P.", async ({
+    page,
+  }) => {
     await page.goto("/");
     await waitForPageReady(page);
     // The old iPad carousel was retired on 2026-06-02 in favor of in-context
     // spotlight sections embedded as auto-sized iframes after LENS/S.O.A.P.
-    // Mosaic was inserted between Sermon and Themes on the same day.
-    const wraps = page.locator(".flow-iframe-wrap");
-    await expect(wraps).toHaveCount(10);
-    for (const id of [
+    // 2026-06-04: the flow was reordered (Reflections + Games above Themes,
+    // Focus Timer to the bottom) and the Orb, Parental Lock, and Deep Study
+    // sections were added.
+    const order = [
       "canvas-flow",
       "sermon-flow",
       "mosaic-flow",
+      "reflections-flow",
+      "games-flow",
       "themes-flow",
       "glow-flow",
       "fellowship-flow",
-      "timer-flow",
-      "games-flow",
-      "reflections-flow",
+      "orb-flow",
+      "parental-lock-flow",
       "cards-flow",
-    ]) {
-      await expect(page.locator(`#${id} iframe`)).toBeAttached();
+      "deep-study-flow",
+      "timer-flow",
+    ];
+    const wraps = page.locator(".flow-iframe-wrap");
+    await expect(wraps).toHaveCount(order.length);
+    for (let i = 0; i < order.length; i++) {
+      await expect(wraps.nth(i)).toHaveAttribute("id", order[i]);
+      await expect(page.locator(`#${order[i]} iframe`)).toBeAttached();
     }
   });
 
