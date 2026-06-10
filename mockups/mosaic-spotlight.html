@@ -1100,10 +1100,6 @@
     </style>
   </head>
   <body>
-    <div class="mockup-banner">
-      <strong>MOCKUP</strong> — Mosaic vision board. Cut. Layer. Pray over it. Live cursors drift. Hover any item.
-    </div>
-
     <section class="mosaic-showcase section-padding" id="mosaic-spotlight" data-spotlight>
       <div class="container mosaic-showcase__inner">
         <!-- LEFT — copy -->
@@ -1128,97 +1124,154 @@
 
         <!-- RIGHT — Mosaic board + two phones (overlap on desktop · side-by-side under the board on mobile) -->
         <div class="board-wrap reveal-fade reveal-fade--board">
-          <div class="mosaic-board" aria-hidden="true">
-            <!-- Presence chip top-left -->
-            <div class="mosaic-presence"><span class="mosaic-presence__dot"></span>5 LIVE</div>
-
-            <!-- Layout selector top-center -->
-            <div class="mosaic-chrome">
-              <span class="mosaic-layout is-active">✦ Cross</span>
-              <span class="mosaic-layout">Book</span>
-              <span class="mosaic-layout">Square</span>
-            </div>
-
-            <!-- Sparkles -->
-            <div class="mosaic-sparkles"><span></span><span></span><span></span><span></span><span></span></div>
-
-            <!-- Washi tape strips (decorative corners) -->
-            <div class="mosaic-tape tape--1"></div>
-            <div class="mosaic-tape tape--2"></div>
-            <div class="mosaic-tape tape--3"></div>
-
-            <!-- ===== Photo polaroids (cutouts) ===== -->
-            <div class="mosaic-item mosaic-polaroid item--p1">
-              <img src="../assets/bibles.jpg" alt="" />
-              <span class="mosaic-polaroid__caption">fellowship</span>
-            </div>
-            <div class="mosaic-item mosaic-polaroid item--p2">
-              <img src="../assets/testimony.jpg" alt="" />
-              <span class="mosaic-polaroid__caption">my testimony</span>
-            </div>
-            <div class="mosaic-item mosaic-polaroid item--p3">
-              <img src="assets/mosaic/mosaic-1.jpg" alt="" />
-              <span class="mosaic-polaroid__caption">together</span>
-            </div>
-            <div class="mosaic-item mosaic-polaroid item--p4">
-              <img src="assets/mosaic/mosaic-2.jpg" alt="" />
-              <span class="mosaic-polaroid__caption">summer 26</span>
-            </div>
-            <div class="mosaic-item mosaic-polaroid item--p5">
-              <img src="../assets/benefits.jpg" alt="" />
-              <span class="mosaic-polaroid__caption">grace</span>
-            </div>
-
-            <!-- ===== Verse cards ===== -->
-            <div class="mosaic-item mosaic-verse item--v1">
-              <div class="mosaic-verse__ref">Psalm 100:2</div>
-              <p class="mosaic-verse__text">&ldquo;Serve the Lord with gladness; come before His presence with singing.&rdquo;</p>
-            </div>
-            <div class="mosaic-item mosaic-verse item--v2">
-              <div class="mosaic-verse__ref">Isaiah 43:19</div>
-              <p class="mosaic-verse__text">&ldquo;Behold, I am doing a new thing; now it springs forth, do you not perceive it?&rdquo;</p>
-            </div>
-            <div class="mosaic-item mosaic-verse item--v3">
-              <div class="mosaic-verse__ref">Philippians 4:13</div>
-              <p class="mosaic-verse__text">&ldquo;I can do all things through Christ who strengthens me.&rdquo;</p>
-            </div>
-
-            <!-- ===== Sanctuary symbols ===== -->
-            <div class="mosaic-item mosaic-symbol item--s1">✝️</div>
-            <div class="mosaic-item mosaic-symbol mosaic-symbol--lg item--s2">🕊️</div>
-            <div class="mosaic-item mosaic-symbol item--s3">🐟</div>
-            <div class="mosaic-item mosaic-symbol item--s4">🕯️</div>
-
-            <!-- ===== Hand-drawn stickers ===== -->
-            <div class="mosaic-item mosaic-sticker item--sticker1">✨ amen</div>
-            <div class="mosaic-item mosaic-sticker item--sticker2">grateful ♡</div>
-            <div class="mosaic-item mosaic-sticker item--sticker3">★ rise</div>
-
-            <!-- Smart Cut pill overlay on p1 -->
-            <div class="smart-cut-pill">✂️ Smart Cut</div>
-
-            <!-- ===== Live cursors (5) ===== -->
-            <div class="mosaic-cursor cursor--quinn">
-              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M 2 2 L 2 14 L 6 11 L 9 16 L 11 15 L 8 10 L 14 9 Z" /></svg>
-              <span class="mosaic-cursor__name">Quinn</span>
-            </div>
-            <div class="mosaic-cursor cursor--katie">
-              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M 2 2 L 2 14 L 6 11 L 9 16 L 11 15 L 8 10 L 14 9 Z" /></svg>
-              <span class="mosaic-cursor__name">Katie</span>
-            </div>
-            <div class="mosaic-cursor cursor--aiyana">
-              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M 2 2 L 2 14 L 6 11 L 9 16 L 11 15 L 8 10 L 14 9 Z" /></svg>
-              <span class="mosaic-cursor__name">Aiyana</span>
-            </div>
-            <div class="mosaic-cursor cursor--kyle">
-              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M 2 2 L 2 14 L 6 11 L 9 16 L 11 15 L 8 10 L 14 9 Z" /></svg>
-              <span class="mosaic-cursor__name">Kyleigh</span>
-            </div>
-            <div class="mosaic-cursor cursor--baker">
-              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M 2 2 L 2 14 L 6 11 L 9 16 L 11 15 L 8 10 L 14 9 Z" /></svg>
-              <span class="mosaic-cursor__name">Baker</span>
-            </div>
+          <!-- iPad mockup — Mosaic canvas-shapes demo video -->
+          <div class="mosaic-board mosaic-board--ipad" aria-hidden="true">
+            <video
+              class="mosaic-board__demo"
+              src="assets/mosaic/mosaic-demo.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            ></video>
           </div>
+
+          <!-- Tiny shape-template cards orbiting the iPad -->
+          <div class="shape-cards" aria-hidden="true">
+            <figure class="shape-card shape-card--1">
+              <img src="assets/mosaic/shape-latin-cross.png" alt="" loading="lazy" />
+              <figcaption>Latin Cross</figcaption>
+            </figure>
+            <figure class="shape-card shape-card--2">
+              <img src="assets/mosaic/shape-patriarchal-cross.png" alt="" loading="lazy" />
+              <figcaption>Patriarchal Cross</figcaption>
+            </figure>
+            <figure class="shape-card shape-card--3">
+              <img src="assets/mosaic/shape-ark.png" alt="" loading="lazy" />
+              <figcaption>The Ark</figcaption>
+            </figure>
+            <figure class="shape-card shape-card--4">
+              <img src="assets/mosaic/shape-celtic-cross.png" alt="" loading="lazy" />
+              <figcaption>Celtic Cross</figcaption>
+            </figure>
+          </div>
+          <style>
+            .mosaic-board--ipad {
+              aspect-ratio: auto;
+              background: linear-gradient(145deg, #2a2a2e, #131316);
+              border-radius: 30px;
+              padding: 16px 14px;
+              box-shadow:
+                inset 0 0 0 2px #050506,
+                0 0 0 1px rgba(212, 146, 31, 0.35),
+                0 40px 80px -22px rgba(0, 0, 0, 0.55),
+                0 16px 40px -10px rgba(212, 146, 31, 0.25);
+              overflow: visible;
+            }
+            .mosaic-board--ipad::before {
+              content: "";
+              position: absolute;
+              top: 7px;
+              left: 50%;
+              transform: translateX(-50%);
+              width: 6px;
+              height: 6px;
+              border-radius: 50%;
+              background: #3a3a40;
+              box-shadow: 0 0 2px rgba(255, 255, 255, 0.25) inset;
+              pointer-events: none;
+            }
+            .mosaic-board--ipad .mosaic-board__demo {
+              display: block;
+              width: 100%;
+              aspect-ratio: 1080 / 1422;
+              object-fit: cover;
+              border-radius: 16px;
+              background: #000;
+            }
+            .shape-cards {
+              display: contents;
+            }
+            .shape-card {
+              position: absolute;
+              z-index: 16;
+              width: 130px;
+              margin: 0;
+              padding: 7px 7px 6px;
+              background: linear-gradient(180deg, #efe3c8 0%, #e3d2ae 100%);
+              border: 1px solid rgba(182, 117, 29, 0.35);
+              border-radius: 10px;
+              box-shadow: 0 10px 24px -10px rgba(26, 16, 8, 0.45);
+              animation: phone-float 7s ease-in-out infinite alternate;
+            }
+            @media (prefers-reduced-motion: reduce) {
+              .shape-card {
+                animation: none;
+              }
+            }
+            .shape-card img {
+              display: block;
+              width: 100%;
+              aspect-ratio: 3 / 4;
+              object-fit: cover;
+              border-radius: 6px;
+              background: #3d2b1f;
+            }
+            .shape-card figcaption {
+              margin-top: 5px;
+              font-family: var(--font-display);
+              font-size: 0.62rem;
+              font-weight: 700;
+              letter-spacing: 0.08em;
+              text-transform: uppercase;
+              text-align: center;
+              color: var(--gold-pressed);
+              line-height: 1.2;
+            }
+            .shape-card--1 {
+              top: -3rem;
+              left: -3.2rem;
+              transform: rotate(-6deg);
+            }
+            .shape-card--2 {
+              top: -4rem;
+              right: -8rem;
+              transform: rotate(5deg);
+              animation-delay: -2s;
+            }
+            .shape-card--3 {
+              top: calc(50% + 255px);
+              right: calc(100% + clamp(1.5rem, 3vw, 3rem) + 45px);
+              left: auto;
+              transform: rotate(3deg);
+              animation-delay: -4s;
+            }
+            .shape-card--4 {
+              top: 21%;
+              right: -8.5rem;
+              transform: rotate(-4deg);
+              animation-delay: -5.5s;
+            }
+            @media (max-width: 1023px) {
+              .shape-cards {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 0.7rem;
+                margin-top: 1.2rem;
+              }
+              .shape-card,
+              .shape-card--1,
+              .shape-card--2,
+              .shape-card--3,
+              .shape-card--4 {
+                position: static;
+                transform: none;
+                animation: none;
+              }
+            }
+          </style>
 
           <!-- Two phones — overlap the board on desktop, sit side-by-side beneath it on mobile -->
           <div class="mosaic-phones">

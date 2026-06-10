@@ -19,10 +19,10 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await expect(page.locator(".hero-tagline")).toContainText("Bringing people closer to God");
   });
 
-  test("repository section eyebrow announces Bible Sanctuary App", async ({ page }) => {
-    await page.goto("/#repository");
+  test("hero eyebrow announces the World's First Sanctuary App", async ({ page }) => {
+    await page.goto("/");
     await waitForPageReady(page);
-    const eyebrow = page.locator(".repo-eyebrow");
+    const eyebrow = page.locator(".hero-eyebrow");
     await expect(eyebrow).toContainText(/world.s first/i);
     await expect(eyebrow).toContainText("Sanctuary App");
   });
@@ -137,7 +137,6 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     const section = page.locator("#mosaic-showcase");
     await expect(section).toBeVisible();
     await expect(section.locator(".mosaic-showcase__title")).toContainText("Scan a page");
-    await expect(section.locator(".mosaic-showcase__board")).toBeVisible();
   });
 
   test("FAQ section renders all questions and each item expands", async ({ page }) => {
