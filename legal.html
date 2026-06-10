@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MyBibleLens™ — Digital Sanctuary</title>
-  <meta name="description" content="MyBibleLens is an AI-powered spiritual research and personal growth sanctuary. About, Support, Privacy Policy, and Terms of Service.">
-  <meta property="og:title" content="MyBibleLens — Digital Sanctuary">
-  <meta property="og:description" content="AI-powered spiritual research and personal growth. Legal policies and mission.">
+  <meta name="description" content="The Builder's Manifesto — MyBibleLens, the World's First Sanctuary App, founded, designed, and built solo by Denzel Rigaud. Read his story, mission, plus Support, Privacy Policy, and Terms of Service.">
+  <meta name="author" content="Denzel Rigaud">
+  <meta property="og:title" content="MyBibleLens — About & Founder Denzel Rigaud">
+  <meta property="og:description" content="The Builder's Manifesto by Denzel Rigaud — founder & full-stack developer of MyBibleLens, the World's First Sanctuary App. His story, mission, and legal policies.">
   <meta property="og:type" content="website">
 
   <!-- Fonts: Hammersmith One (headlines) + Inter (body) -->
@@ -21,6 +22,43 @@
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#3D2B1F">
+
+  <!-- Structured data — ties the entity "Denzel Rigaud" to "MyBibleLens" so a
+       name search ("denzel rigaud") and the brand search resolve to one story. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://expectedend.co/#denzel",
+        "name": "Denzel Rigaud",
+        "jobTitle": ["Founder", "Full-Stack Developer"],
+        "url": "https://expectedend.co/",
+        "description": "Founder, architect, and sole full-stack developer of MyBibleLens — the World's First Sanctuary App. A self-taught builder making Scripture come alive through technology.",
+        "worksFor": { "@id": "https://mybiblelens.us/#org" },
+        "sameAs": [
+          "https://www.instagram.com/smiledenzel/",
+          "https://www.linkedin.com/in/denzel-rigaud-2b0200210",
+          "https://expectedend.co/"
+        ]
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://mybiblelens.us/#org",
+        "name": "MyBibleLens",
+        "alternateName": "MyBibleLens™ — The Sanctuary App",
+        "legalName": "Scriptorium Digital Productions",
+        "url": "https://mybiblelens.us/",
+        "description": "The World's First Sanctuary App. AI-assisted Bible journaling, scripture scanning, sermon building, and fellowship — one-time purchase, no subscriptions.",
+        "founder": { "@id": "https://expectedend.co/#denzel" },
+        "sameAs": [
+          "https://www.instagram.com/mybiblelens/"
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
