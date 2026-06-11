@@ -19,12 +19,14 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await expect(page.locator(".hero-tagline")).toContainText("Bringing people closer to God");
   });
 
-  test("hero eyebrow announces the World's First Sanctuary App", async ({ page }) => {
+  test("hero eyebrow announces the World's First Sanctuary App for Christianity", async ({
+    page,
+  }) => {
     await page.goto("/");
     await waitForPageReady(page);
     const eyebrow = page.locator(".hero-eyebrow");
     await expect(eyebrow).toContainText(/world.s first/i);
-    await expect(eyebrow).toContainText("Sanctuary App");
+    await expect(eyebrow).toContainText("Sanctuary App for Christianity");
   });
 
   test("spotlight flow renders all 13 feature iframes in order after LENS/S.O.A.P.", async ({

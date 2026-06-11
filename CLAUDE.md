@@ -42,7 +42,7 @@ in Docker if we ever need cross-platform visual coverage.)
 ## Brand identity (locked — match the iOS app)
 
 - **Tagline:** "Bringing people closer to God in an exciting and easy way!" (verbatim, with exclamation)
-- **Framing:** "The World's First Sanctuary App" (primary descriptor — capitalized, exact wording across site/socials/schema). "Bible Productivity App" is allowed only as a secondary SEO descriptor in body copy, never the lead. NEVER "Christianity app".
+- **Framing:** "The World's First Sanctuary App for Christianity" (primary descriptor — capitalized, exact wording across site/socials/schema; updated 2026-06-11 by Denzel). "Bible Productivity App" is allowed only as a secondary SEO descriptor in body copy, never the lead. NEVER "Christianity app" as a standalone label.
 - **Palette** (warm only — no cool tones):
   - Parchment `#F5F2ED` · Deep Brown `#3D2B1F` · Dark BG `#1A1008`
   - Gold `#b6751d` · Gold Pressed `#9a6218` · Gold Light `#D4921F`
