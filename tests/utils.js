@@ -58,6 +58,28 @@ async function waitForPageReady(page) {
       }
     `,
   });
+  // Freeze <video> elements at their first frame — an autoplaying loop
+  // (e.g. the Lens phone preview) renders a different frame every capture.
+  await page.evaluate(async () => {
+    const videos = Array.from(document.querySelectorAll("video"));
+    await Promise.all(
+      videos.map(async (v) => {
+        v.pause();
+        if (v.readyState < 2) {
+          await new Promise((resolve) => {
+            v.addEventListener("loadeddata", resolve, { once: true });
+            v.load();
+            setTimeout(resolve, 1500);
+          });
+        }
+        v.currentTime = 0;
+        await new Promise((resolve) => {
+          v.addEventListener("seeked", resolve, { once: true });
+          setTimeout(resolve, 500);
+        });
+      })
+    );
+  });
   // Force-complete any in-flight GSAP timelines if GSAP is loaded.
   await page.evaluate(() => {
     if (typeof window.gsap !== "undefined") {
