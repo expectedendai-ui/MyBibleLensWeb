@@ -334,7 +334,16 @@
             <div class="about-main">
               <h2 class="section-heading">My plan with all the money?</h2>
               <p style="margin-bottom:1.25rem;">I'm blessed to say I built all of this by myself. I asked for help at one point, got it, and then later ripped out the entire codebase because I knew God wanted better. Doing it this way means I retain 100% of the profit.</p>
-              <p style="margin-bottom:1.25rem;">My upbringing taught me a lot. From being homeless, hustling, and hacking just to make a difference in my life, I know exactly what my generation is going through. But to summarize it simply: I don't put money over God. I can't bear to look at the younger generation and withhold what I desperately needed as a kid.</p>
+              <p style="margin-bottom:1.25rem;">My upbringing taught me a lot. From being homeless, hustling, and <span
+                  id="hacker-egg"
+                  class="hacker-egg"
+                  role="button"
+                  tabindex="0"
+                  aria-haspopup="dialog"
+                  aria-controls="hacker-egg-modal"
+                  style="font-size:1.03em;"
+                  >hacking</span
+                > just to make a difference in my life, I know exactly what my generation is going through. But to summarize it simply: I don't put money over God. I can't bear to look at the younger generation and withhold what I desperately needed as a kid.</p>
               <p style="margin-bottom:1.25rem;">Yea, I'm going to upgrade my workspace so I can build faster. But I refuse to turn my back on the kid I once was who just needed a little help. That's why, as MyBibleLens grows, my ultimate vision is to direct a meaningful share of our profits straight into community giveback.</p>
 
               <ul style="list-style:none; padding:0; margin:0 0 1.5rem 0; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:0.55rem; font-family:'Inter', sans-serif;">
@@ -2898,6 +2907,249 @@
         },
         true
       );
+    })();
+  </script>
+
+  <!-- ✦ Easter egg: the "hacking" origin story ✦ -->
+  <style>
+    .hacker-egg {
+      cursor: pointer;
+      border-radius: 3px;
+      transition:
+        color 200ms cubic-bezier(0.16, 1, 0.3, 1),
+        text-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hacker-egg:hover,
+    .hacker-egg:focus-visible {
+      color: #f0c850;
+      text-shadow: 0 0 14px rgba(240, 200, 80, 0.55);
+      outline: none;
+    }
+
+    .hacker-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      background: rgba(12, 7, 3, 0.72);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 220ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hacker-modal[data-open="true"] {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .hacker-modal__panel {
+      position: relative;
+      width: min(560px, 100%);
+      max-height: 86vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      background: linear-gradient(180deg, #211408 0%, #1a1008 100%);
+      border: 1px solid rgba(240, 200, 80, 0.22);
+      border-radius: 18px;
+      box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.4),
+        0 30px 80px rgba(0, 0, 0, 0.6),
+        0 0 60px rgba(212, 146, 31, 0.12);
+      padding: 2.25rem 1.75rem 2rem;
+      transform: translateY(16px) scale(0.98);
+      transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hacker-modal[data-open="true"] .hacker-modal__panel {
+      transform: translateY(0) scale(1);
+    }
+
+    .hacker-modal__kicker {
+      font-family: "Inter", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.7rem;
+      color: #b6741d;
+      margin: 0 0 0.5rem;
+    }
+    .hacker-modal__title {
+      font-family: "Hammersmith One", sans-serif;
+      font-size: clamp(1.4rem, 5vw, 1.85rem);
+      line-height: 1.15;
+      text-wrap: balance;
+      color: #f0c850;
+      margin: 0 0 1.25rem;
+    }
+    .hacker-modal__body p {
+      font-family: "Inter", sans-serif;
+      color: rgba(245, 242, 237, 0.88);
+      font-size: 0.98rem;
+      line-height: 1.7;
+      margin: 0 0 1rem;
+    }
+    .hacker-modal__body p:last-child {
+      margin-bottom: 0;
+      color: rgba(240, 200, 80, 0.82);
+      font-style: italic;
+    }
+    .hacker-modal__body em {
+      color: #f0c850;
+      font-style: italic;
+    }
+
+    .hacker-modal__close {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.85rem;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(240, 200, 80, 0.25);
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.25);
+      color: rgba(245, 242, 237, 0.75);
+      font-size: 1.1rem;
+      line-height: 1;
+      cursor: pointer;
+      transition:
+        color 200ms cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 200ms cubic-bezier(0.16, 1, 0.3, 1),
+        background 200ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hacker-modal__close:hover,
+    .hacker-modal__close:focus-visible {
+      color: #f0c850;
+      border-color: rgba(240, 200, 80, 0.6);
+      background: rgba(240, 200, 80, 0.08);
+      outline: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hacker-egg,
+      .hacker-modal,
+      .hacker-modal__panel,
+      .hacker-modal__close {
+        transition: none;
+      }
+      .hacker-modal__panel {
+        transform: none;
+      }
+    }
+  </style>
+
+  <div
+    class="hacker-modal"
+    id="hacker-egg-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="hacker-egg-title"
+    data-open="false"
+    hidden
+  >
+    <div class="hacker-modal__panel" role="document">
+      <button
+        type="button"
+        class="hacker-modal__close"
+        id="hacker-egg-close"
+        aria-label="Close"
+      >
+        &times;
+      </button>
+      <p class="hacker-modal__kicker">✦ A little secret ✦</p>
+      <h2 class="hacker-modal__title" id="hacker-egg-title">
+        Before the lens, there was the inspect button
+      </h2>
+      <div class="hacker-modal__body">
+        <p>
+          I've been a hacker since elementary school. It started the year I
+          failed second grade.
+        </p>
+        <p>
+          No matter how hard I tried, I couldn't get good grades &mdash; so one
+          day I stopped asking <em>why</em> I kept failing and started asking
+          <em>how do I change this?</em> I pressed around a few keys, hunting for
+          anything, and I found the inspect button. From that moment on, I was
+          hooked.
+        </p>
+        <p>
+          It started with my grades. Nobody knows this about me except my
+          brother &mdash; because when you tell someone you're a hacker, they do
+          one of two things. They assume they already know what you're about to
+          say and try to get you to do something for them, or they get afraid of
+          you. So I kept it quiet.
+        </p>
+        <p>But I've never hacked unethically. That's just not in my bones.</p>
+        <p>
+          More stories to come. And honestly, it's kind of beautiful &mdash; the
+          moment I say it out loud, it starts to make sense to the people I grew
+          up with. They finally understand how I was able to do the things I did.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const trigger = document.getElementById("hacker-egg");
+      const modal = document.getElementById("hacker-egg-modal");
+      if (!trigger || !modal) return;
+      const panel = modal.querySelector(".hacker-modal__panel");
+      const closeBtn = document.getElementById("hacker-egg-close");
+      let lastFocused = null;
+
+      function openModal() {
+        lastFocused = document.activeElement;
+        modal.hidden = false;
+        // next frame so the transition runs from the hidden state
+        requestAnimationFrame(() => {
+          modal.setAttribute("data-open", "true");
+        });
+        document.body.style.overflow = "hidden";
+        if (closeBtn) closeBtn.focus();
+      }
+
+      function closeModal() {
+        modal.setAttribute("data-open", "false");
+        document.body.style.overflow = "";
+        const finish = () => {
+          modal.hidden = true;
+          panel.removeEventListener("transitionend", finish);
+        };
+        panel.addEventListener("transitionend", finish);
+        // fallback in case transitionend doesn't fire
+        setTimeout(() => {
+          if (modal.getAttribute("data-open") === "false") modal.hidden = true;
+        }, 320);
+        if (lastFocused && typeof lastFocused.focus === "function") {
+          lastFocused.focus();
+        }
+      }
+
+      trigger.addEventListener("click", openModal);
+      trigger.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openModal();
+        }
+      });
+
+      if (closeBtn) closeBtn.addEventListener("click", closeModal);
+
+      // Backdrop click closes; clicks inside the panel do not
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal.getAttribute("data-open") === "true") {
+          closeModal();
+        }
+      });
     })();
   </script>
 </body>
