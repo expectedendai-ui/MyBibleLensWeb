@@ -670,15 +670,10 @@ a:hover {
 /* ─── About Grid ─── */
 .about-grid {
   display: grid;
-  grid-template-columns: 655px 1fr;
+  /* Stacked: full-width "Question" card on top, "My plan" horizontal beneath it. */
+  grid-template-columns: 1fr;
   gap: var(--space-10);
   align-items: start;
-}
-
-@media (max-width: 900px) {
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 .callout-card {
