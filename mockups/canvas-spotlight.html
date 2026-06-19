@@ -43,7 +43,7 @@
         -webkit-font-smoothing: antialiased;
       }
       .container {
-        max-width: 1280px;
+        max-width: 1480px;
         margin: 0 auto;
         padding: 0 1.5rem;
       }
@@ -63,7 +63,7 @@
       }
       .mosaic-showcase__inner {
         display: grid;
-        grid-template-columns: 0.85fr 1.6fr;
+        grid-template-columns: 0.72fr 1.9fr;
         gap: clamp(2rem, 5vw, 4rem);
         align-items: center;
       }
@@ -160,7 +160,7 @@
       .canvas-board {
         position: relative;
         width: 100%;
-        max-width: 920px;
+        max-width: 1180px;
         aspect-ratio: 1 / 0.78;
         margin-left: auto;
         margin-right: 0;
@@ -399,8 +399,9 @@
         box-shadow: 0 4px 12px -4px rgba(26, 16, 8, 0.3);
       }
       .cursor--marcus {
-        left: 22%;
-        top: 30%;
+        left: 18%;
+        top: 13%;
+        animation: marcus-grab 13s ease-in-out infinite;
         animation-delay: 0s;
       }
       .cursor--marcus .canvas-cursor__name {
@@ -411,9 +412,11 @@
       }
 
       .cursor--julia {
-        right: 26%;
-        bottom: 32%;
-        animation-delay: -7s;
+        right: 18%;
+        top: 14%;
+        bottom: auto;
+        animation: julia-grab 13s ease-in-out infinite;
+        animation-delay: -6.5s;
       }
       .cursor--julia .canvas-cursor__name {
         background: #c46680;
@@ -677,6 +680,262 @@
         color: #fffbf0;
       }
 
+      /* "+27 more" presence avatar */
+      .canvas-presence__avatar--more {
+        background: var(--deep-brown);
+        font-size: 0.56rem;
+        letter-spacing: 0.01em;
+      }
+
+      /* ============================================================
+         INFINITE FEEL — camera glide, parallax grid, glow, mini-map
+         (the whole point: telegraph an endless, zoomable board)
+      ============================================================ */
+
+      /* Slow whole-board camera glide + breathing zoom. Low amplitude so the
+         curated cards stay readable; the grid parallaxes further behind them. */
+      .canvas-stage {
+        animation: camera-pan 34s ease-in-out infinite;
+        transform-origin: 55% 50%;
+        will-change: transform;
+      }
+      @keyframes camera-pan {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        25% {
+          transform: translate(-26px, 14px) scale(1.04);
+        }
+        50% {
+          transform: translate(-14px, -20px) scale(1.07);
+        }
+        75% {
+          transform: translate(22px, 10px) scale(1.03);
+        }
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+      }
+
+      /* Dot-grid drifts slowly — parallax depth that reads as "endless surface". */
+      .canvas-board::before {
+        animation: grid-pan 52s linear infinite;
+      }
+      @keyframes grid-pan {
+        to {
+          background-position: -220px 176px;
+        }
+      }
+
+      /* Warm spotlight sweeping the board — heavenly motion, not flashy. */
+      .canvas-glow {
+        position: absolute;
+        width: 62%;
+        height: 62%;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(240, 200, 80, 0.22) 0%, transparent 70%);
+        filter: blur(6px);
+        z-index: 0;
+        pointer-events: none;
+        animation: glow-travel 28s ease-in-out infinite;
+      }
+      @keyframes glow-travel {
+        0% {
+          transform: translate(-30%, -18%);
+          opacity: 0.45;
+        }
+        50% {
+          transform: translate(72%, 58%);
+          opacity: 0.85;
+        }
+        100% {
+          transform: translate(-30%, -18%);
+          opacity: 0.45;
+        }
+      }
+
+      /* Ghost cards bleeding off the frame — "there's more out there". */
+      .card--ghost {
+        z-index: 1;
+        filter: blur(0.5px) saturate(0.92);
+      }
+      .card--ghost-a {
+        left: -9%;
+        top: 24%;
+        width: 20%;
+        transform: rotate(-2.5deg);
+        animation-delay: -3.2s;
+      }
+      .card--ghost-b {
+        right: -8%;
+        bottom: 20%;
+        width: 20%;
+        transform: rotate(2.5deg);
+        animation-delay: -6.4s;
+      }
+
+      /* ---- Mini-map (the clearest "you're seeing a sliver of an endless board") ---- */
+      .canvas-minimap {
+        position: absolute;
+        bottom: 3.4rem;
+        right: 1rem;
+        width: 96px;
+        height: 66px;
+        border-radius: 10px;
+        background:
+          radial-gradient(circle, rgba(61, 43, 31, 0.18) 1px, transparent 1px) 0 0 / 9px 9px,
+          rgba(255, 251, 240, 0.85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(212, 146, 31, 0.3);
+        box-shadow: 0 6px 18px -8px rgba(26, 16, 8, 0.35);
+        overflow: hidden;
+        z-index: 7;
+      }
+      .canvas-minimap__label {
+        position: absolute;
+        top: 3px;
+        left: 6px;
+        font-family: var(--font-body);
+        font-size: 0.42rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold);
+        opacity: 0.8;
+      }
+      .canvas-minimap__dot {
+        position: absolute;
+        width: 9px;
+        height: 6px;
+        border-radius: 2px;
+        background: rgba(182, 117, 29, 0.5);
+      }
+      .canvas-minimap__view {
+        position: absolute;
+        width: 30px;
+        height: 22px;
+        border: 1.5px solid var(--gold);
+        border-radius: 3px;
+        background: rgba(240, 200, 80, 0.18);
+        box-shadow: 0 0 8px rgba(240, 200, 80, 0.5);
+        animation: minimap-view 34s ease-in-out infinite;
+      }
+      @keyframes minimap-view {
+        0% {
+          left: 30px;
+          top: 22px;
+        }
+        25% {
+          left: 46px;
+          top: 13px;
+        }
+        50% {
+          left: 39px;
+          top: 31px;
+        }
+        75% {
+          left: 19px;
+          top: 24px;
+        }
+        100% {
+          left: 30px;
+          top: 22px;
+        }
+      }
+
+      /* live-cycling zoom readout fade */
+      .canvas-zoom__val {
+        transition: opacity 200ms ease;
+        min-width: 2.6em;
+        text-align: center;
+      }
+
+      /* ============================================================
+         LIVE DRAG — a cursor grabs a card and carries it (collab demo)
+         Cursor + its card share the exact translate path during the
+         carry phase, so the card reads as "held" by the cursor.
+      ============================================================ */
+      .card--observation {
+        z-index: 6;
+        animation: obs-drag 13s ease-in-out infinite;
+      }
+      .card--crossref {
+        z-index: 6;
+        animation: cross-drag 13s ease-in-out infinite;
+        animation-delay: -6.5s;
+      }
+
+      /* Marcus carries the Observation note down toward the center */
+      @keyframes marcus-grab {
+        0%,
+        8% {
+          transform: translate(0, 0);
+        }
+        40%,
+        55% {
+          transform: translate(150px, 130px);
+        }
+        85%,
+        100% {
+          transform: translate(0, 0);
+        }
+      }
+      @keyframes obs-drag {
+        0% {
+          transform: translate(0, 0) rotate(-3deg) scale(1);
+        }
+        8% {
+          transform: translate(0, 0) rotate(-1.5deg) scale(1.05);
+        }
+        40%,
+        55% {
+          transform: translate(150px, 130px) rotate(-1.5deg) scale(1.05);
+        }
+        85% {
+          transform: translate(0, 0) rotate(-1.5deg) scale(1.05);
+        }
+        88%,
+        100% {
+          transform: translate(0, 0) rotate(-3deg) scale(1);
+        }
+      }
+
+      /* Julia carries the Cross-Ref card down toward the center */
+      @keyframes julia-grab {
+        0%,
+        8% {
+          transform: translate(0, 0);
+        }
+        40%,
+        55% {
+          transform: translate(-150px, 130px);
+        }
+        85%,
+        100% {
+          transform: translate(0, 0);
+        }
+      }
+      @keyframes cross-drag {
+        0% {
+          transform: translate(0, 0) rotate(2.5deg) scale(1);
+        }
+        8% {
+          transform: translate(0, 0) rotate(1deg) scale(1.05);
+        }
+        40%,
+        55% {
+          transform: translate(-150px, 130px) rotate(1deg) scale(1.05);
+        }
+        85% {
+          transform: translate(0, 0) rotate(1deg) scale(1.05);
+        }
+        88%,
+        100% {
+          transform: translate(0, 0) rotate(2.5deg) scale(1);
+        }
+      }
+
       /* ============================================================
          REVEAL
       ============================================================ */
@@ -730,6 +989,14 @@
       }
       .is-revealed .card--sketch {
         transition-delay: 880ms;
+      }
+      .is-revealed .card--ghost-a {
+        opacity: 0.3;
+        transition-delay: 360ms;
+      }
+      .is-revealed .card--ghost-b {
+        opacity: 0.3;
+        transition-delay: 520ms;
       }
       .is-revealed .cursor--marcus {
         transition-delay: 1100ms;
@@ -819,11 +1086,29 @@
         .canvas-toolbar {
           display: none;
         }
+        /* Keep the tight mobile board calm + uncropped */
+        .canvas-stage {
+          animation: none;
+        }
+        .canvas-minimap,
+        .canvas-glow,
+        .card--ghost {
+          display: none;
+        }
+        /* Cursors are hidden on mobile — don't let their cards self-drag */
+        .card--observation,
+        .card--crossref {
+          animation: none;
+        }
       }
       @media (prefers-reduced-motion: reduce) {
         .canvas-card,
         .canvas-cursor,
-        .canvas-edges path {
+        .canvas-edges path,
+        .canvas-stage,
+        .canvas-board::before,
+        .canvas-glow,
+        .canvas-minimap__view {
           animation: none !important;
         }
         .reveal-fade {
@@ -860,7 +1145,10 @@
           <ul class="mosaic-showcase__bullets" role="list">
             <li>Drop <strong>verses, notes, photos, sketches</strong> anywhere on the board</li>
             <li>Connect anything to anything with gold threads &mdash; mind maps, timelines, flowcharts</li>
-            <li><strong>Live Sanctuary</strong> &mdash; your fellowship sees your cursor, edits alongside you in real time</li>
+            <li>
+              <strong>Live Sanctuary</strong> &mdash; collaborate with <strong>30+ people</strong> on one board, watching each other&rsquo;s
+              cursors and edits in real time
+            </li>
             <li>Hand-draw with finger or Apple Pencil &mdash; ink, marker, charcoal</li>
             <li>One-tap <strong>S.O.A.P.</strong> on any verse you drop</li>
             <li>Zoom from a single word to the whole Old Testament</li>
@@ -874,16 +1162,20 @@
           <div class="canvas-chrome">
             <div class="canvas-title">Walking in Purpose · Sunday Study</div>
             <div class="canvas-presence">
-              <span class="canvas-presence__label"><span class="canvas-presence__live"></span>3 LIVE</span>
+              <span class="canvas-presence__label"><span class="canvas-presence__live"></span>30+ LIVE</span>
               <div class="canvas-presence__avatars">
                 <span class="canvas-presence__avatar canvas-presence__avatar--1">M</span>
                 <span class="canvas-presence__avatar canvas-presence__avatar--2">J</span>
                 <span class="canvas-presence__avatar canvas-presence__avatar--3">J</span>
+                <span class="canvas-presence__avatar canvas-presence__avatar--more">+27</span>
               </div>
             </div>
           </div>
 
           <div class="canvas-stage">
+            <!-- Ambient warm spotlight sweeping the endless surface -->
+            <div class="canvas-glow"></div>
+
             <!-- Connection edges (curved gold dashed lines) -->
             <svg class="canvas-edges" viewBox="0 0 680 626" preserveAspectRatio="none">
               <!-- verse → observation -->
@@ -971,6 +1263,16 @@
               <svg width="18" height="18" viewBox="0 0 18 18"><path d="M 2 2 L 2 14 L 6 11 L 9 16 L 11 15 L 8 10 L 14 9 Z" /></svg>
               <span class="canvas-cursor__name">Janis</span>
             </div>
+
+            <!-- Ghost cards bleeding off the frame — the board keeps going -->
+            <div class="canvas-card card--ghost card--ghost-a">
+              <div class="card__eyebrow">🔗 Cross-Ref</div>
+              <div class="card__title" style="font-size: 0.85rem">Romans 8:28</div>
+            </div>
+            <div class="canvas-card card--ghost card--ghost-b">
+              <div class="card__eyebrow">📝 Note</div>
+              <p class="card__note">…continued in week 3</p>
+            </div>
           </div>
 
           <!-- Bottom-left toolbar -->
@@ -983,10 +1285,23 @@
             <button title="Connect">🔗</button>
           </div>
 
-          <!-- Bottom-right zoom -->
+          <!-- Mini-map — your viewport is a sliver of an endless board -->
+          <div class="canvas-minimap" aria-hidden="true">
+            <span class="canvas-minimap__label">Board</span>
+            <span class="canvas-minimap__dot" style="left: 12px; top: 16px"></span>
+            <span class="canvas-minimap__dot" style="left: 58px; top: 10px"></span>
+            <span class="canvas-minimap__dot" style="left: 74px; top: 30px"></span>
+            <span class="canvas-minimap__dot" style="left: 22px; top: 42px"></span>
+            <span class="canvas-minimap__dot" style="left: 50px; top: 48px"></span>
+            <span class="canvas-minimap__dot" style="left: 80px; top: 50px"></span>
+            <span class="canvas-minimap__dot" style="left: 8px; top: 54px"></span>
+            <span class="canvas-minimap__view"></span>
+          </div>
+
+          <!-- Bottom-right zoom (live-cycling readout) -->
           <div class="canvas-zoom">
             <span>−</span>
-            <span style="color: var(--gold)">100%</span>
+            <span class="canvas-zoom__val" id="canvas-zoom-val" style="color: var(--gold)">100%</span>
             <span>+</span>
           </div>
         </div>
@@ -1010,6 +1325,22 @@
         const r = sp.getBoundingClientRect();
         if (r.top < window.innerHeight * 0.8) sp.classList.add("is-revealed");
       });
+
+      // Live zoom readout — "from a single word to the whole testament"
+      const zoomEl = document.getElementById("canvas-zoom-val");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (zoomEl && !reduceMotion) {
+        const steps = ["340%", "100%", "42%", "12%", "6%"];
+        let i = 1;
+        setInterval(() => {
+          i = (i + 1) % steps.length;
+          zoomEl.style.opacity = "0";
+          setTimeout(() => {
+            zoomEl.textContent = steps[i];
+            zoomEl.style.opacity = "1";
+          }, 200);
+        }, 2600);
+      }
     </script>
   </body>
 </html>
