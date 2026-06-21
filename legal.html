@@ -247,15 +247,44 @@
       </div>
 
       <!-- Purpose -->
+      
+    <style>
+      #my-mission { position: relative; }
+      #my-mission .content-inner { position: relative; z-index: 1; }
+      .about-sticker {
+        position: absolute;
+        width: clamp(140px, 14vw, 240px);
+        opacity: 0.5;
+        pointer-events: none;
+        z-index: 0;
+        filter: drop-shadow(0 5px 12px rgba(61, 43, 31, 0.2));
+        user-select: none;
+      }
+      @media (max-width: 700px) { .about-sticker { width: 100px; opacity: 0.42; } }
+    </style>
       <div class="content-block" id="my-mission">
+        <img class="about-sticker" src="assets/stickers/ren-01-latin-cross.png" alt="" aria-hidden="true" style="top:3%; left:-1.5%; transform:rotate(-12deg);" />
+        <img class="about-sticker" src="assets/stickers/ren-06-dove.png" alt="" aria-hidden="true" style="top:11%; right:-1%; transform:rotate(10deg);" />
+        <img class="about-sticker" src="assets/stickers/3d-03-lamb.png" alt="" aria-hidden="true" style="top:20%; left:-0.5%; transform:rotate(6deg);" />
+        <img class="about-sticker" src="assets/stickers/ren-07-lion.png" alt="" aria-hidden="true" style="top:30%; right:-1.5%; transform:rotate(-9deg);" />
+        <img class="about-sticker" src="assets/stickers/3d-08-ichthys.png" alt="" aria-hidden="true" style="top:41%; left:-1%; transform:rotate(8deg);" />
+        <img class="about-sticker" src="assets/stickers/pix-56-seraphim.png" alt="" aria-hidden="true" style="top:52%; right:-0.5%; transform:rotate(-7deg);" />
+        <img class="about-sticker" src="assets/stickers/3d-05-white-horse.png" alt="" aria-hidden="true" style="top:63%; left:-1.5%; transform:rotate(12deg);" />
+        <img class="about-sticker" src="assets/stickers/ren-20-tau-cross.png" alt="" aria-hidden="true" style="top:73%; right:-1%; transform:rotate(-10deg);" />
+        <img class="about-sticker" src="assets/stickers/3d-10-bronze-serpent.png" alt="" aria-hidden="true" style="top:83%; left:-0.5%; transform:rotate(5deg);" />
+        <img class="about-sticker" src="assets/stickers/pix-02-virgin-mary.png" alt="" aria-hidden="true" style="top:92%; right:-1.5%; transform:rotate(-6deg);" />
         <div class="content-inner">
 
           <div class="about-grid">
             <div class="about-aside">
+              <div style="margin:0 0 1.2rem; padding:0 0.2rem;">
+                <p style="font-family:'Hammersmith One', sans-serif; font-size:1.35rem; color:#3D2B1F; margin:0 0 0.35rem;">Denzel Rigaud</p>
+                <p style="font-size:0.95rem; color:#3D2B1F; opacity:0.8; margin:0; line-height:1.5;">Lynn University &middot; Class of &rsquo;27 &middot; Hometown: Virginia</p>
+              </div>
               <div class="callout-card">
                 <h3 style="font-family:'Hammersmith One', sans-serif; font-size:1.2rem; color:#f0c850; text-shadow:0 0 12px rgba(240, 200, 80, 0.35); margin:0 0 0.9rem;">The Question That Started It All</h3>
                 <p style="font-weight:700; font-size:1.15rem; line-height:1.65; color:var(--parchment); margin-bottom:1.2rem;">I started asking myself a hard question: at what age does faith start to disappear? Why do so many of us &mdash; who grew up with God in our households, who went to church every Sunday &mdash; grow up to side-eye religion?</p>
-                <p>I grew up in a household of four women &mdash; my mom, her wife, and my two sisters. Even as a young, carnal boy just trying to navigate the world, I spent my life listening deeply to the stories of dozens of women. Those pillow talks made it all make sense. It explained why they were in my bed. Growing up Catholic, Mormon, or in strict Christian homes, religion never felt like love to them. It felt like a chore. They were forced to listen to pastors who had absolutely no connection to a kid's real life. Instead of experiencing the joy of God, the routine was so deeply dreadful that their only goal was to escape the second they got older.</p>
+                <p>I grew up in a household of four women &mdash; my mom, her wife, and my two sisters. Even as a young, carnal boy just trying to navigate the world, I spent my life listening deeply to the stories of dozens of women. Those pillow talks made it all make sense &mdash; hence why they were in my bed. Growing up Catholic, Mormon, or in strict Christian homes, religion never felt like love to them. It felt like a chore. They were forced to listen to pastors who had absolutely no connection to a kid's real life. Instead of experiencing the joy of God, the routine was so deeply dreadful that their only goal was to escape the second they got older.</p>
                 <h3 style="font-family:'Hammersmith One', sans-serif; font-size:1.2rem; color:#f0c850; text-shadow:0 0 12px rgba(240, 200, 80, 0.35); margin:1.6rem 0 0.9rem;">The Void and The Noise</h3>
                 <p>When you run away from a forced foundation, the void gets filled by the other force. We let social media, toxic music, and outside voices teach our generation fear, shame, unworthiness, depression, and anxiety. We fall under SIN. We watch young women lose sight of their true strength, charity, and purity, while boys get stuck playing Peter Pan, completely avoiding the responsibility of becoming men. To the point where, when they finally hear God's voice, they get skittish. They become afraid of the one thing trying to save them.</p>
                 <p>Instead of turning to the source that created love and marriage, we see people chasing temporary pleasures. We see a generation raised in the church turning to worship Money over God, status, and fleeting validation, allowing the pursuit of the wrong things to slowly destroy them. And I'm no hypocrite saying this &mdash; I lived that very life in my teens, so I see both sides, like a channel.</p>
@@ -329,6 +358,115 @@
                     >Do people even listen to Lauryn Hill anymore?</a
                   >
                 </p>
+              </div>
+
+              <!-- Supabase security badge (duplicated from homepage) -->
+              <style>
+                .supabase-badge-wrap {
+                  padding: 1.5rem 0 0.5rem;
+                  text-align: center;
+                }
+                .supabase-badge {
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 0.7rem;
+                  padding: 0.9rem 1.3rem;
+                  border-radius: 999px;
+                  background: #1c1c1c;
+                  border: 1.5px solid #3ecf8e;
+                  box-shadow:
+                    0 0 0 4px rgba(62, 207, 142, 0.12),
+                    0 16px 40px -14px rgba(62, 207, 142, 0.5),
+                    0 0 30px -6px rgba(62, 207, 142, 0.35);
+                  color: #ffffff;
+                  font-family: "Inter", sans-serif;
+                  font-size: 0.85rem;
+                  font-weight: 600;
+                  letter-spacing: 0.02em;
+                  text-decoration: none;
+                  transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+                }
+                .supabase-badge:hover {
+                  transform: translateY(-2px);
+                  box-shadow:
+                    0 0 0 5px rgba(62, 207, 142, 0.18),
+                    0 22px 48px -14px rgba(62, 207, 142, 0.6),
+                    0 0 40px -4px rgba(62, 207, 142, 0.5);
+                }
+                .supabase-badge__shield {
+                  width: 22px;
+                  height: 22px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: #3ecf8e;
+                  filter: drop-shadow(0 0 6px rgba(62, 207, 142, 0.7));
+                }
+                .supabase-badge__shield svg {
+                  width: 100%;
+                  height: 100%;
+                }
+                .supabase-badge__brand {
+                  color: #3ecf8e;
+                  font-weight: 700;
+                  text-shadow: 0 0 8px rgba(62, 207, 142, 0.5);
+                }
+                .supabase-badge__divider {
+                  width: 1px;
+                  height: 14px;
+                  background: rgba(255, 255, 255, 0.2);
+                  margin: 0 0.2rem;
+                }
+                .supabase-badge__pills {
+                  display: inline-flex;
+                  gap: 0.4rem;
+                  font-size: 0.65rem;
+                  font-weight: 700;
+                  letter-spacing: 0.08em;
+                  text-transform: uppercase;
+                  color: #3ecf8e;
+                }
+                .supabase-badge__pills span + span::before {
+                  content: "·";
+                  margin: 0 0.35rem;
+                  color: rgba(62, 207, 142, 0.5);
+                }
+                .supabase-badge-tag {
+                  margin-top: 0.8rem;
+                  font-family: "Inter", sans-serif;
+                  font-size: 0.72rem;
+                  font-weight: 500;
+                  letter-spacing: 0.08em;
+                  color: rgba(61, 43, 31, 0.45);
+                }
+              </style>
+              <div class="supabase-badge-wrap">
+                <a href="https://supabase.com/security" target="_blank" rel="noopener" class="supabase-badge">
+                  <span class="supabase-badge__shield" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M12 2 L20 5 L20 11 C20 16 16.5 20 12 22 C7.5 20 4 16 4 11 L4 5 Z" fill="#3ECF8E" opacity="0.18" />
+                      <path
+                        d="M12 2 L20 5 L20 11 C20 16 16.5 20 12 22 C7.5 20 4 16 4 11 L4 5 Z"
+                        stroke="#3ECF8E"
+                        stroke-width="1.6"
+                        stroke-linejoin="round"
+                        fill="none"
+                      />
+                      <path
+                        d="M8.5 12 L11 14.5 L15.5 9.5"
+                        stroke="#3ECF8E"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        fill="none"
+                      />
+                    </svg>
+                  </span>
+                  <span>Protected by <span class="supabase-badge__brand">Supabase</span></span>
+                  <span class="supabase-badge__divider"></span>
+                  <span class="supabase-badge__pills"> <span>RLS</span><span>Encrypted</span><span>SOC&nbsp;2</span> </span>
+                </a>
+                <p class="supabase-badge-tag">Row-level security &middot; AES-256 encryption &middot; Enterprise-grade infrastructure</p>
               </div>
             </div>
             <div class="about-main">

@@ -39,20 +39,22 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     // 2026-06-04: the flow was reordered (Reflections + Games above Themes,
     // Focus Timer to the bottom) and the Orb, Parental Lock, and Deep Study
     // sections were added.
+    // 2026-06-21: reordered to lead with the most visual tools — Canvas, Glow,
+    // Mosaic up top; Parental Lock moved to the very bottom.
     const order = [
       "canvas-flow",
-      "sermon-flow",
-      "mosaic-flow",
-      "reflections-flow",
-      "games-flow",
-      "themes-flow",
       "glow-flow",
-      "fellowship-flow",
-      "orb-flow",
-      "parental-lock-flow",
+      "mosaic-flow",
+      "sermon-flow",
+      "reflections-flow",
       "cards-flow",
       "deep-study-flow",
+      "fellowship-flow",
+      "games-flow",
+      "themes-flow",
+      "orb-flow",
       "timer-flow",
+      "parental-lock-flow",
     ];
     const wraps = page.locator(".flow-iframe-wrap");
     await expect(wraps).toHaveCount(order.length);
