@@ -264,15 +264,15 @@
     </style>
       <div class="content-block" id="my-mission">
         <img class="about-sticker" src="assets/stickers/ren-01-latin-cross.png" alt="" aria-hidden="true" style="top:3%; left:-1.5%; transform:rotate(-12deg);" />
-        <img class="about-sticker" src="assets/stickers/ren-06-dove.png" alt="" aria-hidden="true" style="top:11%; right:-1%; transform:rotate(10deg);" />
+        <span class="about-sticker sticker-sparkle" role="button" tabindex="0" aria-label="Tap the sticker for a reward" data-src="assets/stickers/ren-06-dove.png" style="top:11%; right:-1%; transform:rotate(10deg); background-image: url('assets/stickers/ren-06-dove.png')"></span>
         <img class="about-sticker" src="assets/stickers/3d-03-lamb.png" alt="" aria-hidden="true" style="top:20%; left:-0.5%; transform:rotate(6deg);" />
         <img class="about-sticker" src="assets/stickers/ren-07-lion.png" alt="" aria-hidden="true" style="top:30%; right:-1.5%; transform:rotate(-9deg);" />
-        <img class="about-sticker" src="assets/stickers/3d-08-ichthys.png" alt="" aria-hidden="true" style="top:41%; left:-1%; transform:rotate(8deg);" />
+        <span class="about-sticker sticker-sparkle" role="button" tabindex="0" aria-label="Tap the sticker for a reward" data-src="assets/stickers/3d-08-ichthys.png" style="top:41%; left:-1%; transform:rotate(8deg); background-image: url('assets/stickers/3d-08-ichthys.png')"></span>
         <img class="about-sticker" src="assets/stickers/pix-56-seraphim.png" alt="" aria-hidden="true" style="top:52%; right:-0.5%; transform:rotate(-7deg);" />
         <img class="about-sticker" src="assets/stickers/3d-05-white-horse.png" alt="" aria-hidden="true" style="top:63%; left:-1.5%; transform:rotate(12deg);" />
-        <img class="about-sticker" src="assets/stickers/ren-20-tau-cross.png" alt="" aria-hidden="true" style="top:73%; right:-1%; transform:rotate(-10deg);" />
+        <span class="about-sticker sticker-sparkle" role="button" tabindex="0" aria-label="Tap the sticker for a reward" data-src="assets/stickers/ren-20-tau-cross.png" style="top:73%; right:-1%; transform:rotate(-10deg); background-image: url('assets/stickers/ren-20-tau-cross.png')"></span>
         <img class="about-sticker" src="assets/stickers/3d-10-bronze-serpent.png" alt="" aria-hidden="true" style="top:83%; left:-0.5%; transform:rotate(5deg);" />
-        <img class="about-sticker" src="assets/stickers/pix-02-virgin-mary.png" alt="" aria-hidden="true" style="top:92%; right:-1.5%; transform:rotate(-6deg);" />
+        <span class="about-sticker sticker-sparkle" role="button" tabindex="0" aria-label="Tap the sticker for a reward" data-src="assets/stickers/pix-02-virgin-mary.png" style="top:92%; right:-1.5%; transform:rotate(-6deg); background-image: url('assets/stickers/pix-02-virgin-mary.png')"></span>
         <div class="content-inner">
 
           <div class="about-grid">
@@ -3290,5 +3290,108 @@
       });
     })();
   </script>
-</body>
+
+    <style>
+      /* ✦ Tappable sparkle stickers + reward pop ✦ */
+      .sticker-sparkle {
+        aspect-ratio: 1 / 1;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 0.96;
+        pointer-events: auto;
+        cursor: pointer;
+        z-index: 6;
+        animation: sticker-glow 2.6s ease-in-out infinite;
+      }
+      .sticker-sparkle::before,
+      .sticker-sparkle::after {
+        content: "\2726";
+        position: absolute;
+        color: #f0c850;
+        text-shadow: 0 0 10px rgba(240, 200, 80, 0.95);
+        pointer-events: none;
+        animation: spark-twinkle 1.9s ease-in-out infinite;
+      }
+      .sticker-sparkle::before { top: -10%; right: -2%; font-size: 30px; }
+      .sticker-sparkle::after  { bottom: -4%; left: -6%; font-size: 20px; animation-delay: 0.95s; }
+      .sticker-sparkle:hover { animation-play-state: paused; filter: drop-shadow(0 0 18px rgba(240, 200, 80, 1)); }
+      @keyframes sticker-glow {
+        0%, 100% { filter: drop-shadow(0 8px 16px rgba(61, 43, 31, 0.25)); }
+        50%      { filter: drop-shadow(0 0 15px rgba(240, 200, 80, 0.9)) drop-shadow(0 8px 16px rgba(61, 43, 31, 0.25)); }
+      }
+      @keyframes spark-twinkle {
+        0%, 100% { transform: scale(0.4) rotate(0deg); opacity: 0.25; }
+        50%      { transform: scale(1.1) rotate(90deg); opacity: 1; }
+      }
+      /* Reward overlay */
+      .sticker-reward {
+        position: fixed; inset: 0; z-index: 9999;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(26, 16, 8, 0.74);
+        backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+        cursor: pointer; opacity: 0; transition: opacity 0.25s ease;
+      }
+      .sticker-reward[hidden] { display: none; }
+      .sticker-reward.is-open { opacity: 1; }
+      .sticker-reward__img {
+        width: min(62vw, 340px); aspect-ratio: 1 / 1;
+        background-size: contain; background-repeat: no-repeat; background-position: center;
+        filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5)) drop-shadow(0 0 34px rgba(240,200,80,0.65));
+        transform-style: preserve-3d;
+      }
+      .sticker-reward.is-open .sticker-reward__img {
+        animation: reward-pop 0.6s cubic-bezier(0.16,1,0.3,1) both,
+                   reward-spin 2.4s 0.6s ease-in-out infinite;
+      }
+      .sticker-reward__hint {
+        position: absolute; bottom: 8%; left: 0; right: 0; text-align: center;
+        color: rgba(245,242,237,0.8); font-family: "Inter", sans-serif;
+        font-size: 0.85rem; letter-spacing: 0.08em;
+      }
+      @keyframes reward-pop {
+        0%   { transform: scale(0.2) rotate(-25deg); opacity: 0; }
+        60%  { transform: scale(1.15) rotate(8deg); opacity: 1; }
+        100% { transform: scale(1) rotate(0deg); opacity: 1; }
+      }
+      @keyframes reward-spin { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(360deg); } }
+      @media (prefers-reduced-motion: reduce) {
+        .sticker-sparkle, .sticker-sparkle::before, .sticker-sparkle::after,
+        .sticker-reward.is-open .sticker-reward__img { animation: none !important; }
+      }
+    </style>
+
+    <div id="sticker-reward" class="sticker-reward" hidden aria-hidden="true">
+      <div class="sticker-reward__img" id="sticker-reward-img"></div>
+      <div class="sticker-reward__hint">Tap anywhere to close ✦</div>
+    </div>
+    <script>
+      (function () {
+        var modal = document.getElementById("sticker-reward");
+        var img = document.getElementById("sticker-reward-img");
+        if (!modal) return;
+        function open(src) {
+          img.style.backgroundImage = "url('" + src + "')";
+          modal.hidden = false;
+          requestAnimationFrame(function () { modal.classList.add("is-open"); });
+        }
+        function close() {
+          modal.classList.remove("is-open");
+          setTimeout(function () { modal.hidden = true; }, 260);
+        }
+        document.addEventListener("click", function (e) {
+          var s = e.target.closest(".sticker-sparkle");
+          if (s) { e.preventDefault(); open(s.getAttribute("data-src")); }
+        });
+        document.addEventListener("keydown", function (e) {
+          var t = e.target;
+          if ((e.key === "Enter" || e.key === " ") && t.classList && t.classList.contains("sticker-sparkle")) {
+            e.preventDefault(); open(t.getAttribute("data-src"));
+          }
+          if (e.key === "Escape" && !modal.hidden) close();
+        });
+        modal.addEventListener("click", close);
+      })();
+    </script>
+  </body>
 </html>
