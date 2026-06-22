@@ -147,7 +147,7 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await page.goto("/#faq");
     await waitForPageReady(page);
     const items = page.locator(".faq-item");
-    await expect(items).toHaveCount(7);
+    await expect(items).toHaveCount(8);
     // Click the first one open and confirm the answer becomes visible
     const first = items.first();
     await first.locator("summary").click();
