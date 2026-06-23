@@ -8,6 +8,19 @@ const { expect } = require("@playwright/test");
  */
 async function waitForPageReady(page) {
   await page.evaluate(() => document.fonts.ready);
+  // Dismiss the first-visit language picker so it doesn't intercept clicks or
+  // cover the page during functional + visual checks. Seeding mbl_lang keeps it
+  // dismissed for the rest of the session (mirrors a returning visitor).
+  await page.evaluate(() => {
+    try {
+      localStorage.setItem("mbl_lang", "en");
+    } catch (e) {}
+    const m = document.getElementById("lang-modal");
+    if (m) {
+      m.classList.remove("is-open");
+      m.hidden = true;
+    }
+  });
   // Pause animations + hide non-deterministic elements for stable visual diffs.
   // (Particles spawn at random positions each pageload, ::before light shafts
   //  rotate continuously — both would otherwise cause flaky pixel diffs.)
@@ -25,6 +38,8 @@ async function waitForPageReady(page) {
       .pricing-card-wrapper:nth-child(5) .pricing-card::after,
       .floating-nav,
       .scroll-halo,
+      .lang-globe,
+      .lang-modal,
       /* Scripture Canvas dynamic elements: positions are JS-driven and
          non-deterministic by frame. Hide them for stable baselines. */
       .collab-cursor,

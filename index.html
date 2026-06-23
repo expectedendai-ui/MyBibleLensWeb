@@ -4746,13 +4746,13 @@
       <div class="floating-nav__inner">
         <a href="#hero" class="floating-nav__brand" aria-label="MyBibleLens — back to top">
           <span class="floating-nav__orb" aria-hidden="true"></span>
-          <span class="floating-nav__brand-text">MyBibleLens</span>
+          <span class="floating-nav__brand-text notranslate" translate="no">MyBibleLens</span>
         </a>
         <nav class="floating-nav__links" aria-label="Jump to section">
-          <a href="#repository" data-target="repository">The Repository</a>
-          <a href="#pricing" data-target="pricing">Pricing</a>
-          <a href="#faq" data-target="faq">FAQ</a>
-          <a href="legal.html#about">About</a>
+          <a href="#repository" data-target="repository" data-i18n="nav.repository">The Repository</a>
+          <a href="#pricing" data-target="pricing" data-i18n="nav.pricing">Pricing</a>
+          <a href="#faq" data-target="faq" data-i18n="nav.faq">FAQ</a>
+          <a href="legal.html#about" data-i18n="nav.about">About</a>
         </nav>
         <button
           class="floating-nav__menu-toggle"
@@ -4769,10 +4769,10 @@
         </button>
       </div>
       <nav class="floating-nav__mobile" id="floating-nav-mobile" aria-label="Jump to section (mobile)" hidden>
-        <a href="#repository">The Repository</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#faq">FAQ</a>
-        <a href="legal.html#about">About</a>
+        <a href="#repository" data-i18n="nav.repository">The Repository</a>
+        <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+        <a href="#faq" data-i18n="nav.faq">FAQ</a>
+        <a href="legal.html#about" data-i18n="nav.about">About</a>
       </nav>
     </header>
 
@@ -4910,15 +4910,15 @@
       </div>
 
       <div class="hero-content">
-        <h1 class="hero-title">MyBibleLens™</h1>
-        <p class="hero-eyebrow">The World's First Sanctuary App for Christianity</p>
+        <h1 class="hero-title notranslate" translate="no">MyBibleLens™</h1>
+        <p class="hero-eyebrow" data-i18n="hero.eyebrow">The World's First Sanctuary App for Christianity</p>
       </div>
     </section>
 
     <!-- Gold divider between hero and study repository -->
     <div class="gold-divider gold-divider--on-light" aria-hidden="true">
       <span class="gold-divider__line"></span>
-      <span class="gold-divider__ornament">The Repository</span>
+      <span class="gold-divider__ornament" data-i18n="nav.repository">The Repository</span>
       <span class="gold-divider__line"></span>
     </div>
 
@@ -4926,7 +4926,9 @@
     <section class="repo-section section-padding" id="repository">
       <div class="container">
         <!-- Brand tagline — moved out of the hero canvas, sits above the store badges -->
-        <p class="hero-tagline hero-tagline--standalone">Bringing people closer to God in an exciting and easy way!</p>
+        <p class="hero-tagline hero-tagline--standalone" data-i18n="repo.tagline">
+          Bringing people closer to God in an exciting and easy way!
+        </p>
 
         <!-- App Store / Google Play badges — moved ABOVE the section title -->
         <div class="repo-badges" aria-label="Download MyBibleLens">
@@ -4963,11 +4965,11 @@
             Google Play
           </a>
         </div>
-        <p class="repo-coming-soon">Coming soon · iPhone, iPad &amp; Android</p>
+        <p class="repo-coming-soon" data-i18n="repo.comingSoon">Coming soon · iPhone, iPad &amp; Android</p>
 
         <div class="section-header">
-          <h2 class="section-title">Your Study Repository</h2>
-          <p class="section-subtitle">
+          <h2 class="section-title" data-i18n="repo.title">Your Study Repository</h2>
+          <p class="section-subtitle" data-i18n="repo.subtitle">
             Lens. Sermon Builder. Infinite Canvas. Scripture Glow. Twelve sanctuaries, one timer, fellowship built in.
             <strong>Every tool a sanctuary holds &mdash; in one app.</strong>
           </p>
@@ -5829,8 +5831,8 @@
     <section class="pricing-section section-padding" id="pricing">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">Pay Once. Yours Forever.</h2>
-          <p class="section-subtitle">
+          <h2 class="section-title" data-i18n="pricing.title">Pay Once. Yours Forever.</h2>
+          <p class="section-subtitle" data-i18n="pricing.subtitle">
             No subscriptions. No churn. No surprise charges. One purchase, lifetime access — for you and for everyone you bring with you.
           </p>
           <p
@@ -6452,8 +6454,8 @@
     <section class="faq-section section-padding" id="faq" aria-label="Frequently asked questions">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">Honest Answers</h2>
-          <p class="section-subtitle">The questions friends ask before they trust us with their faith practice.</p>
+          <h2 class="section-title" data-i18n="faq.title">Honest Answers</h2>
+          <p class="section-subtitle" data-i18n="faq.subtitle">The questions friends ask before they trust us with their faith practice.</p>
         </div>
         <div class="faq-list">
           <details class="faq-item">
@@ -7776,6 +7778,605 @@
           if (e.key === "Escape" && !modal.hidden) close();
         });
         modal.addEventListener("click", close);
+      })();
+    </script>
+
+    <!-- ============================================================
+         LANGUAGE / i18n  —  self-contained, vanilla, no build step
+         Hand-translated core copy for EN · ES · PT · FR (instant,
+         brand-owned). "All languages" routes through Google's free
+         widget as a best-effort fallback. See data-i18n="…" tags.
+         ============================================================ -->
+    <style>
+      /* Hide Google Translate's injected banner / branding so it never
+         pushes the layout down or breaks the sanctuary look. */
+      .goog-te-banner-frame.skiptranslate,
+      .goog-te-gadget,
+      #goog-gt-tt,
+      .goog-te-balloon-frame {
+        display: none !important;
+      }
+      body {
+        top: 0 !important;
+      }
+      .goog-text-highlight {
+        background: none !important;
+        box-shadow: none !important;
+      }
+
+      /* ===== Language picker modal ===== */
+      .lang-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 4000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.25rem;
+        background: rgba(16, 9, 4, 0.72);
+        backdrop-filter: blur(10px) saturate(120%);
+        -webkit-backdrop-filter: blur(10px) saturate(120%);
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 220ms cubic-bezier(0.16, 1, 0.3, 1),
+          visibility 220ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .lang-modal.is-open {
+        opacity: 1;
+        visibility: visible;
+      }
+      .lang-modal__card {
+        position: relative;
+        width: 100%;
+        max-width: 460px;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 2.25rem 1.75rem 1.75rem;
+        text-align: center;
+        background: radial-gradient(120% 90% at 50% 0%, rgba(240, 200, 80, 0.12), transparent 60%), #1a1008;
+        border: 1px solid rgba(212, 146, 31, 0.45);
+        border-radius: 22px;
+        box-shadow:
+          0 0 0 1px rgba(240, 200, 80, 0.08),
+          0 24px 70px rgba(0, 0, 0, 0.6),
+          0 0 60px rgba(212, 146, 31, 0.15);
+        transform: translateY(14px) scale(0.985);
+        transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .lang-modal.is-open .lang-modal__card {
+        transform: translateY(0) scale(1);
+      }
+      .lang-modal__orb {
+        width: 46px;
+        height: 46px;
+        margin: 0 auto 1rem;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 30%, #f0c850, #d4921f 55%, #9a6218);
+        box-shadow: 0 0 26px rgba(240, 200, 80, 0.5);
+      }
+      .lang-modal__title {
+        margin: 0 0 0.35rem;
+        font-family: "Hammersmith One", sans-serif;
+        font-size: 1.5rem;
+        line-height: 1.2;
+        color: #f5f2ed;
+        text-wrap: balance;
+      }
+      .lang-modal__sub {
+        margin: 0 0 1.4rem;
+        font-family: "Inter", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(245, 242, 237, 0.62);
+      }
+      .lang-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.6rem;
+        margin-bottom: 1.1rem;
+      }
+      .lang-opt {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.7rem 0.85rem;
+        font-family: "Inter", sans-serif;
+        font-size: 0.98rem;
+        color: #f5f2ed;
+        text-align: left;
+        background: rgba(245, 242, 237, 0.04);
+        border: 1.5px solid rgba(212, 146, 31, 0.28);
+        border-radius: 13px;
+        cursor: pointer;
+        transition:
+          border-color 180ms cubic-bezier(0.16, 1, 0.3, 1),
+          background 180ms cubic-bezier(0.16, 1, 0.3, 1),
+          transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .lang-opt:hover {
+        background: rgba(212, 146, 31, 0.1);
+        border-color: rgba(212, 146, 31, 0.55);
+      }
+      .lang-opt[aria-pressed="true"] {
+        border-color: #f0c850;
+        background: rgba(212, 146, 31, 0.16);
+        box-shadow: 0 0 18px rgba(240, 200, 80, 0.25);
+      }
+      .lang-opt__flag {
+        font-size: 1.3rem;
+        line-height: 1;
+      }
+      .lang-opt__name {
+        font-weight: 600;
+      }
+      .lang-more-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin: 0 auto 0.9rem;
+        padding: 0.4rem 0.6rem;
+        font-family: "Inter", sans-serif;
+        font-size: 0.85rem;
+        color: #d4921f;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+      .lang-more-toggle:hover {
+        color: #f0c850;
+      }
+      .lang-more {
+        display: none;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.45rem;
+        margin-bottom: 1.1rem;
+      }
+      .lang-more.is-open {
+        display: grid;
+      }
+      .lang-more .lang-opt {
+        font-size: 0.88rem;
+        padding: 0.55rem 0.7rem;
+      }
+      .lang-modal__hint {
+        display: block;
+        margin-top: 0.4rem;
+        font-family: "Inter", sans-serif;
+        font-size: 0.72rem;
+        color: rgba(245, 242, 237, 0.4);
+      }
+      .lang-modal__close {
+        position: absolute;
+        top: 0.7rem;
+        right: 0.85rem;
+        width: 34px;
+        height: 34px;
+        font-size: 1.3rem;
+        line-height: 1;
+        color: rgba(245, 242, 237, 0.6);
+        background: none;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: color 160ms ease;
+      }
+      .lang-modal__close:hover {
+        color: #f0c850;
+      }
+
+      /* ===== Globe button (always-available switcher) ===== */
+      .lang-globe {
+        position: fixed;
+        left: 18px;
+        bottom: 18px;
+        z-index: 3500;
+        width: 46px;
+        height: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #1a1008;
+        background: radial-gradient(circle at 35% 30%, #f0c850, #d4921f 70%);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow:
+          0 6px 20px rgba(0, 0, 0, 0.4),
+          0 0 22px rgba(212, 146, 31, 0.3);
+        transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .lang-globe:hover {
+        transform: scale(1.08);
+      }
+      .lang-globe svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      @media (max-width: 380px) {
+        .lang-grid {
+          grid-template-columns: 1fr;
+        }
+        .lang-modal__card {
+          padding: 1.9rem 1.25rem 1.5rem;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .lang-modal,
+        .lang-modal__card,
+        .lang-opt,
+        .lang-globe {
+          transition: none !important;
+        }
+      }
+    </style>
+
+    <button class="lang-globe" id="lang-globe" type="button" aria-label="Change language" title="Change language">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18" />
+      </svg>
+    </button>
+
+    <div class="lang-modal" id="lang-modal" role="dialog" aria-modal="true" aria-labelledby="lang-modal-title" hidden>
+      <div class="lang-modal__card notranslate" translate="no">
+        <button class="lang-modal__close" id="lang-modal-close" type="button" aria-label="Close">×</button>
+        <div class="lang-modal__orb" aria-hidden="true"></div>
+        <h2 class="lang-modal__title" id="lang-modal-title">Choose your language</h2>
+        <p class="lang-modal__sub" id="lang-modal-sub">You can change this anytime.</p>
+        <div class="lang-grid" id="lang-grid" role="group" aria-label="Featured languages"></div>
+        <button class="lang-more-toggle" id="lang-more-toggle" type="button" aria-expanded="false">
+          <span id="lang-more-label">All languages</span> ▾
+        </button>
+        <div class="lang-more" id="lang-more" role="group" aria-label="All languages"></div>
+        <span class="lang-modal__hint" id="lang-modal-hint">Additional languages are auto-translated.</span>
+      </div>
+    </div>
+
+    <div id="google_translate_element" style="display: none"></div>
+
+    <script>
+      (function () {
+        "use strict";
+
+        var STORAGE_KEY = "mbl_lang";
+
+        /* Featured languages = hand-translated, brand-perfect, instant. */
+        var FEATURED = [
+          { code: "en", flag: "🇺🇸", name: "English" },
+          { code: "es", flag: "🇪🇸", name: "Español" },
+          { code: "pt", flag: "🇧🇷", name: "Português" },
+          { code: "fr", flag: "🇫🇷", name: "Français" },
+          { code: "ko", flag: "🇰🇷", name: "한국어" },
+          { code: "zh-CN", flag: "🇨🇳", name: "中文" },
+        ];
+
+        /* The long tail — routed through the auto-translate fallback. */
+        var MORE = [
+          { code: "de", flag: "🇩🇪", name: "Deutsch" },
+          { code: "it", flag: "🇮🇹", name: "Italiano" },
+          { code: "ja", flag: "🇯🇵", name: "日本語" },
+          { code: "ar", flag: "🇸🇦", name: "العربية" },
+          { code: "hi", flag: "🇮🇳", name: "हिन्दी" },
+          { code: "ru", flag: "🇷🇺", name: "Русский" },
+          { code: "tl", flag: "🇵🇭", name: "Tagalog" },
+          { code: "sw", flag: "🇰🇪", name: "Kiswahili" },
+          { code: "id", flag: "🇮🇩", name: "Indonesia" },
+          { code: "vi", flag: "🇻🇳", name: "Tiếng Việt" },
+          { code: "nl", flag: "🇳🇱", name: "Nederlands" },
+          { code: "pl", flag: "🇵🇱", name: "Polski" },
+          { code: "tr", flag: "🇹🇷", name: "Türkçe" },
+          { code: "ht", flag: "🇭🇹", name: "Kreyòl" },
+        ];
+
+        var CURATED = { en: 1, es: 1, pt: 1, fr: 1, ko: 1, "zh-CN": 1 };
+
+        /* Hand-translated copy. Keys mirror the data-i18n="…" tags.
+           English is captured live from the DOM, so it isn't repeated here. */
+        var DICT = {
+          es: {
+            "nav.repository": "El Repositorio",
+            "nav.pricing": "Precios",
+            "nav.faq": "Preguntas",
+            "nav.about": "Acerca de",
+            "hero.eyebrow": "La primera app santuario para el cristianismo del mundo",
+            "repo.tagline": "¡Acercando a las personas a Dios de una forma emocionante y sencilla!",
+            "repo.comingSoon": "Próximamente · iPhone, iPad y Android",
+            "repo.title": "Tu repositorio de estudio",
+            "repo.subtitle":
+              "Lens. Sermon Builder. Infinite Canvas. Scripture Glow. Doce santuarios, un temporizador, comunión integrada. <strong>Cada herramienta que guarda un santuario, en una sola app.</strong>",
+            "pricing.title": "Paga una vez. Tuyo para siempre.",
+            "pricing.subtitle":
+              "Sin suscripciones. Sin cargos recurrentes. Sin sorpresas. Una compra, acceso de por vida, para ti y para todos los que traigas contigo.",
+            "faq.title": "Respuestas honestas",
+            "faq.subtitle": "Las preguntas que hacen los amigos antes de confiarnos su práctica de fe.",
+          },
+          pt: {
+            "nav.repository": "O Repositório",
+            "nav.pricing": "Preços",
+            "nav.faq": "Perguntas",
+            "nav.about": "Sobre",
+            "hero.eyebrow": "O primeiro app santuário para o cristianismo do mundo",
+            "repo.tagline": "Aproximando as pessoas de Deus de um jeito empolgante e fácil!",
+            "repo.comingSoon": "Em breve · iPhone, iPad e Android",
+            "repo.title": "Seu repositório de estudo",
+            "repo.subtitle":
+              "Lens. Sermon Builder. Infinite Canvas. Scripture Glow. Doze santuários, um cronômetro, comunhão integrada. <strong>Cada ferramenta que um santuário guarda, em um só app.</strong>",
+            "pricing.title": "Pague uma vez. Seu para sempre.",
+            "pricing.subtitle":
+              "Sem assinaturas. Sem cobranças recorrentes. Sem surpresas. Uma compra, acesso vitalício, para você e para todos que trouxer com você.",
+            "faq.title": "Respostas honestas",
+            "faq.subtitle": "As perguntas que os amigos fazem antes de confiar a nós a sua prática de fé.",
+          },
+          fr: {
+            "nav.repository": "Le Répertoire",
+            "nav.pricing": "Tarifs",
+            "nav.faq": "FAQ",
+            "nav.about": "À propos",
+            "hero.eyebrow": "La première application sanctuaire au monde pour le christianisme",
+            "repo.tagline": "Rapprocher les gens de Dieu d'une manière passionnante et simple !",
+            "repo.comingSoon": "Bientôt disponible · iPhone, iPad et Android",
+            "repo.title": "Votre répertoire d'étude",
+            "repo.subtitle":
+              "Lens. Sermon Builder. Infinite Canvas. Scripture Glow. Douze sanctuaires, un minuteur, la communion intégrée. <strong>Chaque outil qu'un sanctuaire renferme, dans une seule application.</strong>",
+            "pricing.title": "Payez une fois. À vous pour toujours.",
+            "pricing.subtitle":
+              "Aucun abonnement. Aucun renouvellement. Aucune surprise. Un seul achat, un accès à vie, pour vous et pour tous ceux que vous amenez.",
+            "faq.title": "Réponses honnêtes",
+            "faq.subtitle": "Les questions que les amis posent avant de nous confier leur pratique de la foi.",
+          },
+          ko: {
+            "nav.repository": "저장소",
+            "nav.pricing": "가격",
+            "nav.faq": "질문",
+            "nav.about": "소개",
+            "hero.eyebrow": "세계 최초의 기독교 성소 앱",
+            "repo.tagline": "흥미롭고 쉬운 방법으로 사람들을 하나님께 더 가까이!",
+            "repo.comingSoon": "곧 출시 · iPhone, iPad 및 Android",
+            "repo.title": "나의 학습 저장소",
+            "repo.subtitle":
+              "Lens. Sermon Builder. Infinite Canvas. Scripture Glow. 열두 개의 성소, 하나의 타이머, 내장된 교제. <strong>성소가 품은 모든 도구를 하나의 앱에.</strong>",
+            "pricing.title": "한 번 결제, 평생 소유.",
+            "pricing.subtitle": "구독 없음. 갱신 없음. 깜짝 청구 없음. 한 번의 구매로 평생 이용 — 당신과 함께하는 모든 이들을 위해.",
+            "faq.title": "솔직한 답변",
+            "faq.subtitle": "친구들이 신앙 생활을 우리에게 맡기기 전에 묻는 질문들.",
+          },
+          "zh-CN": {
+            "nav.repository": "资源库",
+            "nav.pricing": "价格",
+            "nav.faq": "常见问题",
+            "nav.about": "关于",
+            "hero.eyebrow": "全球首款基督教圣所应用",
+            "repo.tagline": "以令人兴奋而简单的方式，让人们更亲近上帝！",
+            "repo.comingSoon": "即将推出 · iPhone、iPad 和 Android",
+            "repo.title": "你的学习资源库",
+            "repo.subtitle":
+              "Lens. Sermon Builder. Infinite Canvas. Scripture Glow. 十二个圣所，一个计时器，内置团契。<strong>圣所所拥有的每一个工具，尽在一个应用之中。</strong>",
+            "pricing.title": "一次付费，永久拥有。",
+            "pricing.subtitle": "无订阅。无续费。无意外收费。一次购买，终身使用——为你，也为你带来的每一个人。",
+            "faq.title": "诚实的回答",
+            "faq.subtitle": "朋友们在把信仰实践托付给我们之前会问的问题。",
+          },
+        };
+
+        /* Modal chrome strings, localized for the featured languages. */
+        var UI = {
+          en: {
+            title: "Choose your language",
+            sub: "You can change this anytime.",
+            more: "All languages",
+            hint: "Additional languages are auto-translated.",
+          },
+          es: {
+            title: "Elige tu idioma",
+            sub: "Puedes cambiarlo cuando quieras.",
+            more: "Todos los idiomas",
+            hint: "Los demás idiomas se traducen automáticamente.",
+          },
+          pt: {
+            title: "Escolha seu idioma",
+            sub: "Você pode mudar isso quando quiser.",
+            more: "Todos os idiomas",
+            hint: "Os outros idiomas são traduzidos automaticamente.",
+          },
+          fr: {
+            title: "Choisissez votre langue",
+            sub: "Vous pourrez la changer à tout moment.",
+            more: "Toutes les langues",
+            hint: "Les autres langues sont traduites automatiquement.",
+          },
+          ko: {
+            title: "언어를 선택하세요",
+            sub: "언제든지 변경할 수 있습니다.",
+            more: "모든 언어",
+            hint: "다른 언어는 자동 번역됩니다.",
+          },
+          "zh-CN": {
+            title: "选择您的语言",
+            sub: "您可以随时更改。",
+            more: "所有语言",
+            hint: "其他语言为自动翻译。",
+          },
+        };
+
+        var els = document.querySelectorAll("[data-i18n]");
+        /* Snapshot the original English so we can always restore it. */
+        els.forEach(function (el) {
+          el.setAttribute("data-i18n-en", el.innerHTML.trim());
+        });
+
+        function setLangCookie(lang) {
+          if (lang === "en") {
+            // Drop the cookie so the auto-translate layer reverts to English.
+            var gone = "googtrans=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+            document.cookie = gone;
+            document.cookie = gone + ";domain=" + location.hostname;
+            document.cookie = gone + ";domain=." + location.hostname;
+            return;
+          }
+          var val = "/en/" + lang;
+          document.cookie = "googtrans=" + val + ";path=/";
+          document.cookie = "googtrans=" + val + ";path=/;domain=" + location.hostname;
+        }
+
+        /* Paint hand-translated copy onto the tagged elements and shield them
+           from the auto-translate layer (translate="no" / .notranslate) so the
+           machine never overwrites the brand-perfect headlines. Untagged body
+           copy is left for Google's widget to fill in. */
+        function applyHandStrings(lang) {
+          var table = DICT[lang];
+          els.forEach(function (el) {
+            var key = el.getAttribute("data-i18n");
+            if (lang === "en" || !table || !table[key]) {
+              el.innerHTML = el.getAttribute("data-i18n-en");
+            } else {
+              el.innerHTML = table[key];
+            }
+            if (lang === "en") {
+              el.classList.remove("notranslate");
+              el.removeAttribute("translate");
+            } else {
+              el.classList.add("notranslate");
+              el.setAttribute("translate", "no");
+            }
+          });
+          document.documentElement.lang = lang;
+          updateModalChrome(lang);
+        }
+
+        function updateModalChrome(lang) {
+          var t = UI[lang] || UI.en;
+          var q = function (id) {
+            return document.getElementById(id);
+          };
+          q("lang-modal-title").textContent = t.title;
+          q("lang-modal-sub").textContent = t.sub;
+          q("lang-more-label").textContent = t.more;
+          q("lang-modal-hint").textContent = t.hint;
+        }
+
+        /* A language pick always reloads: the googtrans cookie drives the
+           auto-translate fill, and (for curated languages) hand strings are
+           re-applied on boot. Reloading keeps Google's DOM rewriting and our
+           overrides from fighting over the same text nodes. */
+        function selectLanguage(lang, persist) {
+          if (persist !== false) {
+            try {
+              localStorage.setItem(STORAGE_KEY, lang);
+            } catch (e) {}
+          }
+          setLangCookie(lang);
+          location.reload();
+        }
+
+        function markSelected(lang) {
+          document.querySelectorAll(".lang-opt").forEach(function (b) {
+            b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false");
+          });
+        }
+
+        /* ---- Build the picker UI ---- */
+        function makeOpt(item) {
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "lang-opt";
+          b.setAttribute("data-lang", item.code);
+          b.setAttribute("aria-pressed", "false");
+          b.innerHTML =
+            '<span class="lang-opt__flag" aria-hidden="true">' + item.flag + '</span><span class="lang-opt__name">' + item.name + "</span>";
+          b.addEventListener("click", function () {
+            selectLanguage(item.code, true);
+          });
+          return b;
+        }
+
+        var grid = document.getElementById("lang-grid");
+        FEATURED.forEach(function (i) {
+          grid.appendChild(makeOpt(i));
+        });
+        var moreWrap = document.getElementById("lang-more");
+        MORE.forEach(function (i) {
+          moreWrap.appendChild(makeOpt(i));
+        });
+
+        var moreToggle = document.getElementById("lang-more-toggle");
+        moreToggle.addEventListener("click", function () {
+          var open = moreWrap.classList.toggle("is-open");
+          moreToggle.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+
+        /* ---- Modal open / close ---- */
+        var modal = document.getElementById("lang-modal");
+        function openModal() {
+          modal.hidden = false;
+          requestAnimationFrame(function () {
+            modal.classList.add("is-open");
+          });
+        }
+        function closeModal() {
+          modal.classList.remove("is-open");
+          setTimeout(function () {
+            modal.hidden = true;
+          }, 240);
+        }
+        document.getElementById("lang-modal-close").addEventListener("click", closeModal);
+        modal.addEventListener("click", function (e) {
+          if (e.target === modal) closeModal();
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && !modal.hidden) closeModal();
+        });
+        document.getElementById("lang-globe").addEventListener("click", openModal);
+
+        /* ---- Load Google widget only if/when an auto language is needed ---- */
+        window.googleTranslateElementInit = function () {
+          /* eslint-disable no-undef */
+          new google.translate.TranslateElement({ pageLanguage: "en", autoDisplay: false }, "google_translate_element");
+        };
+        function loadGoogle() {
+          if (document.getElementById("goog-te-script")) return;
+          var s = document.createElement("script");
+          s.id = "goog-te-script";
+          s.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+          document.body.appendChild(s);
+        }
+
+        /* ---- Boot ---- */
+        // Always load the auto-translate layer so a previously-set googtrans
+        // cookie can fill untagged copy in any language (curated or long-tail).
+        loadGoogle();
+
+        var stored = null;
+        try {
+          stored = localStorage.getItem(STORAGE_KEY);
+        } catch (e) {}
+
+        if (stored) {
+          markSelected(stored);
+          if (CURATED[stored]) {
+            // Hand-perfect headlines now; Google fills the rest via the cookie.
+            applyHandStrings(stored);
+          } else {
+            // Long-tail language: leave tagged copy in English so Google
+            // translates the whole page uniformly via the cookie.
+            updateModalChrome("en");
+          }
+        } else {
+          // First visit — pre-highlight the browser's language, then ask.
+          var nav = (navigator.language || "en").toLowerCase();
+          var guess = "en";
+          var all = FEATURED.concat(MORE);
+          for (var i = 0; i < all.length; i++) {
+            var c = all[i].code.toLowerCase();
+            if (nav === c || nav.split("-")[0] === c.split("-")[0]) {
+              guess = all[i].code;
+              break;
+            }
+          }
+          updateModalChrome(CURATED[guess] ? guess : "en");
+          markSelected(guess);
+          openModal();
+        }
       })();
     </script>
   </body>
