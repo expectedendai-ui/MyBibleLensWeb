@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cloud Storage Preview</title>
+    <style>
+      :root {
+        --bg: #f5efdf;
+        --panel: rgba(255, 250, 240, 0.9);
+        --panel-border: rgba(132, 80, 0, 0.16);
+        --text: #3d2b1f;
+        --muted: rgba(61, 43, 31, 0.62);
+        --gold: #b8892e;
+        --gold-soft: rgba(184, 137, 46, 0.14);
+        --bar-bg: rgba(61, 43, 31, 0.08);
+        --track: #d8c39a;
+        --good: #2f9a5c;
+        --warn: #ca7a26;
+        --full: #9d2a22;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background:
+          radial-gradient(circle at 20% 18%, rgba(184, 137, 46, 0.12), transparent 22%),
+          radial-gradient(circle at 85% 16%, rgba(132, 80, 0, 0.08), transparent 20%),
+          linear-gradient(180deg, #f9f4e7 0%, #f1e6cf 100%);
+        color: var(--text);
+        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        padding: 24px;
+      }
+
+      .frame {
+        width: min(760px, 100%);
+        border-radius: 28px;
+        padding: 28px;
+        background: rgba(255, 252, 246, 0.72);
+        border: 1px solid rgba(132, 80, 0, 0.08);
+        box-shadow:
+          0 22px 60px rgba(91, 63, 19, 0.18),
+          inset 0 1px 0 rgba(255, 255, 255, 0.65);
+      }
+
+      .panel {
+        border-radius: 24px;
+        padding: 22px 22px 18px;
+        border: 1px solid var(--panel-border);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(253, 246, 229, 0.86));
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.8),
+          0 12px 30px rgba(91, 63, 19, 0.08);
+      }
+
+      .topline {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: start;
+      }
+
+      .eyebrow {
+        margin: 0;
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(184, 137, 46, 0.9);
+        font-weight: 700;
+      }
+
+      h1 {
+        margin: 6px 0 0;
+        font-size: clamp(26px, 4vw, 34px);
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+      }
+
+      .pill {
+        align-self: start;
+        border: 1px solid rgba(184, 137, 46, 0.22);
+        background: rgba(255, 248, 231, 0.92);
+        color: #8c5b12;
+        border-radius: 999px;
+        padding: 10px 14px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .meter {
+        margin-top: 22px;
+        padding: 18px;
+        border-radius: 20px;
+        background: rgba(255, 248, 233, 0.68);
+        border: 1px solid rgba(132, 80, 0, 0.08);
+      }
+
+      .meter-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: end;
+      }
+
+      .meter-label {
+        margin: 0;
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(61, 43, 31, 0.5);
+        font-weight: 700;
+      }
+
+      .meter-value {
+        margin: 6px 0 0;
+        font-size: clamp(18px, 2.5vw, 24px);
+        font-weight: 800;
+      }
+
+      .percent {
+        border-radius: 999px;
+        padding: 7px 10px;
+        background: rgba(184, 137, 46, 0.12);
+        color: #8f5e14;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .bar {
+        margin-top: 14px;
+        height: 12px;
+        border-radius: 999px;
+        overflow: hidden;
+        background: var(--bar-bg);
+      }
+
+      .fill {
+        height: 100%;
+        width: 33%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #c89a3a 0%, #d5b154 42%, #af7d1f 100%);
+        box-shadow: 0 0 0 1px rgba(138, 92, 18, 0.12) inset;
+      }
+
+      .help {
+        margin: 14px 0 0;
+        color: rgba(61, 43, 31, 0.72);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      .estimate {
+        margin-top: 14px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .estimate-card {
+        border-radius: 18px;
+        border: 1px solid rgba(132, 80, 0, 0.1);
+        background: rgba(255, 252, 245, 0.88);
+        padding: 14px 14px 12px;
+      }
+
+      .estimate-card .label {
+        font-size: 10px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(61, 43, 31, 0.46);
+        font-weight: 800;
+      }
+
+      .estimate-card .value {
+        margin-top: 8px;
+        font-size: 18px;
+        font-weight: 900;
+      }
+
+      .estimate-card .sub {
+        margin-top: 3px;
+        font-size: 12px;
+        color: rgba(61, 43, 31, 0.72);
+      }
+
+      .plan-row {
+        margin-top: 16px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .plan {
+        flex: 1 1 145px;
+        border-radius: 18px;
+        border: 1px solid rgba(132, 80, 0, 0.14);
+        background: linear-gradient(180deg, rgba(255, 251, 242, 0.96), rgba(248, 238, 217, 0.95));
+        padding: 14px 16px;
+      }
+
+      .plan strong {
+        display: block;
+        font-size: 15px;
+        margin-bottom: 6px;
+      }
+
+      .plan .seats {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border-radius: 999px;
+        padding: 4px 9px;
+        background: rgba(184, 137, 46, 0.12);
+        color: #8c5b12;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .plan .meta {
+        margin-top: 10px;
+        font-size: 12px;
+        color: rgba(61, 43, 31, 0.7);
+      }
+
+      .plan .price {
+        margin-top: 10px;
+        font-size: 18px;
+        font-weight: 900;
+        color: #7e5313;
+      }
+
+      .members {
+        margin-top: 16px;
+        padding: 16px;
+        border-radius: 20px;
+        border: 1px solid rgba(132, 80, 0, 0.12);
+        background: rgba(255, 252, 246, 0.82);
+      }
+
+      .members-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .members-title {
+        margin: 0;
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(61, 43, 31, 0.5);
+        font-weight: 800;
+      }
+
+      .members-count {
+        font-size: 12px;
+        font-weight: 800;
+        color: #8c5b12;
+      }
+
+      .member-rows {
+        margin-top: 12px;
+        display: grid;
+        gap: 8px;
+      }
+
+      .member-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        border-radius: 16px;
+        padding: 10px 12px;
+        background: rgba(255, 248, 231, 0.82);
+        border: 1px solid rgba(132, 80, 0, 0.08);
+      }
+
+      .member-row strong {
+        display: block;
+        font-size: 14px;
+      }
+
+      .member-row span {
+        display: block;
+        margin-top: 2px;
+        font-size: 11px;
+        color: rgba(61, 43, 31, 0.62);
+      }
+
+      .member-role {
+        border-radius: 999px;
+        padding: 5px 9px;
+        background: rgba(61, 43, 31, 0.08);
+        color: rgba(61, 43, 31, 0.82);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .member-add {
+        margin-top: 10px;
+        display: flex;
+        gap: 8px;
+      }
+
+      .member-input {
+        flex: 1;
+        border-radius: 14px;
+        border: 1px solid rgba(132, 80, 0, 0.14);
+        background: white;
+        padding: 12px 12px;
+        font: inherit;
+        font-size: 13px;
+        color: var(--text);
+      }
+
+      .member-button {
+        border: 0;
+        border-radius: 14px;
+        padding: 12px 14px;
+        background: linear-gradient(180deg, #c99b3b, #ad7b1a);
+        color: white;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .footer-note {
+        margin: 16px 2px 0;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(61, 43, 31, 0.34);
+      }
+
+      @media (max-width: 680px) {
+        .frame {
+          padding: 16px;
+        }
+
+        .panel {
+          padding: 18px;
+        }
+
+        .topline,
+        .meter-row {
+          flex-direction: column;
+          align-items: start;
+        }
+
+        .estimate {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="frame">
+      <section class="panel">
+        <div class="topline">
+          <div>
+            <p class="eyebrow">Storage Meter Preview</p>
+            <h1>See how long until the cloud fills up.</h1>
+          </div>
+          <div class="pill">Private to the user</div>
+        </div>
+
+        <section class="meter" aria-label="Cloud storage meter preview">
+          <div class="meter-row">
+            <div>
+              <p class="meter-label">Cloud Storage</p>
+              <p class="meter-value">8.2 GB used of 25 GB included</p>
+            </div>
+            <div class="percent">33%</div>
+          </div>
+
+          <div class="bar" aria-hidden="true">
+            <div class="fill"></div>
+          </div>
+
+          <p class="help">
+            At your current pace, you may reach your limit in about 3.8 years. The estimate updates
+            from recent upload behavior, so it stays useful without being noisy.
+          </p>
+
+          <div class="estimate">
+            <div class="estimate-card">
+              <div class="label">Light use</div>
+              <div class="value">5+ years</div>
+              <div class="sub">Slow growth, occasional uploads</div>
+            </div>
+            <div class="estimate-card">
+              <div class="label">Typical use</div>
+              <div class="value">3.8 years</div>
+              <div class="sub">Normal sharing and board activity</div>
+            </div>
+            <div class="estimate-card">
+              <div class="label">Heavy use</div>
+              <div class="value">18 months</div>
+              <div class="sub">Large media uploads and frequent saves</div>
+            </div>
+          </div>
+
+          <div class="plan-row">
+            <div class="plan">
+              <strong>Solo</strong>
+              <div class="seats">1 seat</div>
+              <div class="meta">25 GB personal storage add-on</div>
+              <div class="price">$1.99/mo</div>
+            </div>
+            <div class="plan">
+              <strong>Family</strong>
+              <div class="seats">12 seats</div>
+              <div class="meta">150 GB pooled across the family</div>
+              <div class="price">$8.99/mo</div>
+            </div>
+            <div class="plan">
+              <strong>Group</strong>
+              <div class="seats">30 seats</div>
+              <div class="meta">500 GB pooled for teams and groups</div>
+              <div class="price">$19.99/mo</div>
+            </div>
+            <div class="plan">
+              <strong>Ministry</strong>
+              <div class="seats">75 seats</div>
+              <div class="meta">1 TB pooled for larger ministries</div>
+              <div class="price">$39.99/mo</div>
+            </div>
+          </div>
+
+          <section class="members" aria-label="Member management preview">
+            <div class="members-head">
+              <div>
+                <p class="members-title">Adding Members</p>
+                <div class="members-count">4 of 12 seats used</div>
+              </div>
+              <div class="pill" style="padding: 8px 10px;">Owner invites only</div>
+            </div>
+
+            <div class="member-rows">
+              <div class="member-row">
+                <div>
+                  <strong>Denzel</strong>
+                  <span>Plan owner and billing admin</span>
+                </div>
+                <div class="member-role">Owner</div>
+              </div>
+              <div class="member-row">
+                <div>
+                  <strong>JJ</strong>
+                  <span>Invite accepted, can edit boards</span>
+                </div>
+                <div class="member-role">Member</div>
+              </div>
+              <div class="member-row">
+                <div>
+                  <strong>Pending invite</strong>
+                  <span>sent to family@example.com</span>
+                </div>
+                <div class="member-role">Pending</div>
+              </div>
+            </div>
+
+            <div class="member-add">
+              <input class="member-input" value="name or email" aria-label="Add member by name or email" />
+              <button class="member-button" type="button">Add</button>
+            </div>
+          </section>
+        </section>
+
+        <div class="footer-note">App features stay one-time. Storage is separate and optional later.</div>
+      </section>
+    </main>
+  </body>
+</html>

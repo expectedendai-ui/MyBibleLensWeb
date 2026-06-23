@@ -5464,7 +5464,8 @@
         <div class="section-header">
           <h2 class="section-title">Pay Once. Yours Forever.</h2>
           <p class="section-subtitle">
-            No subscriptions. No churn. No surprise charges. One purchase, lifetime access — for you and for everyone you bring with you.
+            No feature subscriptions. No churn. No surprise feature charges. One purchase, lifetime app access — for you and for everyone
+            you bring with you.
           </p>
           <p
             style="
@@ -5477,7 +5478,8 @@
             "
           >
             Every paid tier unlocks the <strong>same features</strong>. The only difference is how many seats you get to share with your
-            fellowship, family, or small group.
+            fellowship, family, or small group. Cloud storage starts included and visible; if heavy media use ever needs more, optional
+            monthly storage will be separate from your lifetime app access.
           </p>
 
           <!-- Always-visible "What are seats?" explainer card -->
@@ -6039,9 +6041,11 @@
             line-height: 1.6;
           "
         >
-          Purchases are processed by Apple In-App Purchase or Google Play Billing. Lifetime means lifetime of the app — no recurring
-          charges, ever. Empire Pack &amp; Empire Plus unlock every feature and can be bought on any plan — even free; seats inherit your
-          full access.
+          Purchases are processed by Apple In-App Purchase or Google Play Billing. Lifetime means lifetime access to the paid app features
+          attached to your tier. Cloud storage for uploaded and generated media starts included and is measured separately; if optional
+          paid storage plans are introduced later, they will show the storage amount, renewal period, price, restore option, and
+          cancellation path before purchase. Empire Pack &amp; Empire Plus unlock every feature and can be bought on any plan — even free;
+          seats inherit your full app access.
         </p>
       </div>
     </section>
@@ -6063,14 +6067,15 @@
         <div class="faq-list">
           <details class="faq-item">
             <summary>
-              <span class="faq-item__q">Is this <em>really</em> one-time? No subscription tricks?</span>
+              <span class="faq-item__q">Is this <em>really</em> one-time? What about storage?</span>
               <span class="faq-item__chevron" aria-hidden="true">+</span>
             </summary>
             <div class="faq-item__a">
               <p>
-                Yes — really. You pay once on Apple's App Store or Google Play, and the tier you bought is yours for the lifetime of the
-                app. We will never convert you to a subscription, never charge you a renewal, and never paywall a feature you already own.
-                The founder built this app after a season of personal hardship — there will never be a "stress payment" inside MyBibleLens.
+                Yes — for the paid app features attached to your tier. You pay once on Apple's App Store or Google Play, and that app access
+                is yours for the lifetime of the app. Cloud storage is separate because uploaded photos, mosaics, generated media, and shared
+                boards create real hosting cost. Storage starts included and visible in your profile; if optional paid storage is added
+                later, it will be shown as a separate monthly storage plan before you choose it.
               </p>
             </div>
           </details>
@@ -6091,15 +6096,14 @@
 
           <details class="faq-item">
             <summary>
-              <span class="faq-item__q">Will you add subscriptions or ads later?</span>
+              <span class="faq-item__q">Will you add subscriptions, ads, or surprise charges later?</span>
               <span class="faq-item__chevron" aria-hidden="true">+</span>
             </summary>
             <div class="faq-item__a">
               <p>
-                No. The business model is one-time IAP, full stop. New features that ship to the app are free forever for everyone who
-                already owns a paid tier. We will never sell your data, run ads in the experience, or introduce a "Pro" subscription on top
-                of your existing purchase. If economics change someday in a way that requires a new product, it will be a new app — not a
-                subscription bolted onto this one.
+                No ads. No selling your data. No surprise charges. The core app unlock is one-time IAP. The only subscription model we are
+                preparing for is optional cloud storage if a user's saved media becomes heavy enough to create real ongoing cost. That would
+                be a clearly labeled storage plan, not a surprise renewal for features you already bought.
               </p>
             </div>
           </details>
@@ -6143,8 +6147,9 @@
             <div class="faq-item__a">
               <p>
                 Reflections, mosaics, and prayers are private by default — only you and the seats you've explicitly shared with can access
-                them. Supabase Row-Level Security enforces this at the database level. AI requests are routed through our edge gateway with
-                no third-party tracking, and we never sell or advertise against your spiritual content. Read the full
+                them. Supabase Row-Level Security enforces this at the database level. Your profile can show a private storage meter so you
+                can see how much cloud-backed media your account is using. AI requests are routed through our edge gateway with no
+                third-party tracking, and we never sell or advertise against your spiritual content. Read the full
                 <a href="legal.html#privacy">Privacy Policy</a> and <a href="legal.html#ai-disclosure">AI Disclosure</a> for details.
               </p>
             </div>
@@ -6213,7 +6218,7 @@
             <a href="legal.html#eula">EULA</a>
             <a href="legal.html#ai-disclosure">AI Disclosure</a>
             <a href="legal.html#refund">Billing &amp; Refunds</a>
-            <a href="legal.html#subscription-disclosure">Purchase Model</a>
+            <a href="legal.html#subscription-disclosure">Purchase &amp; Storage Model</a>
             <a href="legal.html#dmca">DMCA</a>
             <a href="legal.html#accessibility">Accessibility</a>
             <a href="legal.html#security">Security</a>
@@ -6936,13 +6941,8 @@
         });
       })();
 
-      // ── Supabase Config ──
-      var SUPABASE_URL = "https://wokvqbxkzugceuvcrsyl.supabase.co";
-      var SUPABASE_ANON =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indva3ZxYnhrenVnY2V1dmNyc3lsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMzNjYyNjEsImV4cCI6MjA1ODk0MjI2MX0.bloMmxXjQOcZOhbCHHNqUjEyiRhIDPkZE4YHa7VRxms";
-
-      // (Stripe web-checkout flow removed — payment rail is now in-app via
-      //  Apple IAP / Google Play Billing. Site is informational only.)
+      // Payment rail is now in-app via Apple IAP / Google Play Billing.
+      // This public landing page is informational and does not need database credentials.
     </script>
     <!-- ===== Coming Soon Toast (App Download placeholder) ===== -->
     <div class="coming-soon-toast" id="coming-soon-toast" role="status" aria-live="polite" aria-hidden="true">
