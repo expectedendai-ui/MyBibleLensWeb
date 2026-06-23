@@ -4009,9 +4009,9 @@
         height: 40px;
         margin-left: 0.4rem;
         border-radius: 50%;
-        background: rgba(212, 146, 31, 0.12);
-        border: 1.5px solid rgba(240, 200, 80, 0.5);
-        color: #f0c850;
+        background: rgba(220, 53, 47, 0.14);
+        border: 1.5px solid rgba(229, 72, 77, 0.6);
+        color: #e5484d;
         font-family: var(--font-display, "Hammersmith One", serif);
         font-size: 1.75rem;
         font-weight: 900;
@@ -4026,8 +4026,8 @@
           opacity 220ms ease;
       }
       .floating-nav__close:hover {
-        background: rgba(240, 200, 80, 0.28);
-        border-color: #f0c850;
+        background: rgba(229, 72, 77, 0.3);
+        border-color: #e5484d;
         color: #ffffff;
         transform: rotate(90deg) scale(1.08);
       }
@@ -4264,6 +4264,56 @@
       /* Container that holds parallax-transformed nodes — JS shifts on mousemove */
       .scripture-canvas[data-parallax="1"] .canvas-node {
         will-change: transform;
+      }
+
+      /* ═══════════════════════════════════════════════════════
+         CANVAS STICKERS — die-cut sanctuary icons that drift among
+         the photos. Purely decorative: no pointer events, sit behind
+         the polaroids so they never block dragging or the picker.
+         ═══════════════════════════════════════════════════════ */
+      .canvas-sticker {
+        position: absolute;
+        left: var(--st-x, 50%);
+        top: var(--st-y, 50%);
+        width: var(--st-size, 60px);
+        height: auto;
+        pointer-events: none;
+        opacity: 0;
+        transform: rotate(var(--st-rot, 0deg)) translateY(0);
+        filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.4));
+        animation:
+          canvasStickerFade 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards var(--st-delay, 0s),
+          canvasStickerFloat 7s ease-in-out infinite var(--st-delay, 0s);
+        will-change: transform, opacity;
+      }
+      @keyframes canvasStickerFade {
+        to {
+          opacity: var(--st-op, 0.92);
+        }
+      }
+      @keyframes canvasStickerFloat {
+        0%,
+        100% {
+          transform: rotate(var(--st-rot, 0deg)) translateY(0);
+        }
+        50% {
+          transform: rotate(var(--st-rot, 0deg)) translateY(-10px);
+        }
+      }
+      @media (max-width: 640px) {
+        /* Shrink + thin out on phones so the canvas doesn't feel crowded. */
+        .canvas-sticker {
+          width: calc(var(--st-size, 60px) * 0.62);
+        }
+        .canvas-sticker:nth-of-type(n + 8) {
+          display: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .canvas-sticker {
+          opacity: var(--st-op, 0.92);
+          animation: none;
+        }
       }
 
       /* ═══════════════════════════════════════════════════════
@@ -4782,6 +4832,97 @@
 
       <!-- Scripture Canvas — drifting Miro-board layer behind the hero text -->
       <div class="scripture-canvas" data-parallax="1" aria-hidden="true">
+        <!-- Drifting sanctuary stickers (decorative) — sit behind the photos.
+             7 pixel · 2 renaissance · 2 3D. -->
+        <img
+          class="canvas-sticker"
+          src="assets/stickers/pix-06-dove.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style="--st-x: 50%; --st-y: 11%; --st-size: 60px; --st-rot: -8deg; --st-delay: 0.3s; --st-op: 0.95"
+        />
+        <img
+          class="canvas-sticker"
+          src="assets/stickers/pix-03-lamb.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style="--st-x: 29%; --st-y: 71%; --st-size: 66px; --st-rot: 6deg; --st-delay: 0.6s; --st-op: 0.92"
+        />
+        <img
+          class="canvas-sticker"
+          src="assets/stickers/pix-08-ichthys.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style="--st-x: 89%; --st-y: 29%; --st-size: 52px; --st-rot: 10deg; --st-delay: 0.9s; --st-op: 0.9"
+        />
+        <img
+          class="canvas-sticker"
+          src="assets/stickers/pix-11-church.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style="--st-x: 11%; --st-y: 41%; --st-size: 70px; --st-rot: -6deg; --st-delay: 1.2s; --st-op: 0.93"
+        />
+        <img
+          class="canvas-sticker"
+          src="assets/stickers/pix-56-seraphim.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style="--st-x: 71%; --st-y: 13%; --st-size: 56px; --st-rot: 8deg; --st-delay: 1.5s; --st-op: 0.9"
+        />
+        <img
+          class="canvas-sticker"
+          src="assets/stickers/pix-57-cherubim.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style="--st-x: 93%; --st-y: 64%; --st-size: 54px; --st-rot: -10deg; --st-delay: 1.8s; --st-op: 0.9"
+        />
+        <img
+          class="canvas-sticker"
+          src="assets/stickers/pix-02-virgin-mary.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style="--st-x: 6%; --st-y: 73%; --st-size: 62px; --st-rot: 5deg; --st-delay: 2.1s; --st-op: 0.92"
+        />
+        <img
+          class="canvas-sticker"
+          src="assets/stickers/ren-07-lion.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style="--st-x: 60%; --st-y: 85%; --st-size: 74px; --st-rot: -5deg; --st-delay: 2.4s; --st-op: 0.95"
+        />
+        <img
+          class="canvas-sticker"
+          src="assets/stickers/ren-14-celtic-cross.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style="--st-x: 39%; --st-y: 6%; --st-size: 50px; --st-rot: 7deg; --st-delay: 2.7s; --st-op: 0.92"
+        />
+        <img
+          class="canvas-sticker"
+          src="assets/stickers/3d-104-open-bible.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style="--st-x: 81%; --st-y: 88%; --st-size: 68px; --st-rot: -8deg; --st-delay: 3s; --st-op: 0.95"
+        />
+        <img
+          class="canvas-sticker"
+          src="assets/stickers/3d-04-deer.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style="--st-x: 21%; --st-y: 16%; --st-size: 60px; --st-rot: 9deg; --st-delay: 3.3s; --st-op: 0.93"
+        />
+
         <!-- Pinned scripture art — pops in, gets dragged around by cursors -->
         <div class="canvas-photo" data-photo="ascension">
           <img src="assets/ascension.jpg" alt="" loading="lazy" decoding="async" width="400" height="600" />
@@ -4855,7 +4996,19 @@
           <svg viewBox="0 0 24 24" fill="#ddb04a" stroke="#1a1008" stroke-width="1.2">
             <path d="M5 3l14 8-7 1.5L9 21z" />
           </svg>
-          <span class="collab-cursor__label">Grace</span>
+          <span class="collab-cursor__label">Serena</span>
+        </div>
+        <div class="collab-cursor" data-collab="kyleigh" style="--collab-color: #e6b13c; --collab-delay: 4.8s">
+          <svg viewBox="0 0 24 24" fill="#e6b13c" stroke="#1a1008" stroke-width="1.2">
+            <path d="M5 3l14 8-7 1.5L9 21z" />
+          </svg>
+          <span class="collab-cursor__label">Kyleigh</span>
+        </div>
+        <div class="collab-cursor" data-collab="quinn" style="--collab-color: #d6a23a; --collab-delay: 5.4s">
+          <svg viewBox="0 0 24 24" fill="#d6a23a" stroke="#1a1008" stroke-width="1.2">
+            <path d="M5 3l14 8-7 1.5L9 21z" />
+          </svg>
+          <span class="collab-cursor__label">Quinn</span>
         </div>
         <div class="canvas-node" data-feature="canvas" style="--nx: 14%; --ny: 28%; --node-delay: 0s">
           <span class="canvas-node__icon" aria-hidden="true">
@@ -6976,7 +7129,17 @@
           /* ── Collaborator cursors — Pastor James, Ashley, Carline, Eva, Ila drift around ── */
           // Track which cursor is currently "busy" dragging a photo so we
           // don't override its position during the drag.
-          const cursorBusy = { james: false, ashley: false, carline: false, eva: false, ila: false, kevin: false, grace: false };
+          const cursorBusy = {
+            james: false,
+            ashley: false,
+            carline: false,
+            eva: false,
+            ila: false,
+            kevin: false,
+            grace: false,
+            kyleigh: false,
+            quinn: false,
+          };
 
           if (!reduceMotion) {
             // Where each cursor enters from (off-canvas).
@@ -6988,6 +7151,8 @@
               ila: { x: 1.12, y: 1.1 },
               kevin: { x: -0.12, y: 0.5 },
               grace: { x: 1.14, y: 0.5 },
+              kyleigh: { x: 0.5, y: -0.12 },
+              quinn: { x: 0.78, y: -0.12 },
             };
             const collabPaths = {
               james: [
@@ -7038,6 +7203,20 @@
                 { x: 0.54, y: 0.58 },
                 { x: 0.72, y: 0.66 },
                 { x: 0.6, y: 0.32 },
+              ],
+              kyleigh: [
+                { x: 0.5, y: 0.3 },
+                { x: 0.36, y: 0.46 },
+                { x: 0.62, y: 0.5 },
+                { x: 0.46, y: 0.26 },
+                { x: 0.68, y: 0.4 },
+              ],
+              quinn: [
+                { x: 0.7, y: 0.6 },
+                { x: 0.5, y: 0.44 },
+                { x: 0.34, y: 0.6 },
+                { x: 0.56, y: 0.72 },
+                { x: 0.42, y: 0.4 },
               ],
             };
             document.querySelectorAll(".collab-cursor").forEach(function (cursor) {
@@ -7244,7 +7423,7 @@
 
             /* Cursor-drag drama — every ~9s a random idle photo gets grabbed */
             if (!isMobile && photos.length) {
-              const cursorIds = ["james", "ashley", "carline", "eva", "ila", "kevin", "grace"];
+              const cursorIds = ["james", "ashley", "carline", "eva", "ila", "kevin", "grace", "kyleigh", "quinn"];
               function triggerDrag() {
                 // Pick a random idle photo
                 const idlePhotos = photos.filter(function (p) {
@@ -7813,9 +7992,9 @@
         align-items: center;
         justify-content: center;
         padding: 1.25rem;
-        background: rgba(16, 9, 4, 0.72);
-        backdrop-filter: blur(10px) saturate(120%);
-        -webkit-backdrop-filter: blur(10px) saturate(120%);
+        background: rgba(16, 9, 4, 0.5);
+        backdrop-filter: blur(3px) saturate(115%);
+        -webkit-backdrop-filter: blur(3px) saturate(115%);
         opacity: 0;
         visibility: hidden;
         transition:

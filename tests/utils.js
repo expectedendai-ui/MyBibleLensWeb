@@ -43,7 +43,8 @@ async function waitForPageReady(page) {
       /* Scripture Canvas dynamic elements: positions are JS-driven and
          non-deterministic by frame. Hide them for stable baselines. */
       .collab-cursor,
-      .canvas-photo {
+      .canvas-photo,
+      .canvas-sticker {
         opacity: 0 !important;
         visibility: hidden !important;
       }
