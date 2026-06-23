@@ -8282,7 +8282,35 @@
       .sticker-reward.is-open {
         opacity: 1;
       }
+      .sticker-reward::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: min(80vw, 470px);
+        height: min(60vw, 330px);
+        transform: translate(-50%, -50%) scale(0.92);
+        border-radius: 46px;
+        background:
+          radial-gradient(42% 55% at 22% 28%, rgba(240, 200, 80, 0.62), transparent 70%),
+          radial-gradient(46% 60% at 80% 22%, rgba(212, 146, 31, 0.55), transparent 72%),
+          radial-gradient(50% 62% at 78% 82%, rgba(182, 117, 29, 0.6), transparent 72%),
+          radial-gradient(46% 56% at 20% 84%, rgba(245, 242, 237, 0.4), transparent 70%), linear-gradient(135deg, #321f0e, #221308);
+        filter: blur(16px);
+        opacity: 0;
+        z-index: 0;
+        pointer-events: none;
+        transition:
+          opacity 0.4s ease,
+          transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .sticker-reward.is-open::before {
+        opacity: 0.9;
+        transform: translate(-50%, -50%) scale(1);
+      }
       .sticker-reward__img {
+        position: relative;
+        z-index: 1;
         width: min(62vw, 340px);
         aspect-ratio: 1 / 1;
         background-size: contain;

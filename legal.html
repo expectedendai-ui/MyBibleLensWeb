@@ -316,20 +316,6 @@
                     class="ig-handle-btn"
                     style="margin-top:0; cursor:pointer;"
                     aria-expanded="false"
-                    aria-controls="novella-soon"
-                    onclick="var m=document.getElementById('novella-soon');var open=m.style.display==='flex';m.style.display=open?'none':'flex';this.setAttribute('aria-expanded',String(!open));"
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-                    </svg>
-                    Memoir
-                  </button>
-                  <button
-                    type="button"
-                    class="ig-handle-btn"
-                    style="margin-top:0; cursor:pointer;"
-                    aria-expanded="false"
                     aria-controls="go-deeper"
                     onclick="var m=document.getElementById('go-deeper');var open=m.style.display==='block';m.style.display=open?'none':'block';this.setAttribute('aria-expanded',String(!open));if(!open){m.scrollIntoView({behavior:'smooth',block:'nearest'});}"
                   >
@@ -370,7 +356,31 @@
                     <li><strong style="color:#f0c850;">Task Games &amp; Trivia:</strong> Real interaction for your family and friends to connect in reality, not just behind a screen.</li>
                   </ul>
                   <p>My generation is drawing closer to God because we need answers to this madness. We don&rsquo;t want to be disconnected from our families anymore. We want harmony.</p>
-                  <p style="font-weight:700;">This isn&rsquo;t just an app. It&rsquo;s a sanctuary to take back your mind.</p>
+                  <div style="display:flex; flex-wrap:wrap; align-items:center; gap:0.75rem; margin-top:0.5rem;">
+                    <p style="font-weight:700; margin:0;">This isn&rsquo;t just an app. It&rsquo;s a sanctuary to take back your mind.</p>
+                    <button
+                      type="button"
+                      class="ig-handle-btn"
+                      style="margin-top:0; cursor:pointer;"
+                      aria-expanded="false"
+                      aria-controls="my-testimony"
+                      onclick="var m=document.getElementById('my-testimony');var open=m.style.display==='block';m.style.display=open?'none':'block';this.setAttribute('aria-expanded',String(!open));if(!open){m.scrollIntoView({behavior:'smooth',block:'nearest'});}"
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                      </svg>
+                      go even deeper
+                    </button>
+                  </div>
+                  <div
+                    id="my-testimony"
+                    role="status"
+                    style="display:none; margin:1rem 0 0; padding:1rem 1.2rem; border-radius:16px; border:1px solid rgba(240, 200, 80, 0.3); background:rgba(240, 200, 80, 0.08);"
+                  >
+                    <p style="margin:0 0 0.35rem; font-family:'Hammersmith One', sans-serif; font-size:1.1rem; color:#f0c850; text-shadow:0 0 12px rgba(240, 200, 80, 0.35);">My Testimony</p>
+                    <p style="margin:0; font-style:italic; color:rgba(245, 242, 237, 0.88); line-height:1.55;">Woah&hellip; now I gotta write a book if you want to know more, haha.</p>
+                  </div>
                 </div>
 
                 <!-- Shiny glossary terms + pop-ups (Bloom's Taxonomy, Erikson) -->
@@ -610,13 +620,6 @@
                     }
                   });
                 </script>
-                <p
-                  id="novella-soon"
-                  role="status"
-                  style="display:none; align-items:center; gap:0.4rem; margin:0.85rem 0 0; font-family:'Hammersmith One', sans-serif; font-style:italic; font-size:0.95rem; color:#b6751d; letter-spacing:0.02em; text-shadow:0 0 14px rgba(240, 200, 80, 0.45);"
-                >
-                  <span aria-hidden="true">✦</span> Coming soon&hellip; the real story behind MyBibleLens&hellip;
-                </p>
                 <p style="margin:0.85rem 0 0; font-size:0.95rem; font-style:italic; color:rgba(245,242,237,0.7);">
                   <a
                     href="https://www.youtube.com/watch?v=T6QKqFPRZSA&list=RDCx0xzO73Amo&index=4"
@@ -3602,7 +3605,26 @@
       }
       .sticker-reward[hidden] { display: none; }
       .sticker-reward.is-open { opacity: 1; }
+      .sticker-reward::before {
+        content: "";
+        position: absolute;
+        top: 50%; left: 50%;
+        width: min(80vw, 470px); height: min(60vw, 330px);
+        transform: translate(-50%, -50%) scale(0.92);
+        border-radius: 46px;
+        background:
+          radial-gradient(42% 55% at 22% 28%, rgba(240, 200, 80, 0.62), transparent 70%),
+          radial-gradient(46% 60% at 80% 22%, rgba(212, 146, 31, 0.55), transparent 72%),
+          radial-gradient(50% 62% at 78% 82%, rgba(182, 117, 29, 0.6), transparent 72%),
+          radial-gradient(46% 56% at 20% 84%, rgba(245, 242, 237, 0.4), transparent 70%),
+          linear-gradient(135deg, #321f0e, #221308);
+        filter: blur(16px);
+        opacity: 0; z-index: 0; pointer-events: none;
+        transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1);
+      }
+      .sticker-reward.is-open::before { opacity: 0.9; transform: translate(-50%, -50%) scale(1); }
       .sticker-reward__img {
+        position: relative; z-index: 1;
         width: min(62vw, 340px); aspect-ratio: 1 / 1;
         background-size: contain; background-repeat: no-repeat; background-position: center;
         filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5)) drop-shadow(0 0 34px rgba(240,200,80,0.65));
