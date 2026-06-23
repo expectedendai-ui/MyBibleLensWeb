@@ -5986,7 +5986,8 @@
         <div class="section-header">
           <h2 class="section-title" data-i18n="pricing.title">Pay Once. Yours Forever.</h2>
           <p class="section-subtitle" data-i18n="pricing.subtitle">
-            No subscriptions. No churn. No surprise charges. One purchase, lifetime access — for you and for everyone you bring with you.
+            No app subscriptions. No churn. No surprise charges. One purchase unlocks every feature for life — for you and everyone you
+            bring with you. Extra cloud storage is the one optional add-on, only if you ever outgrow your free space.
           </p>
           <p
             style="
@@ -6550,6 +6551,424 @@
           </div>
         </div>
 
+        <!-- ===== Cloud Storage (optional add-on) ===== -->
+        <style>
+          .cs-block {
+            --cs-text: #f5f2ed;
+            --cs-muted: rgba(245, 242, 237, 0.82);
+            --cs-faint: rgba(245, 242, 237, 0.66);
+            --cs-gold: #d4921f;
+            --cs-gold-deep: #b6751d;
+            --cs-line: rgba(212, 146, 31, 0.22);
+            max-width: 760px;
+            margin: 3.5rem auto 0;
+            border-radius: 28px;
+            padding: 26px;
+            background: linear-gradient(180deg, rgba(40, 25, 11, 0.97), rgba(22, 13, 6, 0.98));
+            border: 1px solid rgba(212, 146, 31, 0.18);
+            box-shadow:
+              0 22px 60px rgba(0, 0, 0, 0.35),
+              inset 0 1px 0 rgba(240, 200, 80, 0.08);
+            color: var(--cs-text);
+            font-family: "Inter", sans-serif;
+            box-sizing: border-box;
+          }
+          .cs-block * {
+            box-sizing: border-box;
+          }
+          .cs-topline {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: start;
+          }
+          .cs-eyebrow {
+            margin: 0;
+            font-size: 11px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--cs-gold);
+            font-weight: 700;
+          }
+          .cs-title {
+            margin: 8px 0 0;
+            font-family: "Hammersmith One", sans-serif;
+            font-size: clamp(22px, 3.4vw, 30px);
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            color: var(--cs-text);
+          }
+          .cs-pill {
+            align-self: start;
+            border: 1px solid var(--cs-line);
+            background: rgba(212, 146, 31, 0.1);
+            color: var(--cs-gold);
+            border-radius: 999px;
+            padding: 9px 13px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            white-space: nowrap;
+          }
+          .cs-meter {
+            margin-top: 22px;
+            padding: 18px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 146, 31, 0.12);
+          }
+          .cs-meter-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: end;
+          }
+          .cs-meter-label {
+            margin: 0;
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--cs-faint);
+            font-weight: 700;
+          }
+          .cs-meter-value {
+            margin: 6px 0 0;
+            font-size: clamp(17px, 2.4vw, 22px);
+            font-weight: 800;
+          }
+          .cs-percent {
+            border-radius: 999px;
+            padding: 7px 11px;
+            background: rgba(212, 146, 31, 0.16);
+            color: var(--cs-gold);
+            font-size: 12px;
+            font-weight: 800;
+            white-space: nowrap;
+          }
+          .cs-bar {
+            margin-top: 14px;
+            height: 12px;
+            border-radius: 999px;
+            overflow: hidden;
+            background: rgba(245, 242, 237, 0.1);
+          }
+          .cs-fill {
+            height: 100%;
+            width: 33%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #b6751d 0%, #d4921f 50%, #f0c850 100%);
+          }
+          .cs-help {
+            margin: 14px 0 0;
+            color: var(--cs-muted);
+            font-size: 13px;
+            line-height: 1.55;
+          }
+          .cs-estimate {
+            margin-top: 14px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+          }
+          .cs-card {
+            border-radius: 18px;
+            border: 1px solid rgba(212, 146, 31, 0.12);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 14px;
+          }
+          .cs-card .cs-card-label {
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--cs-faint);
+            font-weight: 800;
+          }
+          .cs-card .cs-card-value {
+            margin-top: 8px;
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--cs-gold);
+          }
+          .cs-card .cs-card-sub {
+            margin-top: 3px;
+            font-size: 12px;
+            color: var(--cs-muted);
+          }
+          .cs-plan-row {
+            margin-top: 16px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+          }
+          .cs-plan {
+            flex: 1 1 150px;
+            border-radius: 18px;
+            border: 1px solid rgba(212, 146, 31, 0.16);
+            background: linear-gradient(180deg, rgba(212, 146, 31, 0.08), rgba(255, 255, 255, 0.02));
+            padding: 14px 16px;
+          }
+          .cs-plan strong {
+            display: block;
+            font-size: 15px;
+            margin-bottom: 6px;
+          }
+          .cs-seats {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border-radius: 999px;
+            padding: 4px 9px;
+            background: rgba(212, 146, 31, 0.24);
+            color: #f0c850;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+          }
+          .cs-plan .cs-plan-meta {
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--cs-muted);
+          }
+          .cs-plan .cs-plan-price {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--cs-gold);
+          }
+          .cs-members {
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 146, 31, 0.12);
+            background: rgba(255, 255, 255, 0.03);
+          }
+          .cs-members-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: center;
+          }
+          .cs-members-title {
+            margin: 0;
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--cs-faint);
+            font-weight: 800;
+          }
+          .cs-members-count {
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--cs-gold);
+          }
+          .cs-member-rows {
+            margin-top: 12px;
+            display: grid;
+            gap: 8px;
+          }
+          .cs-member-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            border-radius: 16px;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 146, 31, 0.1);
+          }
+          .cs-member-row strong {
+            display: block;
+            font-size: 14px;
+          }
+          .cs-member-row span {
+            display: block;
+            margin-top: 2px;
+            font-size: 11px;
+            color: var(--cs-muted);
+          }
+          .cs-member-role {
+            border-radius: 999px;
+            padding: 5px 9px;
+            background: rgba(61, 43, 31, 0.7);
+            border: 1px solid rgba(212, 146, 31, 0.28);
+            color: #f0dcc0;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            white-space: nowrap;
+          }
+          .cs-member-add {
+            margin-top: 10px;
+            display: flex;
+            gap: 8px;
+          }
+          .cs-member-input {
+            flex: 1;
+            border-radius: 14px;
+            border: 1px solid rgba(212, 146, 31, 0.16);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 12px;
+            font: inherit;
+            font-size: 13px;
+            color: var(--cs-text);
+          }
+          .cs-member-button {
+            border: 0;
+            border-radius: 14px;
+            padding: 12px 16px;
+            background: linear-gradient(180deg, #d4921f, #b6751d);
+            color: #1a1008;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: default;
+          }
+          .cs-footer-note {
+            margin: 16px 2px 0;
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--cs-faint);
+          }
+          @media (max-width: 680px) {
+            .cs-block {
+              padding: 18px;
+            }
+            .cs-topline,
+            .cs-meter-row {
+              flex-direction: column;
+              align-items: start;
+            }
+            .cs-estimate {
+              grid-template-columns: 1fr;
+            }
+          }
+        </style>
+        <section class="cs-block" aria-labelledby="cs-heading">
+          <div class="cs-topline">
+            <div>
+              <p class="cs-eyebrow">Cloud Storage · Optional</p>
+              <h3 class="cs-title" id="cs-heading">Need more room? Storage is the only thing you'd ever rent.</h3>
+            </div>
+            <div class="cs-pill">Private to you</div>
+          </div>
+
+          <div class="cs-meter" aria-label="Cloud storage meter preview">
+            <div class="cs-meter-row">
+              <div>
+                <p class="cs-meter-label">Cloud Storage</p>
+                <p class="cs-meter-value">8.2 GB used of 25 GB included</p>
+              </div>
+              <div class="cs-percent">33%</div>
+            </div>
+
+            <div class="cs-bar" aria-hidden="true">
+              <div class="cs-fill"></div>
+            </div>
+
+            <p class="cs-help">
+              At your current pace, you may reach your limit in about 3.8 years. The estimate updates from recent upload behavior, so it
+              stays useful without being noisy.
+            </p>
+
+            <div class="cs-estimate">
+              <div class="cs-card">
+                <div class="cs-card-label">Light use</div>
+                <div class="cs-card-value">5+ years</div>
+                <div class="cs-card-sub">Slow growth, occasional uploads</div>
+              </div>
+              <div class="cs-card">
+                <div class="cs-card-label">Typical use</div>
+                <div class="cs-card-value">3.8 years</div>
+                <div class="cs-card-sub">Normal sharing and board activity</div>
+              </div>
+              <div class="cs-card">
+                <div class="cs-card-label">Heavy use</div>
+                <div class="cs-card-value">18 months</div>
+                <div class="cs-card-sub">Large media uploads and frequent saves</div>
+              </div>
+            </div>
+
+            <div class="cs-plan-row">
+              <div class="cs-plan">
+                <strong>Solo</strong>
+                <div class="cs-seats">1 seat</div>
+                <div class="cs-plan-meta">25 GB personal storage add-on</div>
+                <div class="cs-plan-price">$1.99/mo</div>
+              </div>
+              <div class="cs-plan">
+                <strong>Family</strong>
+                <div class="cs-seats">12 seats</div>
+                <div class="cs-plan-meta">150 GB pooled across the family</div>
+                <div class="cs-plan-price">$8.99/mo</div>
+              </div>
+              <div class="cs-plan">
+                <strong>Group</strong>
+                <div class="cs-seats">30 seats</div>
+                <div class="cs-plan-meta">500 GB pooled for teams and groups</div>
+                <div class="cs-plan-price">$19.99/mo</div>
+              </div>
+              <div class="cs-plan">
+                <strong>Ministry</strong>
+                <div class="cs-seats">75 seats</div>
+                <div class="cs-plan-meta">1 TB pooled for larger ministries</div>
+                <div class="cs-plan-price">$39.99/mo</div>
+              </div>
+            </div>
+
+            <section class="cs-members" aria-label="Member management preview">
+              <div class="cs-members-head">
+                <div>
+                  <p class="cs-members-title">Adding Members</p>
+                  <div class="cs-members-count">4 of 12 seats used</div>
+                </div>
+                <div class="cs-pill">Owner invites only</div>
+              </div>
+
+              <div class="cs-member-rows">
+                <div class="cs-member-row">
+                  <div>
+                    <strong>Denzel</strong>
+                    <span>Plan owner and billing admin</span>
+                  </div>
+                  <div class="cs-member-role">Owner</div>
+                </div>
+                <div class="cs-member-row">
+                  <div>
+                    <strong>JJ</strong>
+                    <span>Invite accepted, can edit boards</span>
+                  </div>
+                  <div class="cs-member-role">Member</div>
+                </div>
+                <div class="cs-member-row">
+                  <div>
+                    <strong>Pending invite</strong>
+                    <span>sent to family@example.com</span>
+                  </div>
+                  <div class="cs-member-role">Pending</div>
+                </div>
+              </div>
+
+              <div class="cs-member-add">
+                <input
+                  class="cs-member-input"
+                  value="name or email"
+                  readonly
+                  tabindex="-1"
+                  aria-label="Add member by name or email (illustration)"
+                />
+                <button class="cs-member-button" type="button" tabindex="-1" aria-hidden="true">Add</button>
+              </div>
+            </section>
+          </div>
+
+          <div class="cs-footer-note">App features stay one-time and yours for life. Storage is separate and optional.</div>
+        </section>
+
         <p
           style="
             max-width: 560px;
@@ -6561,9 +6980,10 @@
             line-height: 1.6;
           "
         >
-          Purchases are processed by Apple In-App Purchase or Google Play Billing. Lifetime means lifetime of the app — no recurring
-          charges, ever. Empire Pack &amp; Empire Plus unlock every feature and can be bought on any plan — even free; seats inherit your
-          full access.
+          Purchases are processed by Apple In-App Purchase or Google Play Billing. Lifetime means lifetime of the app — no recurring charges
+          for any feature, ever. Empire Pack &amp; Empire Plus unlock every feature and can be bought on any plan — even free; seats inherit
+          your full access. Cloud storage is the only optional add-on and the only thing ever billed monthly — every app feature you buy
+          stays one-time and yours for life.
         </p>
       </div>
     </section>
