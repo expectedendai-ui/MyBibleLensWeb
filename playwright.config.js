@@ -1,6 +1,9 @@
 // @ts-check
 const { defineConfig, devices } = require("@playwright/test");
 
+const testPort = process.env.PLAYWRIGHT_PORT || "8765";
+const baseURL = process.env.PLAYWRIGHT_BASE_URL || `http://localhost:${testPort}`;
+
 /**
  * Playwright config for the MyBibleLens marketing site.
  *
@@ -28,7 +31,7 @@ module.exports = defineConfig({
   },
 
   use: {
-    baseURL: "http://localhost:8765",
+    baseURL,
     trace: "on-first-retry",
     screenshot: "only-on-failure",
     video: "retain-on-failure",
@@ -57,9 +60,9 @@ module.exports = defineConfig({
   ],
 
   webServer: {
-    command: "npm run dev",
-    url: "http://localhost:8765",
-    reuseExistingServer: !process.env.CI,
+    command: `npx http-server -p ${testPort} -c-1 --cors`,
+    url: baseURL,
+    reuseExistingServer: process.env.PLAYWRIGHT_REUSE_SERVER === "1",
     timeout: 30_000,
   },
 });

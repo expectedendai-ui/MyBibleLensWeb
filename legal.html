@@ -825,7 +825,7 @@
                 <tr>
                   <td style="padding:0.6rem 0.8rem;border:1px solid #e5d5c0;"><strong>Usage analytics</strong></td>
                   <td style="padding:0.6rem 0.8rem;border:1px solid #e5d5c0;">24 months</td>
-                  <td style="padding:0.6rem 0.8rem;border:1px solid #e5d5c0;">Aggregated and anonymized only; cannot be linked to individual users</td>
+                  <td style="padding:0.6rem 0.8rem;border:1px solid #e5d5c0;">Metadata-only product analytics linked to a Supabase UUID where needed for product reliability; never includes prompts, notes, prayers, filenames, photos, audio, or raw user content</td>
                 </tr>
                 <tr style="background:#fdf8f3;">
                   <td style="padding:0.6rem 0.8rem;border:1px solid #e5d5c0;"><strong>Support communications</strong></td>
@@ -896,6 +896,18 @@
                   <td style="padding:0.6rem 0.8rem;border:1px solid #e5d5c0;">Apple In-App Purchase receipt validation, entitlement management, and IAP analytics</td>
                   <td style="padding:0.6rem 0.8rem;border:1px solid #e5d5c0;">Apple-issued purchase identifiers, anonymized device identifiers, and subscription/entitlement state. No card or banking details — those stay with Apple.</td>
                   <td style="padding:0.6rem 0.8rem;border:1px solid #e5d5c0;"><a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener noreferrer" style="color:#b6741d;">revenuecat.com/privacy</a></td>
+                </tr>
+                <tr>
+                  <td style="padding:0.6rem 0.8rem;border:1px solid #e5d5c0;"><strong>Sentry</strong></td>
+                  <td style="padding:0.6rem 0.8rem;border:1px solid #e5d5c0;">Crash, error, and performance diagnostics</td>
+                  <td style="padding:0.6rem 0.8rem;border:1px solid #e5d5c0;">Sanitized stack traces, app version, device/platform metadata, and UUID user context when signed in. No prompts, photos, audio, payment details, or raw user content.</td>
+                  <td style="padding:0.6rem 0.8rem;border:1px solid #e5d5c0;"><a href="https://sentry.io/privacy/" target="_blank" rel="noopener noreferrer" style="color:#b6741d;">sentry.io/privacy</a></td>
+                </tr>
+                <tr style="background:#fdf8f3;">
+                  <td style="padding:0.6rem 0.8rem;border:1px solid #e5d5c0;"><strong>PostHog</strong></td>
+                  <td style="padding:0.6rem 0.8rem;border:1px solid #e5d5c0;">Product analytics for feature usage, onboarding, and purchase-flow reliability</td>
+                  <td style="padding:0.6rem 0.8rem;border:1px solid #e5d5c0;">Metadata-only interaction events linked to a Supabase UUID where needed. Session recording is disabled and visible text is masked.</td>
+                  <td style="padding:0.6rem 0.8rem;border:1px solid #e5d5c0;"><a href="https://posthog.com/privacy" target="_blank" rel="noopener noreferrer" style="color:#b6741d;">posthog.com/privacy</a></td>
                 </tr>
                 <tr>
                   <td style="padding:0.6rem 0.8rem;border:1px solid #e5d5c0;"><strong>Apple (App Store / In-App Purchase)</strong></td>
@@ -1395,6 +1407,8 @@
               <li><strong>Supabase (Supabase Inc.):</strong> Database, authentication, real-time sync, and file storage. Supabase maintains its own independent SOC 2 Type II attestation; MyBibleLens™ itself is not separately SOC 2 audited. Policy: <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer" style="color:#b6741d;">supabase.com/privacy</a></li>
               <li><strong>Apple (Apple Inc.):</strong> Sole payment processor for all paid tiers and Empire consumables via the App Store In-App Purchase system. Apple handles all payment details, billing address, and tax/locale data under Apple's own privacy policy. MBL never receives this data. Policy: <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer" style="color:#b6741d;">apple.com/legal/privacy</a></li>
               <li><strong>RevenueCat (RevenueCat, Inc.):</strong> Validates Apple In-App Purchase receipts and manages your entitlements. Receives Apple-issued purchase identifiers, anonymized device identifiers, and your subscription/entitlement state. Does not receive card or banking details. Policy: <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener noreferrer" style="color:#b6741d;">revenuecat.com/privacy</a></li>
+              <li><strong>Sentry (Functional Software, Inc.):</strong> Crash, error, and performance diagnostics. Receives sanitized stack traces, app version, device/platform metadata, and UUID user context when signed in; no prompts, photos, audio, payment details, or raw user content. Policy: <a href="https://sentry.io/privacy/" target="_blank" rel="noopener noreferrer" style="color:#b6741d;">sentry.io/privacy</a></li>
+              <li><strong>PostHog (PostHog, Inc.):</strong> Product analytics for feature usage, onboarding, and purchase-flow reliability. Receives metadata-only interaction events linked to a Supabase UUID where needed; session recording is disabled and visible text is masked. Policy: <a href="https://posthog.com/privacy" target="_blank" rel="noopener noreferrer" style="color:#b6741d;">posthog.com/privacy</a></li>
               <li><strong>Cloudflare (Cloudflare, Inc.):</strong> CDN, DDoS protection, and DNS security. Processes IP addresses and request metadata. Policy: <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer" style="color:#b6741d;">cloudflare.com/privacypolicy</a></li>
             </ul>
             <p>We have executed data processing agreements with each applicable Subprocessor. Each Subprocessor is contractually prohibited from using your data for any purpose other than providing services to MBL.</p>
@@ -1820,6 +1834,8 @@
               <li><strong>Supabase (Database &amp; Auth):</strong> <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer" style="color:#b6741d;">supabase.com/privacy</a></li>
               <li><strong>Apple (App Store / In-App Purchase):</strong> <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer" style="color:#b6741d;">apple.com/legal/privacy</a></li>
               <li><strong>RevenueCat (IAP receipt validation &amp; entitlements):</strong> <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener noreferrer" style="color:#b6741d;">revenuecat.com/privacy</a></li>
+              <li><strong>Sentry (Crash &amp; performance diagnostics):</strong> <a href="https://sentry.io/privacy/" target="_blank" rel="noopener noreferrer" style="color:#b6741d;">sentry.io/privacy</a></li>
+              <li><strong>PostHog (Product analytics):</strong> <a href="https://posthog.com/privacy" target="_blank" rel="noopener noreferrer" style="color:#b6741d;">posthog.com/privacy</a></li>
               <li><strong>Cloudflare (CDN &amp; Security):</strong> <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer" style="color:#b6741d;">cloudflare.com/privacypolicy</a></li>
             </ul>
           </div>
