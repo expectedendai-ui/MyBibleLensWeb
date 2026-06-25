@@ -2783,6 +2783,48 @@
         position: relative;
         z-index: 1;
       }
+      /* Decorative new-sticker layer — sits BEHIND the repo content (z-index 0),
+         tucked into the side gutters so it never blocks text */
+      .repo-section .repo-stickers {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .repo-sticker {
+        position: absolute;
+        width: clamp(74px, 7vw, 132px);
+        opacity: 0.5;
+        filter: drop-shadow(0 6px 14px rgba(61, 43, 31, 0.22));
+        transform: rotate(var(--r, 0deg));
+        animation: repoStickerFloat 7s ease-in-out infinite var(--d, 0s);
+        will-change: transform;
+        user-select: none;
+      }
+      @keyframes repoStickerFloat {
+        0%,
+        100% {
+          transform: translateY(0) rotate(var(--r, 0deg));
+        }
+        50% {
+          transform: translateY(-10px) rotate(var(--r, 0deg));
+        }
+      }
+      @media (max-width: 760px) {
+        .repo-sticker {
+          width: 62px;
+          opacity: 0.32;
+        }
+        .repo-sticker:nth-of-type(n + 5) {
+          display: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .repo-sticker {
+          animation: none !important;
+        }
+      }
 
       /* ════════════════════════════════════════════════════════════════
          iPad Showcase — animated carousel that replaced the 10-card grid
@@ -4069,7 +4111,7 @@
         pointer-events: none;
         z-index: 1;
         overflow: hidden;
-        opacity: 0.95;
+        opacity: 1;
         /* Infinite-canvas dot grid — classic Miro/Figma whiteboard texture */
         background-image: radial-gradient(circle, rgba(240, 200, 80, 0.16) 1.1px, transparent 1.4px);
         background-size: 28px 28px;
@@ -4313,6 +4355,17 @@
         .canvas-sticker {
           opacity: var(--st-op, 0.92);
           animation: none;
+        }
+      }
+      /* NEW sticker sets — pulled forward, much bigger, full strength */
+      .canvas-sticker--big {
+        width: clamp(140px, 18vw, 230px) !important;
+        z-index: 6;
+        filter: drop-shadow(0 14px 32px rgba(26, 16, 8, 0.55));
+      }
+      @media (max-width: 640px) {
+        .canvas-sticker--big {
+          width: clamp(96px, 32vw, 150px) !important;
         }
       }
 
@@ -4923,6 +4976,56 @@
           style="--st-x: 21%; --st-y: 16%; --st-size: 60px; --st-rot: 9deg; --st-delay: 3.3s; --st-op: 0.93"
         />
 
+        <!-- NEW sticker sets — 3 Holy Card + 3 Afro-Art, pulled FORWARD + much bigger (added 2026-06-24) -->
+        <img
+          class="canvas-sticker canvas-sticker--big"
+          src="assets/stickers/hc-07-lion.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style="--st-x: 67%; --st-y: 40%; --st-size: 170px; --st-rot: -7deg; --st-delay: 3.6s; --st-op: 1"
+        />
+        <img
+          class="canvas-sticker canvas-sticker--big"
+          src="assets/stickers/aa-26-king-david.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style="--st-x: 33%; --st-y: 52%; --st-size: 180px; --st-rot: 6deg; --st-delay: 3.9s; --st-op: 1"
+        />
+        <img
+          class="canvas-sticker canvas-sticker--big"
+          src="assets/stickers/hc-93-joy.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style="--st-x: 14%; --st-y: 58%; --st-size: 160px; --st-rot: 8deg; --st-delay: 4.2s; --st-op: 1"
+        />
+        <img
+          class="canvas-sticker canvas-sticker--big"
+          src="assets/stickers/aa-28-moses.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style="--st-x: 82%; --st-y: 48%; --st-size: 175px; --st-rot: -9deg; --st-delay: 4.5s; --st-op: 1"
+        />
+        <img
+          class="canvas-sticker canvas-sticker--big"
+          src="assets/stickers/hc-71-crown-life.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style="--st-x: 48%; --st-y: 24%; --st-size: 150px; --st-rot: 10deg; --st-delay: 4.8s; --st-op: 1"
+        />
+        <img
+          class="canvas-sticker canvas-sticker--big"
+          src="assets/stickers/aa-94-peace.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style="--st-x: 86%; --st-y: 76%; --st-size: 160px; --st-rot: -6deg; --st-delay: 5.1s; --st-op: 1"
+        />
+
         <!-- Pinned scripture art — pops in, gets dragged around by cursors -->
         <div class="canvas-photo" data-photo="ascension">
           <img src="assets/ascension.jpg" alt="" loading="lazy" decoding="async" width="400" height="600" />
@@ -5077,6 +5180,17 @@
 
     <!-- ===== SECTION 4: STUDY REPOSITORY ===== -->
     <section class="repo-section section-padding" id="repository">
+      <!-- Decorative new stickers — 4 Holy Card + 4 Afro-Art, drifting in the gutters (added 2026-06-24) -->
+      <div class="repo-stickers" aria-hidden="true">
+        <img class="repo-sticker" src="assets/stickers/hc-07-lion.png" alt="" style="top: 7%; left: 1%; --r: -10deg; --d: 0s" />
+        <img class="repo-sticker" src="assets/stickers/aa-26-king-david.png" alt="" style="top: 5%; right: 1.5%; --r: 8deg; --d: 1.1s" />
+        <img class="repo-sticker" src="assets/stickers/hc-93-joy.png" alt="" style="top: 35%; left: 0.5%; --r: 7deg; --d: 2.2s" />
+        <img class="repo-sticker" src="assets/stickers/aa-104-open-bible.png" alt="" style="top: 31%; right: 1%; --r: -8deg; --d: 0.6s" />
+        <img class="repo-sticker" src="assets/stickers/hc-06-dove.png" alt="" style="top: 61%; left: 1.5%; --r: -6deg; --d: 1.7s" />
+        <img class="repo-sticker" src="assets/stickers/aa-28-moses.png" alt="" style="top: 58%; right: 0.5%; --r: 9deg; --d: 3s" />
+        <img class="repo-sticker" src="assets/stickers/hc-88-nativity-star.png" alt="" style="top: 85%; left: 1%; --r: 11deg; --d: 2.6s" />
+        <img class="repo-sticker" src="assets/stickers/aa-56-seraphim.png" alt="" style="top: 82%; right: 1.5%; --r: -7deg; --d: 0.9s" />
+      </div>
       <div class="container">
         <!-- Brand tagline — moved out of the hero canvas, sits above the store badges -->
         <p class="hero-tagline hero-tagline--standalone" data-i18n="repo.tagline">
@@ -5121,14 +5235,53 @@
         <p class="repo-coming-soon" data-i18n="repo.comingSoon">Coming soon · iPhone, iPad &amp; Android</p>
 
         <div class="section-header">
-          <h2 class="section-title" data-i18n="repo.title">Your Study Repository</h2>
-          <p class="section-subtitle" data-i18n="repo.subtitle">
-            Lens. Sermon Builder. Infinite Canvas. Scripture Glow. Twelve sanctuaries, one timer, fellowship built in.
-            <strong>Every tool a sanctuary holds &mdash; in one app.</strong>
-          </p>
+          <h2 class="section-title" data-i18n="repo.title" style="font-size: clamp(1.4rem, 1.1rem + 1.3vw, 2.05rem)">
+            Your Study Repository
+          </h2>
         </div>
       </div>
     </section>
+
+    <!-- Infinite Canvas — moved to LEAD the feature flow (first slot, before Lens) per Denzel 2026-06-24 -->
+    <div class="gold-divider gold-divider--on-light" aria-hidden="true">
+      <span class="gold-divider__line"></span>
+      <span class="gold-divider__ornament">Infinite Canvas</span>
+      <span class="gold-divider__line"></span>
+
+      <img
+        class="scatter-sticker"
+        src="assets/stickers/ren-01-latin-cross.png"
+        alt=""
+        aria-hidden="true"
+        style="top: 50%; left: 1.5%; transform: translateY(-50%) rotate(-10deg)"
+      />
+      <img
+        class="scatter-sticker"
+        src="assets/stickers/3d-01-latin-cross.png"
+        alt=""
+        aria-hidden="true"
+        style="top: 50%; right: 1.5%; transform: translateY(-50%) rotate(9deg)"
+      />
+      <span
+        class="scatter-sticker sticker-sparkle"
+        role="button"
+        tabindex="0"
+        aria-label="Tap the sticker for a reward"
+        data-src="assets/stickers/pix-06-dove.png"
+        style="top: -10%; left: 8%; transform: rotate(7deg); background-image: url(&quot;assets/stickers/pix-06-dove.png&quot;)"
+      ></span>
+    </div>
+    <div class="flow-iframe-wrap" id="canvas-flow">
+      <span
+        class="scatter-sticker sticker-sparkle"
+        role="button"
+        tabindex="0"
+        aria-label="Tap the sticker for a reward"
+        data-src="assets/stickers/3d-119-gold-coins.png"
+        style="top: 5%; right: 0.5%; transform: rotate(7deg); background-image: url(&quot;assets/stickers/3d-119-gold-coins.png&quot;)"
+      ></span>
+      <iframe src="mockups/canvas-spotlight.html" loading="lazy" title="Infinite Canvas"></iframe>
+    </div>
 
     <!-- Gold divider between repository and Mosaic showcase -->
     <div class="gold-divider gold-divider--on-light" aria-hidden="true">
@@ -5470,46 +5623,6 @@
         }
       }
     </style>
-
-    <div class="gold-divider gold-divider--on-light" aria-hidden="true">
-      <span class="gold-divider__line"></span>
-      <span class="gold-divider__ornament">Infinite Canvas</span>
-      <span class="gold-divider__line"></span>
-
-      <img
-        class="scatter-sticker"
-        src="assets/stickers/ren-01-latin-cross.png"
-        alt=""
-        aria-hidden="true"
-        style="top: 50%; left: 1.5%; transform: translateY(-50%) rotate(-10deg)"
-      />
-      <img
-        class="scatter-sticker"
-        src="assets/stickers/3d-01-latin-cross.png"
-        alt=""
-        aria-hidden="true"
-        style="top: 50%; right: 1.5%; transform: translateY(-50%) rotate(9deg)"
-      />
-      <span
-        class="scatter-sticker sticker-sparkle"
-        role="button"
-        tabindex="0"
-        aria-label="Tap the sticker for a reward"
-        data-src="assets/stickers/pix-06-dove.png"
-        style="top: -10%; left: 8%; transform: rotate(7deg); background-image: url(&quot;assets/stickers/pix-06-dove.png&quot;)"
-      ></span>
-    </div>
-    <div class="flow-iframe-wrap" id="canvas-flow">
-      <span
-        class="scatter-sticker sticker-sparkle"
-        role="button"
-        tabindex="0"
-        aria-label="Tap the sticker for a reward"
-        data-src="assets/stickers/3d-119-gold-coins.png"
-        style="top: 5%; right: 0.5%; transform: rotate(7deg); background-image: url(&quot;assets/stickers/3d-119-gold-coins.png&quot;)"
-      ></span>
-      <iframe src="mockups/canvas-spotlight.html" loading="lazy" title="Infinite Canvas"></iframe>
-    </div>
 
     <div class="gold-divider gold-divider--on-light" aria-hidden="true">
       <span class="gold-divider__line"></span>
@@ -6040,7 +6153,7 @@
                   Your starting point. A generous taste of every feature.
                 </div>
                 <ul class="pricing-features" role="list">
-                  <li>10 AI study queries every 5 hours</li>
+                  <li>3 Lens AI study queries every 10 hours</li>
                   <li>1 Mosaic vision board to dream on</li>
                   <li>Scripture Glow &mdash; 1 hand-drawn zoom canvas / month</li>
                   <li>~5 Lens scans every month</li>
@@ -6101,7 +6214,7 @@
                   Unlock the full app for you. Forever.
                 </div>
                 <ul class="pricing-features" role="list">
-                  <li>100 AI study queries every 5 hours</li>
+                  <li>7 Lens AI study queries every 10 hours</li>
                   <li><strong>Infinite Canvas</strong> &mdash; unlimited boards, infinite zoom, live fellowship collab</li>
                   <li><strong>Scripture Glow</strong> &mdash; unlimited hand-drawn zoom canvases</li>
                   <li><strong>Sermon Builder</strong> &mdash; 500 decks, 30 slides each, real-time COLLAB, present from your phone</li>
@@ -6164,7 +6277,7 @@
                 </div>
                 <ul class="pricing-features" role="list">
                   <li><strong>Everything in Apostle</strong></li>
-                  <li>100 AI study queries every 5 hours</li>
+                  <li>7 Lens AI study queries every 10 hours</li>
                   <li><strong>Infinite Canvas</strong> &mdash; unlimited boards, infinite zoom, live collab</li>
                   <li><strong>Scripture Glow</strong> &mdash; unlimited hand-drawn zoom canvases</li>
                   <li><strong>Sermon Builder</strong> &mdash; 500 decks, COLLAB, present from your phone</li>
@@ -6226,7 +6339,7 @@
                 </div>
                 <ul class="pricing-features" role="list">
                   <li><strong>Everything in Sanctuary</strong></li>
-                  <li>100 AI study queries every 5 hours</li>
+                  <li>7 Lens AI study queries every 10 hours</li>
                   <li><strong>Infinite Canvas</strong> &mdash; unlimited boards, infinite zoom, live collab</li>
                   <li><strong>Scripture Glow</strong> &mdash; unlimited hand-drawn zoom canvases</li>
                   <li><strong>Sermon Builder</strong> &mdash; 500 decks, COLLAB, present from your phone</li>
@@ -6316,7 +6429,7 @@
                 </div>
                 <ul class="pricing-features" role="list">
                   <li><strong>Everything in Kingdom</strong></li>
-                  <li>100 AI study queries every 5 hours</li>
+                  <li>7 Lens AI study queries every 10 hours</li>
                   <li><strong>Infinite Canvas</strong> &mdash; unlimited boards, infinite zoom, live collab</li>
                   <li><strong>Scripture Glow</strong> &mdash; unlimited hand-drawn zoom canvases</li>
                   <li><strong>Sermon Builder</strong> &mdash; 500 decks, COLLAB, present from your phone</li>

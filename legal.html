@@ -157,7 +157,13 @@
       <a href="index.html#mosaic-showcase">Mosaic</a>
       <a href="index.html#pricing">Pricing</a>
       <a href="index.html#faq">FAQ</a>
-      <a href="#about">About</a>
+      <div class="floating-nav__mobile-combo">
+        <a href="#about">About</a>
+        <span class="nav-dot" aria-hidden="true">•</span>
+        <a href="#my-mission">Founder Story</a>
+        <span class="nav-dot" aria-hidden="true">•</span>
+        <a href="#partner">Press</a>
+      </div>
     </nav>
   </header>
 
@@ -260,18 +266,47 @@
         user-select: none;
       }
       @media (max-width: 700px) { .about-sticker { width: 100px; opacity: 0.42; } }
+      /* Mobile nav — About · Founder Story · Press as ONE combined button row */
+      .floating-nav__mobile-combo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+        padding: 0.7rem 0.9rem;
+        border-radius: 14px;
+        background: rgba(212, 146, 31, 0.1);
+        border: 1px solid rgba(212, 146, 31, 0.22);
+      }
+      .floating-nav__mobile-combo a {
+        padding: 0 !important;
+        background: transparent !important;
+        font-size: 0.92rem;
+        font-weight: 600;
+        color: rgba(245, 242, 237, 0.9);
+        text-decoration: none;
+        transition: color 160ms ease;
+      }
+      .floating-nav__mobile-combo a:hover {
+        color: #f0c850;
+      }
+      .floating-nav__mobile-combo .nav-dot {
+        color: rgba(212, 146, 31, 0.75);
+        font-size: 0.8rem;
+        line-height: 1;
+        user-select: none;
+      }
     </style>
       <div class="content-block" id="my-mission">
-        <img class="about-sticker" src="assets/stickers/ren-01-latin-cross.png" alt="" aria-hidden="true" style="top:3%; left:-1.5%; transform:rotate(-12deg);" />
-        <span class="about-sticker sticker-sparkle" role="button" tabindex="0" aria-label="Tap the sticker for a reward" data-src="assets/stickers/ren-06-dove.png" style="top:11%; right:-1%; transform:rotate(10deg); background-image: url('assets/stickers/ren-06-dove.png')"></span>
-        <img class="about-sticker" src="assets/stickers/3d-03-lamb.png" alt="" aria-hidden="true" style="top:20%; left:-0.5%; transform:rotate(6deg);" />
-        <img class="about-sticker" src="assets/stickers/ren-07-lion.png" alt="" aria-hidden="true" style="top:30%; right:-1.5%; transform:rotate(-9deg);" />
-        <span class="about-sticker sticker-sparkle" role="button" tabindex="0" aria-label="Tap the sticker for a reward" data-src="assets/stickers/3d-08-ichthys.png" style="top:41%; right:-1%; transform:rotate(8deg); background-image: url('assets/stickers/3d-08-ichthys.png')"></span>
-        <img class="about-sticker" src="assets/stickers/pix-56-seraphim.png" alt="" aria-hidden="true" style="top:52%; right:-0.5%; transform:rotate(-7deg); z-index:3; opacity:0.95;" />
-        <img class="about-sticker" src="assets/stickers/3d-05-white-horse.png" alt="" aria-hidden="true" style="top:63%; left:-1.5%; transform:rotate(12deg);" />
-        <span class="about-sticker sticker-sparkle" role="button" tabindex="0" aria-label="Tap the sticker for a reward" data-src="assets/stickers/ren-20-tau-cross.png" style="top:73%; right:-1%; transform:rotate(-10deg); background-image: url('assets/stickers/ren-20-tau-cross.png')"></span>
-        <img class="about-sticker" src="assets/stickers/3d-10-bronze-serpent.png" alt="" aria-hidden="true" style="top:83%; left:-0.5%; transform:rotate(5deg);" />
-        <span class="about-sticker sticker-sparkle" role="button" tabindex="0" aria-label="Tap the sticker for a reward" data-src="assets/stickers/pix-02-virgin-mary.png" style="top:92%; right:-1.5%; transform:rotate(-6deg); background-image: url('assets/stickers/pix-02-virgin-mary.png')"></span>
+        <!-- New sticker set — 4 Holy Card + 4 Afro-Art (swapped 2026-06-24) -->
+        <img class="about-sticker" src="assets/stickers/hc-01-latin-cross.png" alt="" aria-hidden="true" style="top:4%; left:-1.5%; transform:rotate(-12deg);" />
+        <span class="about-sticker sticker-sparkle" role="button" tabindex="0" aria-label="Tap the sticker for a reward" data-src="assets/stickers/aa-02-virgin-mary.png" style="top:15%; right:-1%; transform:rotate(10deg); background-image: url('assets/stickers/aa-02-virgin-mary.png')"></span>
+        <img class="about-sticker" src="assets/stickers/hc-03-lamb.png" alt="" aria-hidden="true" style="top:27%; left:-0.5%; transform:rotate(6deg);" />
+        <img class="about-sticker" src="assets/stickers/aa-94-peace.png" alt="" aria-hidden="true" style="top:39%; right:-1.5%; transform:rotate(-9deg);" />
+        <span class="about-sticker sticker-sparkle" role="button" tabindex="0" aria-label="Tap the sticker for a reward" data-src="assets/stickers/hc-101-menorah.png" style="top:51%; left:-1%; transform:rotate(8deg); background-image: url('assets/stickers/hc-101-menorah.png')"></span>
+        <img class="about-sticker" src="assets/stickers/aa-30-daniel.png" alt="" aria-hidden="true" style="top:63%; right:-0.5%; transform:rotate(-7deg);" />
+        <img class="about-sticker" src="assets/stickers/hc-71-crown-life.png" alt="" aria-hidden="true" style="top:75%; left:-1.5%; transform:rotate(12deg);" />
+        <span class="about-sticker sticker-sparkle" role="button" tabindex="0" aria-label="Tap the sticker for a reward" data-src="assets/stickers/aa-72-anchor-hope.png" style="top:87%; right:-1%; transform:rotate(-6deg); background-image: url('assets/stickers/aa-72-anchor-hope.png')"></span>
         <div class="content-inner">
 
           <div class="about-grid">
@@ -364,7 +399,7 @@
                       style="margin-top:0; cursor:pointer;"
                       aria-expanded="false"
                       aria-controls="my-testimony"
-                      onclick="var m=document.getElementById('my-testimony');var open=m.style.display==='block';m.style.display=open?'none':'block';this.setAttribute('aria-expanded',String(!open));if(!open){m.scrollIntoView({behavior:'smooth',block:'nearest'});}"
+                      onclick="var m=document.getElementById('my-testimony');var wasOpen=m.style.display==='block';m.style.display='block';this.setAttribute('aria-expanded','true');if(wasOpen){bumpDeeper();}else{m.scrollIntoView({behavior:'smooth',block:'nearest'});}"
                     >
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
@@ -380,6 +415,65 @@
                   >
                     <p style="margin:0 0 0.35rem; font-family:'Hammersmith One', sans-serif; font-size:1.1rem; color:#f0c850; text-shadow:0 0 12px rgba(240, 200, 80, 0.35);">My Testimony</p>
                     <p style="margin:0; font-style:italic; color:rgba(245, 242, 237, 0.88); line-height:1.55;">Woah&hellip; now I gotta write a book if you want to know more, haha.</p>
+                    <style>
+                      @keyframes deeper-pop {
+                        0% { transform: scale(1); }
+                        40% { transform: scale(1.22); }
+                        100% { transform: scale(1); }
+                      }
+                      #deeper-count-num.deeper-pop {
+                        display: inline-block;
+                        animation: deeper-pop 380ms cubic-bezier(0.16, 1, 0.3, 1);
+                      }
+                    </style>
+                    <div class="deeper-counter" style="margin-top:1.1rem;">
+                      <div style="display:flex; align-items:baseline; gap:0.5rem; flex-wrap:wrap;">
+                        <span id="deeper-count-num" style="font-family:'Hammersmith One', sans-serif; font-size:1.65rem; color:#f0c850; text-shadow:0 0 14px rgba(240, 200, 80, 0.45);">8,329</span>
+                        <span style="font-family:'Inter', sans-serif; font-size:0.82rem; color:rgba(245, 242, 237, 0.55); letter-spacing:0.02em;">out of 70,000</span>
+                      </div>
+                      <div style="height:7px; margin-top:0.55rem; border-radius:999px; background:rgba(240, 200, 80, 0.16); overflow:hidden;">
+                        <div id="deeper-count-bar" style="height:100%; width:11.9%; border-radius:999px; background:linear-gradient(90deg, #b6751d, #f0c850); box-shadow:0 0 10px rgba(240, 200, 80, 0.5); transition:width 450ms cubic-bezier(0.16, 1, 0.3, 1);"></div>
+                      </div>
+                      <p id="deeper-count-msg" style="margin:0.75rem 0 0; font-family:'Inter', sans-serif; font-size:0.9rem; color:rgba(245, 242, 237, 0.78); line-height:1.5;">You&rsquo;re the <strong style="color:#f0c850;">8,329th</strong> to tap &ldquo;go even deeper.&rdquo;</p>
+                    </div>
+                    <script>
+                      (function () {
+                        var n = 8329,
+                          MAX = 70000;
+                        function ordinal(x) {
+                          var s = ["th", "st", "nd", "rd"],
+                            v = x % 100;
+                          return x.toLocaleString("en-US") + (s[(v - 20) % 10] || s[v] || s[0]);
+                        }
+                        function render() {
+                          var num = document.getElementById("deeper-count-num");
+                          var bar = document.getElementById("deeper-count-bar");
+                          var msg = document.getElementById("deeper-count-msg");
+                          if (num) {
+                            num.textContent = n.toLocaleString("en-US");
+                            num.classList.remove("deeper-pop");
+                            void num.offsetWidth; // restart the pop animation
+                            num.classList.add("deeper-pop");
+                          }
+                          if (bar) bar.style.width = (n / MAX) * 100 + "%";
+                          if (msg) {
+                            if (n >= MAX) {
+                              msg.innerHTML =
+                                '🎉 You&rsquo;re the <strong style="color:#f0c850;">70,000th</strong> &mdash; the sanctuary is full. We made it together.';
+                            } else {
+                              msg.innerHTML =
+                                'You&rsquo;re the <strong style="color:#f0c850;">' +
+                                ordinal(n) +
+                                '</strong> to tap &ldquo;go even deeper.&rdquo;';
+                            }
+                          }
+                        }
+                        window.bumpDeeper = function () {
+                          n = Math.min(MAX, n + 1);
+                          render();
+                        };
+                      })();
+                    </script>
                   </div>
                 </div>
 
