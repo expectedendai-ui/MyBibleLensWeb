@@ -3443,6 +3443,36 @@
         background: rgba(212, 146, 31, 0.12);
         color: #f0c850;
       }
+      /* About · Founder Story · Press — one combined button row */
+      .floating-nav__mobile-combo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+        padding: 0.7rem 0.9rem;
+        border-radius: 14px;
+        background: rgba(212, 146, 31, 0.1);
+        border: 1px solid rgba(212, 146, 31, 0.22);
+      }
+      .floating-nav__mobile-combo a {
+        padding: 0 !important;
+        background: transparent !important;
+        font-size: 0.92rem;
+        font-weight: 600;
+        color: rgba(245, 242, 237, 0.9);
+        text-decoration: none;
+        transition: color 160ms ease;
+      }
+      .floating-nav__mobile-combo a:hover {
+        color: #f0c850;
+      }
+      .floating-nav__mobile-combo .nav-dot {
+        color: rgba(212, 146, 31, 0.75);
+        font-size: 0.8rem;
+        line-height: 1;
+        user-select: none;
+      }
       @keyframes floating-nav-mobile-in {
         from {
           opacity: 0;
@@ -4051,9 +4081,10 @@
         height: 40px;
         margin-left: 0.4rem;
         border-radius: 50%;
-        background: rgba(220, 53, 47, 0.14);
-        border: 1.5px solid rgba(229, 72, 77, 0.6);
-        color: #e5484d;
+        background: #e5484d;
+        border: 1.5px solid #c0392b;
+        color: #ffffff;
+        box-shadow: 0 3px 12px -3px rgba(229, 72, 77, 0.75);
         font-family: var(--font-display, "Hammersmith One", serif);
         font-size: 1.75rem;
         font-weight: 900;
@@ -4068,8 +4099,8 @@
           opacity 220ms ease;
       }
       .floating-nav__close:hover {
-        background: rgba(229, 72, 77, 0.3);
-        border-color: #e5484d;
+        background: #d83a3f;
+        border-color: #ffffff;
         color: #ffffff;
         transform: rotate(90deg) scale(1.08);
       }
@@ -4875,7 +4906,13 @@
         <a href="#repository" data-i18n="nav.repository">The Repository</a>
         <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
         <a href="#faq" data-i18n="nav.faq">FAQ</a>
-        <a href="legal.html#about" data-i18n="nav.about">About</a>
+        <a
+          href="legal.html#about"
+          class="floating-nav__mobile-combo"
+          style="text-decoration: none; color: rgba(245, 242, 237, 0.9); font-size: 0.92rem; font-weight: 600; cursor: pointer"
+        >
+          About <span class="nav-dot" aria-hidden="true">•</span> Founder Story <span class="nav-dot" aria-hidden="true">•</span> Press
+        </a>
       </nav>
     </header>
 
@@ -5280,7 +5317,7 @@
         data-src="assets/stickers/3d-119-gold-coins.png"
         style="top: 5%; right: 0.5%; transform: rotate(7deg); background-image: url(&quot;assets/stickers/3d-119-gold-coins.png&quot;)"
       ></span>
-      <iframe src="mockups/canvas-spotlight.html" loading="lazy" title="Infinite Canvas"></iframe>
+      <iframe src="mockups/canvas-spotlight.html?v=2" loading="lazy" title="Infinite Canvas"></iframe>
     </div>
 
     <!-- Gold divider between repository and Mosaic showcase -->

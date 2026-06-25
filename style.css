@@ -1966,9 +1966,10 @@ a:hover {
   height: 40px;
   margin-left: 0.4rem;
   border-radius: 50%;
-  background: rgba(212, 146, 31, 0.12);
-  border: 1.5px solid rgba(240, 200, 80, 0.5);
-  color: #f0c850;
+  background: #e5484d;
+  border: 1.5px solid #c0392b;
+  color: #ffffff;
+  box-shadow: 0 3px 12px -3px rgba(229, 72, 77, 0.75);
   font-family: var(--font-display);
   font-size: 1.75rem;
   font-weight: 900;
@@ -1983,8 +1984,8 @@ a:hover {
     opacity 220ms ease;
 }
 .floating-nav__close:hover {
-  background: rgba(240, 200, 80, 0.28);
-  border-color: #f0c850;
+  background: #d83a3f;
+  border-color: #ffffff;
   color: #ffffff;
   transform: rotate(90deg) scale(1.08);
 }

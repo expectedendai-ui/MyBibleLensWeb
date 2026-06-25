@@ -1179,109 +1179,6 @@
   </head>
   <body>
     <section class="mosaic-showcase section-padding" id="canvas-spotlight" data-spotlight>
-      <style>
-        /* Three square 1080×1080 (Instagram) video frames — above the canvas-stage */
-        .canvas-video-row {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.1rem;
-          width: 100%;
-          max-width: 1000px;
-          margin: 0 auto 2.6rem;
-        }
-        .canvas-video-frame {
-          position: relative;
-          aspect-ratio: 1 / 1; /* 1080 × 1080 square */
-          border-radius: 18px;
-          overflow: hidden;
-          background: linear-gradient(160deg, #fdf8e8 0%, #f1e3c0 100%);
-          border: 2px dashed rgba(182, 117, 29, 0.55);
-          box-shadow: 0 18px 44px -20px rgba(26, 16, 8, 0.32);
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 0.5rem;
-          color: rgba(61, 43, 31, 0.6);
-          transition:
-            transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
-            box-shadow 220ms ease;
-        }
-        .canvas-video-frame:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 26px 56px -20px rgba(26, 16, 8, 0.4);
-        }
-        /* Any <video>/<img> you drop in fills the square edge-to-edge */
-        .canvas-video-frame > video,
-        .canvas-video-frame > img {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-        .canvas-video-frame__play {
-          width: 46px;
-          height: 46px;
-          border-radius: 999px;
-          display: grid;
-          place-items: center;
-          background: rgba(182, 117, 29, 0.14);
-          border: 1.5px solid rgba(182, 117, 29, 0.5);
-          color: var(--gold, #b6751d);
-          font-size: 1rem;
-          padding-left: 3px;
-        }
-        .canvas-video-frame__label {
-          font-family: var(--font-body);
-          font-size: 0.72rem;
-          font-weight: 600;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-        }
-        .canvas-video-frame__badge {
-          position: absolute;
-          top: 0.55rem;
-          left: 0.55rem;
-          padding: 0.2rem 0.5rem;
-          border-radius: 999px;
-          background: rgba(26, 16, 8, 0.72);
-          color: #f0c850;
-          font-family: var(--font-body);
-          font-size: 0.6rem;
-          font-weight: 700;
-          letter-spacing: 0.05em;
-        }
-        @media (max-width: 760px) {
-          .canvas-video-row {
-            grid-template-columns: 1fr;
-            max-width: 340px;
-          }
-        }
-      </style>
-      <div class="container">
-        <div class="canvas-video-row" aria-label="1080 by 1080 video frames">
-          <!-- Frame 1 — to add a video, replace the placeholder children with:
-               <video src="assets/your-clip-1.mp4" autoplay muted loop playsinline></video> -->
-          <div class="canvas-video-frame">
-            <span class="canvas-video-frame__badge">1080 × 1080</span>
-            <span class="canvas-video-frame__play">▶</span>
-            <span class="canvas-video-frame__label">Drop video</span>
-          </div>
-          <!-- Frame 2 -->
-          <div class="canvas-video-frame">
-            <span class="canvas-video-frame__badge">1080 × 1080</span>
-            <span class="canvas-video-frame__play">▶</span>
-            <span class="canvas-video-frame__label">Drop video</span>
-          </div>
-          <!-- Frame 3 -->
-          <div class="canvas-video-frame">
-            <span class="canvas-video-frame__badge">1080 × 1080</span>
-            <span class="canvas-video-frame__play">▶</span>
-            <span class="canvas-video-frame__label">Drop video</span>
-          </div>
-        </div>
-      </div>
       <div class="container mosaic-showcase__inner">
         <!-- LEFT — copy -->
         <div class="mosaic-showcase__copy reveal-fade reveal-fade--copy">
@@ -1300,6 +1197,11 @@
           <ul class="mosaic-showcase__bullets" role="list">
             <li>Drop <strong>verses, notes, photos &amp; sketches</strong> anywhere on an endless board</li>
             <li>Connect anything to anything with <strong>gold threads</strong> &mdash; mind maps, timelines, flowcharts</li>
+            <li>
+              <strong>600+ stickers</strong> &amp; color-shifting sticky notes &mdash; write a name and the note glows to match:
+              <span style="color: #d4921f; font-weight: 700">God</span> turns gold,
+              <span style="color: #c0392b; font-weight: 700">the enemy</span> red &mdash; and much more interactive sticky notes!
+            </li>
             <li><strong>Live Sanctuary</strong> &mdash; collaborate with <strong>30+ people</strong> in real time, cursors and all</li>
           </ul>
           <a href="#pricing" class="mosaic-showcase__cta">Open your first canvas &rarr;</a>
