@@ -4,3 +4,5 @@ playwright-report
 playwright/.cache
 .DS_Store
 *.log
+
+assets/stickers/_originals_backup/
