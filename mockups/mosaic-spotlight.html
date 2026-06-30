@@ -1137,25 +1137,6 @@
             ></video>
           </div>
 
-          <!-- Tiny shape-template cards orbiting the iPad -->
-          <div class="shape-cards" aria-hidden="true">
-            <figure class="shape-card shape-card--1">
-              <img src="assets/mosaic/shape-latin-cross.png" alt="" loading="lazy" />
-              <figcaption>Latin Cross</figcaption>
-            </figure>
-            <figure class="shape-card shape-card--2">
-              <img src="assets/mosaic/shape-patriarchal-cross.png" alt="" loading="lazy" />
-              <figcaption>Patriarchal Cross</figcaption>
-            </figure>
-            <figure class="shape-card shape-card--3">
-              <img src="assets/mosaic/shape-ark.png" alt="" loading="lazy" />
-              <figcaption>The Ark</figcaption>
-            </figure>
-            <figure class="shape-card shape-card--4">
-              <img src="assets/mosaic/shape-celtic-cross.png" alt="" loading="lazy" />
-              <figcaption>Celtic Cross</figcaption>
-            </figure>
-          </div>
           <style>
             .mosaic-board--ipad {
               aspect-ratio: auto;
@@ -1190,20 +1171,29 @@
               border-radius: 16px;
               background: #000;
             }
+            /* Shape templates — full-width row beneath the showcase */
             .shape-cards {
-              display: contents;
+              display: flex;
+              justify-content: center;
+              align-items: flex-start;
+              flex-wrap: wrap;
+              gap: clamp(1rem, 2.5vw, 2.2rem);
+              margin-top: clamp(2.5rem, 5vw, 4.5rem);
             }
             .shape-card {
-              position: absolute;
-              z-index: 16;
-              width: 130px;
+              flex: 1 1 220px;
+              max-width: 300px;
               margin: 0;
-              padding: 7px 7px 6px;
-              background: linear-gradient(180deg, #efe3c8 0%, #e3d2ae 100%);
-              border: 1px solid rgba(182, 117, 29, 0.35);
-              border-radius: 10px;
-              box-shadow: 0 10px 24px -10px rgba(26, 16, 8, 0.45);
               animation: phone-float 7s ease-in-out infinite alternate;
+            }
+            .shape-card:nth-child(2) {
+              animation-delay: -2s;
+            }
+            .shape-card:nth-child(3) {
+              animation-delay: -4s;
+            }
+            .shape-card:nth-child(4) {
+              animation-delay: -5.5s;
             }
             @media (prefers-reduced-motion: reduce) {
               .shape-card {
@@ -1214,62 +1204,19 @@
               display: block;
               width: 100%;
               aspect-ratio: 3 / 4;
-              object-fit: cover;
-              border-radius: 6px;
-              background: #3d2b1f;
+              object-fit: contain;
+              filter: drop-shadow(0 14px 28px rgba(26, 16, 8, 0.4));
             }
             .shape-card figcaption {
-              margin-top: 5px;
+              margin-top: 0.6rem;
               font-family: var(--font-display);
-              font-size: 0.62rem;
+              font-size: 0.8rem;
               font-weight: 700;
               letter-spacing: 0.08em;
               text-transform: uppercase;
               text-align: center;
               color: var(--gold-pressed);
               line-height: 1.2;
-            }
-            .shape-card--1 {
-              top: -3rem;
-              left: -3.2rem;
-              transform: rotate(-6deg);
-            }
-            .shape-card--2 {
-              top: -4rem;
-              right: -8rem;
-              transform: rotate(5deg);
-              animation-delay: -2s;
-            }
-            .shape-card--3 {
-              top: calc(50% + 255px);
-              right: calc(100% + clamp(1.5rem, 3vw, 3rem) + 45px);
-              left: auto;
-              transform: rotate(3deg);
-              animation-delay: -4s;
-            }
-            .shape-card--4 {
-              top: 21%;
-              right: -8.5rem;
-              transform: rotate(-4deg);
-              animation-delay: -5.5s;
-            }
-            @media (max-width: 1023px) {
-              .shape-cards {
-                display: flex;
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 0.7rem;
-                margin-top: 1.2rem;
-              }
-              .shape-card,
-              .shape-card--1,
-              .shape-card--2,
-              .shape-card--3,
-              .shape-card--4 {
-                position: static;
-                transform: none;
-                animation: none;
-              }
             }
           </style>
 
@@ -1305,6 +1252,26 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Shape templates — full-width row beneath the showcase -->
+      <div class="container shape-cards" aria-hidden="true">
+        <figure class="shape-card">
+          <img src="assets/mosaic/shape-latin-cross.png" alt="" loading="lazy" />
+          <figcaption>Latin Cross</figcaption>
+        </figure>
+        <figure class="shape-card">
+          <img src="assets/mosaic/shape-patriarchal-cross.png" alt="" loading="lazy" />
+          <figcaption>Patriarchal Cross</figcaption>
+        </figure>
+        <figure class="shape-card">
+          <img src="assets/mosaic/shape-ark.png" alt="" loading="lazy" />
+          <figcaption>The Ark</figcaption>
+        </figure>
+        <figure class="shape-card">
+          <img src="assets/mosaic/shape-celtic-cross.png" alt="" loading="lazy" />
+          <figcaption>Celtic Cross</figcaption>
+        </figure>
       </div>
     </section>
 
