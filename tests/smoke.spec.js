@@ -47,7 +47,7 @@ test.describe("MyBibleLens marketing site — smoke", () => {
       "mosaic-flow",
       "sermon-flow",
       "reflections-flow",
-      "cards-flow",
+      "milestone-flow",
       "deep-study-flow",
       "fellowship-flow",
       "games-flow",

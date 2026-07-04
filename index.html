@@ -6,7 +6,7 @@
     <title>The World's First Sanctuary App for Christianity — MyBibleLens™</title>
     <meta
       name="description"
-      content="MyBibleLens — the World's First Sanctuary App for Christianity. Lens (camera scripture scanner), Sermon Builder, Infinite Canvas, Scripture Glow (hand-drawn zoom canvas), Reflections, Study Cards, 12 themes. One-time purchase from $14.99, lifetime access."
+      content="MyBibleLens — the World's First Sanctuary App for Christianity. Lens (camera scripture scanner), Sermon Builder, Infinite Canvas, Scripture Glow (hand-drawn zoom canvas), Reflections, Milestone reading plans, 12 themes. One-time purchase from $14.99, lifetime access."
     />
     <meta property="og:title" content="The World's First Sanctuary App for Christianity — MyBibleLens™" />
     <meta
@@ -30,7 +30,7 @@
         "operatingSystem": "iOS, Android",
         "applicationCategory": "LifestyleApplication",
         "applicationSubCategory": "Bible Study",
-        "description": "MyBibleLens is the World's First Sanctuary App for Christianity. Lens (camera scripture scanner with S.O.A.P. journaling), Sermon Builder (real-time COLLAB, present from your phone), Infinite Canvas (mind-map with live fellowship), Scripture Glow (hand-drawn infinite zoom canvas), Reflections (8 modes), Study Cards, 12 themes, 3 typefaces. One-time purchase from $14.99, lifetime access.",
+        "description": "MyBibleLens is the World's First Sanctuary App for Christianity. Lens (camera scripture scanner with S.O.A.P. journaling), Sermon Builder (real-time COLLAB, present from your phone), Infinite Canvas (mind-map with live fellowship), Scripture Glow (hand-drawn infinite zoom canvas), Reflections (8 modes), Milestone (day-by-day Bible reading plans), 12 themes, 3 typefaces. One-time purchase from $14.99, lifetime access.",
         "publisher": {
           "@type": "Organization",
           "name": "Scriptorium Digital Productions",
@@ -63,7 +63,7 @@
           ]
         },
         "sameAs": ["https://www.instagram.com/mybiblelens/"],
-        "featureList": "Lens (camera scripture scanner), S.O.A.P. journaling, Scripture Glow (hand-drawn zoom canvas, NOT AI image generation), Sermon Builder with real-time COLLAB, Reflections journal (8 modes), Study Cards, Infinite Canvas, Mosaic vision boards, Fellowship sharing (friend-picker only), 12 themes, 3 typefaces, Cloud sync, Focus Timer",
+        "featureList": "Lens (camera scripture scanner), S.O.A.P. journaling, Scripture Glow (hand-drawn zoom canvas, NOT AI image generation), Sermon Builder with real-time COLLAB, Reflections journal (8 modes), Milestone (day-by-day Bible reading plans with a Reading Circle), Infinite Canvas, Mosaic vision boards, Fellowship sharing (friend-picker only), 12 themes, 3 typefaces, Cloud sync, Focus Timer",
         "offers": [
           {
             "@type": "Offer",
@@ -71,7 +71,7 @@
             "price": "0",
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock",
-            "description": "Free starter tier. ~5 Lens scans per month, 1 Mosaic vision board, 1 Scripture Glow canvas per month, Reflections 15 entries, Study Cards 3 per session."
+            "description": "Free starter tier. ~5 Lens scans per month, 1 Mosaic vision board, 1 Scripture Glow canvas per month, Reflections 15 entries, Milestone reading plans."
           },
           {
             "@type": "Offer",
@@ -4674,45 +4674,6 @@
         }
       }
 
-      /* —— Study Cards preview: card stack with flipping middle card —— */
-      .preview-cards {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        perspective: 600px;
-      }
-      .preview-cards .pc-card {
-        position: absolute;
-        width: 50px;
-        height: 70px;
-        border-radius: 6px;
-        background: linear-gradient(135deg, rgba(240, 200, 80, 0.65) 0%, rgba(182, 117, 29, 0.5) 100%);
-        border: 1px solid rgba(240, 200, 80, 0.6);
-        box-shadow: 0 4px 14px -4px rgba(26, 16, 8, 0.55);
-        transform-style: preserve-3d;
-      }
-      .preview-cards .pc-card:nth-child(1) {
-        transform: translate(-22px, 6px) rotate(-8deg);
-      }
-      .preview-cards .pc-card:nth-child(2) {
-        animation: pc-card-flip 4.5s ease-in-out infinite;
-      }
-      .preview-cards .pc-card:nth-child(3) {
-        transform: translate(22px, 6px) rotate(8deg);
-      }
-      @keyframes pc-card-flip {
-        0%,
-        60%,
-        100% {
-          transform: rotateY(0deg);
-        }
-        30% {
-          transform: rotateY(180deg);
-        }
-      }
-
       /* —— Mosaic preview: 6 tiles popping in to form a board —— */
       .preview-mosaic {
         position: absolute;
@@ -5227,6 +5188,14 @@
         <img class="repo-sticker" src="assets/stickers/aa-28-moses.png" alt="" style="top: 58%; right: 0.5%; --r: 9deg; --d: 3s" />
         <img class="repo-sticker" src="assets/stickers/hc-88-nativity-star.png" alt="" style="top: 85%; left: 1%; --r: 11deg; --d: 2.6s" />
         <img class="repo-sticker" src="assets/stickers/aa-56-seraphim.png" alt="" style="top: 82%; right: 1.5%; --r: -7deg; --d: 0.9s" />
+        <!-- Eastern Light set — scattered in the gutters (added 2026-07-04) -->
+        <img class="repo-sticker" src="assets/stickers/el-02-virgin-mary.png" alt="" style="top: 20%; left: 1%; --r: -8deg; --d: 1.4s" />
+        <img class="repo-sticker" src="assets/stickers/el-74-living-water.png" alt="" style="top: 18%; right: 1%; --r: 7deg; --d: 2s" />
+        <img class="repo-sticker" src="assets/stickers/el-88-nativity-star.png" alt="" style="top: 47%; left: 0.5%; --r: 9deg; --d: 0.4s" />
+        <img class="repo-sticker" src="assets/stickers/el-06-dove.png" alt="" style="top: 46%; right: 1.5%; --r: -9deg; --d: 2.9s" />
+        <img class="repo-sticker" src="assets/stickers/el-110-moon-stars.png" alt="" style="top: 72%; left: 1.5%; --r: -6deg; --d: 1.9s" />
+        <img class="repo-sticker" src="assets/stickers/el-92-love.png" alt="" style="top: 71%; right: 0.5%; --r: 8deg; --d: 3.3s" />
+        <img class="repo-sticker" src="assets/stickers/el-87-empty-tomb.png" alt="" style="top: 94%; right: 1%; --r: -10deg; --d: 1.2s" />
       </div>
       <div class="container">
         <!-- Brand tagline — moved out of the hero canvas, sits above the store badges -->
@@ -5781,7 +5750,7 @@
 
     <div class="gold-divider gold-divider--on-light" aria-hidden="true">
       <span class="gold-divider__line"></span>
-      <span class="gold-divider__ornament">Study Cards</span>
+      <span class="gold-divider__ornament">Milestone</span>
       <span class="gold-divider__line"></span>
 
       <img
@@ -5799,7 +5768,7 @@
         style="top: 50%; right: 1.5%; transform: translateY(-50%) rotate(9deg)"
       />
     </div>
-    <div class="flow-iframe-wrap" id="cards-flow">
+    <div class="flow-iframe-wrap" id="milestone-flow">
       <img
         class="scatter-sticker"
         src="assets/stickers/3d-104-open-bible.png"
@@ -5807,7 +5776,7 @@
         aria-hidden="true"
         style="top: 6%; right: 0.5%; transform: rotate(7deg)"
       />
-      <iframe src="mockups/study-cards-spotlight.html" loading="lazy" title="Study Cards"></iframe>
+      <iframe src="mockups/milestone-spotlight.html" loading="lazy" title="Milestone"></iframe>
     </div>
 
     <div class="gold-divider gold-divider--on-light" aria-hidden="true">
@@ -6046,35 +6015,6 @@
       <iframe src="mockups/parental-lock-spotlight.html" loading="lazy" title="Parental Lock"></iframe>
     </div>
 
-    <!-- "What this app will never have" — moved here per Denzel's request -->
-    <div class="gold-divider gold-divider--on-light" aria-hidden="true">
-      <span class="gold-divider__line"></span>
-      <span class="gold-divider__ornament">What this app will never have</span>
-      <span class="gold-divider__line"></span>
-    </div>
-    <div class="never-have-block never-have-block--rebottom">
-      <h3 class="never-have-title">What this app will never have:</h3>
-      <ul class="never-have-list" role="list">
-        <li>
-          <strong>No Gamification</strong> &mdash; your faith isn&rsquo;t a game. Gamification limits you to the worth of that
-          software&hellip; This app isn&rsquo;t your limit. God is.
-        </li>
-        <li><strong>No AI Voice</strong> &mdash; God already speaks. You don&rsquo;t need a robot to.</li>
-        <li><strong>No Algorithm</strong> &mdash; nothing deciding what you see or when you see it.</li>
-        <li><strong>No Explore Feed</strong> &mdash; no rabbit holes. No comparison traps.</li>
-        <li>
-          <strong>No Scripture in-app</strong> &mdash; because it&rsquo;s for your <em>journal</em> and your <em>physical Bible.</em> The
-          Word belongs in your hands, not behind a screen.
-        </li>
-        <li>
-          <strong>No Companion</strong>&mdash; &ldquo;Companion&rdquo; is a sugarcoat.<br /><br />This app isn&rsquo;t your friend. God
-          is.<br /><br />Go to your church. Your pastor. Your friends and family &mdash; the people who actually love you.
-        </li>
-        <li><strong>No Selling Your Data</strong> &mdash; your prayers aren&rsquo;t a product.</li>
-      </ul>
-      <p class="never-have-closer">Just an efficient tool to grow your faith with God.</p>
-    </div>
-
     <script>
       // Auto-resize each flow iframe to its content's height
       (function () {
@@ -6186,7 +6126,7 @@
                   <li>Scripture Glow &mdash; 1 hand-drawn zoom canvas / month</li>
                   <li>~5 Lens scans every month</li>
                   <li>Reflections journal &mdash; 15 entries</li>
-                  <li>Study Cards &mdash; 3 per session</li>
+                  <li>Milestone &mdash; day-by-day Bible reading plans</li>
                   <li>Sermon Builder &mdash; paid only</li>
                   <li>Fellowship sharing &mdash; paid only</li>
                   <li>Cloud sync &mdash; paid only</li>
@@ -6247,7 +6187,7 @@
                   <li><strong>Scripture Glow</strong> &mdash; unlimited hand-drawn zoom canvases</li>
                   <li><strong>Sermon Builder</strong> &mdash; 500 decks, 30 slides each, real-time COLLAB, present from your phone</li>
                   <li><strong>Reflections</strong> &mdash; unlimited entries, 8 modes (Prayer, Wisdom, Gratitude, Calling&hellip;)</li>
-                  <li><strong>Study Cards</strong> &mdash; 10 per session, all 3 starter decks</li>
+                  <li><strong>Milestone</strong> &mdash; plan the whole Bible with your Reading Circle</li>
                   <li><strong>Mosaic</strong> vision boards with live fellowship collab</li>
                   <li><strong>Fellowship sharing</strong> &mdash; friend-picker only, no public links</li>
                   <li><strong>Cloud sync</strong> across iPhone, iPad &amp; Android</li>
@@ -6796,7 +6736,7 @@
           }
           .cs-fill {
             height: 100%;
-            width: 33%;
+            width: 41%;
             border-radius: 999px;
             background: linear-gradient(90deg, #b6751d 0%, #d4921f 50%, #f0c850 100%);
           }
@@ -7002,9 +6942,9 @@
             <div class="cs-meter-row">
               <div>
                 <p class="cs-meter-label">Cloud Storage</p>
-                <p class="cs-meter-value">8.2 GB used of 25 GB included</p>
+                <p class="cs-meter-value">8.2 GB used of 20 GB included</p>
               </div>
-              <div class="cs-percent">33%</div>
+              <div class="cs-percent">41%</div>
             </div>
 
             <div class="cs-bar" aria-hidden="true">
@@ -7038,7 +6978,7 @@
               <div class="cs-plan">
                 <strong>Solo</strong>
                 <div class="cs-seats">1 seat</div>
-                <div class="cs-plan-meta">25 GB personal storage add-on</div>
+                <div class="cs-plan-meta">20 GB personal storage add-on</div>
                 <div class="cs-plan-price">$1.99/mo</div>
               </div>
               <div class="cs-plan">
@@ -7150,7 +7090,7 @@
             "name": "What is MyBibleLens?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "MyBibleLens is the World's First Sanctuary App for Christianity — a digital sanctuary for Scripture rather than a daily-verse feed. It offers Lens (a camera scripture scanner with S.O.A.P. journaling), Sermon Builder with real-time fellowship, an Infinite Canvas for study notes, Scripture Glow (a hand-drawn zoom canvas), Reflections journaling, and Study Cards. One-time purchase from $14.99 with lifetime access — no subscriptions."
+              "text": "MyBibleLens is the World's First Sanctuary App for Christianity — a digital sanctuary for Scripture rather than a daily-verse feed. It offers Lens (a camera scripture scanner with S.O.A.P. journaling), Sermon Builder with real-time fellowship, an Infinite Canvas for study notes, Scripture Glow (a hand-drawn zoom canvas), Reflections journaling, and Milestone Bible reading plans. One-time purchase from $14.99 with lifetime access — no subscriptions."
             }
           },
           {
@@ -7182,7 +7122,8 @@
                 MyBibleLens is the World's First Sanctuary App for Christianity — a digital sanctuary for Scripture, not a daily-verse feed.
                 Point your camera at any Bible page and watch verses light up with S.O.A.P. journaling (Lens), build and present sermons in
                 real-time fellowship (Sermon Builder), map study notes on an Infinite Canvas, hand-draw on a Scripture Glow zoom canvas, and
-                journal through Reflections and Study Cards. One-time purchase from $14.99 — lifetime access, no subscriptions.
+                journal through Reflections while Milestone paces your whole-Bible reading plan. One-time purchase from $14.99 — lifetime
+                access, no subscriptions.
               </p>
             </div>
           </details>

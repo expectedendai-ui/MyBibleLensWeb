@@ -1,0 +1,805 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Milestone Spotlight — MyBibleLens Mockup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --parchment: #f5f2ed;
+        --deep-brown: #3d2b1f;
+        --ink: #2a1e16;
+        --gold: #b6751d;
+        --gold-light: #d4921f;
+        --gold-pressed: #9a6218;
+        --ember: #d4921f;
+        --halo: #f0c850;
+        --plan-bg: #2a170a;
+        --plan-gold: #d4af37;
+        --plan-cream: #f5e8cc;
+        --font-display: "Hammersmith One", serif;
+        --font-body: "Inter", -apple-system, system-ui, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        background: var(--parchment);
+        color: var(--deep-brown);
+      }
+      body {
+        font-family: var(--font-body);
+        min-height: 100vh;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+      .section-padding {
+        padding: 6rem 0;
+      }
+
+      /* ============================================================
+         MOSAIC-SHOWCASE pattern (site-matching left/right grid)
+      ============================================================ */
+      .mosaic-showcase {
+        background:
+          radial-gradient(ellipse 60% 40% at 25% 30%, rgba(212, 146, 31, 0.06) 0%, transparent 65%),
+          radial-gradient(ellipse 60% 40% at 75% 70%, rgba(240, 200, 80, 0.04) 0%, transparent 65%), var(--parchment);
+        position: relative;
+        overflow: hidden;
+      }
+      .mosaic-showcase__inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(2rem, 5vw, 5rem);
+        align-items: center;
+      }
+      .mosaic-showcase__copy {
+        max-width: 540px;
+      }
+      .mosaic-showcase__eyebrow {
+        font-family: var(--font-display);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1.1rem;
+      }
+      .mosaic-showcase__title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 1.3rem + 2.5vw, 3.25rem);
+        line-height: 1.15;
+        color: var(--deep-brown);
+        letter-spacing: 0.005em;
+        margin-bottom: 1.4rem;
+        text-wrap: balance;
+      }
+      .mosaic-showcase__body {
+        font-family: var(--font-body);
+        font-size: clamp(1rem, 0.95rem + 0.25vw, 1.1rem);
+        line-height: 1.75;
+        color: rgba(61, 43, 31, 0.85);
+        margin-bottom: 1.5rem;
+      }
+      .mosaic-showcase__body strong {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .mosaic-showcase__bullets {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.6rem;
+        display: grid;
+        gap: 0.55rem;
+      }
+      .mosaic-showcase__bullets li {
+        font-family: var(--font-body);
+        font-size: 0.95rem;
+        color: rgba(61, 43, 31, 0.78);
+        padding-left: 1.5rem;
+        position: relative;
+        line-height: 1.55;
+      }
+      .mosaic-showcase__bullets li strong {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .mosaic-showcase__bullets li::before {
+        content: "✦";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--gold);
+        font-size: 0.85rem;
+      }
+      .mosaic-showcase__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        font-family: var(--font-display);
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: var(--gold);
+        padding: 0.85rem 1.4rem;
+        border-radius: 999px;
+        border: 1px solid rgba(182, 117, 29, 0.4);
+        background: linear-gradient(180deg, rgba(240, 200, 80, 0.06) 0%, rgba(212, 146, 31, 0.04) 100%);
+        transition:
+          color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+          border-color 220ms ease,
+          background 220ms ease,
+          transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 220ms ease;
+      }
+      .mosaic-showcase__cta:hover {
+        color: var(--gold-light);
+        border-color: rgba(212, 146, 31, 0.7);
+        background: rgba(240, 200, 80, 0.12);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px -12px rgba(212, 146, 31, 0.4);
+      }
+
+      /* ============================================================
+         RIGHT — the Milestone plan board
+      ============================================================ */
+      .ms-board {
+        position: relative;
+        width: 100%;
+        max-width: 620px;
+        margin-inline: auto;
+      }
+      .ms-board::before {
+        content: "";
+        position: absolute;
+        inset: -4% 0;
+        background:
+          radial-gradient(ellipse at 50% 45%, rgba(240, 200, 80, 0.28), transparent 60%),
+          radial-gradient(ellipse at 30% 80%, rgba(212, 146, 31, 0.18), transparent 55%);
+        filter: blur(40px);
+        z-index: 0;
+        pointer-events: none;
+        animation: halo-pulse 6s ease-in-out infinite alternate;
+      }
+      @keyframes halo-pulse {
+        0% {
+          opacity: 0.8;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1.04);
+        }
+      }
+
+      /* ---- The plan card (matches the in-app Milestone look) ---- */
+      .ms-plan {
+        position: relative;
+        z-index: 2;
+        background: linear-gradient(180deg, #34200f 0%, var(--plan-bg) 100%);
+        border-radius: 28px;
+        padding: 1.6rem 1.5rem 1.5rem;
+        box-shadow:
+          0 0 0 1px rgba(212, 175, 55, 0.28),
+          0 30px 70px -22px rgba(26, 16, 8, 0.6),
+          0 0 60px -12px rgba(212, 146, 31, 0.35);
+        color: var(--plan-cream);
+        animation: plan-float 8s ease-in-out infinite alternate;
+      }
+      @keyframes plan-float {
+        0% {
+          translate: 0 0;
+        }
+        100% {
+          translate: 0 -8px;
+        }
+      }
+      .ms-plan__chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        border: 1px solid rgba(212, 175, 55, 0.35);
+        background: rgba(245, 232, 204, 0.08);
+        border-radius: 999px;
+        padding: 0.35rem 0.9rem;
+        font-family: var(--font-display);
+        font-size: 0.58rem;
+        font-weight: 700;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--plan-gold);
+      }
+      .ms-plan__title {
+        font-family: var(--font-display);
+        font-size: clamp(1.25rem, 1rem + 1vw, 1.6rem);
+        color: var(--plan-cream);
+        margin: 0.85rem 0 0.2rem;
+        letter-spacing: 0.01em;
+      }
+      .ms-plan__meta {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(245, 232, 204, 0.55);
+      }
+      .ms-plan__meta em {
+        font-style: normal;
+        color: var(--plan-gold);
+      }
+
+      /* ---- Progress rail with quarter-mark flags ---- */
+      .ms-rail {
+        position: relative;
+        margin: 1.35rem 0 2rem;
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(245, 232, 204, 0.12);
+      }
+      .ms-rail__fill {
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 0%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--gold) 0%, var(--plan-gold) 60%, var(--halo) 100%);
+        box-shadow: 0 0 14px rgba(240, 200, 80, 0.5);
+        transition: width 2200ms cubic-bezier(0.16, 1, 0.3, 1) 500ms;
+      }
+      .is-revealed .ms-rail__fill {
+        width: 40%;
+      }
+      .ms-rail__mark {
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--plan-bg);
+        border: 2px solid rgba(212, 175, 55, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.5rem;
+        color: var(--plan-gold);
+      }
+      .ms-rail__mark--done {
+        background: var(--plan-gold);
+        border-color: var(--plan-gold);
+        color: var(--plan-bg);
+        font-weight: 700;
+      }
+      .ms-rail__label {
+        position: absolute;
+        top: 16px;
+        transform: translateX(-50%);
+        font-family: var(--font-display);
+        font-size: 0.55rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(245, 232, 204, 0.45);
+        white-space: nowrap;
+      }
+      .ms-rail__label--done {
+        color: var(--plan-gold);
+      }
+
+      /* ---- Day rows ---- */
+      .ms-day {
+        border: 1px solid rgba(212, 175, 55, 0.16);
+        background: rgba(0, 0, 0, 0.16);
+        border-radius: 18px;
+        padding: 0.9rem 1rem;
+        margin-bottom: 0.7rem;
+      }
+      .ms-day__head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 0.75rem;
+      }
+      .ms-day__date {
+        font-family: var(--font-display);
+        font-size: 0.58rem;
+        font-weight: 700;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: rgba(212, 175, 55, 0.72);
+      }
+      .ms-day__reading {
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        color: var(--plan-cream);
+        margin-top: 2px;
+      }
+      .ms-day__tag {
+        flex-shrink: 0;
+        border: 1px solid rgba(212, 175, 55, 0.25);
+        background: rgba(212, 175, 55, 0.1);
+        border-radius: 999px;
+        padding: 0.3rem 0.75rem;
+        font-family: var(--font-display);
+        font-size: 0.52rem;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--plan-gold);
+        white-space: nowrap;
+      }
+      .ms-day__people {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+        flex-wrap: wrap;
+      }
+      .ms-person {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        border: 1px solid rgba(245, 232, 204, 0.12);
+        background: rgba(245, 232, 204, 0.06);
+        border-radius: 999px;
+        padding: 0.32rem 0.75rem 0.32rem 0.6rem;
+        font-size: 0.72rem;
+        font-weight: 500;
+        color: rgba(245, 232, 204, 0.82);
+      }
+      .ms-person__check {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(245, 232, 204, 0.3);
+        font-size: 0.6rem;
+        color: transparent;
+        flex-shrink: 0;
+      }
+      .ms-person--done .ms-person__check {
+        background: var(--plan-gold);
+        border-color: var(--plan-gold);
+        color: var(--plan-bg);
+        font-weight: 700;
+      }
+      /* Checkmarks tick in after reveal */
+      .ms-person--done .ms-person__check {
+        transform: scale(0);
+        transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .is-revealed .ms-person--done .ms-person__check {
+        transform: scale(1);
+      }
+      .is-revealed .ms-day:nth-of-type(1) .ms-person--done .ms-person__check {
+        transition-delay: 900ms;
+      }
+      .is-revealed .ms-day:nth-of-type(1) .ms-person--done + .ms-person--done .ms-person__check {
+        transition-delay: 1150ms;
+      }
+      .is-revealed .ms-day:nth-of-type(2) .ms-person--done .ms-person__check {
+        transition-delay: 1400ms;
+      }
+      .ms-day--upcoming {
+        opacity: 0.62;
+      }
+      .ms-plan__foot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.75rem;
+        margin-top: 1.1rem;
+        font-size: 0.75rem;
+        color: rgba(245, 232, 204, 0.6);
+      }
+      .ms-plan__foot strong {
+        color: var(--plan-cream);
+        font-weight: 600;
+      }
+      .ms-plan__pace {
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        background: rgba(212, 175, 55, 0.1);
+        border-radius: 999px;
+        padding: 0.35rem 0.85rem;
+        font-family: var(--font-display);
+        font-size: 0.55rem;
+        font-weight: 700;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--plan-gold);
+        white-space: nowrap;
+      }
+
+      /* ---- Floating milestone flag badge ---- */
+      .ms-flag {
+        position: absolute;
+        z-index: 3;
+        top: -1.4rem;
+        right: -0.6rem;
+        background: linear-gradient(180deg, #fdfaf3 0%, #f5edd9 100%);
+        border-radius: 16px;
+        padding: 0.7rem 1rem;
+        box-shadow:
+          0 0 0 1px rgba(212, 146, 31, 0.35),
+          0 18px 44px -16px rgba(26, 16, 8, 0.45);
+        transform: rotate(3deg);
+        animation: flag-float 7s ease-in-out infinite alternate;
+      }
+      @keyframes flag-float {
+        0% {
+          translate: 0 0;
+        }
+        100% {
+          translate: 0 -10px;
+        }
+      }
+      .ms-flag__pct {
+        font-family: var(--font-display);
+        font-size: 1.3rem;
+        color: var(--gold);
+        line-height: 1;
+      }
+      .ms-flag__note {
+        font-size: 0.68rem;
+        font-weight: 600;
+        color: rgba(61, 43, 31, 0.75);
+        margin-top: 3px;
+        max-width: 150px;
+        line-height: 1.4;
+      }
+
+      /* ---- Floating weekday chip ---- */
+      .ms-weekdays {
+        position: absolute;
+        z-index: 3;
+        bottom: -1.2rem;
+        left: -0.6rem;
+        display: flex;
+        gap: 0.35rem;
+        background: linear-gradient(180deg, #fdfaf3 0%, #f5edd9 100%);
+        border-radius: 999px;
+        padding: 0.55rem 0.8rem;
+        box-shadow:
+          0 0 0 1px rgba(212, 146, 31, 0.35),
+          0 18px 44px -16px rgba(26, 16, 8, 0.45);
+        transform: rotate(-2deg);
+        animation: flag-float 8s ease-in-out infinite alternate-reverse;
+      }
+      .ms-weekdays span {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-display);
+        font-size: 0.6rem;
+        font-weight: 700;
+        color: rgba(61, 43, 31, 0.45);
+        border: 1px solid rgba(182, 117, 29, 0.2);
+      }
+      .ms-weekdays span.is-on {
+        background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 100%);
+        border-color: var(--gold);
+        color: #fdfaf3;
+        box-shadow: 0 4px 10px -4px rgba(154, 98, 24, 0.6);
+      }
+
+      /* Sparkles */
+      .ms-sparkles {
+        position: absolute;
+        inset: -6%;
+        pointer-events: none;
+        z-index: 1;
+      }
+      .ms-sparkles span {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background: var(--halo);
+        border-radius: 50%;
+        box-shadow:
+          0 0 8px var(--halo),
+          0 0 16px rgba(240, 200, 80, 0.6);
+        opacity: 0;
+        animation: sparkle 10s ease-in-out infinite;
+      }
+      .ms-sparkles span:nth-child(1) {
+        top: 6%;
+        left: 12%;
+        animation-delay: 0s;
+      }
+      .ms-sparkles span:nth-child(2) {
+        top: 18%;
+        right: 8%;
+        animation-delay: 2.1s;
+        width: 4px;
+        height: 4px;
+      }
+      .ms-sparkles span:nth-child(3) {
+        top: 76%;
+        left: 6%;
+        animation-delay: 4.3s;
+      }
+      .ms-sparkles span:nth-child(4) {
+        top: 88%;
+        right: 14%;
+        animation-delay: 6s;
+        width: 4px;
+        height: 4px;
+      }
+      .ms-sparkles span:nth-child(5) {
+        top: 48%;
+        right: 2%;
+        animation-delay: 7.6s;
+        width: 3px;
+        height: 3px;
+      }
+      @keyframes sparkle {
+        0%,
+        100% {
+          opacity: 0;
+          transform: translateY(0) scale(0.8);
+        }
+        15% {
+          opacity: 0.9;
+        }
+        50% {
+          opacity: 0.6;
+          transform: translateY(-22px) scale(1.05);
+        }
+        85% {
+          opacity: 0.3;
+        }
+      }
+
+      /* Reveal */
+      .reveal-fade {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 900ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .is-revealed .reveal-fade {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-fade--copy {
+        transition-delay: 80ms;
+      }
+      .reveal-fade--board {
+        transition-delay: 220ms;
+      }
+
+      /* Responsive */
+      @media (max-width: 960px) {
+        .mosaic-showcase__inner {
+          grid-template-columns: 1fr;
+          gap: 4rem;
+        }
+        .mosaic-showcase__copy {
+          max-width: 100%;
+        }
+        .ms-board {
+          max-width: 520px;
+        }
+        .ms-flag {
+          right: 0;
+        }
+        .ms-weekdays {
+          left: 0;
+        }
+      }
+      @media (max-width: 600px) {
+        .section-padding {
+          padding: 4rem 0;
+        }
+        .ms-plan {
+          padding: 1.2rem 1rem 1.1rem;
+          border-radius: 22px;
+        }
+        .ms-day__reading {
+          font-size: 0.92rem;
+        }
+        .ms-flag {
+          top: -1.1rem;
+          padding: 0.55rem 0.8rem;
+        }
+        .ms-flag__pct {
+          font-size: 1.05rem;
+        }
+        .ms-flag__note {
+          font-size: 0.6rem;
+          max-width: 120px;
+        }
+        .ms-weekdays span {
+          width: 22px;
+          height: 22px;
+          font-size: 0.52rem;
+        }
+        .ms-rail__label {
+          font-size: 0.48rem;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .ms-plan,
+        .ms-flag,
+        .ms-weekdays,
+        .ms-sparkles span {
+          animation: none !important;
+        }
+        .ms-rail__fill,
+        .ms-person--done .ms-person__check,
+        .reveal-fade {
+          transition: none !important;
+        }
+        .ms-rail__fill {
+          width: 40%;
+        }
+        .ms-person--done .ms-person__check {
+          transform: scale(1);
+        }
+      }
+
+      /* Mockup banner */
+      .mockup-banner {
+        background: var(--deep-brown);
+        color: var(--parchment);
+        padding: 10px 24px;
+        font-size: 12px;
+        text-align: center;
+        letter-spacing: 0.04em;
+      }
+      .mockup-banner strong {
+        color: var(--halo);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== SECTION: MILESTONE SPOTLIGHT ===== -->
+    <section class="mosaic-showcase section-padding" id="milestone-spotlight" data-spotlight>
+      <div class="container mosaic-showcase__inner">
+        <!-- LEFT — copy -->
+        <div class="mosaic-showcase__copy reveal-fade reveal-fade--copy">
+          <p class="mosaic-showcase__eyebrow">Pick a goal. Set a finish line.</p>
+          <h2 class="mosaic-showcase__title">
+            Finish the whole Bible &mdash;<br />by <span style="color: var(--gold)">a date you choose.</span>
+          </h2>
+          <p class="mosaic-showcase__body">
+            Milestone turns &ldquo;I should read the Bible more&rdquo; into a plan with your name on it. Choose your goal &mdash; the
+            <strong>whole Bible, Old Testament, or New Testament</strong> &mdash; pick the weekdays you actually read, and set the finish
+            line. Milestone builds your <strong>day-by-day chapter path</strong> and tells you honestly what pace it takes. Then you just
+            read, and check the days off &mdash; beside the people walking with you.
+          </p>
+          <ul class="mosaic-showcase__bullets" role="list">
+            <li><strong>Your calendar, your pace</strong> &mdash; start date, finish date, and the weekdays you read</li>
+            <li><strong>Day by day</strong> &mdash; exact chapters per reading day, with a minutes-a-day estimate</li>
+            <li><strong>Honest pacing</strong> &mdash; gentle &middot; steady &middot; intense. Know before you commit</li>
+            <li><strong>Quarter-mark milestones</strong> &mdash; see where 25%, 50%, and 75% land before you start</li>
+            <li><strong>Reading Circle</strong> &mdash; family &amp; fellowship check off each day beside you</li>
+            <li>Miss a day? <strong>Catch-up days are built in.</strong> No streaks. No XP. Just a finish line.</li>
+          </ul>
+          <a href="#pricing" class="mosaic-showcase__cta">Set your finish line &rarr;</a>
+        </div>
+
+        <!-- RIGHT — the plan board -->
+        <div class="ms-board reveal-fade reveal-fade--board" aria-hidden="true">
+          <div class="ms-sparkles"><span></span><span></span><span></span><span></span><span></span></div>
+
+          <!-- Floating quarter-mark flag -->
+          <div class="ms-flag">
+            <div class="ms-flag__pct">50%</div>
+            <div class="ms-flag__note">You&rsquo;ll be in Psalms by September 3</div>
+          </div>
+
+          <!-- The plan card -->
+          <div class="ms-plan">
+            <span class="ms-plan__chip">&#9873; Milestone</span>
+            <h3 class="ms-plan__title">Whole Bible &middot; The Rigaud Family</h3>
+            <p class="ms-plan__meta">1,189 chapters &middot; finish by <em>Easter</em></p>
+
+            <div class="ms-rail">
+              <div class="ms-rail__fill"></div>
+              <div class="ms-rail__mark ms-rail__mark--done" style="left: 25%">&#10003;</div>
+              <span class="ms-rail__label ms-rail__label--done" style="left: 25%">25%</span>
+              <div class="ms-rail__mark" style="left: 50%"></div>
+              <span class="ms-rail__label" style="left: 50%">50%</span>
+              <div class="ms-rail__mark" style="left: 75%"></div>
+              <span class="ms-rail__label" style="left: 75%">75%</span>
+              <div class="ms-rail__mark" style="left: 100%"></div>
+              <span class="ms-rail__label" style="left: 100%">Done</span>
+            </div>
+
+            <div class="ms-day">
+              <div class="ms-day__head">
+                <div>
+                  <div class="ms-day__date">Today</div>
+                  <div class="ms-day__reading">Psalms 1&ndash;9</div>
+                </div>
+                <span class="ms-day__tag">Reading day</span>
+              </div>
+              <div class="ms-day__people">
+                <span class="ms-person ms-person--done"><span class="ms-person__check">&#10003;</span>You</span>
+                <span class="ms-person ms-person--done"><span class="ms-person__check">&#10003;</span>Mom</span>
+                <span class="ms-person"><span class="ms-person__check">&#10003;</span>Ethan</span>
+              </div>
+            </div>
+
+            <div class="ms-day">
+              <div class="ms-day__head">
+                <div>
+                  <div class="ms-day__date">Yesterday</div>
+                  <div class="ms-day__reading">Job 38&ndash;42</div>
+                </div>
+                <span class="ms-day__tag">Complete</span>
+              </div>
+              <div class="ms-day__people">
+                <span class="ms-person ms-person--done"><span class="ms-person__check">&#10003;</span>You</span>
+                <span class="ms-person ms-person--done"><span class="ms-person__check">&#10003;</span>Mom</span>
+                <span class="ms-person ms-person--done"><span class="ms-person__check">&#10003;</span>Ethan</span>
+              </div>
+            </div>
+
+            <div class="ms-day ms-day--upcoming">
+              <div class="ms-day__head">
+                <div>
+                  <div class="ms-day__date">Friday</div>
+                  <div class="ms-day__reading">Psalms 10&ndash;18</div>
+                </div>
+                <span class="ms-day__tag">Up next</span>
+              </div>
+            </div>
+
+            <div class="ms-plan__foot">
+              <span><strong>~14 min</strong> a reading day</span>
+              <span class="ms-plan__pace">Steady pace</span>
+            </div>
+          </div>
+
+          <!-- Floating weekday picker chip -->
+          <div class="ms-weekdays">
+            <span class="is-on">S</span><span>M</span><span class="is-on">T</span><span>W</span><span class="is-on">T</span><span>F</span
+            ><span class="is-on">S</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // ============================================================
+      // Reveal on scroll (fill the rail + tick the checkmarks)
+      // ============================================================
+      const sp = document.querySelector("[data-spotlight]");
+      const obs = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              sp.classList.add("is-revealed");
+              obs.disconnect();
+            }
+          }),
+        { threshold: 0.15 }
+      );
+      obs.observe(sp);
+      requestAnimationFrame(() => {
+        const r = sp.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.8) {
+          sp.classList.add("is-revealed");
+        }
+      });
+    </script>
+  </body>
+</html>
