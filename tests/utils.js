@@ -106,6 +106,52 @@ async function waitForPageReady(page) {
   await page.waitForTimeout(260);
 }
 
+/**
+ * Force every lazy spotlight iframe to load and finish its height animation.
+ * Sections below the flow (Lens showcase, pricing, FAQ) otherwise keep getting
+ * pushed down mid-capture as each iframe loads and the auto-resize script
+ * re-measures it (`transition: height 200ms` makes each jump a slide).
+ */
+async function settleLazyFlows(page) {
+  await page.evaluate(async () => {
+    const step = Math.max(200, window.innerHeight - 100);
+    for (let y = 0; y <= document.body.scrollHeight; y += step) {
+      window.scrollTo(0, y);
+      await new Promise((r) => setTimeout(r, 60));
+    }
+  });
+  await page.waitForLoadState("networkidle");
+  // Outlast the auto-resize retry timers (fire up to 2200ms after load).
+  await page.waitForTimeout(2400);
+}
+
+/**
+ * Wait until a section's bounding box stops moving. Sections that sit below
+ * the lazy-loaded spotlight iframes get pushed down in steps as each iframe
+ * loads and the auto-resize script re-measures it — screenshotting before the
+ * shifts finish captures the wrong region of the page.
+ */
+async function waitForStableBox(
+  page,
+  locator,
+  { checks = 3, interval = 300, timeout = 15000 } = {}
+) {
+  const deadline = Date.now() + timeout;
+  let prev = null;
+  let stable = 0;
+  while (Date.now() < deadline) {
+    const box = await locator.boundingBox();
+    if (prev && box && Math.abs(box.y - prev.y) < 1 && Math.abs(box.height - prev.height) < 1) {
+      stable += 1;
+      if (stable >= checks) return;
+    } else {
+      stable = 0;
+    }
+    prev = box;
+    await page.waitForTimeout(interval);
+  }
+}
+
 /** Stable screenshot helper — applies consistent treatment before snapshot. */
 async function snapshot(page, name) {
   await waitForPageReady(page);
@@ -122,4 +168,10 @@ function attachConsoleErrorWatch(page) {
   return () => errors;
 }
 
-module.exports = { waitForPageReady, snapshot, attachConsoleErrorWatch };
+module.exports = {
+  waitForPageReady,
+  settleLazyFlows,
+  waitForStableBox,
+  snapshot,
+  attachConsoleErrorWatch,
+};

@@ -3596,6 +3596,55 @@
         box-shadow: 0 12px 32px -12px rgba(212, 146, 31, 0.4);
       }
 
+      /* Coming-soon veil — blurs the Lens showcase until the feature ships */
+      .mosaic-showcase--coming-soon .mosaic-showcase__inner {
+        filter: blur(9px);
+        pointer-events: none;
+        user-select: none;
+      }
+      .coming-soon-veil {
+        position: absolute;
+        inset: 0;
+        z-index: 6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .coming-soon-veil__badge {
+        font-family: var(--font-display);
+        font-size: clamp(1.2rem, 1rem + 1.2vw, 1.9rem);
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--deep-brown);
+        padding: 1rem 2.2rem;
+        border-radius: 999px;
+        background: linear-gradient(180deg, rgba(253, 248, 232, 0.96) 0%, rgba(244, 232, 196, 0.96) 100%);
+        border: 1px solid rgba(212, 146, 31, 0.55);
+        box-shadow:
+          0 0 0 6px rgba(240, 200, 80, 0.12),
+          0 24px 60px -18px rgba(26, 16, 8, 0.35);
+        animation: comingSoonBreath 3.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+      }
+      @keyframes comingSoonBreath {
+        0%,
+        100% {
+          box-shadow:
+            0 0 0 6px rgba(240, 200, 80, 0.12),
+            0 24px 60px -18px rgba(26, 16, 8, 0.35);
+        }
+        50% {
+          box-shadow:
+            0 0 0 10px rgba(240, 200, 80, 0.2),
+            0 24px 60px -18px rgba(26, 16, 8, 0.35);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .coming-soon-veil__badge {
+          animation: none;
+        }
+      }
+
       /* S.O.A.P. explainer card — sits under the bullets in the Lens showcase */
       .soap-explainer {
         margin-top: 1.4rem;
@@ -5434,62 +5483,6 @@
       <p class="supabase-badge-tag">Row-level security &middot; AES-256 encryption &middot; Enterprise-grade infrastructure</p>
     </div>
 
-    <!-- ===== SECTION 4.5: MOSAIC SHOWCASE ===== -->
-    <section class="mosaic-showcase section-padding" id="mosaic-showcase" aria-label="Mosaic — a vision board for your faith">
-      <div class="container mosaic-showcase__inner">
-        <div class="mosaic-showcase__copy">
-          <p class="mosaic-showcase__eyebrow">Point your camera. Unlock scripture.</p>
-          <h2 class="mosaic-showcase__title">Scan a page.<br />Tap a verse.<br />Go deeper — instantly.</h2>
-          <p class="mosaic-showcase__body">
-            Open <strong>Lens</strong>. Point at any Bible page &mdash; printed, e-reader, even handwritten &mdash; and watch every verse
-            light up as a tappable card. Tap the one that&rsquo;s speaking to you. Drop it into <strong>S.O.A.P.</strong> for guided
-            journaling, or into <strong>Scripture Glow</strong> to sit with it on an infinite, hand-drawn zoom canvas.
-            <strong>One scan. Infinite paths in.</strong>
-          </p>
-          <ul class="mosaic-showcase__bullets" role="list">
-            <li><strong>Reads every verse</strong> on a page &mdash; printed, screen, or handwritten</li>
-          </ul>
-          <div class="soap-explainer">
-            <p class="soap-explainer__title">What is S.O.A.P.?</p>
-            <p class="soap-explainer__intro">
-              A 4-step Bible study method — Lens guides you through each step with AI prompts. Here's the flow on Philippians 4:13:
-            </p>
-            <ul class="soap-explainer__steps" role="list">
-              <li>
-                <span class="soap-explainer__letter">S</span>
-                <span class="soap-explainer__step"
-                  ><strong>Scripture.</strong> <em>"I can do all things through Christ who strengthens me." — Philippians 4:13</em></span
-                >
-              </li>
-              <li>
-                <span class="soap-explainer__letter">O</span>
-                <span class="soap-explainer__step"
-                  ><strong>Observation.</strong> Paul wrote this from a prison cell. The strength isn't self-generated — it flows through
-                  Christ.</span
-                >
-              </li>
-              <li>
-                <span class="soap-explainer__letter">A</span>
-                <span class="soap-explainer__step"
-                  ><strong>Application.</strong> When today feels too heavy, lean on His strength, not your own.</span
-                >
-              </li>
-              <li>
-                <span class="soap-explainer__letter">P</span>
-                <span class="soap-explainer__step"
-                  ><strong>Prayer.</strong> <em>"Lord, when I'm at the end of myself, be my strength. Amen."</em></span
-                >
-              </li>
-            </ul>
-          </div>
-          <a href="#pricing" class="mosaic-showcase__cta">Try Lens free — included in Seeker →</a>
-        </div>
-        <div class="mosaic-showcase__board" aria-hidden="true">
-          <video class="mosaic-showcase__video" src="assets/mosaic-preview.mp4" autoplay muted loop playsinline preload="metadata"></video>
-        </div>
-      </div>
-    </section>
-
     <!-- ============================================================
          FLOW SECTIONS — 9 new spotlights after LENS/S.O.A.P.
          (each loads its mockup in an auto-sized iframe so styles stay isolated)
@@ -6014,6 +6007,70 @@
     <div class="flow-iframe-wrap" id="parental-lock-flow">
       <iframe src="mockups/parental-lock-spotlight.html" loading="lazy" title="Parental Lock"></iframe>
     </div>
+
+    <div class="gold-divider gold-divider--on-light" aria-hidden="true">
+      <span class="gold-divider__line"></span>
+      <span class="gold-divider__ornament">Lens + S.O.A.P.</span>
+      <span class="gold-divider__line"></span>
+    </div>
+    <!-- ===== SECTION 4.5: LENS SHOWCASE (moved to end of study repository — coming soon) ===== -->
+    <section class="mosaic-showcase section-padding mosaic-showcase--coming-soon" id="mosaic-showcase" aria-label="Lens — coming soon">
+      <div class="coming-soon-veil">
+        <span class="coming-soon-veil__badge">Coming Soon</span>
+      </div>
+      <div class="container mosaic-showcase__inner">
+        <div class="mosaic-showcase__copy">
+          <p class="mosaic-showcase__eyebrow">Point your camera. Unlock scripture.</p>
+          <h2 class="mosaic-showcase__title">Scan a page.<br />Tap a verse.<br />Go deeper — instantly.</h2>
+          <p class="mosaic-showcase__body">
+            Open <strong>Lens</strong>. Point at any Bible page &mdash; printed, e-reader, even handwritten &mdash; and watch every verse
+            light up as a tappable card. Tap the one that&rsquo;s speaking to you. Drop it into <strong>S.O.A.P.</strong> for guided
+            journaling, or into <strong>Scripture Glow</strong> to sit with it on an infinite, hand-drawn zoom canvas.
+            <strong>One scan. Infinite paths in.</strong>
+          </p>
+          <ul class="mosaic-showcase__bullets" role="list">
+            <li><strong>Reads every verse</strong> on a page &mdash; printed, screen, or handwritten</li>
+          </ul>
+          <div class="soap-explainer">
+            <p class="soap-explainer__title">What is S.O.A.P.?</p>
+            <p class="soap-explainer__intro">
+              A 4-step Bible study method — Lens guides you through each step with AI prompts. Here's the flow on Philippians 4:13:
+            </p>
+            <ul class="soap-explainer__steps" role="list">
+              <li>
+                <span class="soap-explainer__letter">S</span>
+                <span class="soap-explainer__step"
+                  ><strong>Scripture.</strong> <em>"I can do all things through Christ who strengthens me." — Philippians 4:13</em></span
+                >
+              </li>
+              <li>
+                <span class="soap-explainer__letter">O</span>
+                <span class="soap-explainer__step"
+                  ><strong>Observation.</strong> Paul wrote this from a prison cell. The strength isn't self-generated — it flows through
+                  Christ.</span
+                >
+              </li>
+              <li>
+                <span class="soap-explainer__letter">A</span>
+                <span class="soap-explainer__step"
+                  ><strong>Application.</strong> When today feels too heavy, lean on His strength, not your own.</span
+                >
+              </li>
+              <li>
+                <span class="soap-explainer__letter">P</span>
+                <span class="soap-explainer__step"
+                  ><strong>Prayer.</strong> <em>"Lord, when I'm at the end of myself, be my strength. Amen."</em></span
+                >
+              </li>
+            </ul>
+          </div>
+          <a href="#pricing" class="mosaic-showcase__cta">Try Lens free — included in Seeker →</a>
+        </div>
+        <div class="mosaic-showcase__board" aria-hidden="true">
+          <video class="mosaic-showcase__video" src="assets/mosaic-preview.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        </div>
+      </div>
+    </section>
 
     <script>
       // Auto-resize each flow iframe to its content's height

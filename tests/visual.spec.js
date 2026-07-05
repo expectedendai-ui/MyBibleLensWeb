@@ -1,6 +1,6 @@
 // @ts-check
 const { test, expect } = require("@playwright/test");
-const { waitForPageReady } = require("./utils");
+const { waitForPageReady, settleLazyFlows, waitForStableBox } = require("./utils");
 
 /**
  * Visual regression baselines for the marketing site. Every change that
@@ -41,21 +41,29 @@ test.describe("Visual regression — index.html", () => {
   test("mosaic showcase", async ({ page }) => {
     await page.goto("/#mosaic-showcase");
     await waitForPageReady(page);
-    await page.waitForTimeout(120);
-    await expect(page.locator(".mosaic-showcase")).toHaveScreenshot("mosaic-showcase.png");
+    await settleLazyFlows(page);
+    const section = page.locator(".mosaic-showcase");
+    await section.scrollIntoViewIfNeeded();
+    await waitForStableBox(page, section);
+    await expect(section).toHaveScreenshot("mosaic-showcase.png", { timeout: 15000 });
   });
 
   test("pricing", async ({ page }) => {
     await page.goto("/#pricing");
     await waitForPageReady(page);
-    await expect(page.locator(".pricing-section")).toHaveScreenshot("pricing.png");
+    await settleLazyFlows(page);
+    const section = page.locator(".pricing-section");
+    await waitForStableBox(page, section);
+    await expect(section).toHaveScreenshot("pricing.png", { timeout: 15000 });
   });
 
   test("faq", async ({ page }) => {
     await page.goto("/#faq");
     await waitForPageReady(page);
-    await page.waitForTimeout(120);
-    await expect(page.locator(".faq-section")).toHaveScreenshot("faq.png");
+    await settleLazyFlows(page);
+    const section = page.locator(".faq-section");
+    await waitForStableBox(page, section);
+    await expect(section).toHaveScreenshot("faq.png", { timeout: 15000 });
   });
 
   test("about + footer", async ({ page }, testInfo) => {
