@@ -467,13 +467,20 @@ a:hover {
     hero-photo-appear 0.9s cubic-bezier(0.34, 1.45, 0.5, 1) 0.7s forwards,
     hero-photo-drift 11s ease-in-out 1.6s infinite alternate;
 }
-.hero-photo-card img {
+.hero-photo-card img,
+.hero-photo-card video {
   display: block;
   width: 100%;
   height: auto;
   max-height: 480px;
   object-fit: cover;
   border-radius: 3px;
+}
+/* Portrait video keeps its 9:16 frame even before the first frame paints */
+.hero-photo-card--mid video {
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  background: #1a1008;
 }
 @keyframes hero-photo-appear {
   from {
@@ -509,9 +516,9 @@ a:hover {
   --py: 28%;
   --rot: 7deg;
 }
-/* Wall photo: center-under-title, lifted to match the higher title position */
+/* Wall photo: shifted left of center to leave the smack-middle open for the video */
 .hero-photo-card--bl {
-  --px: 50%;
+  --px: 35%;
   --py: 68%;
   --rot: 3deg;
 }
@@ -519,6 +526,38 @@ a:hover {
   --px: 86%;
   --py: 64%;
   --rot: -4deg;
+}
+/* Center video polaroid — smaller, lifted, sits above the others */
+.hero-photo-card--mid {
+  --px: 57%;
+  --py: 50%;
+  --rot: -2deg;
+  z-index: 3;
+  width: clamp(150px, 14vw, 215px);
+  max-width: 215px;
+}
+/* Tap-to-play affordance over the center video poster */
+.hero-photo-playbtn {
+  position: absolute;
+  top: 47%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(26, 16, 8, 0.55);
+  color: #fdf9f1;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+  z-index: 2;
+}
+.hero-photo-playbtn svg {
+  width: 20px;
+  height: 20px;
+  margin-left: 2px;
 }
 
 @media (max-width: 640px) {
@@ -564,6 +603,10 @@ a:hover {
   .hero-photo-card--br {
     grid-row: 3;
     grid-column: 2;
+  }
+  .hero-photo-card--mid {
+    grid-row: 4;
+    grid-column: 1 / -1;
   }
 }
 

@@ -230,9 +230,15 @@
           <img src="assets/about-photo-4.jpg" alt="Eyes on the next hurdle" loading="lazy" />
           <span class="spark-layer" aria-hidden="true"><i class="spark" style="--sx:15%;--sy:15%;--sd:.2s"></i><i class="spark" style="--sx:83%;--sy:13%;--sd:.8s"></i><i class="spark" style="--sx:85%;--sy:64%;--sd:1.4s"></i><i class="spark" style="--sx:23%;--sy:79%;--sd:2.1s"></i><i class="spark" style="--sx:48%;--sy:42%;--sd:2.7s"></i></span>
         </figure>
+        <!-- Center video polaroid: the old mock-up clip -->
+        <figure class="hero-photo-card hero-photo-card--mid hero-photo-reward sparkle-gold" tabindex="0" role="button" data-caption="old mock up aka trenches of building mybiblelens" aria-label="Open video: old mock up, trenches of building MyBibleLens" onclick="openAboutVideoReward(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openAboutVideoReward(this);}">
+          <video src="assets/about-video-middle.mp4" poster="assets/about-video-middle-poster.jpg" muted playsinline preload="none" aria-label="Old mock up — trenches of building MyBibleLens"></video>
+          <span class="hero-photo-playbtn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="spark-layer" aria-hidden="true"><i class="spark" style="--sx:13%;--sy:17%;--sd:.4s"></i><i class="spark" style="--sx:85%;--sy:15%;--sd:1.0s"></i><i class="spark" style="--sx:82%;--sy:67%;--sd:1.6s"></i><i class="spark" style="--sx:21%;--sy:81%;--sd:2.3s"></i><i class="spark" style="--sx:52%;--sy:45%;--sd:2.9s"></i></span>
+        </figure>
 
         <!-- Collaborator cursor: Denzel Rigaud (his page, his cursor) -->
-        <div class="hero-cursor" aria-hidden="true" style="--cx: 50%; --cy: 41%;">
+        <div class="hero-cursor" aria-hidden="true" style="--cx: 12%; --cy: 33%;">
           <svg viewBox="0 0 16 16" width="22" height="22">
             <path
               d="M1 1 L1 12 L4.5 8.5 L6.5 13 L8.5 12 L6.5 7.5 L12 7.5 Z"
@@ -368,13 +374,20 @@
           opacity 0.3s ease;
       }
       .about-reward-overlay.is-open .about-reward-card { transform: scale(1) rotate(0); opacity: 1; }
-      .about-reward-card img {
+      .about-reward-card img,
+      .about-reward-card video {
         display: block;
         width: 100%;
         height: auto;
         max-height: 72vh;
         object-fit: contain;
         border-radius: 4px;
+      }
+      .about-reward-card video {
+        max-width: min(86vw, 340px);
+        aspect-ratio: 9 / 16;
+        object-fit: contain;
+        background: #000;
       }
       .about-reward-badge {
         position: absolute;
@@ -500,14 +513,14 @@
               <div class="callout-card">
                 <h3 style="font-family:'Hammersmith One', sans-serif; font-size:1.2rem; color:#f0c850; text-shadow:0 0 12px rgba(240, 200, 80, 0.35); margin:0 0 0.9rem;">The Question That Started It All</h3>
                 <p style="font-weight:700; font-size:1.15rem; line-height:1.65; color:var(--parchment); margin-bottom:1.2rem;">I started asking myself a hard question: at what age does faith start to disappear? Why do so many of us, who grew up with God in our households, who went to church every Sunday, grow up to side-eye religion?</p>
-                <p>I grew up in a household of four women: my mom, her wife, and my two sisters. Even as a young, carnal boy just trying to navigate the world, I spent my life listening deeply to the stories of dozens of women. Those pillow talks made it all make sense. I was deep in my carnal season, but even then I was paying attention, and every woman carried the same wound. Catholic, Mormon, or strict Christian homes: religion never felt like love to them. It felt like a chore. They were forced to listen to pastors who had absolutely no connection to a kid's real life. Instead of experiencing the joy of God, the routine was so deeply dreadful that their only goal was to escape the second they got older.</p>
+                <p>I grew up in a household of four women: my mom, her wife, and my two sisters. Even as a young, carnal boy just trying to navigate the world, I spent my life listening deeply to the stories of dozens of women, the pillow talks made it all make sense. I was deep in my carnal season, but even then I was paying attention, and every woman carried the same wound. Catholic, Mormon, or strict Christian homes: religion never felt like love to them. It felt like a chore. They were forced to listen to pastors who had absolutely no connection to a kid's real life. Instead of experiencing the joy of God, the routine was so deeply dreadful that their only goal was to escape the second they got older.</p>
                 <h3 style="font-family:'Hammersmith One', sans-serif; font-size:1.2rem; color:#f0c850; text-shadow:0 0 12px rgba(240, 200, 80, 0.35); margin:1.6rem 0 0.9rem;">The Void and The Noise</h3>
                 <p>When you run away from a forced foundation, the void gets filled by the other force. We let social media, toxic music, and outside voices teach our generation fear, shame, unworthiness, depression, and anxiety. We fall under SIN. We watch young women lose sight of their true strength, charity, and purity, while boys get stuck playing Peter Pan, completely avoiding the responsibility of becoming men. <span style="color:#f0c850; font-style:italic; font-weight:600; text-shadow:0 0 10px rgba(240, 200, 80, 0.3); white-space:nowrap;">&mdash;2nd&nbsp;Timothy&nbsp;chapter&nbsp;3</span> To the point where, when they finally hear God's voice, they get skittish. They become afraid of the one thing trying to save them.</p>
                 <p>Instead of turning to the source that created love and marriage, we see people chasing temporary pleasures. We see a generation raised in the church turning to worship Money over God, status, and fleeting validation, allowing the pursuit of the wrong things to slowly destroy them. And I'm no hypocrite saying this; I lived that very life in my teens, so I see both sides, like a channel.</p>
                 <p>What I’m really getting at is this: even when parents try their best to guide their kids, what they pass down is often shaped by their own unhealed places: old guilt, insecurities, things they never got to work through themselves. None of that makes them bad parents; it makes them human. But it’s exactly why you still need the space to find your own understanding of God, on your own terms. You need your own personal time, away from their baggage, so you can genuinely grow into the loving, kind person you want to be. The kind of light this world actually needs.</p>
                 <h3 style="font-family:'Hammersmith One', sans-serif; font-size:1.2rem; color:#f0c850; text-shadow:0 0 12px rgba(240, 200, 80, 0.35); margin:1.6rem 0 0.9rem;">My Breaking Point</h3>
-                <p>I ask myself these questions because I lived it. I live in Miami, for crying out loud; I am surrounded by it every single daaaaay. I was carnal. I drifted. Honestly, looking at the life I used to live, the things I've seen, and the ways I've been betrayed, manipulated, and secretly cheated on&hellip; I should be the last person to have ANY faith left.</p>
-                <p>But I'm from Virginia, and Virginia is for <a href="https://www.google.com/search?q=virginia+for+lover&rlz=1C5CHFA_enUS943US944&oq=virginia&gs_lcrp=EgZjaHJvbWUqBggDECMYJzIHCAAQABiPAjIKCAEQLhixAxiABDIKCAIQLhixAxiABDIGCAMQIxgnMg0IBBAuGIMBGLEDGIAEMgoIBRAuGLEDGIAEMg0IBhAuGK8BGMcBGIAEMgoIBxAuGLEDGIAEMhAICBAAGIMBGLEDGIAEGIoFMgcICRAAGIAE0gEINDc0MmowajeoAgCwAgA&sourceid=chrome&ie=UTF-8" target="_blank" rel="noopener noreferrer" style="color:#b6741d; text-decoration:underline;">lovers</a>, I guess that's why I didn't give up. When you have zero hope in humanity, zero hope in love, and you hit rock bottom, you realize the truth. But for the ones who have fallen deeper into the noise, it's infinitely harder. I see it everywhere I go.</p>
+                <p>I ask myself these questions because I lived it. I live in Miami, for crying out loud; I am surrounded by it every single daaaaay. uuugh. I was carnal. I drifted. Honestly, looking at the life I used to live, the things I've seen, and the ways I've been betrayed, manipulated, poison, and secretly cheated on&hellip; I should be the last person to have ANY faith left.</p>
+                <p>But I'm from Virginia, and Virginia is for <a href="https://www.google.com/search?q=virginia+for+lover&rlz=1C5CHFA_enUS943US944&oq=virginia&gs_lcrp=EgZjaHJvbWUqBggDECMYJzIHCAAQABiPAjIKCAEQLhixAxiABDIKCAIQLhixAxiABDIGCAMQIxgnMg0IBBAuGIMBGLEDGIAEMgoIBRAuGLEDGIAEMg0IBhAuGK8BGMcBGIAEMgoIBxAuGLEDGIAEMhAICBAAGIMBGLEDGIAEGIoFMgcICRAAGIAE0gEINDc0MmowajeoAgCwAgA&sourceid=chrome&ie=UTF-8" target="_blank" rel="noopener noreferrer" style="color:#b6741d; text-decoration:underline;">lovers</a>, I guess that's why I didn't give up. When you have zero hope in humanity, zero hope in love, and you hit rock bottom, you realize the truth. But for the ones who have fallen deeper into the noise, but for the ones who drink, do drugs it's infinitely harder. I see it everywhere I go.</p>
                 <h3 style="font-family:'Hammersmith One', sans-serif; font-size:1.2rem; color:#f0c850; text-shadow:0 0 12px rgba(240, 200, 80, 0.35); margin:1.6rem 0 0.9rem;">Why I Built MyBibleLens</h3>
                 <p>Ultimately, it's a space for a mother or father to pull up a prayer they wrote years ago, side-by-side with the picture of how God actually answered it. It's built to forge a deeper family connection. For a pastor to show more. A kid shouldn't have to hit rock bottom just to find God. We can't keep throwing our children into a pew, letting someone preach over their heads, and expecting them to stay rooted. Kids read between the lines. They need living testimonies from their own parents. They need visuals, photos, collages, and authentic, joyful experiences with faith.</p>
                 <p>And after everything, here's the answer to my hard question: faith starts to disappear at whatever age the fun stops. Think about it: nobody runs away from the place where they laughed, played, created, and felt loved. A kid who has FUN with God at a young age never forgets Him. That joy becomes the foundation, so when the noise comes, and it will come, they already know where home is. They won't remember God as a chore. They'll remember Him as the best part of growing up. That's why every inch of MyBibleLens is built around play: the games, the canvas, the collages, the glow. Not to water faith down, but to plant it deep, the joyful way it was always meant to feel.</p>
@@ -556,7 +569,7 @@
                   <p>They want us distracted. They want our kids&rsquo; brains turning to mush, forever trapped at the lowest tier of <button type="button" class="glint-term" aria-haspopup="dialog" aria-controls="bloom-modal" onclick="gdOpen('bloom-modal')">Bloom&rsquo;s Taxonomy</button>: just &ldquo;remembering&rdquo; and consuming, never asking questions, never creating, never going deeper. We are watching an entire generation delay the critical <button type="button" class="glint-term" aria-haspopup="dialog" aria-controls="erikson-modal" onclick="gdOpen('erikson-modal')">Erikson</button> stages of life, paralyzed by the fake, curated realities they see on screens, terrified of actually growing up because nothing feels authentic anymore. The world is entirely sick and tired of the lies. If you don&rsquo;t see it, no worries; my generation does, and the future generation will too.</p>
 
                   <h4 style="font-family:'Hammersmith One', sans-serif; font-size:1.1rem; color:#f0c850; text-shadow:0 0 10px rgba(240, 200, 80, 0.3); margin:1.6rem 0 0.7rem;">The Crucible That Built Me</h4>
-                  <p>I didn&rsquo;t just learn this by studying data; I lived it: selling dope just to build the life I&rsquo;d promised myself, one that&rsquo;d make it to a bright future. Kicked out of loved ones&rsquo; houses, homeless. Offered a way into the adult industry when I needed money the most, but momma raised me with morals. <a href="https://unicourt.com/case/fl-pal-rigaud-denzel-v-hall-aaron-914059" target="_blank" rel="noopener noreferrer" style="color:#d2a679; text-decoration:underline;">Two</a> lawsuits <a href="https://www.google.com/search?sca_esv=4f4e6eb4e747ddd2&amp;rlz=1C5CHFA_enUS943US944&amp;sxsrf=APpeQnuG9TE471N73TYP7yCoA2imGwD_zA%3A1782396826570&amp;q=rigaud+vs+pineapple+scuba&amp;sa=X&amp;ved=2ahUKEwjM5sjNyaKVAxUhnWoFHVgDL1IQ7xYoAHoECBAQAQ&amp;biw=1041&amp;bih=872&amp;dpr=2" target="_blank" rel="noopener noreferrer" style="color:#d2a679; text-decoration:underline;">in</a> high school. I started hacking my grades in 5th grade because I got sick and tired of failing, especially when I realized I&rsquo;d been held back in 2nd grade over the accent I came in with. That later turned into hacking a whole lot more&hellip; my <a href="https://www.google.com/search?q=clifford+rigaud" target="_blank" rel="noopener noreferrer" style="color:#d2a679; text-decoration:underline;">father</a> showed me how. To put it simply: if you want something done right, you gotta do it yourself.</p>
+                  <p>I didn&rsquo;t just learn this by studying data; I lived it: selling dope just to build the life I&rsquo;d promised myself, one that&rsquo;d make it to a bright future. Kicked out of loved ones&rsquo; houses, homeless. Offered a way into the adult industry when I needed money the most, 10k waved right in front of my face, but momma raised me with morals. <a href="https://unicourt.com/case/fl-pal-rigaud-denzel-v-hall-aaron-914059" target="_blank" rel="noopener noreferrer" style="color:#d2a679; text-decoration:underline;">Two</a> lawsuits <a href="https://www.google.com/search?sca_esv=4f4e6eb4e747ddd2&amp;rlz=1C5CHFA_enUS943US944&amp;sxsrf=APpeQnuG9TE471N73TYP7yCoA2imGwD_zA%3A1782396826570&amp;q=rigaud+vs+pineapple+scuba&amp;sa=X&amp;ved=2ahUKEwjM5sjNyaKVAxUhnWoFHVgDL1IQ7xYoAHoECBAQAQ&amp;biw=1041&amp;bih=872&amp;dpr=2" target="_blank" rel="noopener noreferrer" style="color:#d2a679; text-decoration:underline;">in</a> high school. I started hacking my grades in 5th grade because I got sick and tired of failing, especially when I realized I&rsquo;d been held back in 2nd grade over the accent I came in with. That later turned into hacking a whole lot more&hellip; truly meeting my <a href="https://www.google.com/search?q=clifford+rigaud" target="_blank" rel="noopener noreferrer" style="color:#d2a679; text-decoration:underline;">father</a> one day, I see where I get it from.</p>
                   <p>For the longest time, I thought God would never take me back after all that. I thought I was too far gone. But then I learned about the Apostle Paul. Paul literally murdered Christians, and God still turned around and gave him a massive gift. <em>Whoa.</em> So call me crazy, but if you think God can&rsquo;t use someone with my past to build His future, then you just don&rsquo;t know the Bible.</p>
                   <p>That survival instinct started early. Growing up surrounded by 4 women for 16 years shaped my psyche in ways I am still unpacking. My mind was trained to work simultaneously across different psychological wavelengths. I navigated twisted psychology, complex dynamics, and manipulation that sculpted me into who I am. And I love them for that; it saved me energy with girls when I truly decided to think about what my momma&rsquo;s was talking about. And after heartbreaks and being cheated on, I still believe in <a href="https://www.youtube.com/watch?v=SHVKb2j6rfc&amp;list=RDSHVKb2j6rfc&amp;start_radio=1" target="_blank" rel="noopener noreferrer" style="color:#d2a679; text-decoration:underline;">chivalry</a>.</p>
                   <p>What I&rsquo;m saying is, to survive in a house full of women you have to think like one, and when I left them I had to become the young man I am today, with the numerous amount of struggles I went through. It was a chaotic environment, and I only found clarity when I actively chose to eliminate the sin and the noise through prayer. When I finally put God first, I realized who I actually was. I saw the challenges that shaped me not as curses, but as the exact training I needed to get closer to God, and to build a way out for others.</p>
@@ -581,7 +594,7 @@
                       style="margin-top:0; cursor:pointer;"
                       aria-expanded="false"
                       aria-controls="my-testimony"
-                      onclick="var m=document.getElementById('my-testimony');var wasOpen=m.style.display==='block';m.style.display='block';this.setAttribute('aria-expanded','true');if(wasOpen){bumpDeeper();}else{m.scrollIntoView({behavior:'smooth',block:'nearest'});}"
+                      onclick="var m=document.getElementById('my-testimony');m.style.display='block';this.setAttribute('aria-expanded','true');m.scrollIntoView({behavior:'smooth',block:'nearest'});"
                     >
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
@@ -595,67 +608,22 @@
                     role="status"
                     style="display:none; margin:1rem 0 0; padding:1rem 1.2rem; border-radius:16px; border:1px solid rgba(240, 200, 80, 0.3); background:rgba(240, 200, 80, 0.08);"
                   >
-                    <p style="margin:0 0 0.35rem; font-family:'Hammersmith One', sans-serif; font-size:1.1rem; color:#f0c850; text-shadow:0 0 12px rgba(240, 200, 80, 0.35);">My Testimony</p>
                     <p style="margin:0; font-style:italic; color:rgba(245, 242, 237, 0.88); line-height:1.55;">Woah&hellip; now I gotta write a book if you want to know more, haha.</p>
-                    <style>
-                      @keyframes deeper-pop {
-                        0% { transform: scale(1); }
-                        40% { transform: scale(1.22); }
-                        100% { transform: scale(1); }
-                      }
-                      #deeper-count-num.deeper-pop {
-                        display: inline-block;
-                        animation: deeper-pop 380ms cubic-bezier(0.16, 1, 0.3, 1);
-                      }
-                    </style>
-                    <div class="deeper-counter" style="margin-top:1.1rem;">
-                      <div style="display:flex; align-items:baseline; gap:0.5rem; flex-wrap:wrap;">
-                        <span id="deeper-count-num" style="font-family:'Hammersmith One', sans-serif; font-size:1.65rem; color:#f0c850; text-shadow:0 0 14px rgba(240, 200, 80, 0.45);">8,329</span>
-                        <span style="font-family:'Inter', sans-serif; font-size:0.82rem; color:rgba(245, 242, 237, 0.55); letter-spacing:0.02em;">out of 70,000</span>
-                      </div>
-                      <div style="height:7px; margin-top:0.55rem; border-radius:999px; background:rgba(240, 200, 80, 0.16); overflow:hidden;">
-                        <div id="deeper-count-bar" style="height:100%; width:11.9%; border-radius:999px; background:linear-gradient(90deg, #b6751d, #f0c850); box-shadow:0 0 10px rgba(240, 200, 80, 0.5); transition:width 450ms cubic-bezier(0.16, 1, 0.3, 1);"></div>
-                      </div>
-                      <p id="deeper-count-msg" style="margin:0.75rem 0 0; font-family:'Inter', sans-serif; font-size:0.9rem; color:rgba(245, 242, 237, 0.78); line-height:1.5;">You&rsquo;re the <strong style="color:#f0c850;">8,329th</strong> to tap &ldquo;go even deeper.&rdquo;</p>
-                    </div>
-                    <script>
-                      (function () {
-                        var n = 8329,
-                          MAX = 70000;
-                        function ordinal(x) {
-                          var s = ["th", "st", "nd", "rd"],
-                            v = x % 100;
-                          return x.toLocaleString("en-US") + (s[(v - 20) % 10] || s[v] || s[0]);
-                        }
-                        function render() {
-                          var num = document.getElementById("deeper-count-num");
-                          var bar = document.getElementById("deeper-count-bar");
-                          var msg = document.getElementById("deeper-count-msg");
-                          if (num) {
-                            num.textContent = n.toLocaleString("en-US");
-                            num.classList.remove("deeper-pop");
-                            void num.offsetWidth; // restart the pop animation
-                            num.classList.add("deeper-pop");
-                          }
-                          if (bar) bar.style.width = (n / MAX) * 100 + "%";
-                          if (msg) {
-                            if (n >= MAX) {
-                              msg.innerHTML =
-                                '🎉 You&rsquo;re the <strong style="color:#f0c850;">70,000th</strong>; the sanctuary is full. We made it together.';
-                            } else {
-                              msg.innerHTML =
-                                'You&rsquo;re the <strong style="color:#f0c850;">' +
-                                ordinal(n) +
-                                '</strong> to tap &ldquo;go even deeper.&rdquo;';
-                            }
-                          }
-                        }
-                        window.bumpDeeper = function () {
-                          n = Math.min(MAX, n + 1);
-                          render();
-                        };
-                      })();
-                    </script>
+                    <p style="margin:0.9rem 0 0; font-family:'Hammersmith One', sans-serif; font-size:1.1rem; color:#f0c850; text-shadow:0 0 12px rgba(240, 200, 80, 0.35); line-height:1.35;">Title: The real reason I made MyBibleLens</p>
+                    <a
+                      href="https://www.instagram.com/smiledenzel/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Follow @smiledenzel on Instagram"
+                      style="display:inline-flex; align-items:center; gap:0.5rem; margin-top:0.9rem; text-decoration:none; color:#f0c850; font-family:'Inter', sans-serif; font-size:0.95rem; font-weight:600;"
+                    >
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                      </svg>
+                      @smiledenzel
+                    </a>
                   </div>
                 </div>
 
@@ -3997,6 +3965,54 @@
       function closeAboutReward() {
         var ov = document.getElementById("about-reward-overlay");
         if (ov) ov.classList.remove("is-open");
+      }
+      function openAboutVideoReward(card) {
+        var vid = card && card.querySelector("video");
+        if (!vid) return;
+        var src = vid.currentSrc || vid.src;
+        var caption = card.getAttribute("data-caption") || "";
+        var ov = document.getElementById("about-video-overlay");
+        if (!ov) {
+          ov = document.createElement("div");
+          ov.id = "about-video-overlay";
+          ov.className = "about-reward-overlay";
+          ov.innerHTML =
+            '<div class="about-reward-card" role="dialog" aria-modal="true" aria-label="Video">' +
+            '<span class="about-reward-badge">✦</span>' +
+            '<button type="button" class="about-reward-close" aria-label="Close">×</button>' +
+            '<video class="about-reward-video" controls playsinline loop></video>' +
+            '<p class="about-reward-caption"></p>' +
+            "</div>";
+          document.body.appendChild(ov);
+          ov.addEventListener("click", function (e) {
+            if (e.target === ov) closeAboutVideoReward();
+          });
+          ov.querySelector(".about-reward-close").addEventListener("click", closeAboutVideoReward);
+          document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape") closeAboutVideoReward();
+          });
+        }
+        var rv = ov.querySelector("video");
+        var poster = vid.getAttribute("poster");
+        if (poster) rv.poster = poster;
+        if (rv.src !== src) rv.src = src;
+        rv.muted = false;
+        ov.querySelector(".about-reward-caption").textContent = caption;
+        requestAnimationFrame(function () {
+          ov.classList.add("is-open");
+        });
+        try {
+          rv.currentTime = 0;
+          var p = rv.play();
+          if (p && p.catch) p.catch(function () {});
+        } catch (e) {}
+      }
+      function closeAboutVideoReward() {
+        var ov = document.getElementById("about-video-overlay");
+        if (!ov) return;
+        ov.classList.remove("is-open");
+        var rv = ov.querySelector("video");
+        if (rv) rv.pause();
       }
     </script>
   </body>
