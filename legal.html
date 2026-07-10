@@ -508,7 +508,7 @@
             <div class="about-aside">
               <div style="margin:0 0 1.2rem; padding:0 0.2rem;">
                 <p style="font-family:'Hammersmith One', sans-serif; font-size:1.35rem; color:#3D2B1F; margin:0 0 0.35rem;">Denzel Rigaud</p>
-                <p style="font-size:0.95rem; color:#3D2B1F; opacity:0.8; margin:0; line-height:1.5;">Lynn University &middot; Class of &rsquo;27 &middot; Hometown: Virginia &middot; Age 22</p>
+                <p style="font-size:0.95rem; color:#3D2B1F; opacity:0.8; margin:0; line-height:1.5;">Lynn University &middot; Class of &rsquo;27 &middot; Hometown: Virginia &middot; Age 22 &middot; Built within 5 months</p>
               </div>
               <div class="callout-card">
                 <h3 style="font-family:'Hammersmith One', sans-serif; font-size:1.2rem; color:#f0c850; text-shadow:0 0 12px rgba(240, 200, 80, 0.35); margin:0 0 0.9rem;">The Question That Started It All</h3>
@@ -610,25 +610,107 @@
                   >
                     <p style="margin:0; font-style:italic; color:rgba(245, 242, 237, 0.88); line-height:1.55;">Woah&hellip; now I gotta write a book if you want to know more, haha.</p>
                     <p style="margin:0.9rem 0 0; font-family:'Hammersmith One', sans-serif; font-size:1.1rem; color:#f0c850; text-shadow:0 0 12px rgba(240, 200, 80, 0.35); line-height:1.35;">Title: The real reason I made MyBibleLens</p>
-                    <a
-                      href="https://www.instagram.com/smiledenzel/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Follow @smiledenzel on Instagram"
-                      style="display:inline-flex; align-items:center; gap:0.5rem; margin-top:0.9rem; text-decoration:none; color:#f0c850; font-family:'Inter', sans-serif; font-size:0.95rem; font-weight:600;"
-                    >
-                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                      </svg>
-                      @smiledenzel
-                    </a>
+                    <div style="display:flex; flex-wrap:wrap; align-items:center; gap:1rem; margin-top:0.9rem;">
+                      <a
+                        href="https://www.instagram.com/smiledenzel/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Follow @smiledenzel on Instagram"
+                        style="display:inline-flex; align-items:center; gap:0.5rem; text-decoration:none; color:rgba(245, 242, 237, 0.55); font-family:'Inter', sans-serif; font-size:0.9rem; font-weight:500;"
+                      >
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                        </svg>
+                        @smiledenzel
+                      </a>
+                      <a
+                        href="https://www.instagram.com/mybiblelens/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="ig-follow-glow"
+                        aria-label="Follow @mybiblelens on Instagram"
+                      >
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                        </svg>
+                        FOLLOW @MYBIBLELENS ON INSTAGRAM
+                      </a>
+                    </div>
                   </div>
                 </div>
 
                 <!-- Shiny glossary terms + pop-ups (Bloom's Taxonomy, Erikson) -->
                 <style>
+                  /* Glowing FOLLOW @MYBIBLELENS pill — shiny on purpose */
+                  .ig-follow-glow {
+                    position: relative;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.55rem;
+                    padding: 0.7rem 1.25rem;
+                    border-radius: 999px;
+                    text-decoration: none;
+                    font-family: "Hammersmith One", sans-serif;
+                    font-size: 0.92rem;
+                    letter-spacing: 0.05em;
+                    color: #1a1008;
+                    background: linear-gradient(115deg, #d4921f 0%, #f0c850 45%, #f6dd8e 55%, #b6751d 100%);
+                    box-shadow:
+                      0 0 22px rgba(240, 200, 80, 0.55),
+                      0 0 44px rgba(212, 146, 31, 0.3),
+                      0 6px 18px -6px rgba(26, 16, 8, 0.5),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.55);
+                    overflow: hidden;
+                    animation: ig-breathe 3.2s ease-in-out infinite;
+                    transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+                  }
+                  .ig-follow-glow:hover,
+                  .ig-follow-glow:focus-visible {
+                    transform: translateY(-2px) scale(1.02);
+                  }
+                  .ig-follow-glow::after {
+                    content: "";
+                    position: absolute;
+                    top: -20%;
+                    bottom: -20%;
+                    left: 0;
+                    width: 45%;
+                    background: linear-gradient(105deg, transparent 0%, rgba(255, 255, 255, 0.55) 50%, transparent 100%);
+                    transform: translateX(-140%) skewX(-18deg);
+                    animation: ig-sheen 4.5s ease-in-out infinite;
+                    pointer-events: none;
+                  }
+                  @keyframes ig-sheen {
+                    0% { transform: translateX(-140%) skewX(-18deg); }
+                    45%, 100% { transform: translateX(340%) skewX(-18deg); }
+                  }
+                  @keyframes ig-breathe {
+                    0%, 100% {
+                      box-shadow:
+                        0 0 22px rgba(240, 200, 80, 0.55),
+                        0 0 44px rgba(212, 146, 31, 0.3),
+                        0 6px 18px -6px rgba(26, 16, 8, 0.5),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.55);
+                    }
+                    50% {
+                      box-shadow:
+                        0 0 30px rgba(240, 200, 80, 0.8),
+                        0 0 60px rgba(212, 146, 31, 0.45),
+                        0 6px 18px -6px rgba(26, 16, 8, 0.5),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.55);
+                    }
+                  }
+                  @media (prefers-reduced-motion: reduce) {
+                    .ig-follow-glow,
+                    .ig-follow-glow::after {
+                      animation: none;
+                      transition: none;
+                    }
+                  }
                   .glint-term {
                     appearance: none;
                     -webkit-appearance: none;
@@ -1129,7 +1211,7 @@
               </li>
               <li style="display:flex; align-items:baseline; gap:0.5rem; font-family:'Inter',sans-serif; font-size:0.95rem; line-height:1.6;">
                 <span aria-hidden="true" style="color:#b6741d;">·</span>
-                <span><strong style="color:#b6741d;">Chief Officer</strong> — Denzel Rigaud <em style="color:#7a5c3a; font-size:0.85rem;">(fueled by 4:30 AM wake-ups and 15-hour work days&hellip; in a dark, lonely, tunnel-vision pivot for months)</em></span>
+                <span><strong style="color:#b6741d;">Chief Officer</strong> — Denzel Rigaud <em style="color:#7a5c3a; font-size:0.85rem;">(fueled by 4:55 AM wake-ups and 15-hour work days&hellip; in a dark, lonely, tunnel-vision pivot for months)</em></span>
               </li>
             </ul>
             <p style="text-align:center; font-style:italic; color:#7a5c3a; font-size:0.85rem; margin-top:1.25rem; opacity:0.85;">I'm just having fun at this point haha</p>

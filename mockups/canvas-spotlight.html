@@ -201,20 +201,43 @@
         background: linear-gradient(180deg, var(--blend) 0%, var(--parch) 260px);
       }
       .grid {
-        display: grid;
-        gap: 16px;
-        grid-template-columns: repeat(auto-fill, minmax(min(460px, 100%), 1fr));
-        align-items: start;
+        column-count: 2;
+        column-gap: 10px;
+      }
+      @media (max-width: 820px) {
+        .grid {
+          column-count: 1;
+        }
       }
       .card {
         background: var(--card);
         border: 1px solid var(--line);
         border-radius: 26px;
         padding: 22px;
+        margin: 0 0 10px;
+        break-inside: avoid;
+        -webkit-column-break-inside: avoid;
         box-shadow: 0 16px 40px -22px rgba(var(--shadow), 0.55);
       }
       .card.wide {
-        grid-column: 1 / -1;
+        column-span: all;
+        -webkit-column-span: all;
+      }
+      .card.small {
+        padding: 14px;
+      }
+      .card.small .frame {
+        padding: 7px;
+        max-width: 78%;
+        margin: 0 auto;
+      }
+      .card.small h3 {
+        font-size: 21px;
+        margin: 14px 4px 6px;
+      }
+      .card.small p {
+        font-size: 15px;
+        margin: 0 4px 11px;
       }
       .card .frame {
         padding: 10px;
@@ -413,21 +436,6 @@
         </div>
 
         <div class="grid">
-          <!-- 1,000+ cultural stickers -->
-          <article class="card">
-            <div class="frame">
-              <video src="assets/canvas/videos/culture-stickers.mp4" autoplay muted loop playsinline preload="none"></video>
-            </div>
-            <h3>1,000+ Stickers From Every Culture</h3>
-            <p>
-              Renaissance, Afro Art, Eastern Light, pixel and 3D — hundreds of faces and skin tones so
-              <strong>everyone sees themselves</strong> in the story. The most inclusive sticker library in any faith app.
-            </p>
-            <div class="tags">
-              <span class="tag g">Every culture</span><span class="tag g">All skin tones</span><span class="tag">Search instantly</span>
-            </div>
-          </article>
-
           <!-- Connect nodes (wide) -->
           <article class="card wide">
             <div class="frame">
@@ -443,17 +451,47 @@
             </div>
           </article>
 
-          <!-- Renaissance stickers -->
+          <!-- 1,000+ cultural stickers (small) -->
+          <article class="card small">
+            <div class="frame">
+              <video src="assets/canvas/videos/culture-stickers.mp4" autoplay muted loop playsinline preload="none"></video>
+            </div>
+            <h3>1,000+ Stickers From Every Culture</h3>
+            <p>
+              Renaissance, Afro Art, Eastern Light, pixel and 3D — hundreds of faces and skin tones so
+              <strong>everyone sees themselves</strong> in the story. The most inclusive sticker library in any faith app.
+            </p>
+            <div class="tags">
+              <span class="tag g">Every culture</span><span class="tag g">All skin tones</span><span class="tag">Search instantly</span>
+            </div>
+          </article>
+
+          <!-- Sacred templates panel -->
           <article class="card">
             <div class="frame">
-              <video src="assets/canvas/videos/renaissance-stickers.mp4" autoplay muted loop playsinline preload="none"></video>
+              <video src="assets/canvas/videos/sacred-templates.mp4" autoplay muted loop playsinline preload="none"></video>
             </div>
-            <h3>Museum-Grade Fine Art</h3>
+            <h3>50+ Sacred Templates</h3>
             <p>
-              Hand-picked Renaissance icons, illuminated crosses and sacred masterworks — the kind of <strong>timeless imagery</strong> that
-              makes a devotional feel holy.
+              Sevenfold Spirit, Twelve Stones, Sun of Righteousness, Cross Paths — <strong>expert study frameworks</strong> for prayer,
+              teaching and discernment, ready in one tap. Perfect for small-group nights.
             </p>
-            <div class="tags"><span class="tag g">Renaissance set</span><span class="tag">Classic art</span></div>
+            <div class="tags">
+              <span class="tag g">50+ layouts</span><span class="tag i">For Bible groups</span><span class="tag">Save your own</span>
+            </div>
+          </article>
+
+          <!-- Landscapes -->
+          <article class="card">
+            <div class="frame">
+              <video src="assets/canvas/videos/landscapes.mp4" autoplay muted loop playsinline preload="none"></video>
+            </div>
+            <h3>Set the Scene</h3>
+            <p>
+              Warm, calming backdrops and full-bleed landscapes — sienna, sage, olive, rust.
+              <strong>A canvas that feels like sanctuary</strong> the moment you open it.
+            </p>
+            <div class="tags"><span class="tag s">Custom backdrops</span><span class="tag">Seamless landscapes</span></div>
           </article>
 
           <!-- Pixel stickers -->
@@ -523,32 +561,17 @@
             </div>
           </article>
 
-          <!-- Sacred templates panel -->
+          <!-- Renaissance stickers -->
           <article class="card">
             <div class="frame">
-              <video src="assets/canvas/videos/sacred-templates.mp4" autoplay muted loop playsinline preload="none"></video>
+              <video src="assets/canvas/videos/renaissance-stickers.mp4" autoplay muted loop playsinline preload="none"></video>
             </div>
-            <h3>50+ Sacred Templates</h3>
+            <h3>Museum-Grade Fine Art</h3>
             <p>
-              Sevenfold Spirit, Twelve Stones, Sun of Righteousness, Cross Paths — <strong>expert study frameworks</strong> for prayer,
-              teaching and discernment, ready in one tap. Perfect for small-group nights.
+              Hand-picked Renaissance icons, illuminated crosses and sacred masterworks — the kind of <strong>timeless imagery</strong> that
+              makes a devotional feel holy.
             </p>
-            <div class="tags">
-              <span class="tag g">50+ layouts</span><span class="tag i">For Bible groups</span><span class="tag">Save your own</span>
-            </div>
-          </article>
-
-          <!-- Landscapes -->
-          <article class="card">
-            <div class="frame">
-              <video src="assets/canvas/videos/landscapes.mp4" autoplay muted loop playsinline preload="none"></video>
-            </div>
-            <h3>Set the Scene</h3>
-            <p>
-              Warm, calming backdrops and full-bleed landscapes — sienna, sage, olive, rust.
-              <strong>A canvas that feels like sanctuary</strong> the moment you open it.
-            </p>
-            <div class="tags"><span class="tag s">Custom backdrops</span><span class="tag">Seamless landscapes</span></div>
+            <div class="tags"><span class="tag g">Renaissance set</span><span class="tag">Classic art</span></div>
           </article>
 
           <!-- Lasso / move / duplicate (wide) -->
