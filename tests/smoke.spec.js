@@ -29,7 +29,7 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await expect(eyebrow).toContainText("Sanctuary App for Christianity");
   });
 
-  test("spotlight flow renders all 13 feature iframes in order after LENS/S.O.A.P.", async ({
+  test("spotlight flow renders all 14 feature iframes in order after LENS/S.O.A.P.", async ({
     page,
   }) => {
     await page.goto("/");
@@ -41,10 +41,13 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     // sections were added.
     // 2026-06-21: reordered to lead with the most visual tools — Canvas, Glow,
     // Mosaic up top; Parental Lock moved to the very bottom.
+    // 2026-07-09: added the "Before we get started" homepage-customization band
+    // (customize-flow) after Canvas, and swapped Mosaic ahead of Scripture Glow.
     const order = [
       "canvas-flow",
-      "glow-flow",
+      "customize-flow",
       "mosaic-flow",
+      "glow-flow",
       "sermon-flow",
       "reflections-flow",
       "milestone-flow",
