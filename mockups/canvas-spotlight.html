@@ -2,1396 +2,616 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Infinite Canvas Spotlight — MyBibleLens Mockup</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Inter:wght@400;500;600;700&family=Alegreya:ital,wght@0,500;0,700;1,500&family=Caveat:wght@500;700&display=swap"
-      rel="stylesheet"
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Infinite Canvas · MyBibleLens</title>
+    <meta
+      name="description"
+      content="The Infinite Canvas by MyBibleLens — 1,000+ stickers from every culture, 50+ sacred templates, interactive color-changing sticky notes, connectable idea nodes, and endless space to build Bible studies with your friends and community."
     />
     <style>
+      @font-face {
+        font-family: "Hammersmith One";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(assets/canvas/fonts/hammersmithone-latin.woff2) format("woff2");
+      }
       :root {
-        --parchment: #f5f2ed;
-        --parchment-deep: #ece5d8;
-        --deep-brown: #3d2b1f;
-        --ink: #2a1e16;
-        --gold: #b6751d;
-        --gold-light: #d4921f;
-        --gold-pressed: #9a6218;
-        --ember: #d4921f;
-        --halo: #f0c850;
-        --font-display: "Hammersmith One", serif;
-        --font-body: "Inter", -apple-system, system-ui, sans-serif;
-        --font-verse: "Alegreya", Georgia, serif;
-        --font-hand: "Caveat", cursive;
+        --font: "Hammersmith One", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+        --parch: #f2e6cf;
+        --parch-2: #ece0c6;
+        --card: #faf3e2;
+        --mat: #fffaf0;
+        --ink: #3c2c1d;
+        --ink-soft: #6f5b45;
+        --gold: #b9852a;
+        --gold-2: #d9ab4d;
+        --terra: #b5533a;
+        --sage: #7c8a56;
+        --indigo: #3f4d6b;
+        --line: #e0cfa9;
+        --shadow: 28, 18, 8;
+        --blend: #ecdcb4; /* the new tone the hero meshes into */
       }
       * {
         box-sizing: border-box;
-        margin: 0;
-        padding: 0;
       }
       html,
       body {
-        background: var(--parchment);
-        color: var(--deep-brown);
+        margin: 0;
       }
       body {
-        font-family: var(--font-body);
-        min-height: 100vh;
-        overflow-x: hidden;
+        font-family: var(--font);
+        color: var(--ink);
+        background:
+          radial-gradient(1200px 600px at 15% -5%, #f7edd8, transparent), radial-gradient(1000px 700px at 100% 0%, #f6ead2, transparent),
+          var(--parch);
         -webkit-font-smoothing: antialiased;
+        line-height: 1.5;
       }
-      .container {
-        max-width: 1480px;
+      .wrap {
+        max-width: 1120px;
         margin: 0 auto;
-        padding: 0 1.5rem;
-      }
-      .section-padding {
-        padding: 6rem 0;
+        padding: 0 22px;
       }
 
-      /* ============================================================
-         MOSAIC-SHOWCASE pattern (site-matching)
-      ============================================================ */
-      .mosaic-showcase {
-        background:
-          radial-gradient(ellipse 60% 40% at 25% 30%, rgba(212, 146, 31, 0.06) 0%, transparent 65%),
-          radial-gradient(ellipse 60% 40% at 75% 70%, rgba(240, 200, 80, 0.04) 0%, transparent 65%), var(--parchment);
+      /* ---------- HERO ---------- */
+      header.hero {
         position: relative;
+        padding: 70px 0 66px;
+        text-align: center;
         overflow: hidden;
-      }
-      .mosaic-showcase__inner {
-        display: grid;
-        grid-template-columns: 0.72fr 1.9fr;
-        gap: clamp(2rem, 5vw, 4rem);
-        align-items: center;
-      }
-      .mosaic-showcase__copy {
-        max-width: 540px;
-      }
-      .mosaic-showcase__eyebrow {
-        font-family: var(--font-display);
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.32em;
-        text-transform: uppercase;
-        color: var(--gold);
-        margin-bottom: 1.1rem;
-      }
-      .mosaic-showcase__title {
-        font-family: var(--font-display);
-        font-size: clamp(2rem, 1.3rem + 2.5vw, 3.25rem);
-        line-height: 1.15;
-        color: var(--deep-brown);
-        letter-spacing: 0.005em;
-        margin-bottom: 0.9rem;
-      }
-      .mosaic-showcase__subtitle {
-        font-family: var(--font-display);
-        font-weight: 400;
-        font-size: clamp(1.02rem, 0.9rem + 0.6vw, 1.4rem);
-        line-height: 1.45;
-        letter-spacing: 0.01em;
-        margin: 0 0 1.5rem;
-        text-wrap: balance;
-        /* base words stay warm brown; a soft light band sweeps across them */
-        background: linear-gradient(
-          100deg,
-          rgba(61, 43, 31, 0.72) 0%,
-          rgba(61, 43, 31, 0.72) 38%,
-          rgba(240, 200, 80, 0.95) 48%,
-          #f6e3a8 50%,
-          rgba(240, 200, 80, 0.95) 52%,
-          rgba(61, 43, 31, 0.72) 62%,
-          rgba(61, 43, 31, 0.72) 100%
-        );
-        background-size: 230% 100%;
-        background-position: 130% 0;
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        /* halo glows AROUND the letters — sits behind the glyphs, never covers them */
-        text-shadow: 0 0 16px rgba(240, 200, 80, 0.32);
-        animation: subtitle-sheen 7s ease-in-out infinite;
-        will-change: background-position;
-      }
-      @keyframes subtitle-sheen {
-        0% {
-          background-position: 130% 0;
-        }
-        100% {
-          background-position: -30% 0;
-        }
-      }
-      .mosaic-showcase__subtitle .dot {
-        -webkit-text-fill-color: var(--gold);
-        margin: 0 0.5rem;
-        font-weight: 700;
-        text-shadow: 0 0 11px rgba(240, 200, 80, 0.5);
-      }
-      .mosaic-showcase__body {
-        font-family: var(--font-body);
-        font-size: clamp(1rem, 0.95rem + 0.25vw, 1.1rem);
-        line-height: 1.75;
-        color: rgba(61, 43, 31, 0.85);
-        margin-bottom: 1.5rem;
-      }
-      .mosaic-showcase__body strong {
-        color: var(--ink);
-        font-weight: 700;
-      }
-      .mosaic-showcase__bullets {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 1.6rem;
-        display: grid;
-        gap: 0.55rem;
-      }
-      .mosaic-showcase__bullets li {
-        font-family: var(--font-body);
-        font-size: 0.95rem;
-        color: rgba(61, 43, 31, 0.78);
-        padding-left: 1.5rem;
-        position: relative;
-        line-height: 1.55;
-      }
-      .mosaic-showcase__bullets li strong {
-        color: var(--ink);
-        font-weight: 700;
-      }
-      .mosaic-showcase__bullets li::before {
-        content: "✦";
-        position: absolute;
-        left: 0;
-        top: 0;
-        color: var(--gold);
-        font-size: 0.85rem;
-      }
-      .mosaic-showcase__cta {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        text-decoration: none;
-        font-family: var(--font-display);
-        font-size: 0.95rem;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        color: var(--gold);
-        padding: 0.85rem 1.4rem;
-        border-radius: 999px;
-        border: 1px solid rgba(182, 117, 29, 0.4);
-        background: linear-gradient(180deg, rgba(240, 200, 80, 0.06) 0%, rgba(212, 146, 31, 0.04) 100%);
-        transition:
-          color 220ms cubic-bezier(0.16, 1, 0.3, 1),
-          border-color 220ms ease,
-          background 220ms ease,
-          transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
-          box-shadow 220ms ease;
-      }
-      .mosaic-showcase__cta:hover {
-        color: var(--gold-light);
-        border-color: rgba(212, 146, 31, 0.7);
-        background: rgba(240, 200, 80, 0.12);
-        transform: translateY(-2px);
-        box-shadow: 0 12px 32px -12px rgba(212, 146, 31, 0.4);
-      }
-
-      /* ============================================================
-         RIGHT — the infinite canvas surface
-      ============================================================ */
-      .canvas-board {
-        position: relative;
-        width: 100%;
-        max-width: 1180px;
-        aspect-ratio: 1 / 0.78;
-        margin-left: auto;
-        margin-right: 0;
-        border-radius: 28px;
         background:
-          radial-gradient(ellipse at 30% 30%, rgba(240, 200, 80, 0.08), transparent 60%),
-          radial-gradient(ellipse at 70% 70%, rgba(212, 146, 31, 0.06), transparent 60%), linear-gradient(180deg, #faf6ec 0%, #f0e8d4 100%);
-        box-shadow:
-          0 0 0 1px rgba(212, 146, 31, 0.25),
-          0 40px 80px -22px rgba(26, 16, 8, 0.35),
-          0 16px 40px -10px rgba(212, 146, 31, 0.18);
-        overflow: hidden;
+          radial-gradient(60% 52% at 12% 2%, rgba(217, 171, 77, 0.4), transparent 62%),
+          radial-gradient(55% 46% at 92% 8%, rgba(181, 83, 58, 0.2), transparent 60%),
+          radial-gradient(78% 62% at 50% 112%, rgba(124, 138, 86, 0.26), transparent 62%),
+          linear-gradient(180deg, #f7ecd2 0%, #f2e6cf 46%, #efe1c4 100%);
       }
-
-      /* Dot-grid background — telegraphs "infinite canvas" */
-      .canvas-board::before {
+      header.hero::before {
+        /* top mesh — blends into a warm gold */
         content: "";
         position: absolute;
-        inset: 0;
-        background-image: radial-gradient(circle, rgba(61, 43, 31, 0.15) 1px, transparent 1px);
-        background-size: 22px 22px;
-        opacity: 0.5;
-        pointer-events: none;
-      }
-
-      /* Canvas inner — gives us a positioning context for nodes/edges */
-      .canvas-stage {
-        position: absolute;
-        inset: 0;
-      }
-
-      /* ---- SVG connection lines (behind the cards) ---- */
-      .canvas-edges {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 1;
-      }
-      .canvas-edges path {
-        fill: none;
-        stroke: var(--gold);
-        stroke-width: 1.4;
-        stroke-dasharray: 4 5;
-        opacity: 0.55;
-        stroke-linecap: round;
-        animation: dash-flow 18s linear infinite;
-      }
-      @keyframes dash-flow {
-        to {
-          stroke-dashoffset: -200;
-        }
-      }
-
-      /* ---- Floating cards on the canvas ---- */
-      .canvas-card {
-        position: absolute;
-        background: #fffbf0;
-        border: 1px solid rgba(212, 146, 31, 0.3);
-        border-radius: 14px;
-        padding: 0.7rem 0.85rem;
-        box-shadow:
-          0 8px 24px -10px rgba(26, 16, 8, 0.35),
-          0 0 0 1px rgba(212, 146, 31, 0.1);
-        z-index: 3;
-        animation: card-bob 8s ease-in-out infinite alternate;
-        transition:
-          transform 360ms cubic-bezier(0.2, 0.7, 0.2, 1),
-          box-shadow 360ms ease;
-      }
-      .canvas-card:hover {
-        transform: translateY(-3px) scale(1.02) !important;
-        box-shadow:
-          0 16px 36px -12px rgba(26, 16, 8, 0.45),
-          0 0 0 1.5px var(--gold);
-        z-index: 8;
-      }
-      @keyframes card-bob {
-        0% {
-          translate: 0 0;
-        }
-        100% {
-          translate: 0 -4px;
-        }
-      }
-
-      .card__eyebrow {
-        font-family: var(--font-display);
-        font-size: 0.55rem;
-        font-weight: 700;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: var(--gold);
-        margin-bottom: 0.25rem;
-        display: flex;
-        align-items: center;
-        gap: 0.3rem;
-      }
-      .card__title {
-        font-family: var(--font-display);
-        font-size: 0.95rem;
-        color: var(--ink);
-        line-height: 1.2;
-      }
-      .card__body {
-        font-family: var(--font-verse);
-        font-style: italic;
-        font-size: 0.78rem;
-        line-height: 1.4;
-        color: var(--ink);
-        margin-top: 0.35rem;
-      }
-      .card__note {
-        font-family: var(--font-hand);
-        font-size: 1rem;
-        line-height: 1.2;
-        color: var(--ink);
-      }
-
-      /* Specific card variants */
-      .card--verse {
-        left: 30%;
-        top: 36%;
-        width: 30%;
-        transform: rotate(-1.5deg);
-        background: linear-gradient(180deg, #fff8e2 0%, #f4e8c4 100%);
-        box-shadow:
-          0 12px 32px -12px rgba(26, 16, 8, 0.4),
-          0 0 0 1.5px var(--gold),
-          0 0 40px -10px rgba(240, 200, 80, 0.5);
-        z-index: 5;
-        animation-delay: -0.5s;
-      }
-
-      .card--observation {
-        left: 6%;
-        top: 8%;
-        width: 22%;
-        transform: rotate(-3deg);
-        background: #fdf2dc;
-        animation-delay: -1.6s;
-      }
-
-      .card--crossref {
-        right: 6%;
-        top: 10%;
-        width: 22%;
-        transform: rotate(2.5deg);
-        animation-delay: -2.4s;
-      }
-
-      .card--prayer {
-        right: 4%;
-        top: 50%;
-        width: 22%;
-        transform: rotate(-1.5deg);
-        background: #fde0e6;
-        border-color: rgba(196, 102, 128, 0.4);
-        animation-delay: -3s;
-      }
-      .card--prayer .card__eyebrow {
-        color: #c46680;
-      }
-
-      .card--reflection {
-        left: 4%;
-        bottom: 12%;
-        width: 22%;
-        transform: rotate(-2deg);
-        background: #e6efde;
-        border-color: rgba(107, 136, 85, 0.4);
-        animation-delay: -4s;
-      }
-      .card--reflection .card__eyebrow {
-        color: #6b8855;
-      }
-
-      .card--sketch {
-        right: 18%;
-        bottom: 4%;
-        width: 26%;
-        aspect-ratio: 4 / 3;
-        transform: rotate(2.5deg);
-        background: linear-gradient(135deg, #f5e9d0 0%, #ead9b5 100%);
-        padding: 0;
-        overflow: hidden;
-        animation-delay: -5s;
-      }
-      .card--sketch::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background:
-          radial-gradient(circle at 35% 50%, rgba(182, 117, 29, 0.2), transparent 30%),
-          radial-gradient(circle at 65% 60%, rgba(212, 146, 31, 0.15), transparent 35%);
-      }
-      .card--sketch .card__eyebrow {
-        position: absolute;
-        top: 0.5rem;
-        left: 0.7rem;
-      }
-      /* A hand-drawn cross emoji-style overlay */
-      .card--sketch svg {
-        position: absolute;
-        inset: 30% 25% 20% 25%;
-        width: 50%;
-        height: 50%;
-        opacity: 0.7;
-      }
-
-      /* ---- Live cursors (telegraphy: Live Sanctuary collab) ---- */
-      .canvas-cursor {
-        position: absolute;
-        z-index: 9;
-        display: flex;
-        align-items: flex-start;
-        gap: 0.3rem;
-        pointer-events: none;
-        animation: cursor-drift 14s ease-in-out infinite alternate;
-        transition: opacity 600ms ease;
-      }
-      .canvas-cursor svg {
-        flex-shrink: 0;
-        filter: drop-shadow(0 2px 4px rgba(26, 16, 8, 0.3));
-      }
-      .canvas-cursor__name {
-        font-family: var(--font-body);
-        font-size: 0.62rem;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        color: #fff;
-        padding: 0.2rem 0.5rem;
-        border-radius: 999px;
-        white-space: nowrap;
-        box-shadow: 0 4px 12px -4px rgba(26, 16, 8, 0.3);
-      }
-      .cursor--marcus {
-        left: 18%;
-        top: 13%;
-        animation: marcus-grab 13s ease-in-out infinite;
-        animation-delay: 0s;
-      }
-      .cursor--marcus .canvas-cursor__name {
-        background: #6b8855;
-      }
-      .cursor--marcus svg path {
-        fill: #6b8855;
-      }
-
-      .cursor--julia {
-        right: 18%;
-        top: 14%;
-        bottom: auto;
-        animation: julia-grab 13s ease-in-out infinite;
-        animation-delay: -6.5s;
-      }
-      .cursor--julia .canvas-cursor__name {
-        background: #c46680;
-      }
-      .cursor--julia svg path {
-        fill: #c46680;
-      }
-
-      .cursor--janis {
-        left: 48%;
-        top: 16%;
-        animation-delay: -4s;
-      }
-      .cursor--janis .canvas-cursor__name {
-        background: var(--gold);
-      }
-      .cursor--janis svg path {
-        fill: var(--gold);
-      }
-
-      /* ---- Polaroid photo cards (sit BEHIND content cards, slightly tilted) ---- */
-      .canvas-photo {
-        position: absolute;
-        background: #fffbf0;
-        padding: 6px 6px 22px;
-        border-radius: 4px;
-        box-shadow:
-          0 10px 28px -10px rgba(26, 16, 8, 0.45),
-          0 0 0 1px rgba(212, 146, 31, 0.18);
-        z-index: 2;
-        animation: card-bob 9s ease-in-out infinite alternate;
-        transition:
-          transform 360ms cubic-bezier(0.2, 0.7, 0.2, 1),
-          box-shadow 360ms ease;
-      }
-      .canvas-photo:hover {
-        transform: scale(1.04) rotate(0deg) !important;
-        z-index: 8;
-        box-shadow:
-          0 20px 44px -14px rgba(26, 16, 8, 0.55),
-          0 0 0 1.5px var(--gold);
-      }
-      .canvas-photo img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 2px;
-      }
-      .canvas-photo__caption {
-        position: absolute;
-        bottom: 4px;
         left: 0;
         right: 0;
-        text-align: center;
-        font-family: var(--font-hand);
-        font-size: 0.85rem;
-        color: var(--ink);
-        opacity: 0.75;
-      }
-
-      /* Per-photo positions */
-      .photo--1 {
-        left: 1%;
-        top: 4%;
-        width: 13%;
-        aspect-ratio: 4 / 5;
-        transform: rotate(-8deg);
-        animation-delay: -0.4s;
-      }
-      .photo--2 {
-        right: 1%;
-        top: 38%;
-        width: 11%;
-        aspect-ratio: 4 / 5;
-        transform: rotate(6deg);
-        animation-delay: -2.2s;
-      }
-      .photo--3 {
-        left: 35%;
-        bottom: 2%;
-        width: 11%;
-        aspect-ratio: 4 / 5;
-        transform: rotate(-4deg);
-        animation-delay: -3.4s;
-      }
-      .photo--4 {
-        left: 14%;
-        top: 40%;
-        width: 10%;
-        aspect-ratio: 4 / 5;
-        transform: rotate(5deg);
-        animation-delay: -5s;
-      }
-
-      @keyframes cursor-drift {
-        0% {
-          transform: translate(0, 0);
-        }
-        25% {
-          transform: translate(20px, -8px);
-        }
-        50% {
-          transform: translate(-12px, 14px);
-        }
-        75% {
-          transform: translate(8px, 20px);
-        }
-        100% {
-          transform: translate(-16px, -10px);
-        }
-      }
-
-      /* ---- Canvas chrome ---- */
-      .canvas-chrome {
-        position: absolute;
-        top: 1rem;
-        left: 1rem;
-        right: 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        z-index: 7;
-      }
-      .canvas-title {
-        font-family: var(--font-display);
-        font-size: 0.8rem;
-        color: var(--ink);
-        background: rgba(255, 251, 240, 0.85);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        padding: 0.4rem 0.85rem;
-        border-radius: 999px;
-        border: 1px solid rgba(212, 146, 31, 0.3);
-      }
-      .canvas-presence {
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-      }
-      .canvas-presence__avatars {
-        display: flex;
-      }
-      .canvas-presence__avatar {
-        width: 26px;
-        height: 26px;
-        border-radius: 50%;
-        border: 2px solid #fffbf0;
-        font-family: var(--font-display);
-        font-size: 0.7rem;
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: -8px;
-      }
-      .canvas-presence__avatar:first-child {
-        margin-left: 0;
-      }
-      .canvas-presence__avatar--1 {
-        background: #6b8855;
-      }
-      .canvas-presence__avatar--2 {
-        background: #c46680;
-      }
-      .canvas-presence__avatar--3 {
-        background: var(--gold);
-      }
-      .canvas-presence__label {
-        font-family: var(--font-body);
-        font-size: 0.62rem;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--gold);
-        background: rgba(255, 251, 240, 0.85);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        padding: 0.3rem 0.6rem;
-        border-radius: 999px;
-        border: 1px solid rgba(212, 146, 31, 0.3);
-      }
-      .canvas-presence__live {
-        display: inline-block;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: #6b8855;
-        margin-right: 0.3rem;
-        box-shadow: 0 0 6px #6b8855;
-        animation: live-pulse 1.6s ease-in-out infinite;
-      }
-      @keyframes live-pulse {
-        0%,
-        100% {
-          opacity: 1;
-          transform: scale(1);
-        }
-        50% {
-          opacity: 0.5;
-          transform: scale(0.85);
-        }
-      }
-
-      /* ---- Zoom / mini-map chrome (bottom-right) ---- */
-      .canvas-zoom {
-        position: absolute;
-        bottom: 1rem;
-        right: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-        z-index: 7;
-        font-family: var(--font-body);
-        font-size: 0.7rem;
-        font-weight: 600;
-        color: var(--ink);
-        background: rgba(255, 251, 240, 0.85);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        padding: 0.35rem 0.7rem;
-        border-radius: 999px;
-        border: 1px solid rgba(212, 146, 31, 0.3);
-      }
-
-      /* ---- Toolbar (bottom-left) ---- */
-      .canvas-toolbar {
-        position: absolute;
-        bottom: 1rem;
-        left: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.3rem;
-        z-index: 7;
-        background: rgba(255, 251, 240, 0.85);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        padding: 0.3rem;
-        border-radius: 999px;
-        border: 1px solid rgba(212, 146, 31, 0.3);
-      }
-      .canvas-toolbar button {
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        border: none;
-        background: transparent;
-        color: var(--gold);
-        font-size: 0.95rem;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 200ms ease;
-      }
-      .canvas-toolbar button:hover {
-        background: rgba(212, 146, 31, 0.15);
-      }
-      .canvas-toolbar button.is-active {
-        background: var(--gold);
-        color: #fffbf0;
-      }
-
-      /* "+27 more" presence avatar */
-      .canvas-presence__avatar--more {
-        background: var(--deep-brown);
-        font-size: 0.56rem;
-        letter-spacing: 0.01em;
-      }
-
-      /* ============================================================
-         INFINITE FEEL — camera glide, parallax grid, glow, mini-map
-         (the whole point: telegraph an endless, zoomable board)
-      ============================================================ */
-
-      /* Slow whole-board camera glide + breathing zoom. Low amplitude so the
-         curated cards stay readable; the grid parallaxes further behind them. */
-      .canvas-stage {
-        animation: camera-pan 34s ease-in-out infinite;
-        transform-origin: 55% 50%;
-        will-change: transform;
-      }
-      @keyframes camera-pan {
-        0% {
-          transform: translate(0, 0) scale(1);
-        }
-        25% {
-          transform: translate(-26px, 14px) scale(1.04);
-        }
-        50% {
-          transform: translate(-14px, -20px) scale(1.07);
-        }
-        75% {
-          transform: translate(22px, 10px) scale(1.03);
-        }
-        100% {
-          transform: translate(0, 0) scale(1);
-        }
-      }
-
-      /* Dot-grid drifts slowly — parallax depth that reads as "endless surface". */
-      .canvas-board::before {
-        animation: grid-pan 52s linear infinite;
-      }
-      @keyframes grid-pan {
-        to {
-          background-position: -220px 176px;
-        }
-      }
-
-      /* Warm spotlight sweeping the board — heavenly motion, not flashy. */
-      .canvas-glow {
-        position: absolute;
-        width: 62%;
-        height: 62%;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(240, 200, 80, 0.22) 0%, transparent 70%);
-        filter: blur(6px);
-        z-index: 0;
+        top: 0;
+        height: 210px;
         pointer-events: none;
-        animation: glow-travel 28s ease-in-out infinite;
+        background: linear-gradient(180deg, #f1dca6 0%, rgba(241, 220, 166, 0) 100%);
       }
-      @keyframes glow-travel {
-        0% {
-          transform: translate(-30%, -18%);
-          opacity: 0.45;
-        }
-        50% {
-          transform: translate(72%, 58%);
-          opacity: 0.85;
-        }
-        100% {
-          transform: translate(-30%, -18%);
-          opacity: 0.45;
-        }
+      header.hero::after {
+        /* bottom mesh — melts into the new tone */
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 230px;
+        pointer-events: none;
+        background: linear-gradient(180deg, rgba(236, 220, 180, 0) 0%, var(--blend) 100%);
       }
-
-      /* Ghost cards bleeding off the frame — "there's more out there". */
-      .card--ghost {
+      header.hero > .wrap {
+        position: relative;
         z-index: 1;
-        filter: blur(0.5px) saturate(0.92);
       }
-      .card--ghost-a {
-        left: -9%;
-        top: 24%;
-        width: 20%;
-        transform: rotate(-2.5deg);
-        animation-delay: -3.2s;
+      .kicker {
+        display: inline-block;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--gold);
+        padding: 7px 16px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--card);
       }
-      .card--ghost-b {
-        right: -8%;
-        bottom: 20%;
-        width: 20%;
-        transform: rotate(2.5deg);
-        animation-delay: -6.4s;
+      h1 {
+        font-size: clamp(38px, 7vw, 72px);
+        line-height: 1.02;
+        margin: 20px 0 12px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        background: linear-gradient(180deg, #4a3624, #7b5a34);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .sub {
+        font-size: clamp(17px, 2.4vw, 22px);
+        color: var(--ink-soft);
+        max-width: 660px;
+        margin: 0 auto 18px;
+      }
+      .tagline {
+        font-size: 14px;
+        letter-spacing: 0.06em;
+        color: var(--gold);
+        text-transform: uppercase;
+        margin: 0 auto 18px;
+        max-width: 640px;
+      }
+      .tagline b {
+        color: var(--terra);
+        font-weight: 700;
+      }
+      .intro {
+        font-size: clamp(16px, 2vw, 19px);
+        color: var(--ink-soft);
+        max-width: 680px;
+        margin: 0 auto 26px;
+        line-height: 1.6;
+      }
+      .stats {
+        display: flex;
+        gap: 26px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 10px 0 30px;
+      }
+      .stat b {
+        display: block;
+        font-size: 26px;
+        font-weight: 800;
+        color: var(--terra);
+      }
+      .stat span {
+        font-size: 12.5px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
       }
 
-      /* ---- Mini-map (the clearest "you're seeing a sliver of an endless board") ---- */
-      .canvas-minimap {
-        position: absolute;
-        bottom: 3.4rem;
-        right: 1rem;
-        width: 96px;
-        height: 66px;
-        border-radius: 10px;
-        background:
-          radial-gradient(circle, rgba(61, 43, 31, 0.18) 1px, transparent 1px) 0 0 / 9px 9px,
-          rgba(255, 251, 240, 0.85);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border: 1px solid rgba(212, 146, 31, 0.3);
-        box-shadow: 0 6px 18px -8px rgba(26, 16, 8, 0.35);
-        overflow: hidden;
-        z-index: 7;
+      /* ---------- FRAME ---------- */
+      .frame {
+        background: var(--mat);
+        padding: 10px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        box-shadow:
+          0 1px 0 #fff inset,
+          0 18px 40px -18px rgba(var(--shadow), 0.55),
+          0 2px 8px -2px rgba(var(--shadow), 0.3);
+        position: relative;
       }
-      .canvas-minimap__label {
+      .frame::after {
+        /* thin gold inner keyline */
+        content: "";
         position: absolute;
-        top: 3px;
-        left: 6px;
-        font-family: var(--font-body);
-        font-size: 0.42rem;
-        font-weight: 700;
-        letter-spacing: 0.14em;
+        inset: 6px;
+        border: 1.5px solid rgba(185, 133, 42, 0.35);
+        border-radius: 12px;
+        pointer-events: none;
+      }
+      .frame video {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 11px;
+        background: #e9dcc0;
+      }
+
+      .hero-frame {
+        max-width: 880px;
+        margin: 8px auto 0;
+      }
+
+      /* ---------- GRID ---------- */
+      section.showcase {
+        padding: 52px 0 74px;
+        background: linear-gradient(180deg, var(--blend) 0%, var(--parch) 260px);
+      }
+      .grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fill, minmax(min(460px, 100%), 1fr));
+        align-items: start;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 26px;
+        padding: 22px;
+        box-shadow: 0 16px 40px -22px rgba(var(--shadow), 0.55);
+      }
+      .card.wide {
+        grid-column: 1 / -1;
+      }
+      .card .frame {
+        padding: 10px;
+      }
+      .card h3 {
+        margin: 22px 6px 8px;
+        font-size: 27px;
+        font-weight: 800;
+        letter-spacing: -0.3px;
+        line-height: 1.1;
+      }
+      .card p {
+        margin: 0 6px 15px;
+        color: var(--ink-soft);
+        font-size: 17.5px;
+        line-height: 1.55;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin: 0 4px;
+      }
+      .tag {
+        font-family: var(--font);
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        padding: 7px 13px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        color: var(--ink);
+        background: var(--mat);
+      }
+      .tag.g {
+        color: #7a561a;
+        border-color: #e6cf95;
+        background: #fbf1d6;
+      }
+      .tag.t {
+        color: #8a3a26;
+        border-color: #e6bfb2;
+        background: #fbe6df;
+      }
+      .tag.s {
+        color: #4d5a2f;
+        border-color: #cdd6ae;
+        background: #eef2df;
+      }
+      .tag.i {
+        color: #2f3a54;
+        border-color: #bcc6da;
+        background: #e5eaf3;
+      }
+
+      .band {
+        text-align: center;
+        margin: 6px 0 30px;
+      }
+      .band .eyebrow {
+        letter-spacing: 0.28em;
         text-transform: uppercase;
+        font-size: 12px;
+        font-weight: 700;
         color: var(--gold);
-        opacity: 0.8;
       }
-      .canvas-minimap__dot {
-        position: absolute;
-        width: 9px;
-        height: 6px;
-        border-radius: 2px;
-        background: rgba(182, 117, 29, 0.5);
+      .band h2 {
+        font-size: clamp(26px, 4vw, 38px);
+        margin: 8px 0 6px;
+        font-weight: 800;
+        letter-spacing: -0.3px;
       }
-      .canvas-minimap__view {
-        position: absolute;
-        width: 30px;
-        height: 22px;
-        border: 1.5px solid var(--gold);
-        border-radius: 3px;
-        background: rgba(240, 200, 80, 0.18);
-        box-shadow: 0 0 8px rgba(240, 200, 80, 0.5);
-        animation: minimap-view 34s ease-in-out infinite;
+      .band p {
+        color: var(--ink-soft);
+        max-width: 640px;
+        margin: 0 auto;
+        font-size: 16px;
       }
-      @keyframes minimap-view {
-        0% {
-          left: 30px;
-          top: 22px;
-        }
-        25% {
-          left: 46px;
-          top: 13px;
+
+      /* ---------- CLOSER ---------- */
+      .live {
+        text-align: center;
+        border-radius: 26px;
+        padding: 44px 26px;
+        margin: 10px 0 8px;
+        background:
+          radial-gradient(700px 300px at 50% -20%, rgba(217, 171, 77, 0.28), transparent), linear-gradient(180deg, #3a2c20, #2c2016);
+        color: #f5ead2;
+        border: 1px solid #5a4526;
+        box-shadow: 0 24px 50px -26px rgba(28, 18, 8, 0.7);
+      }
+      .live .pulse {
+        display: inline-block;
+        font-size: 12px;
+        letter-spacing: 0.24em;
+        font-weight: 700;
+        color: #e7c56a;
+        border: 1px solid #6a5230;
+        border-radius: 999px;
+        padding: 6px 14px;
+        margin-bottom: 14px;
+        animation: glow 2.2s ease-in-out infinite;
+      }
+      @keyframes glow {
+        0%,
+        100% {
+          opacity: 0.6;
         }
         50% {
-          left: 39px;
-          top: 31px;
-        }
-        75% {
-          left: 19px;
-          top: 24px;
-        }
-        100% {
-          left: 30px;
-          top: 22px;
+          opacity: 1;
         }
       }
-
-      /* live-cycling zoom readout fade */
-      .canvas-zoom__val {
-        transition: opacity 200ms ease;
-        min-width: 2.6em;
+      .live h2 {
+        font-size: clamp(26px, 4.4vw, 40px);
+        margin: 4px 0 10px;
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: -0.3px;
+      }
+      .live p {
+        color: #e5d6b8;
+        max-width: 600px;
+        margin: 0 auto;
+        font-size: 17px;
+      }
+      .live strong {
+        color: #f0d489;
+      }
+      .closer {
         text-align: center;
+        padding: 26px 0 80px;
       }
-
-      /* ============================================================
-         LIVE DRAG — a cursor grabs a card and carries it (collab demo)
-         Cursor + its card share the exact translate path during the
-         carry phase, so the card reads as "held" by the cursor.
-      ============================================================ */
-      .card--observation {
-        z-index: 6;
-        animation: obs-drag 13s ease-in-out infinite;
+      .closer h2 {
+        font-size: clamp(28px, 5vw, 46px);
+        font-weight: 800;
+        margin: 0 0 10px;
+        letter-spacing: -0.4px;
       }
-      .card--crossref {
-        z-index: 6;
-        animation: cross-drag 13s ease-in-out infinite;
-        animation-delay: -6.5s;
+      .closer p {
+        color: var(--ink-soft);
+        font-size: 18px;
+        max-width: 600px;
+        margin: 0 auto 22px;
       }
-
-      /* Marcus carries the Observation note down toward the center */
-      @keyframes marcus-grab {
-        0%,
-        8% {
-          transform: translate(0, 0);
-        }
-        40%,
-        55% {
-          transform: translate(150px, 130px);
-        }
-        85%,
-        100% {
-          transform: translate(0, 0);
-        }
+      .cta {
+        display: inline-block;
+        font-family: var(--font);
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 16px;
+        letter-spacing: 0.02em;
+        color: #fff;
+        background: linear-gradient(180deg, #c68b2c, #a56d1c);
+        padding: 15px 32px;
+        border-radius: 999px;
+        box-shadow: 0 14px 30px -12px rgba(165, 109, 28, 0.7);
       }
-      @keyframes obs-drag {
-        0% {
-          transform: translate(0, 0) rotate(-3deg) scale(1);
-        }
-        8% {
-          transform: translate(0, 0) rotate(-1.5deg) scale(1.05);
-        }
-        40%,
-        55% {
-          transform: translate(150px, 130px) rotate(-1.5deg) scale(1.05);
-        }
-        85% {
-          transform: translate(0, 0) rotate(-1.5deg) scale(1.05);
-        }
-        88%,
-        100% {
-          transform: translate(0, 0) rotate(-3deg) scale(1);
-        }
-      }
-
-      /* Julia carries the Cross-Ref card down toward the center */
-      @keyframes julia-grab {
-        0%,
-        8% {
-          transform: translate(0, 0);
-        }
-        40%,
-        55% {
-          transform: translate(-150px, 130px);
-        }
-        85%,
-        100% {
-          transform: translate(0, 0);
-        }
-      }
-      @keyframes cross-drag {
-        0% {
-          transform: translate(0, 0) rotate(2.5deg) scale(1);
-        }
-        8% {
-          transform: translate(0, 0) rotate(1deg) scale(1.05);
-        }
-        40%,
-        55% {
-          transform: translate(-150px, 130px) rotate(1deg) scale(1.05);
-        }
-        85% {
-          transform: translate(0, 0) rotate(1deg) scale(1.05);
-        }
-        88%,
-        100% {
-          transform: translate(0, 0) rotate(2.5deg) scale(1);
-        }
-      }
-
-      /* ============================================================
-         REVEAL
-      ============================================================ */
-      .reveal-fade {
-        opacity: 0;
-        transform: translateY(20px);
-        transition:
-          opacity 900ms cubic-bezier(0.2, 0.7, 0.2, 1),
-          transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
-      }
-      .is-revealed .reveal-fade {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      .reveal-fade--copy {
-        transition-delay: 80ms;
-      }
-      .reveal-fade--board {
-        transition-delay: 220ms;
-      }
-
-      .canvas-card,
-      .canvas-cursor,
-      .canvas-edges path {
-        opacity: 0;
-        transition: opacity 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
-      }
-      .is-revealed .canvas-card {
-        opacity: 1;
-      }
-      .is-revealed .canvas-cursor {
-        opacity: 1;
-      }
-      .is-revealed .canvas-edges path {
-        opacity: 0.55;
-      }
-      .is-revealed .card--verse {
-        transition-delay: 300ms;
-      }
-      .is-revealed .card--observation {
-        transition-delay: 480ms;
-      }
-      .is-revealed .card--crossref {
-        transition-delay: 580ms;
-      }
-      .is-revealed .card--prayer {
-        transition-delay: 680ms;
-      }
-      .is-revealed .card--reflection {
-        transition-delay: 780ms;
-      }
-      .is-revealed .card--sketch {
-        transition-delay: 880ms;
-      }
-      .is-revealed .card--ghost-a {
-        opacity: 0.3;
-        transition-delay: 360ms;
-      }
-      .is-revealed .card--ghost-b {
-        opacity: 0.3;
-        transition-delay: 520ms;
-      }
-      .is-revealed .cursor--marcus {
-        transition-delay: 1100ms;
-      }
-      .is-revealed .cursor--julia {
-        transition-delay: 1250ms;
-      }
-      .is-revealed .cursor--janis {
-        transition-delay: 1400ms;
-      }
-      .canvas-photo {
-        opacity: 0;
-        transition: opacity 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
-      }
-      .is-revealed .canvas-photo {
-        opacity: 1;
-      }
-      .is-revealed .photo--1 {
-        transition-delay: 200ms;
-      }
-      .is-revealed .photo--2 {
-        transition-delay: 360ms;
-      }
-      .is-revealed .photo--3 {
-        transition-delay: 520ms;
-      }
-      .is-revealed .photo--4 {
-        transition-delay: 680ms;
-      }
-      .is-revealed .canvas-edges path:nth-child(1) {
-        transition-delay: 1000ms;
-      }
-      .is-revealed .canvas-edges path:nth-child(2) {
-        transition-delay: 1100ms;
-      }
-      .is-revealed .canvas-edges path:nth-child(3) {
-        transition-delay: 1200ms;
-      }
-      .is-revealed .canvas-edges path:nth-child(4) {
-        transition-delay: 1300ms;
-      }
-      .is-revealed .canvas-edges path:nth-child(5) {
-        transition-delay: 1400ms;
-      }
-
-      /* ============================================================
-         RESPONSIVE
-      ============================================================ */
-      @media (max-width: 960px) {
-        .mosaic-showcase__inner {
-          grid-template-columns: 1fr;
-          gap: 4rem;
-        }
-        .mosaic-showcase__copy {
-          max-width: 100%;
-        }
-        .canvas-board {
-          max-width: 560px;
-          aspect-ratio: 1 / 0.95;
-        }
-      }
-      @media (max-width: 600px) {
-        .section-padding {
-          padding: 4rem 0;
-        }
-        .canvas-board {
-          max-width: 420px;
-          aspect-ratio: 1 / 1;
-        }
-        .card__title {
-          font-size: 0.75rem;
-        }
-        .card__body {
-          font-size: 0.65rem;
-        }
-        .card__note {
-          font-size: 0.85rem;
-        }
-        .card__eyebrow {
-          font-size: 0.5rem;
-        }
-        .canvas-card {
-          padding: 0.5rem 0.6rem;
-        }
-        /* Hide noisier elements on small */
-        .canvas-cursor,
-        .canvas-toolbar {
-          display: none;
-        }
-        /* Keep the tight mobile board calm + uncropped */
-        .canvas-stage {
-          animation: none;
-        }
-        .canvas-minimap,
-        .canvas-glow,
-        .card--ghost {
-          display: none;
-        }
-        /* Cursors are hidden on mobile — don't let their cards self-drag */
-        .card--observation,
-        .card--crossref {
-          animation: none;
-        }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .canvas-card,
-        .canvas-cursor,
-        .canvas-edges path,
-        .canvas-stage,
-        .canvas-board::before,
-        .canvas-glow,
-        .canvas-minimap__view {
-          animation: none !important;
-        }
-        .mosaic-showcase__subtitle {
-          animation: none !important;
-          background-position: 0 0 !important;
-        }
-        .reveal-fade {
-          transition: none !important;
-        }
-      }
-
-      /* Mockup banner */
-      .mockup-banner {
-        background: var(--deep-brown);
-        color: var(--parchment);
-        padding: 10px 24px;
-        font-size: 12px;
+      footer {
         text-align: center;
-        letter-spacing: 0.04em;
-      }
-      .mockup-banner strong {
-        color: var(--halo);
+        color: var(--ink-soft);
+        font-size: 13px;
+        padding: 0 0 40px;
+        opacity: 0.8;
       }
     </style>
   </head>
   <body>
-    <section class="mosaic-showcase section-padding" id="canvas-spotlight" data-spotlight>
-      <div class="container mosaic-showcase__inner">
-        <!-- LEFT — copy -->
-        <div class="mosaic-showcase__copy reveal-fade reveal-fade--copy">
-          <p class="mosaic-showcase__eyebrow">Map the message.</p>
-          <h2 class="mosaic-showcase__title">An infinite board<br />for your <span style="color: var(--gold)">faith.</span></h2>
-          <p class="mosaic-showcase__subtitle">
-            Testimony<span class="dot">·</span>story-sharing<span class="dot">·</span>correlating your life to the verse<span class="dot"
-              >·</span
-            >and so much more
-          </p>
-          <p class="mosaic-showcase__body">
-            Bible study isn&rsquo;t linear. Verses connect. Cross-references run for miles. Notes pile up. Photos remind you what you were
-            thinking when you first read it. <strong>Infinite Canvas</strong> gives every thought you&rsquo;ve ever had about scripture one
-            place to live &mdash; on a single endless, zoomable, shareable board.
-          </p>
-          <ul class="mosaic-showcase__bullets" role="list">
-            <li>Drop <strong>verses, notes, photos &amp; sketches</strong> anywhere on an endless board</li>
-            <li>Connect anything to anything with <strong>gold threads</strong> &mdash; mind maps, timelines, flowcharts</li>
-            <li>
-              <strong>1,000+ stickers from all cultures</strong> &amp; color-shifting sticky notes &mdash; write a name and the note glows
-              to match: <span style="color: #d4921f; font-weight: 700">God</span> turns gold,
-              <span style="color: #c0392b; font-weight: 700">the enemy</span> red &mdash; and much more interactive sticky notes!
-            </li>
-            <li><strong>Live Sanctuary</strong> &mdash; collaborate with <strong>30+ people</strong> in real time, cursors and all</li>
-          </ul>
-          <a href="#pricing" class="mosaic-showcase__cta">Open your first canvas &rarr;</a>
+    <header class="hero">
+      <div class="wrap">
+        <span class="kicker">MyBibleLens · Infinite Canvas</span>
+        <h1>An infinite board<br />for your faith.</h1>
+        <p class="tagline">Testimony · Story-sharing · Correlating your life to the verse · <b>and so much more</b></p>
+        <p class="intro">
+          Bible study isn't linear. Verses connect. Cross-references run for miles. Notes pile up. Photos remind you what you were thinking
+          when you first read it. <strong>Infinite Canvas gives every thought you've ever had about scripture one place to live</strong> —
+          on a single endless, zoomable, shareable board.
+        </p>
+        <div class="stats">
+          <div class="stat"><b>1,000+</b><span>Cultural Stickers</span></div>
+          <div class="stat"><b>50+</b><span>Sacred Templates</span></div>
+          <div class="stat"><b>∞</b><span>Space to Build</span></div>
+          <div class="stat"><b>30+</b><span>Live Collaborators</span></div>
+        </div>
+        <div class="frame hero-frame">
+          <video src="assets/canvas/videos/study-map.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        </div>
+      </div>
+    </header>
+
+    <section class="showcase">
+      <div class="wrap">
+        <div class="band">
+          <div class="eyebrow">Why it's addictive</div>
+          <h2>Everything that makes the Infinite Canvas <em>fun</em></h2>
+          <p>Not another notes app. A place where scripture becomes something you build, decorate and get lost in for hours.</p>
         </div>
 
-        <!-- RIGHT — canvas board -->
-        <div class="canvas-board reveal-fade reveal-fade--board" aria-hidden="true">
-          <!-- Top chrome: title + live presence -->
-          <div class="canvas-chrome">
-            <div class="canvas-title">Walking in Purpose · Sunday Study</div>
-            <div class="canvas-presence">
-              <span class="canvas-presence__label"><span class="canvas-presence__live"></span>30+ LIVE</span>
-              <div class="canvas-presence__avatars">
-                <span class="canvas-presence__avatar canvas-presence__avatar--1">M</span>
-                <span class="canvas-presence__avatar canvas-presence__avatar--2">J</span>
-                <span class="canvas-presence__avatar canvas-presence__avatar--3">J</span>
-                <span class="canvas-presence__avatar canvas-presence__avatar--more">+27</span>
-              </div>
+        <div class="grid">
+          <!-- 1,000+ cultural stickers -->
+          <article class="card">
+            <div class="frame">
+              <video src="assets/canvas/videos/culture-stickers.mp4" autoplay muted loop playsinline preload="none"></video>
             </div>
-          </div>
+            <h3>1,000+ Stickers From Every Culture</h3>
+            <p>
+              Renaissance, Afro Art, Eastern Light, pixel and 3D — hundreds of faces and skin tones so
+              <strong>everyone sees themselves</strong> in the story. The most inclusive sticker library in any faith app.
+            </p>
+            <div class="tags">
+              <span class="tag g">Every culture</span><span class="tag g">All skin tones</span><span class="tag">Search instantly</span>
+            </div>
+          </article>
 
-          <div class="canvas-stage">
-            <!-- Ambient warm spotlight sweeping the endless surface -->
-            <div class="canvas-glow"></div>
+          <!-- Connect nodes (wide) -->
+          <article class="card wide">
+            <div class="frame">
+              <video src="assets/canvas/videos/connect-nodes.mp4" autoplay muted loop playsinline preload="none"></video>
+            </div>
+            <h3>Connect Anything With Gold Threads</h3>
+            <p>
+              Link verse to verse, theme to theme with living <strong>gold threads</strong> — build mind maps, timelines and flowcharts
+              where cross-references run for miles. A web of understanding only you could map.
+            </p>
+            <div class="tags">
+              <span class="tag g">Gold threads</span><span class="tag i">Mind maps · timelines</span><span class="tag">Flowcharts</span>
+            </div>
+          </article>
 
-            <!-- Connection edges (curved gold dashed lines) -->
-            <svg class="canvas-edges" viewBox="0 0 680 626" preserveAspectRatio="none">
-              <!-- verse → observation -->
-              <path d="M 240 280 C 200 220, 160 140, 120 100" />
-              <!-- verse → crossref -->
-              <path d="M 380 280 C 460 220, 520 160, 560 110" />
-              <!-- verse → prayer -->
-              <path d="M 408 320 C 480 340, 540 360, 580 380" />
-              <!-- verse → reflection -->
-              <path d="M 240 360 C 180 410, 130 470, 100 530" />
-              <!-- verse → sketch -->
-              <path d="M 360 380 C 420 460, 460 510, 480 540" />
-            </svg>
+          <!-- Renaissance stickers -->
+          <article class="card">
+            <div class="frame">
+              <video src="assets/canvas/videos/renaissance-stickers.mp4" autoplay muted loop playsinline preload="none"></video>
+            </div>
+            <h3>Museum-Grade Fine Art</h3>
+            <p>
+              Hand-picked Renaissance icons, illuminated crosses and sacred masterworks — the kind of <strong>timeless imagery</strong> that
+              makes a devotional feel holy.
+            </p>
+            <div class="tags"><span class="tag g">Renaissance set</span><span class="tag">Classic art</span></div>
+          </article>
 
-            <!-- ===== CARDS ===== -->
+          <!-- Pixel stickers -->
+          <article class="card">
+            <div class="frame">
+              <video src="assets/canvas/videos/pixel-stickers.mp4" autoplay muted loop playsinline preload="none"></video>
+            </div>
+            <h3>Playful Pixel Saints</h3>
+            <p>
+              Retro, fun and made to go viral with a younger audience. Lions, doves, the ichthys —
+              <strong>faith that feels like a game</strong>.
+            </p>
+            <div class="tags"><span class="tag s">Gen-Z ready</span><span class="tag">Pixel set</span></div>
+          </article>
 
-            <!-- Center: anchor verse -->
-            <div class="canvas-card card--verse">
-              <div class="card__eyebrow">📖 Anchor Verse</div>
-              <div class="card__title">Philippians 4:13</div>
-              <p class="card__body">&ldquo;I can do all things through Christ who strengthens me.&rdquo;</p>
+          <!-- 3D stickers -->
+          <article class="card">
+            <div class="frame">
+              <video src="assets/canvas/videos/stickers-3d.mp4" autoplay muted loop playsinline preload="none"></video>
             </div>
+            <h3>Bold, Tactile 3D Stickers</h3>
+            <p>
+              Depth, shadow and dimension that <strong>pop right off the canvas</strong>. Modern, glossy and made to make every board feel
+              alive.
+            </p>
+            <div class="tags"><span class="tag i">3D set</span><span class="tag">Depth &amp; shadow</span></div>
+          </article>
 
-            <!-- Top-left: observation -->
-            <div class="canvas-card card--observation">
-              <div class="card__eyebrow">💡 Observation</div>
-              <p class="card__note">Paul wrote this from a <strong>prison cell</strong> — the strength isn&rsquo;t self-generated.</p>
+          <!-- Afro Art stickers -->
+          <article class="card">
+            <div class="frame">
+              <video src="assets/canvas/videos/afro-stickers.mp4" autoplay muted loop playsinline preload="none"></video>
             </div>
+            <h3>Afro Art Collection</h3>
+            <p>
+              Rich, vibrant and rooted in heritage — a celebration of <strong>Black faith and culture</strong> so your story is seen in full
+              color. Representation that finally feels like home.
+            </p>
+            <div class="tags"><span class="tag t">Afro Art</span><span class="tag g">Heritage &amp; culture</span></div>
+          </article>
 
-            <!-- Top-right: cross-reference -->
-            <div class="canvas-card card--crossref">
-              <div class="card__eyebrow">🔗 Cross-Ref</div>
-              <div class="card__title" style="font-size: 0.85rem">Isaiah 41:10</div>
-              <p class="card__body" style="font-size: 0.7rem">&ldquo;I will strengthen you and help you.&rdquo;</p>
+          <!-- Hail, Daughter of Zion -->
+          <article class="card">
+            <div class="frame">
+              <video src="assets/canvas/videos/hail-daughter-zion.mp4" autoplay muted loop playsinline preload="none"></video>
             </div>
+            <h3>Hail, Daughter of Zion</h3>
+            <p>
+              A graceful collection honoring the women of scripture and the daughters of faith —
+              <strong>gentle, reverent and beautiful</strong>. Made for the women building the church.
+            </p>
+            <div class="tags"><span class="tag t">For women of faith</span><span class="tag g">Reverent art</span></div>
+          </article>
 
-            <!-- Right-mid: prayer -->
-            <div class="canvas-card card--prayer">
-              <div class="card__eyebrow">🙏 Prayer</div>
-              <p class="card__note">Lord, when I&rsquo;m at the end of myself, be my strength.</p>
+          <!-- Cross layout filled -->
+          <article class="card">
+            <div class="frame">
+              <video src="assets/canvas/videos/cross-layout.mp4" autoplay muted loop playsinline preload="none"></video>
             </div>
+            <h3>Beautiful, Ready-Made Boards</h3>
+            <p>
+              Drop a template, fill it with art, and it looks like a gallery piece in seconds.
+              <strong>Screenshot-worthy studies</strong> your followers will want to recreate.
+            </p>
+            <div class="tags">
+              <span class="tag i">Shareable</span><span class="tag t">Influencer-ready</span><span class="tag">One-tap layouts</span>
+            </div>
+          </article>
 
-            <!-- Bottom-left: reflection -->
-            <div class="canvas-card card--reflection">
-              <div class="card__eyebrow">📝 Reflection</div>
-              <p class="card__note">Strength isn&rsquo;t a feeling. It&rsquo;s a Person.</p>
+          <!-- Sacred templates panel -->
+          <article class="card">
+            <div class="frame">
+              <video src="assets/canvas/videos/sacred-templates.mp4" autoplay muted loop playsinline preload="none"></video>
             </div>
+            <h3>50+ Sacred Templates</h3>
+            <p>
+              Sevenfold Spirit, Twelve Stones, Sun of Righteousness, Cross Paths — <strong>expert study frameworks</strong> for prayer,
+              teaching and discernment, ready in one tap. Perfect for small-group nights.
+            </p>
+            <div class="tags">
+              <span class="tag g">50+ layouts</span><span class="tag i">For Bible groups</span><span class="tag">Save your own</span>
+            </div>
+          </article>
 
-            <!-- Bottom-right: sketch / photo -->
-            <div class="canvas-card card--sketch">
-              <div class="card__eyebrow">✏️ Sketch</div>
-              <svg viewBox="0 0 100 100">
-                <path d="M 50 10 L 50 90 M 25 35 L 75 35" stroke="#5a3a1f" stroke-width="4" stroke-linecap="round" fill="none" />
-              </svg>
+          <!-- Landscapes -->
+          <article class="card">
+            <div class="frame">
+              <video src="assets/canvas/videos/landscapes.mp4" autoplay muted loop playsinline preload="none"></video>
             </div>
+            <h3>Set the Scene</h3>
+            <p>
+              Warm, calming backdrops and full-bleed landscapes — sienna, sage, olive, rust.
+              <strong>A canvas that feels like sanctuary</strong> the moment you open it.
+            </p>
+            <div class="tags"><span class="tag s">Custom backdrops</span><span class="tag">Seamless landscapes</span></div>
+          </article>
 
-            <!-- Polaroid photo cards (behind content) -->
-            <div class="canvas-photo photo--1">
-              <img src="assets/canvas/IMG_5547.jpg" alt="" />
-              <span class="canvas-photo__caption">morning light</span>
+          <!-- Lasso / move / duplicate (wide) -->
+          <article class="card wide">
+            <div class="frame">
+              <video src="assets/canvas/videos/endless-canvas.mp4" autoplay muted loop playsinline preload="none"></video>
             </div>
-            <div class="canvas-photo photo--2">
-              <img src="assets/canvas/IMG_7803.jpg" alt="" />
-              <span class="canvas-photo__caption">at the chapel</span>
+            <h3>Lasso, Duplicate &amp; Move Anywhere</h3>
+            <p>
+              Lasso anything on the board and glide it across the canvas. Then <strong>duplicate it in a tap</strong> and send it to another
+              infinite board entirely — keep one on your <strong>private study</strong>, drop a copy on your
+              <strong>group's shared board</strong>. Your work moves as freely as your thoughts do.
+            </p>
+            <div class="tags">
+              <span class="tag i">Lasso select</span><span class="tag g">One-tap duplicate</span><span class="tag t">Send to any board</span
+              ><span class="tag">Private &amp; shared</span>
             </div>
-            <div class="canvas-photo photo--3">
-              <img src="assets/canvas/IMG_7837.jpg" alt="" />
-              <span class="canvas-photo__caption">study group</span>
-            </div>
-            <div class="canvas-photo photo--4">
-              <img src="assets/canvas/IMG_9455.jpg" alt="" />
-              <span class="canvas-photo__caption">first read</span>
-            </div>
-
-            <!-- Live cursors -->
-            <div class="canvas-cursor cursor--marcus">
-              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M 2 2 L 2 14 L 6 11 L 9 16 L 11 15 L 8 10 L 14 9 Z" /></svg>
-              <span class="canvas-cursor__name">Marcus</span>
-            </div>
-            <div class="canvas-cursor cursor--julia">
-              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M 2 2 L 2 14 L 6 11 L 9 16 L 11 15 L 8 10 L 14 9 Z" /></svg>
-              <span class="canvas-cursor__name">Julia</span>
-            </div>
-            <div class="canvas-cursor cursor--janis">
-              <svg width="18" height="18" viewBox="0 0 18 18"><path d="M 2 2 L 2 14 L 6 11 L 9 16 L 11 15 L 8 10 L 14 9 Z" /></svg>
-              <span class="canvas-cursor__name">Janis</span>
-            </div>
-
-            <!-- Ghost cards bleeding off the frame — the board keeps going -->
-            <div class="canvas-card card--ghost card--ghost-a">
-              <div class="card__eyebrow">🔗 Cross-Ref</div>
-              <div class="card__title" style="font-size: 0.85rem">Romans 8:28</div>
-            </div>
-            <div class="canvas-card card--ghost card--ghost-b">
-              <div class="card__eyebrow">📝 Note</div>
-              <p class="card__note">…continued in week 3</p>
-            </div>
-          </div>
-
-          <!-- Bottom-left toolbar -->
-          <div class="canvas-toolbar">
-            <button class="is-active" title="Select">↖</button>
-            <button title="Note">📝</button>
-            <button title="Verse">📖</button>
-            <button title="Sketch">✏️</button>
-            <button title="Photo">📷</button>
-            <button title="Connect">🔗</button>
-          </div>
-
-          <!-- Mini-map — your viewport is a sliver of an endless board -->
-          <div class="canvas-minimap" aria-hidden="true">
-            <span class="canvas-minimap__label">Board</span>
-            <span class="canvas-minimap__dot" style="left: 12px; top: 16px"></span>
-            <span class="canvas-minimap__dot" style="left: 58px; top: 10px"></span>
-            <span class="canvas-minimap__dot" style="left: 74px; top: 30px"></span>
-            <span class="canvas-minimap__dot" style="left: 22px; top: 42px"></span>
-            <span class="canvas-minimap__dot" style="left: 50px; top: 48px"></span>
-            <span class="canvas-minimap__dot" style="left: 80px; top: 50px"></span>
-            <span class="canvas-minimap__dot" style="left: 8px; top: 54px"></span>
-            <span class="canvas-minimap__view"></span>
-          </div>
-
-          <!-- Bottom-right zoom (live-cycling readout) -->
-          <div class="canvas-zoom">
-            <span>−</span>
-            <span class="canvas-zoom__val" id="canvas-zoom-val" style="color: var(--gold)">100%</span>
-            <span>+</span>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <script>
-      const sp = document.querySelector("[data-spotlight]");
-      const obs = new IntersectionObserver(
-        (entries) =>
-          entries.forEach((e) => {
-            if (e.isIntersecting) {
-              sp.classList.add("is-revealed");
-              obs.disconnect();
-            }
-          }),
-        { threshold: 0.15 }
-      );
-      obs.observe(sp);
-      requestAnimationFrame(() => {
-        const r = sp.getBoundingClientRect();
-        if (r.top < window.innerHeight * 0.8) sp.classList.add("is-revealed");
-      });
+    <div class="wrap">
+      <div class="live">
+        <span class="pulse">● LIVE SANCTUARY</span>
+        <h2>Study together, in real time.</h2>
+        <p>
+          Invite your small group, your church, your friends — <strong>collaborate with 30+ people at once</strong>, cursors and all.
+          Everyone builds on the same endless board, live. Faith was never meant to be walked alone.
+        </p>
+      </div>
+    </div>
 
-      // Live zoom readout — "from a single word to the whole testament"
-      const zoomEl = document.getElementById("canvas-zoom-val");
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (zoomEl && !reduceMotion) {
-        const steps = ["340%", "100%", "42%", "12%", "6%"];
-        let i = 1;
-        setInterval(() => {
-          i = (i + 1) % steps.length;
-          zoomEl.style.opacity = "0";
-          setTimeout(() => {
-            zoomEl.textContent = steps[i];
-            zoomEl.style.opacity = "1";
-          }, 200);
-        }, 2600);
-      }
+    <div class="closer">
+      <div class="wrap">
+        <h2>Made for you and your friends.</h2>
+        <p>
+          Whether you're a creator sharing your walk, a small group going deeper, or a church building together — the Infinite Canvas turns
+          Bible study into something you'll <em>want</em> to come back to.
+        </p>
+        <a class="cta" href="#">Start on the Infinite Canvas</a>
+      </div>
+    </div>
+
+    <footer>MyBibleLens · The Infinite Canvas — the world's first sanctuary you can build.</footer>
+
+    <script>
+      // Only play clips when they're on-screen (smooth + battery-friendly)
+      const vids = [...document.querySelectorAll(".card video")];
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            const v = e.target;
+            if (e.isIntersecting) {
+              v.play().catch(() => {});
+            } else {
+              v.pause();
+            }
+          });
+        },
+        { threshold: 0.25 }
+      );
+      vids.forEach((v) => io.observe(v));
     </script>
   </body>
 </html>
