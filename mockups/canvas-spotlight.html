@@ -208,6 +208,9 @@
         .grid {
           column-count: 1;
         }
+        .card.centered {
+          max-width: none;
+        }
       }
       .card {
         background: var(--card);
@@ -222,6 +225,13 @@
       .card.wide {
         column-span: all;
         -webkit-column-span: all;
+      }
+      .card.centered {
+        column-span: all;
+        -webkit-column-span: all;
+        max-width: calc(50% - 5px);
+        margin-left: auto;
+        margin-right: auto;
       }
       .card.small {
         padding: 14px;
@@ -499,12 +509,6 @@
             <div class="frame">
               <video src="assets/canvas/videos/pixel-stickers.mp4" autoplay muted loop playsinline preload="none"></video>
             </div>
-            <h3>Playful Pixel Saints</h3>
-            <p>
-              Retro, fun and made to go viral with a younger audience. Lions, doves, the ichthys —
-              <strong>faith that feels like a game</strong>.
-            </p>
-            <div class="tags"><span class="tag s">Gen-Z ready</span><span class="tag">Pixel set</span></div>
           </article>
 
           <!-- 3D stickers -->
@@ -512,12 +516,6 @@
             <div class="frame">
               <video src="assets/canvas/videos/stickers-3d.mp4" autoplay muted loop playsinline preload="none"></video>
             </div>
-            <h3>Bold, Tactile 3D Stickers</h3>
-            <p>
-              Depth, shadow and dimension that <strong>pop right off the canvas</strong>. Modern, glossy and made to make every board feel
-              alive.
-            </p>
-            <div class="tags"><span class="tag i">3D set</span><span class="tag">Depth &amp; shadow</span></div>
           </article>
 
           <!-- Afro Art stickers -->
@@ -525,12 +523,6 @@
             <div class="frame">
               <video src="assets/canvas/videos/afro-stickers.mp4" autoplay muted loop playsinline preload="none"></video>
             </div>
-            <h3>Afro Art Collection</h3>
-            <p>
-              Rich, vibrant and rooted in heritage — a celebration of <strong>Black faith and culture</strong> so your story is seen in full
-              color. Representation that finally feels like home.
-            </p>
-            <div class="tags"><span class="tag t">Afro Art</span><span class="tag g">Heritage &amp; culture</span></div>
           </article>
 
           <!-- Hail, Daughter of Zion -->
@@ -538,12 +530,6 @@
             <div class="frame">
               <video src="assets/canvas/videos/hail-daughter-zion.mp4" autoplay muted loop playsinline preload="none"></video>
             </div>
-            <h3>Hail, Daughter of Zion</h3>
-            <p>
-              A graceful collection honoring the women of scripture and the daughters of faith —
-              <strong>gentle, reverent and beautiful</strong>. Made for the women building the church.
-            </p>
-            <div class="tags"><span class="tag t">For women of faith</span><span class="tag g">Reverent art</span></div>
           </article>
 
           <!-- Cross layout filled -->
@@ -562,16 +548,10 @@
           </article>
 
           <!-- Renaissance stickers -->
-          <article class="card">
+          <article class="card centered">
             <div class="frame">
               <video src="assets/canvas/videos/renaissance-stickers.mp4" autoplay muted loop playsinline preload="none"></video>
             </div>
-            <h3>Museum-Grade Fine Art</h3>
-            <p>
-              Hand-picked Renaissance icons, illuminated crosses and sacred masterworks — the kind of <strong>timeless imagery</strong> that
-              makes a devotional feel holy.
-            </p>
-            <div class="tags"><span class="tag g">Renaissance set</span><span class="tag">Classic art</span></div>
           </article>
 
           <!-- Lasso / move / duplicate (wide) -->
