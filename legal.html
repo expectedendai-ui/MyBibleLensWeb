@@ -544,10 +544,10 @@
                   <button
                     type="button"
                     class="ig-handle-btn"
-                    style="display:none; margin-top:0; cursor:pointer;"
+                    style="margin-top:0; cursor:pointer;"
                     aria-expanded="false"
                     aria-controls="go-deeper"
-                    onclick="var m=document.getElementById('go-deeper');var open=m.style.display==='block';m.style.display=open?'none':'block';this.setAttribute('aria-expanded',String(!open));if(!open){m.scrollIntoView({behavior:'smooth',block:'nearest'});}"
+                    onclick="var n=(+this.dataset.taps||0)+1;this.dataset.taps=n;var m=document.getElementById('go-deeper');var open=m.style.display==='block';if(!open&&n<2){return;}m.style.display=open?'none':'block';this.setAttribute('aria-expanded',String(!open));if(!open){m.scrollIntoView({behavior:'smooth',block:'nearest'});}"
                   >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                       <circle cx="12" cy="12" r="10" />
