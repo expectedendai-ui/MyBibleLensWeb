@@ -38,16 +38,6 @@ test.describe("Visual regression — index.html", () => {
     await expect(page.locator(".repo-section")).toHaveScreenshot("repository.png");
   });
 
-  test("mosaic showcase", async ({ page }) => {
-    await page.goto("/#mosaic-showcase");
-    await waitForPageReady(page);
-    await settleLazyFlows(page);
-    const section = page.locator(".mosaic-showcase");
-    await section.scrollIntoViewIfNeeded();
-    await waitForStableBox(page, section);
-    await expect(section).toHaveScreenshot("mosaic-showcase.png", { timeout: 15000 });
-  });
-
   test("pricing", async ({ page }) => {
     await page.goto("/#pricing");
     await waitForPageReady(page);

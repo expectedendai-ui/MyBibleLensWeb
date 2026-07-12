@@ -6,12 +6,12 @@
     <title>The World's First Sanctuary App for Christianity — MyBibleLens™</title>
     <meta
       name="description"
-      content="MyBibleLens — the World's First Sanctuary App for Christianity. Lens (camera scripture scanner), Sermon Builder, Infinite Canvas, Scripture Glow (hand-drawn zoom canvas), Reflections, Milestone reading plans, 12 themes. One-time purchase from $14.99, lifetime access."
+      content="MyBibleLens — the World's First Sanctuary App for Christianity. Infinite Canvas, Sermon Builder, Scripture Glow (hand-drawn zoom canvas), Reflections, Milestone reading plans, 12 themes. One-time purchase from $14.99, lifetime access."
     />
     <meta property="og:title" content="The World's First Sanctuary App for Christianity — MyBibleLens™" />
     <meta
       property="og:description"
-      content="The World's First Sanctuary App for Christianity. Lens, Sermon Builder, Infinite Canvas, Scripture Glow, Reflections, 12 themes. One-time purchase from $14.99."
+      content="The World's First Sanctuary App for Christianity. Infinite Canvas, Sermon Builder, Scripture Glow, Reflections, 12 themes. One-time purchase from $14.99."
     />
     <meta property="og:url" content="https://mybiblelens.us/" />
     <meta property="og:type" content="website" />
@@ -31,7 +31,7 @@
         "operatingSystem": "iOS, Android",
         "applicationCategory": "LifestyleApplication",
         "applicationSubCategory": "Bible Study",
-        "description": "MyBibleLens is the World's First Sanctuary App for Christianity. Lens (camera scripture scanner with S.O.A.P. journaling), Sermon Builder (real-time COLLAB, present from your phone), Infinite Canvas (mind-map with live fellowship), Scripture Glow (hand-drawn infinite zoom canvas), Reflections (8 modes), Milestone (day-by-day Bible reading plans), 12 themes, 3 typefaces. One-time purchase from $14.99, lifetime access.",
+        "description": "MyBibleLens is the World's First Sanctuary App for Christianity. Infinite Canvas (mind-map with live fellowship), Sermon Builder (real-time COLLAB, present from your phone), Scripture Glow (hand-drawn infinite zoom canvas), Reflections (8 modes), Milestone (day-by-day Bible reading plans), 12 themes, 3 typefaces. One-time purchase from $14.99, lifetime access.",
         "publisher": {
           "@type": "Organization",
           "name": "Scriptorium Digital Productions",
@@ -64,7 +64,7 @@
           ]
         },
         "sameAs": ["https://www.instagram.com/mybiblelens/", "https://apps.apple.com/us/app/mybiblelens/id6764069602"],
-        "featureList": "Lens (camera scripture scanner), S.O.A.P. journaling, Zoom Canvas (hand-drawn scripture art, NOT AI image generation), Sermon Builder with real-time COLLAB, Reflections journal (8 modes), Milestone (day-by-day Bible reading plans with a Reading Circle), Infinite Canvas, Mosaic vision boards, Prayer Space, Ask Lens AI study guide, Fellowship sharing (friend-picker only), 20 GB included cloud storage, 12 themes, 3 typefaces, Cloud sync, Focus Timer",
+        "featureList": "Infinite Canvas, Zoom Canvas (hand-drawn scripture art, NOT AI image generation), Sermon Builder with real-time COLLAB, Reflections journal (8 modes), Milestone (day-by-day Bible reading plans with a Reading Circle), Mosaic vision boards, Prayer Space, AI study guide, Fellowship sharing (friend-picker only), 20 GB included cloud storage, 12 themes, 3 typefaces, Cloud sync, Focus Timer",
         "offers": [
           {
             "@type": "Offer",
@@ -72,7 +72,7 @@
             "price": "0",
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock",
-            "description": "Free starter tier. 15 shared AI guide queries every 5 hours, 3 Lens scans every 5 hours, 2 Infinite Canvas boards, 5 Sermon decks, 1 Mosaic board, Bible Trivia, Milestone reading plans, S.O.A.P. reflections, 20 GB cloud storage, fellowship access."
+            "description": "Free starter tier. 15 shared AI guide queries every 5 hours, 2 Infinite Canvas boards, 5 Sermon decks, 1 Mosaic board, Bible Trivia, Milestone reading plans, Reflect notes, 20 GB cloud storage, fellowship access."
           },
           {
             "@type": "Offer",
@@ -3613,119 +3613,6 @@
         box-shadow: 0 12px 32px -12px rgba(212, 146, 31, 0.4);
       }
 
-      /* Coming-soon veil — blurs the Lens showcase until the feature ships */
-      .mosaic-showcase--coming-soon .mosaic-showcase__inner {
-        filter: blur(9px);
-        pointer-events: none;
-        user-select: none;
-      }
-      .coming-soon-veil {
-        position: absolute;
-        inset: 0;
-        z-index: 6;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .coming-soon-veil__badge {
-        font-family: var(--font-display);
-        font-size: clamp(1.2rem, 1rem + 1.2vw, 1.9rem);
-        font-weight: 700;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: var(--deep-brown);
-        padding: 1rem 2.2rem;
-        border-radius: 999px;
-        background: linear-gradient(180deg, rgba(253, 248, 232, 0.96) 0%, rgba(244, 232, 196, 0.96) 100%);
-        border: 1px solid rgba(212, 146, 31, 0.55);
-        box-shadow:
-          0 0 0 6px rgba(240, 200, 80, 0.12),
-          0 24px 60px -18px rgba(26, 16, 8, 0.35);
-        animation: comingSoonBreath 3.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-      }
-      @keyframes comingSoonBreath {
-        0%,
-        100% {
-          box-shadow:
-            0 0 0 6px rgba(240, 200, 80, 0.12),
-            0 24px 60px -18px rgba(26, 16, 8, 0.35);
-        }
-        50% {
-          box-shadow:
-            0 0 0 10px rgba(240, 200, 80, 0.2),
-            0 24px 60px -18px rgba(26, 16, 8, 0.35);
-        }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .coming-soon-veil__badge {
-          animation: none;
-        }
-      }
-
-      /* S.O.A.P. explainer card — sits under the bullets in the Lens showcase */
-      .soap-explainer {
-        margin-top: 1.4rem;
-        padding: 1.1rem 1.3rem 1.2rem;
-        border-radius: 16px;
-        background: linear-gradient(135deg, rgba(212, 146, 31, 0.08) 0%, rgba(240, 200, 80, 0.06) 100%);
-        border: 1px solid rgba(212, 146, 31, 0.35);
-      }
-      .soap-explainer__title {
-        font-family: "Hammersmith One", sans-serif;
-        font-size: 1.1rem;
-        color: #1a1008;
-        margin: 0 0 0.4rem 0;
-        line-height: 1.2;
-      }
-      .soap-explainer__intro {
-        font-family: "Inter", sans-serif;
-        font-size: 0.88rem;
-        line-height: 1.55;
-        color: #3d2b1f;
-        margin: 0 0 0.85rem 0;
-      }
-      .soap-explainer__steps {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 0.6rem;
-      }
-      .soap-explainer__steps li {
-        display: flex;
-        gap: 0.75rem;
-        align-items: flex-start;
-      }
-      .soap-explainer__letter {
-        flex-shrink: 0;
-        width: 1.75rem;
-        height: 1.75rem;
-        border-radius: 50%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-family: "Hammersmith One", sans-serif;
-        font-size: 0.95rem;
-        color: #fff8e0;
-        background: linear-gradient(135deg, #b6751d 0%, #9a6218 100%);
-        box-shadow: 0 2px 6px -2px rgba(154, 98, 24, 0.5);
-      }
-      .soap-explainer__step {
-        font-family: "Inter", sans-serif;
-        font-size: 0.88rem;
-        line-height: 1.55;
-        color: #3d2b1f;
-        padding-top: 0.15rem;
-      }
-      .soap-explainer__step strong {
-        color: #1a1008;
-        font-weight: 700;
-      }
-      .soap-explainer__step em {
-        font-style: italic;
-        color: #9a6218;
-      }
       .mosaic-showcase__board {
         perspective: 1200px;
       }
@@ -5306,7 +5193,7 @@
       </div>
     </section>
 
-    <!-- Infinite Canvas — moved to LEAD the feature flow (first slot, before Lens) per Denzel 2026-06-24 -->
+    <!-- Infinite Canvas — LEADS the feature flow (first slot) per Denzel 2026-06-24 -->
     <div class="gold-divider gold-divider--on-light" aria-hidden="true">
       <span class="gold-divider__line"></span>
       <span class="gold-divider__ornament">Infinite Canvas</span>
@@ -5387,7 +5274,7 @@
       <iframe src="mockups/study-repo-card.html" loading="lazy" title="Customize your homepage"></iframe>
     </div>
 
-    <!-- Supabase security badge — sits under the Mosaic divider, above LENS/S.O.A.P. -->
+    <!-- Supabase security badge — sits under the Mosaic divider -->
     <style>
       .supabase-badge-wrap {
         padding: 1.2rem 1.5rem 2rem;
@@ -5498,7 +5385,7 @@
     </div>
 
     <!-- ============================================================
-         FLOW SECTIONS — 9 new spotlights after LENS/S.O.A.P.
+         FLOW SECTIONS — 9 new spotlights
          (each loads its mockup in an auto-sized iframe so styles stay isolated)
     ============================================================ -->
     <style>
@@ -6022,70 +5909,6 @@
       <iframe src="mockups/parental-lock-spotlight.html" loading="lazy" title="Parental Lock"></iframe>
     </div>
 
-    <div class="gold-divider gold-divider--on-light" aria-hidden="true">
-      <span class="gold-divider__line"></span>
-      <span class="gold-divider__ornament">Lens + S.O.A.P.</span>
-      <span class="gold-divider__line"></span>
-    </div>
-    <!-- ===== SECTION 4.5: LENS SHOWCASE (moved to end of study repository — coming soon) ===== -->
-    <section class="mosaic-showcase section-padding mosaic-showcase--coming-soon" id="mosaic-showcase" aria-label="Lens — coming soon">
-      <div class="coming-soon-veil">
-        <span class="coming-soon-veil__badge">Coming Soon</span>
-      </div>
-      <div class="container mosaic-showcase__inner">
-        <div class="mosaic-showcase__copy">
-          <p class="mosaic-showcase__eyebrow">Point your camera. Unlock scripture.</p>
-          <h2 class="mosaic-showcase__title">Scan a page.<br />Tap a verse.<br />Go deeper — instantly.</h2>
-          <p class="mosaic-showcase__body">
-            Open <strong>Lens</strong>. Point at any Bible page &mdash; printed, e-reader, even handwritten &mdash; and watch every verse
-            light up as a tappable card. Tap the one that&rsquo;s speaking to you. Drop it into <strong>S.O.A.P.</strong> for guided
-            journaling, or into <strong>Scripture Glow</strong> to sit with it on an infinite, hand-drawn zoom canvas.
-            <strong>One scan. Infinite paths in.</strong>
-          </p>
-          <ul class="mosaic-showcase__bullets" role="list">
-            <li><strong>Reads every verse</strong> on a page &mdash; printed, screen, or handwritten</li>
-          </ul>
-          <div class="soap-explainer">
-            <p class="soap-explainer__title">What is S.O.A.P.?</p>
-            <p class="soap-explainer__intro">
-              A 4-step Bible study method — Lens guides you through each step with AI prompts. Here's the flow on Philippians 4:13:
-            </p>
-            <ul class="soap-explainer__steps" role="list">
-              <li>
-                <span class="soap-explainer__letter">S</span>
-                <span class="soap-explainer__step"
-                  ><strong>Scripture.</strong> <em>"I can do all things through Christ who strengthens me." — Philippians 4:13</em></span
-                >
-              </li>
-              <li>
-                <span class="soap-explainer__letter">O</span>
-                <span class="soap-explainer__step"
-                  ><strong>Observation.</strong> Paul wrote this from a prison cell. The strength isn't self-generated — it flows through
-                  Christ.</span
-                >
-              </li>
-              <li>
-                <span class="soap-explainer__letter">A</span>
-                <span class="soap-explainer__step"
-                  ><strong>Application.</strong> When today feels too heavy, lean on His strength, not your own.</span
-                >
-              </li>
-              <li>
-                <span class="soap-explainer__letter">P</span>
-                <span class="soap-explainer__step"
-                  ><strong>Prayer.</strong> <em>"Lord, when I'm at the end of myself, be my strength. Amen."</em></span
-                >
-              </li>
-            </ul>
-          </div>
-          <a href="#pricing" class="mosaic-showcase__cta">Try Lens free — included in Seeker →</a>
-        </div>
-        <div class="mosaic-showcase__board" aria-hidden="true">
-          <video class="mosaic-showcase__video" src="assets/mosaic-preview.mp4" autoplay muted loop playsinline preload="metadata"></video>
-        </div>
-      </div>
-    </section>
-
     <div class="never-have-block never-have-block--rebottom">
       <h3 class="never-have-title">What this app will never have:</h3>
       <ul class="never-have-list" role="list">
@@ -6212,13 +6035,12 @@
                 </div>
                 <ul class="pricing-features" role="list">
                   <li>15 shared AI guide queries every 5 hours</li>
-                  <li>3 Scripture Lens scans every 5 hours</li>
                   <li>2 Infinite Canvas boards</li>
                   <li>5 Sermon decks</li>
                   <li>1 Mosaic vision board to dream on</li>
                   <li>Bible Trivia &mdash; free for everyone</li>
                   <li>Milestone &mdash; day-by-day Bible reading plans</li>
-                  <li>S.O.A.P. reflections &amp; Reflect notes</li>
+                  <li>Reflect notes &amp; guided reflections</li>
                   <li>20 GB cloud storage included</li>
                   <li>Fellowship access</li>
                   <li>Scripture Glow / Zoom Canvas &mdash; paid only</li>
@@ -6276,7 +6098,6 @@
                 </div>
                 <ul class="pricing-features" role="list">
                   <li>60 shared AI guide queries every 5 hours</li>
-                  <li>7 Scripture Lens scans every 5 hours</li>
                   <li><strong>Infinite Canvas</strong> &mdash; unlimited boards, infinite zoom, live fellowship collab</li>
                   <li><strong>Scripture Glow</strong> &mdash; unlimited hand-drawn zoom canvases</li>
                   <li><strong>Sermon Builder</strong> &mdash; 500 decks, 30 slides each, real-time COLLAB, present from your phone</li>
@@ -6340,7 +6161,6 @@
                 <ul class="pricing-features" role="list">
                   <li><strong>Everything in Apostle</strong></li>
                   <li>60 shared AI guide queries every 5 hours</li>
-                  <li>7 Scripture Lens scans every 5 hours</li>
                   <li><strong>Infinite Canvas</strong> &mdash; unlimited boards, infinite zoom, live collab</li>
                   <li><strong>Scripture Glow</strong> &mdash; unlimited hand-drawn zoom canvases</li>
                   <li><strong>Sermon Builder</strong> &mdash; 500 decks, COLLAB, present from your phone</li>
@@ -6403,7 +6223,6 @@
                 <ul class="pricing-features" role="list">
                   <li><strong>Everything in Sanctuary</strong></li>
                   <li>60 shared AI guide queries every 5 hours</li>
-                  <li>7 Scripture Lens scans every 5 hours</li>
                   <li><strong>Infinite Canvas</strong> &mdash; unlimited boards, infinite zoom, live collab</li>
                   <li><strong>Scripture Glow</strong> &mdash; unlimited hand-drawn zoom canvases</li>
                   <li><strong>Sermon Builder</strong> &mdash; 500 decks, COLLAB, present from your phone</li>
@@ -6494,7 +6313,6 @@
                 <ul class="pricing-features" role="list">
                   <li><strong>Everything in Kingdom</strong></li>
                   <li>60 shared AI guide queries every 5 hours</li>
-                  <li>7 Scripture Lens scans every 5 hours</li>
                   <li><strong>Infinite Canvas</strong> &mdash; unlimited boards, infinite zoom, live collab</li>
                   <li><strong>Scripture Glow</strong> &mdash; unlimited hand-drawn zoom canvases</li>
                   <li><strong>Sermon Builder</strong> &mdash; 500 decks, COLLAB, present from your phone</li>
@@ -7139,7 +6957,7 @@
             "name": "What is MyBibleLens?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "MyBibleLens is the World's First Sanctuary App for Christianity — a digital sanctuary for Scripture rather than a daily-verse feed. It offers Lens (a camera scripture scanner with S.O.A.P. journaling), Sermon Builder with real-time fellowship, an Infinite Canvas for study notes, Scripture Glow (a hand-drawn zoom canvas), Reflections journaling, and Milestone Bible reading plans. One-time purchase from $14.99 with lifetime access — no subscriptions."
+              "text": "MyBibleLens is the World's First Sanctuary App for Christianity — a digital sanctuary for Scripture rather than a daily-verse feed. It offers an Infinite Canvas for study notes with live fellowship, Sermon Builder with real-time fellowship, Scripture Glow (a hand-drawn zoom canvas), Reflections journaling, and Milestone Bible reading plans. One-time purchase from $14.99 with lifetime access — no subscriptions."
             }
           },
           {
@@ -7169,10 +6987,9 @@
             <div class="faq-item__a">
               <p>
                 MyBibleLens is the World's First Sanctuary App for Christianity — a digital sanctuary for Scripture, not a daily-verse feed.
-                Point your camera at any Bible page and watch verses light up with S.O.A.P. journaling (Lens), build and present sermons in
-                real-time fellowship (Sermon Builder), map study notes on an Infinite Canvas, hand-draw on a Scripture Glow zoom canvas, and
-                journal through Reflections while Milestone paces your whole-Bible reading plan. One-time purchase from $14.99 — lifetime
-                access, no subscriptions.
+                Map study notes on an Infinite Canvas with live fellowship, build and present sermons in real-time fellowship (Sermon
+                Builder), hand-draw on a Scripture Glow zoom canvas, and journal through Reflections while Milestone paces your whole-Bible
+                reading plan. One-time purchase from $14.99 — lifetime access, no subscriptions.
               </p>
             </div>
           </details>
@@ -8848,7 +8665,7 @@
             "repo.comingSoon": "Ya disponible en iPhone y iPad · Android próximamente",
             "repo.title": "Tu repositorio de estudio",
             "repo.subtitle":
-              "Lens. Sermon Builder. Infinite Canvas. Scripture Glow. Doce santuarios, un temporizador, comunión integrada. <strong>Cada herramienta que guarda un santuario, en una sola app.</strong>",
+              "Infinite Canvas. Sermon Builder. Scripture Glow. Doce santuarios, un temporizador, comunión integrada. <strong>Cada herramienta que guarda un santuario, en una sola app.</strong>",
             "pricing.title": "Paga una vez. Tuyo para siempre.",
             "pricing.subtitle":
               "Sin suscripciones. Sin cargos recurrentes. Sin sorpresas. Una compra, acceso de por vida, para ti y para todos los que traigas contigo.",
@@ -8865,7 +8682,7 @@
             "repo.comingSoon": "Já disponível para iPhone e iPad · Android em breve",
             "repo.title": "Seu repositório de estudo",
             "repo.subtitle":
-              "Lens. Sermon Builder. Infinite Canvas. Scripture Glow. Doze santuários, um cronômetro, comunhão integrada. <strong>Cada ferramenta que um santuário guarda, em um só app.</strong>",
+              "Infinite Canvas. Sermon Builder. Scripture Glow. Doze santuários, um cronômetro, comunhão integrada. <strong>Cada ferramenta que um santuário guarda, em um só app.</strong>",
             "pricing.title": "Pague uma vez. Seu para sempre.",
             "pricing.subtitle":
               "Sem assinaturas. Sem cobranças recorrentes. Sem surpresas. Uma compra, acesso vitalício, para você e para todos que trouxer com você.",
@@ -8882,7 +8699,7 @@
             "repo.comingSoon": "Disponible dès maintenant sur iPhone et iPad · Android bientôt disponible",
             "repo.title": "Votre répertoire d'étude",
             "repo.subtitle":
-              "Lens. Sermon Builder. Infinite Canvas. Scripture Glow. Douze sanctuaires, un minuteur, la communion intégrée. <strong>Chaque outil qu'un sanctuaire renferme, dans une seule application.</strong>",
+              "Infinite Canvas. Sermon Builder. Scripture Glow. Douze sanctuaires, un minuteur, la communion intégrée. <strong>Chaque outil qu'un sanctuaire renferme, dans une seule application.</strong>",
             "pricing.title": "Payez une fois. À vous pour toujours.",
             "pricing.subtitle":
               "Aucun abonnement. Aucun renouvellement. Aucune surprise. Un seul achat, un accès à vie, pour vous et pour tous ceux que vous amenez.",
@@ -8899,7 +8716,7 @@
             "repo.comingSoon": "iPhone과 iPad에서 지금 이용 가능 · Android 곧 출시",
             "repo.title": "나의 학습 저장소",
             "repo.subtitle":
-              "Lens. Sermon Builder. Infinite Canvas. Scripture Glow. 열두 개의 성소, 하나의 타이머, 내장된 교제. <strong>성소가 품은 모든 도구를 하나의 앱에.</strong>",
+              "Infinite Canvas. Sermon Builder. Scripture Glow. 열두 개의 성소, 하나의 타이머, 내장된 교제. <strong>성소가 품은 모든 도구를 하나의 앱에.</strong>",
             "pricing.title": "한 번 결제, 평생 소유.",
             "pricing.subtitle": "구독 없음. 갱신 없음. 깜짝 청구 없음. 한 번의 구매로 평생 이용 — 당신과 함께하는 모든 이들을 위해.",
             "faq.title": "솔직한 답변",
@@ -8915,7 +8732,7 @@
             "repo.comingSoon": "现已登陆 iPhone 和 iPad · Android 即将推出",
             "repo.title": "你的学习资源库",
             "repo.subtitle":
-              "Lens. Sermon Builder. Infinite Canvas. Scripture Glow. 十二个圣所，一个计时器，内置团契。<strong>圣所所拥有的每一个工具，尽在一个应用之中。</strong>",
+              "Infinite Canvas. Sermon Builder. Scripture Glow. 十二个圣所，一个计时器，内置团契。<strong>圣所所拥有的每一个工具，尽在一个应用之中。</strong>",
             "pricing.title": "一次付费，永久拥有。",
             "pricing.subtitle": "无订阅。无续费。无意外收费。一次购买，终身使用——为你，也为你带来的每一个人。",
             "faq.title": "诚实的回答",

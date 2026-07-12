@@ -29,13 +29,11 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await expect(eyebrow).toContainText("Sanctuary App for Christianity");
   });
 
-  test("spotlight flow renders all 14 feature iframes in order after LENS/S.O.A.P.", async ({
-    page,
-  }) => {
+  test("spotlight flow renders all 14 feature iframes in order", async ({ page }) => {
     await page.goto("/");
     await waitForPageReady(page);
     // The old iPad carousel was retired on 2026-06-02 in favor of in-context
-    // spotlight sections embedded as auto-sized iframes after LENS/S.O.A.P.
+    // spotlight sections embedded as auto-sized iframes.
     // 2026-06-04: the flow was reordered (Reflections + Games above Themes,
     // Focus Timer to the bottom) and the Orb, Parental Lock, and Deep Study
     // sections were added.
@@ -138,12 +136,15 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await expect(page.getByRole("link", { name: /Google Play/i })).toBeVisible();
   });
 
-  test("Mosaic showcase section renders with all expected content", async ({ page }) => {
-    await page.goto("/#mosaic-showcase");
+  test("retired scanner showcase stays off the page (SEO guard)", async ({ page }) => {
+    await page.goto("/");
     await waitForPageReady(page);
-    const section = page.locator("#mosaic-showcase");
-    await expect(section).toBeVisible();
-    await expect(section.locator(".mosaic-showcase__title")).toContainText("Scan a page");
+    // Pulled 2026-07-11 so search engines index Infinite Canvas + shipped
+    // features instead of the unshipped scanner/journaling method.
+    await expect(page.locator("#mosaic-showcase")).toHaveCount(0);
+    const body = (await page.locator("body").textContent()) ?? "";
+    expect(body).not.toMatch(/S\.O\.A\.P\./);
+    expect(body).not.toMatch(/scripture lens/i);
   });
 
   test("FAQ section renders all questions and each item expands", async ({ page }) => {
