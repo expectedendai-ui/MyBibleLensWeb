@@ -654,6 +654,537 @@
         }
       }
 
+      /* ============================================================
+         READING-TRAIL PHONES BAND (Milestone UI concept)
+         Two device mockups under the plan-board showcase.
+         Device colour vars are pinned to .trailphones so they never
+         touch the ms-* plan board above.
+      ============================================================ */
+      .trail-band {
+        border-top: 1px solid rgba(182, 117, 29, 0.14);
+        padding: 2.5rem 0 5.5rem;
+        background: radial-gradient(ellipse 60% 40% at 30% 18%, rgba(212, 146, 31, 0.05) 0%, transparent 65%), var(--parchment);
+      }
+      .trail-band__head {
+        max-width: 640px;
+        margin: 0 auto 2.6rem;
+        text-align: center;
+      }
+      .trail-band__title {
+        font-family: var(--font-display);
+        font-weight: 400;
+        font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem);
+        color: var(--deep-brown);
+        margin: 0.55rem 0 0.55rem;
+        letter-spacing: 0.005em;
+        text-wrap: balance;
+      }
+      .trail-band__sub {
+        font-family: var(--font-body);
+        font-size: 1rem;
+        line-height: 1.6;
+        color: rgba(61, 43, 31, 0.72);
+        max-width: 52ch;
+        margin: 0 auto;
+        text-wrap: balance;
+      }
+
+      /* Scoped device palette (the concept's espresso/gold theme) */
+      .trailphones {
+        --espresso: #2a170a;
+        --espresso-2: #3a2412;
+        --espresso-3: #4a2f18;
+        --parchment: #f5e8cc;
+        --gold: #d4af37;
+        --gold-deep: #a9861f;
+        --halo: #f0c850;
+        --muted: rgba(245, 232, 204, 0.55);
+        --line: rgba(245, 232, 204, 0.14);
+        display: flex;
+        gap: 44px;
+        justify-content: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+      .trailphones .col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+      }
+      .trailphones .cap {
+        font-size: 13px;
+        line-height: 1.5;
+        color: rgba(61, 43, 31, 0.7);
+        max-width: 26ch;
+        text-align: center;
+      }
+      .trailphones .cap b {
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      /* phone shell */
+      .phone {
+        width: 330px;
+        height: 680px;
+        background: var(--espresso);
+        border-radius: 44px;
+        padding: 12px;
+        box-shadow:
+          0 2px 0 rgba(0, 0, 0, 0.15),
+          0 30px 60px -20px rgba(30, 16, 6, 0.6),
+          inset 0 0 0 2px rgba(245, 232, 204, 0.06);
+        position: relative;
+        flex: none;
+      }
+      .screen {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(120% 60% at 50% -10%, #3a2412 0%, var(--espresso) 55%);
+        border-radius: 33px;
+        overflow: hidden;
+        color: var(--parchment);
+        display: flex;
+        flex-direction: column;
+      }
+      .notch {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 110px;
+        height: 26px;
+        background: #000;
+        border-radius: 0 0 16px 16px;
+        z-index: 40;
+      }
+
+      /* top HUD */
+      .hud {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 34px 16px 12px;
+        z-index: 20;
+      }
+      .hud .plan {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--parchment);
+      }
+      .flag {
+        width: 30px;
+        height: 30px;
+        border-radius: 9px;
+        background: linear-gradient(160deg, #4a2f18, #2f1c0c);
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--line);
+      }
+      .hud .spacer {
+        flex: 1;
+      }
+      .stat {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-weight: 700;
+        font-size: 15px;
+        font-variant-numeric: tabular-nums;
+      }
+      .stat.gold {
+        color: var(--halo);
+      }
+      .stat.streak {
+        color: #f0a03c;
+      }
+      .stat svg {
+        display: block;
+      }
+
+      /* unit banner */
+      .banner {
+        margin: 6px 14px 2px;
+        background: linear-gradient(135deg, var(--gold) 0%, var(--gold-deep) 100%);
+        color: #2a170a;
+        border-radius: 16px;
+        padding: 14px 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow:
+          0 4px 0 var(--gold-deep),
+          0 10px 20px -8px rgba(0, 0, 0, 0.5);
+        position: relative;
+        z-index: 15;
+      }
+      .banner .bk {
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 700;
+        opacity: 0.72;
+      }
+      .banner .ti {
+        font-family: var(--font-display);
+        font-size: 18px;
+        line-height: 1.1;
+        font-weight: 400;
+      }
+      .banner .guide {
+        margin-left: auto;
+        background: rgba(42, 23, 10, 0.14);
+        border: 1.5px solid rgba(42, 23, 10, 0.35);
+        color: #2a170a;
+        border-radius: 11px;
+        padding: 7px 9px;
+        display: grid;
+        place-items: center;
+      }
+
+      /* fellowship bar */
+      .fellow {
+        margin: 8px 14px 0;
+        background: var(--espresso-2);
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        padding: 8px 11px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+        z-index: 14;
+      }
+      .avs {
+        display: flex;
+      }
+      .avs span {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-size: 11px;
+        font-weight: 800;
+        color: #2a170a;
+        border: 2px solid var(--espresso-2);
+        margin-left: -7px;
+      }
+      .avs span:first-child {
+        margin-left: 0;
+      }
+      .avs span:nth-child(1) {
+        background: var(--halo);
+      }
+      .avs span:nth-child(2) {
+        background: var(--gold);
+      }
+      .avs span:nth-child(3) {
+        background: #c98a3a;
+      }
+      .ftxt {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.15;
+      }
+      .ftxt b {
+        font-size: 12.5px;
+        color: var(--parchment);
+        font-weight: 700;
+        letter-spacing: 0.01em;
+      }
+      .ftxt small {
+        font-size: 10px;
+        color: var(--muted);
+      }
+      .anvil {
+        margin-left: auto;
+        color: var(--gold);
+      }
+
+      /* trail */
+      .trail {
+        flex: 1;
+        overflow: hidden;
+        position: relative;
+        padding: 14px 0 8px;
+      }
+      .row {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .row:first-child {
+        margin-top: 26px;
+      }
+      .node {
+        position: relative;
+        width: 66px;
+        height: 66px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        border: none;
+        cursor: pointer;
+      }
+      .node.done {
+        background: var(--gold);
+        box-shadow: 0 7px 0 var(--gold-deep);
+        color: #2a170a;
+      }
+      .node.done:active {
+        transform: translateY(4px);
+        box-shadow: 0 3px 0 var(--gold-deep);
+      }
+      .node.locked {
+        background: #3a2917;
+        box-shadow: 0 7px 0 #241609;
+        color: rgba(245, 232, 204, 0.32);
+      }
+      .cur {
+        position: relative;
+        width: 86px;
+        height: 86px;
+        display: grid;
+        place-items: center;
+      }
+      .ring {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: conic-gradient(var(--halo) 0turn 0.35turn, rgba(245, 232, 204, 0.16) 0.35turn 1turn);
+        -webkit-mask: radial-gradient(farthest-side, transparent 36px, #000 37px);
+        mask: radial-gradient(farthest-side, transparent 36px, #000 37px);
+      }
+      .node.current {
+        width: 66px;
+        height: 66px;
+        background: var(--halo);
+        box-shadow: 0 7px 0 var(--gold-deep);
+        color: #2a170a;
+      }
+      .node.crown {
+        background: linear-gradient(160deg, var(--halo), var(--gold));
+        box-shadow: 0 7px 0 var(--gold-deep);
+        color: #2a170a;
+      }
+      .bubble {
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--parchment);
+        color: var(--gold-deep);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 6px 12px;
+        border-radius: 11px;
+        white-space: nowrap;
+        z-index: 6;
+        box-shadow: 0 4px 10px -3px rgba(0, 0, 0, 0.5);
+        animation: bob 1.6s ease-in-out infinite;
+      }
+      .bubble:after {
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-top: 7px solid var(--parchment);
+      }
+      @keyframes bob {
+        0%,
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
+        50% {
+          transform: translateX(-50%) translateY(-5px);
+        }
+      }
+      .daylabel {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 10.5px;
+        color: var(--muted);
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* bottom nav */
+      .nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px 8px 22px;
+        background: linear-gradient(180deg, rgba(42, 23, 10, 0), var(--espresso) 40%);
+        border-top: 1px solid var(--line);
+        z-index: 20;
+      }
+      .tab {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        font-size: 10px;
+        font-weight: 600;
+        color: var(--muted);
+        padding: 6px 14px;
+        border-radius: 14px;
+      }
+      .tab.on {
+        color: #2a170a;
+        background: var(--gold);
+      }
+      .tab svg {
+        display: block;
+      }
+
+      /* day-detail sheet (screen 2) */
+      .scrim {
+        position: absolute;
+        inset: 0;
+        background: rgba(20, 11, 4, 0.55);
+        z-index: 30;
+      }
+      .sheet {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 31;
+        background: var(--espresso-2);
+        border-radius: 26px 26px 33px 33px;
+        padding: 8px 18px 26px;
+        box-shadow: 0 -20px 40px -10px rgba(0, 0, 0, 0.6);
+        border-top: 1px solid var(--line);
+      }
+      .grab {
+        width: 38px;
+        height: 5px;
+        border-radius: 3px;
+        background: rgba(245, 232, 204, 0.3);
+        margin: 8px auto 14px;
+      }
+      .sheet .dh {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+      }
+      .sheet .dh .d {
+        font-family: var(--font-display);
+        font-size: 20px;
+        color: var(--parchment);
+        font-weight: 400;
+      }
+      .sheet .dh .pill {
+        margin-left: auto;
+        font-size: 11px;
+        font-weight: 700;
+        color: #2a170a;
+        background: var(--halo);
+        padding: 4px 9px;
+        border-radius: 20px;
+      }
+      .sheet .rd {
+        color: var(--gold);
+        font-size: 13px;
+        font-weight: 600;
+        margin: 3px 0 12px;
+      }
+      .seg {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        background: var(--espresso);
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        padding: 11px 13px;
+        margin-bottom: 8px;
+      }
+      .seg .n {
+        width: 26px;
+        height: 26px;
+        border-radius: 7px;
+        background: var(--espresso-3);
+        display: grid;
+        place-items: center;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--halo);
+        flex: none;
+      }
+      .seg .t {
+        font-size: 13px;
+        color: var(--parchment);
+      }
+      .seg .m {
+        margin-left: auto;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .sheet .acts {
+        display: flex;
+        gap: 10px;
+        margin-top: 14px;
+      }
+      .btn {
+        flex: 1;
+        text-align: center;
+        font-weight: 800;
+        font-size: 13.5px;
+        padding: 13px;
+        border-radius: 15px;
+        letter-spacing: 0.02em;
+      }
+      .btn.go {
+        background: var(--gold);
+        color: #2a170a;
+        box-shadow: 0 5px 0 var(--gold-deep);
+      }
+      .btn.tm {
+        background: transparent;
+        color: var(--parchment);
+        border: 1.5px solid var(--line);
+        box-shadow: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+      }
+      .reward {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        font-size: 11.5px;
+        color: var(--halo);
+        margin-top: 12px;
+        font-weight: 600;
+      }
+
+      @media (max-width: 400px) {
+        .phone {
+          width: 300px;
+          height: 618px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .bubble {
+          animation: none;
+        }
+      }
+
       /* Mockup banner */
       .mockup-banner {
         background: var(--deep-brown);
@@ -770,6 +1301,352 @@
           <div class="ms-weekdays">
             <span class="is-on">S</span><span>M</span><span class="is-on">T</span><span>W</span><span class="is-on">T</span><span>F</span
             ><span class="is-on">S</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== READING-TRAIL PHONES BAND ===== -->
+    <section class="trail-band" id="milestone-trail-band">
+      <div class="container">
+        <header class="trail-band__head">
+          <p class="mosaic-showcase__eyebrow">See your plan</p>
+          <h2 class="trail-band__title">Your reading plan, as a path you can walk</h2>
+          <p class="trail-band__sub">
+            Milestone lays your whole-Bible plan out as a trail &mdash; finished days glow gold, today is a tap away, and each day opens to
+            its exact chapters with a built-in Focus Timer.
+          </p>
+        </header>
+
+        <div class="trailphones" aria-hidden="true">
+          <!-- SCREEN 1 : TRAIL -->
+          <div class="col">
+            <div class="phone">
+              <div class="notch"></div>
+              <div class="screen">
+                <div class="hud">
+                  <div class="plan">
+                    <span class="flag">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="#F5E8CC">
+                        <path d="M10.4 2h3.2v5h4.4v3.2h-4.4V22h-3.2V10.2H6V7h4.4z" />
+                      </svg>
+                    </span>
+                    <span>Bible in a Year</span>
+                  </div>
+                  <span class="spacer"></span>
+                  <span class="stat gold" title="Gold">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#F0C850" stroke="#A9861F" stroke-width="1.5">
+                      <circle cx="12" cy="12" r="9" />
+                      <circle cx="12" cy="12" r="5.5" fill="none" stroke="#A9861F" stroke-width="1.2" />
+                    </svg>
+                    1,240
+                  </span>
+                  <span class="stat streak" title="Reading streak">
+                    <svg width="19" height="17" viewBox="0 0 24 22" fill="#F0A03C">
+                      <path
+                        d="M2 15h12.2c.8 0 1.3-.7 1-1.4-.2-.5-.7-.9-1.4-1l3.9-1.7c.7-.3.5-1.4-.3-1.4-.1 0-.3 0-.4.1l-4.5 2C11.3 10.9 9.8 10.6 8 10.6c-3 0-5.5 1.5-6.1 3.4H2a1 1 0 0 0 0 2z"
+                      />
+                      <path d="M4.2 17c.9 1.4 3 2.3 5.3 2.3s4.4-.9 5.3-2.3z" opacity=".5" />
+                      <path
+                        d="M17.6 8c.5-1.2 0-2-.3-2.6 1 .5 1.8 1.5 1.8 2.6a1.75 1.75 0 0 1-3.5 0c0-.4.1-.8.3-1.1.1.6.7 1 1.7 1.1z"
+                        fill="#F0C850"
+                      />
+                    </svg>
+                    14
+                  </span>
+                </div>
+
+                <div class="banner">
+                  <div>
+                    <div class="bk">The Gospels &middot; Week 3</div>
+                    <div class="ti">Matthew</div>
+                  </div>
+                  <span class="guide">
+                    <svg
+                      width="17"
+                      height="17"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#2A170A"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                    </svg>
+                  </span>
+                </div>
+
+                <div class="fellow">
+                  <div class="avs"><span>D</span><span>M</span><span>J</span></div>
+                  <div class="ftxt"><b>Iron Sharpens Iron</b><small>Reading with 3 &middot; Prov 27:17</small></div>
+                  <span class="anvil">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                      <path
+                        d="M2 8h8v1.6c0 1.7 1.6 2.9 3.8 2.9h.5l1-1.5h3.2l-1.7 3.2h-3.9c-.7 0-1.3.2-1.7.6L9.7 18H13v2H5v-2h2.4l1.6-4.4C7.4 13 6 11.5 6 9.6V10H2z"
+                      />
+                    </svg>
+                  </span>
+                </div>
+
+                <div class="trail">
+                  <div class="row" style="right: 0">
+                    <button class="node done">
+                      <svg
+                        width="30"
+                        height="30"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#2A170A"
+                        stroke-width="3.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M20 6L9 17l-5-5" />
+                      </svg>
+                    </button>
+                    <span class="daylabel" style="left: calc(50% + 58px)">Day 15 &middot; Mt 1&ndash;2</span>
+                  </div>
+                  <div class="row" style="right: 44px">
+                    <button class="node done">
+                      <svg
+                        width="30"
+                        height="30"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#2A170A"
+                        stroke-width="3.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M20 6L9 17l-5-5" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="row" style="right: 78px">
+                    <button class="node done">
+                      <svg
+                        width="30"
+                        height="30"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#2A170A"
+                        stroke-width="3.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M20 6L9 17l-5-5" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="row" style="right: 44px">
+                    <div class="cur">
+                      <span class="bubble">Start</span>
+                      <div class="ring"></div>
+                      <button class="node current">
+                        <svg
+                          width="30"
+                          height="30"
+                          viewBox="0 0 24 24"
+                          fill="#2A170A"
+                          stroke="#2A170A"
+                          stroke-width="1.5"
+                          stroke-linejoin="round"
+                        >
+                          <path d="M12 2l3 6.5 7 .6-5.3 4.6 1.6 6.9L12 17l-6.9 3.6 1.6-6.9L1.4 9.1l7-.6z" />
+                        </svg>
+                      </button>
+                    </div>
+                    <span class="daylabel" style="left: calc(50% + 64px)">Day 18 &middot; Mt 5&ndash;7</span>
+                  </div>
+                  <div class="row" style="right: 0">
+                    <button class="node locked">
+                      <svg
+                        width="26"
+                        height="26"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M12 2l3 6.5 7 .6-5.3 4.6 1.6 6.9L12 17l-6.9 3.6 1.6-6.9L1.4 9.1l7-.6z" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="row" style="right: -44px">
+                    <button class="node locked">
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <rect x="5" y="11" width="14" height="9" rx="2" />
+                        <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="row" style="right: 0">
+                    <button class="node crown">
+                      <svg
+                        width="30"
+                        height="30"
+                        viewBox="0 0 24 24"
+                        fill="#2A170A"
+                        stroke="#2A170A"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M2 18l3-10 4.5 5L12 6l2.5 7L19 8l3 10z" />
+                      </svg>
+                    </button>
+                    <span class="daylabel" style="left: calc(50% + 58px)">Finish Matthew</span>
+                  </div>
+                </div>
+
+                <div class="nav">
+                  <div class="tab on">
+                    <svg width="20" height="20" viewBox="0 0 24 24">
+                      <g fill="currentColor">
+                        <path d="M12 22c-2.1-2.1-3.4-4.1-3.4-6.2 0-2 1.5-3.3 3.4-3.3s3.4 1.3 3.4 3.3C15.4 17.9 14.1 19.9 12 22z" />
+                        <path d="M8.7 13.1c-1.7-.3-3-1.3-3.6-2.8 1.7-.3 3.1.1 4.1 1.2z" />
+                        <path d="M15.3 13.1c1.7-.3 3-1.3 3.6-2.8-1.7-.3-3.1.1-4.1 1.2z" />
+                      </g>
+                      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10.6 12.2C9.3 9.5 8.7 7 7.3 5.2" />
+                        <path d="M9.2 9.1C8 9 6.9 8.4 6.1 7.4" />
+                        <path d="M8.7 7C8.2 6 8.1 4.8 8.4 3.6" />
+                        <path d="M13.4 12.2C14.7 9.5 15.3 7 16.7 5.2" />
+                        <path d="M14.8 9.1C16 9 17.1 8.4 17.9 7.4" />
+                        <path d="M15.3 7C15.8 6 15.9 4.8 15.6 3.6" />
+                      </g></svg
+                    >Read
+                  </div>
+                  <div class="tab">
+                    <svg width="21" height="20" viewBox="0 0 24 22" fill="currentColor">
+                      <path
+                        d="M2 15h12.2c.8 0 1.3-.7 1-1.4-.2-.5-.7-.9-1.4-1l3.9-1.7c.7-.3.5-1.4-.3-1.4-.1 0-.3 0-.4.1l-4.5 2C11.3 10.9 9.8 10.6 8 10.6c-3 0-5.5 1.5-6.1 3.4H2a1 1 0 0 0 0 2z"
+                      />
+                      <path d="M4.2 17c.9 1.4 3 2.3 5.3 2.3s4.4-.9 5.3-2.3z" opacity=".55" />
+                      <path
+                        d="M17.6 8c.5-1.2 0-2-.3-2.6 1 .5 1.8 1.5 1.8 2.6a1.75 1.75 0 0 1-3.5 0c0-.4.1-.8.3-1.1.1.6.7 1 1.7 1.1z"
+                      /></svg
+                    >Streak
+                  </div>
+                  <div class="tab">
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M9 11l3 3L22 4" />
+                      <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" /></svg
+                    >Quests
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cap">
+              <b>The reading trail.</b> Every day on your plan becomes a step on a path &mdash; finished days glow gold, today pulses with a
+              tap-to-start.
+            </div>
+          </div>
+
+          <!-- SCREEN 2 : DAY DETAIL SHEET -->
+          <div class="col">
+            <div class="phone">
+              <div class="notch"></div>
+              <div class="screen">
+                <div class="hud">
+                  <div class="plan">
+                    <span class="flag"
+                      ><svg width="15" height="15" viewBox="0 0 24 24" fill="#F5E8CC">
+                        <path d="M10.4 2h3.2v5h4.4v3.2h-4.4V22h-3.2V10.2H6V7h4.4z" /></svg></span
+                    ><span>Bible in a Year</span>
+                  </div>
+                  <span class="spacer"></span>
+                  <span class="stat gold"
+                    ><svg width="18" height="18" viewBox="0 0 24 24" fill="#F0C850" stroke="#A9861F" stroke-width="1.5">
+                      <circle cx="12" cy="12" r="9" />
+                      <circle cx="12" cy="12" r="5.5" fill="none" stroke="#A9861F" stroke-width="1.2" /></svg
+                    >1,240</span
+                  >
+                  <span class="stat streak"
+                    ><svg width="19" height="17" viewBox="0 0 24 22" fill="#F0A03C">
+                      <path
+                        d="M2 15h12.2c.8 0 1.3-.7 1-1.4-.2-.5-.7-.9-1.4-1l3.9-1.7c.7-.3.5-1.4-.3-1.4-.1 0-.3 0-.4.1l-4.5 2C11.3 10.9 9.8 10.6 8 10.6c-3 0-5.5 1.5-6.1 3.4H2a1 1 0 0 0 0 2z"
+                      />
+                      <path d="M4.2 17c.9 1.4 3 2.3 5.3 2.3s4.4-.9 5.3-2.3z" opacity=".5" />
+                      <path
+                        d="M17.6 8c.5-1.2 0-2-.3-2.6 1 .5 1.8 1.5 1.8 2.6a1.75 1.75 0 0 1-3.5 0c0-.4.1-.8.3-1.1.1.6.7 1 1.7 1.1z"
+                        fill="#F0C850"
+                      /></svg
+                    >14</span
+                  >
+                </div>
+                <div class="banner" style="opacity: 0.5">
+                  <div>
+                    <div class="bk">The Gospels &middot; Week 3</div>
+                    <div class="ti">Matthew</div>
+                  </div>
+                </div>
+                <div class="trail" style="opacity: 0.35"></div>
+
+                <div class="scrim"></div>
+                <div class="sheet">
+                  <div class="grab"></div>
+                  <div class="dh">
+                    <span class="d">Day 18</span>
+                    <span class="pill">Today</span>
+                  </div>
+                  <div class="rd">Matthew 5 &ndash; 7 &middot; The Sermon on the Mount</div>
+
+                  <div class="seg"><span class="n">5</span><span class="t">The Beatitudes</span><span class="m">~6 min</span></div>
+                  <div class="seg"><span class="n">6</span><span class="t">Prayer &amp; treasure</span><span class="m">~5 min</span></div>
+                  <div class="seg"><span class="n">7</span><span class="t">Ask, seek, knock</span><span class="m">~5 min</span></div>
+
+                  <div class="acts">
+                    <div class="btn go">Start reading</div>
+                    <div class="btn tm">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="12" cy="13" r="8" />
+                        <path d="M12 9v4l2 2M9 2h6" /></svg
+                      >Focus timer
+                    </div>
+                  </div>
+                  <div class="reward">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="#F0C850" stroke="#A9861F" stroke-width="1.5">
+                      <circle cx="12" cy="12" r="9" />
+                    </svg>
+                    Complete this day to earn <b>+50 Gold</b> &amp; keep your streak
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cap">
+              <b>Tap any day.</b> See the exact chapters, a minutes-a-day estimate, and start reading with a built-in Focus Timer.
+            </div>
           </div>
         </div>
       </div>
