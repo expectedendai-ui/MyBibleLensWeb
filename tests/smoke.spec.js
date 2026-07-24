@@ -29,7 +29,7 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await expect(eyebrow).toContainText("Sanctuary App for Christianity");
   });
 
-  test("spotlight flow renders all 14 feature iframes in order", async ({ page }) => {
+  test("spotlight flow renders all 13 feature iframes in order", async ({ page }) => {
     await page.goto("/");
     await waitForPageReady(page);
     // The old iPad carousel was retired on 2026-06-02 in favor of in-context
@@ -49,7 +49,6 @@ test.describe("MyBibleLens marketing site — smoke", () => {
       "sermon-flow",
       "reflections-flow",
       "milestone-flow",
-      "deep-study-flow",
       "fellowship-flow",
       "games-flow",
       "themes-flow",
