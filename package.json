@@ -2,7 +2,7 @@
   "name": "mybiblelens-web",
   "private": true,
   "version": "1.0.0",
-  "description": "Marketing site for MyBibleLens — bringing people closer to God in an exciting and easy way!",
+  "description": "Marketing site for MyBibleLens — bringing you closer to God in an exciting and easy way!",
   "scripts": {
     "dev": "http-server -p 8765 -c-1 --cors -o /index.html",
     "format": "prettier --write \"**/*.{html,css,js,json,md}\"",
