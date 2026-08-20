@@ -107,10 +107,10 @@ async function waitForPageReady(page) {
 }
 
 /**
- * Force every lazy spotlight iframe to load and finish its height animation.
+ * Force every lazy spotlight iframe to load and settle at its measured height.
  * Sections below the flow (Lens showcase, pricing, FAQ) otherwise keep getting
  * pushed down mid-capture as each iframe loads and the auto-resize script
- * re-measures it (`transition: height 200ms` makes each jump a slide).
+ * measures its final content height.
  */
 async function settleLazyFlows(page) {
   await page.evaluate(async () => {

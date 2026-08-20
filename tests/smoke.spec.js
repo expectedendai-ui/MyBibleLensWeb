@@ -1,6 +1,6 @@
 // @ts-check
 const { test, expect } = require("@playwright/test");
-const { waitForPageReady, attachConsoleErrorWatch } = require("./utils");
+const { waitForPageReady, settleLazyFlows, attachConsoleErrorWatch } = require("./utils");
 
 test.describe("MyBibleLens marketing site — smoke", () => {
   test("loads with no console errors", async ({ page }) => {
@@ -16,7 +16,9 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await waitForPageReady(page);
     await expect(page.locator(".hero-title")).toHaveText(/MyBibleLens/);
     // Tagline lives above the store CTAs (moved out of hero) — still classed .hero-tagline.
-    await expect(page.locator(".hero-tagline")).toContainText("Bringing people closer to God");
+    await expect(page.locator(".hero-tagline")).toContainText(
+      "Bringing you closer to God in an exciting and easy way!"
+    );
   });
 
   test("hero eyebrow announces the World's First Sanctuary App for Christianity", async ({
@@ -29,9 +31,10 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await expect(eyebrow).toContainText("Sanctuary App for Christianity");
   });
 
-  test("spotlight flow renders all 13 feature iframes in order", async ({ page }) => {
+  test("spotlight flow renders all 13 feature iframes in order without nested scrolling", async ({
+    page,
+  }) => {
     await page.goto("/");
-    await waitForPageReady(page);
     // The old iPad carousel was retired on 2026-06-02 in favor of in-context
     // spotlight sections embedded as auto-sized iframes.
     // 2026-06-04: the flow was reordered (Reflections + Games above Themes,
@@ -60,7 +63,44 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await expect(wraps).toHaveCount(order.length);
     for (let i = 0; i < order.length; i++) {
       await expect(wraps.nth(i)).toHaveAttribute("id", order[i]);
-      await expect(page.locator(`#${order[i]} iframe`)).toBeAttached();
+      const frame = page.locator(`#${order[i]} iframe`);
+      await expect(frame).toBeAttached();
+      const transition = await frame.evaluate((element) => {
+        const style = getComputedStyle(element);
+        return {
+          property: style.transitionProperty,
+          duration: style.transitionDuration,
+          hasAnimatedHeight: style.transitionProperty
+            .split(",")
+            .some(
+              (property, index) =>
+                ["all", "height"].includes(property.trim()) &&
+                parseFloat(style.transitionDuration.split(",")[index] ?? style.transitionDuration) >
+                  0
+            ),
+        };
+      });
+      expect(
+        transition,
+        `${order[i]} must resize immediately so it never becomes a second scroll surface`
+      ).toMatchObject({ hasAnimatedHeight: false });
+      await expect(
+        frame,
+        `${order[i]} is presentation-only and must not expose an iframe scrollbar`
+      ).toHaveAttribute("scrolling", "no");
+    }
+    await waitForPageReady(page);
+    await settleLazyFlows(page);
+    for (const id of order) {
+      const dimensions = await page.locator(`#${id} iframe`).evaluate((element) => ({
+        frameHeight: element.getBoundingClientRect().height,
+        contentHeight: element.contentDocument?.body.scrollHeight ?? null,
+      }));
+      expect(dimensions.contentHeight, `${id} content must be measurable`).not.toBeNull();
+      expect(
+        Math.abs(dimensions.frameHeight - dimensions.contentHeight),
+        `${id} frame must fit its content without clipping or nested scrolling`
+      ).toBeLessThanOrEqual(2);
     }
   });
 
