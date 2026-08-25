@@ -367,18 +367,18 @@
         transform: rotate(0deg);
         animation-delay: -1.5s;
       }
-      /* Phone 2 — Editor: TOP-RIGHT, pushed further right */
+      /* Phone 2 — Editor: TOP-RIGHT, kept inside the board's safe edge */
       .phone--editor {
-        right: -16%;
-        top: -24%;
+        right: 0;
+        top: -10%;
         width: 28%;
         aspect-ratio: 9 / 19.5;
         transform: rotate(0deg);
         animation-delay: -3s;
       }
-      /* Phone 3 — Present: BOTTOM-RIGHT, brought up + pushed right to clear "Sunday Preach" label */
+      /* Phone 3 — Present: BOTTOM-RIGHT, brought up to clear "Sunday Preach" */
       .phone--present {
-        right: -22%;
+        right: -1%;
         bottom: -2%;
         width: 28%;
         aspect-ratio: 9 / 19.5;
@@ -587,16 +587,16 @@
           max-width: 620px;
           aspect-ratio: 1 / 0.92;
         }
-        /* Pull both phones back into the frame — desktop offsets hang them off the right */
+        /* Keep both phones within the single-column frame. */
         .phone--editor {
-          right: -2%;
+          right: 1%;
           top: -40%;
         }
         /* present phone: RIGHT side of the iPad, below the editor phone, lifted above
            the Draft/Polish/Preach rail */
         .phone--present {
           left: auto;
-          right: -2%;
+          right: 1%;
           bottom: 10%;
         }
       }

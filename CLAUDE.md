@@ -60,7 +60,15 @@ in Docker if we ever need cross-platform visual coverage.)
 | Kingdom   | $59.99           | 7      |
 | Founding  | **$99.99**       | **14** |
 
-All paid tiers get **identical features** — only seat count differs. No subscriptions. Lifetime ownership. Processed by Apple IAP / Google Play Billing — never Stripe in 2026-05+.
+All paid tiers get **identical features** — only seat count differs. Core feature tiers and Empire seat packs are one-time purchases with lifetime ownership. Cloud storage is the only subscription exception:
+
+| Cloud plan  | Capacity               | Monthly | Annual |
+| ----------- | ---------------------- | ------- | ------ |
+| Seeker Free | 10 GB for new accounts | Free    | Free   |
+| Cloud 20    | 20 GB total            | $1.99   | $19.99 |
+| Cloud 50    | 50 GB total            | $3.99   | $39.99 |
+
+Existing accounts keep their previously included 20 GB. Cloud plans are total caps, not stackable add-ons. After cancellation, paid capacity remains through the current paid period; if the account is then over its free/grandfathered cap, uploads pause while existing files remain viewable, exportable, and deletable. Files are never deleted automatically. Purchases are processed by Apple IAP / Google Play Billing — never Stripe in 2026-05+.
 
 ## UX rules (the sanctuary feel)
 

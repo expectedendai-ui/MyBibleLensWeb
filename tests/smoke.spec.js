@@ -104,6 +104,47 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     }
   });
 
+  test("Sermon Builder phones stay inside the visible spotlight at desktop widths", async ({
+    page,
+  }) => {
+    await page.goto("/mockups/sermon-spotlight.html");
+    await waitForPageReady(page);
+
+    for (const width of [1024, 1280, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+
+      for (const selector of [".phone--editor", ".phone--present"]) {
+        const bounds = await page.locator(selector).evaluate((element) => {
+          const rect = element.getBoundingClientRect();
+          return {
+            left: rect.left,
+            right: rect.right,
+            top: rect.top,
+            bottom: rect.bottom,
+            viewportWidth: window.innerWidth,
+            documentHeight: document.documentElement.scrollHeight,
+          };
+        });
+        expect(
+          bounds.left,
+          `${selector} must not be cut off on the left at ${width}px`
+        ).toBeGreaterThanOrEqual(0);
+        expect(
+          bounds.right,
+          `${selector} must not be cut off on the right at ${width}px`
+        ).toBeLessThanOrEqual(bounds.viewportWidth);
+        expect(
+          bounds.top,
+          `${selector} must not be cut off on the top at ${width}px`
+        ).toBeGreaterThanOrEqual(0);
+        expect(
+          bounds.bottom,
+          `${selector} must not be cut off on the bottom at ${width}px`
+        ).toBeLessThanOrEqual(bounds.documentHeight);
+      }
+    }
+  });
+
   test("Supabase security badge appears with the right link", async ({ page }) => {
     await page.goto("/");
     await waitForPageReady(page);
@@ -128,21 +169,52 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await expect(cardFor("Founding")).toContainText("$99.99");
   });
 
-  test("no subscription / Stripe artifacts remain on the page", async ({ page }) => {
+  test("core tiers stay lifetime while cloud storage shows the current subscriptions", async ({
+    page,
+  }) => {
     await page.goto("/");
     await waitForPageReady(page);
     const body = (await page.locator("body").textContent()) ?? "";
+
+    await expect(page.locator(".pricing-section")).toContainText("Pay Once. Yours Forever.");
+    await expect(page.locator(".cloud-storage-section")).toContainText("10 GB included free");
+    await expect(page.locator(".cloud-storage-section")).toContainText("20 GB total");
+    await expect(page.locator(".cloud-storage-section")).toContainText("$1.99/month");
+    await expect(page.locator(".cloud-storage-section")).toContainText("$19.99/year");
+    await expect(page.locator(".cloud-storage-section")).toContainText("50 GB total");
+    await expect(page.locator(".cloud-storage-section")).toContainText("$3.99/month");
+    await expect(page.locator(".cloud-storage-section")).toContainText("$39.99/year");
+    await expect(page.locator(".cloud-storage-section")).toContainText(
+      "Existing accounts keep their included 20 GB"
+    );
+    await expect(page.locator(".cloud-storage-section")).toContainText(
+      "Your files are never deleted automatically"
+    );
+
     // Old pricing model leftovers — guard against accidental rollback.
-    // Match price-slash patterns ($X / month) NOT feature-rate copy
-    // ("1 Scripture Glow per month" is legitimate).
     expect(body, "old $7.77 monthly Apostle price should be gone").not.toMatch(/\$7\.77/);
-    expect(body, "no slash-month price tags").not.toMatch(/\$\d+(\.\d+)?\s*\/\s*month/i);
-    expect(body, "no slash-year price tags").not.toMatch(/\$\d+(\.\d+)?\s*\/\s*year/i);
+    expect(body, "retired +10 GB storage pack should be gone").not.toMatch(/Storage Pack \+10 GB/i);
+    expect(body, "retired +50 GB storage pack should be gone").not.toMatch(/Storage Pack \+50 GB/i);
+    expect(body, "retired $12.99 storage price should be gone").not.toMatch(/\$12\.99/);
+    expect(body, "retired $49.99 storage price should be gone").not.toMatch(/\$49\.99/);
     expect(body, "70,000-seat narrative is retired").not.toMatch(/70,000\s+seats/i);
     expect(body, "Founding $144 price is retired").not.toMatch(/founding\s+member.*\$144/i);
-    expect(body, "monthly billing toggle is gone").not.toMatch(
-      /monthly\s+billing|yearly\s+billing/i
-    );
+  });
+
+  test("billing disclosure explains storage renewal, cancellation, and safe over-cap behavior", async ({
+    page,
+  }) => {
+    await page.goto("/legal.html#refund");
+    await waitForPageReady(page);
+    const body = (await page.locator("body").textContent()) ?? "";
+
+    expect(body).toContain("Cloud 20");
+    expect(body).toContain("Cloud 50");
+    expect(body).toContain("auto-renewing subscription");
+    expect(body).toContain("current paid billing period");
+    expect(body).toContain("new uploads are paused");
+    expect(body).toContain("never automatically deleted");
+    expect(body).not.toMatch(/Storage Pack \+10 GB|Storage Pack \+50 GB|\$12\.99|\$49\.99/i);
   });
 
   test("footer legal links are readable (contrast guard)", async ({ page }) => {
