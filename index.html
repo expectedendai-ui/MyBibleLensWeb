@@ -64,7 +64,7 @@
           ]
         },
         "sameAs": ["https://www.instagram.com/mybiblelens/", "https://apps.apple.com/us/app/mybiblelens/id6764069602"],
-        "featureList": "Infinite Canvas, Zoom Canvas (hand-drawn scripture art, NOT AI image generation), Sermon Builder with real-time COLLAB, Reflections journal (8 modes), Milestone (day-by-day Bible reading plans with a Reading Circle), Mosaic vision boards, Prayer Space, AI study guide, Fellowship sharing (friend-picker only), 20 GB included cloud storage, 12 themes, 3 typefaces, Cloud sync, Focus Timer",
+        "featureList": "Infinite Canvas, Zoom Canvas (hand-drawn scripture art, NOT AI image generation), Sermon Builder with real-time COLLAB, Reflections journal (8 modes), Milestone (day-by-day Bible reading plans with a Reading Circle), Mosaic vision boards, Prayer Space, AI study guide, Fellowship sharing (friend-picker only), 10 GB included cloud storage for new accounts, optional 20 GB and 50 GB cloud storage plans, 12 themes, 3 typefaces, Cloud sync, Focus Timer",
         "offers": [
           {
             "@type": "Offer",
@@ -72,7 +72,7 @@
             "price": "0",
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock",
-            "description": "Free starter tier. 15 shared AI guide queries every 5 hours, 2 Infinite Canvas boards, 5 Sermon decks, 1 Mosaic board, Bible Trivia, Milestone reading plans, Reflect notes, 20 GB cloud storage, fellowship access."
+            "description": "Free starter tier. 15 shared AI guide queries every 5 hours, 2 Infinite Canvas boards, 5 Sermon decks, 1 Mosaic board, Bible Trivia, Milestone reading plans, Reflect notes, 10 GB cloud storage for new accounts, fellowship access."
           },
           {
             "@type": "Offer",
@@ -108,19 +108,35 @@
           },
           {
             "@type": "Offer",
-            "name": "Storage Pack +10 GB",
-            "price": "12.99",
+            "name": "Cloud 20 Monthly",
+            "price": "1.99",
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock",
-            "description": "One-time consumable. Permanently adds 10 GB to your cloud storage limit. Stackable, never expires, no subscription."
+            "description": "Auto-renewing monthly cloud storage subscription with a 20 GB total account limit. Cancel anytime."
           },
           {
             "@type": "Offer",
-            "name": "Storage Pack +50 GB",
-            "price": "49.99",
+            "name": "Cloud 20 Annual",
+            "price": "19.99",
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock",
-            "description": "One-time consumable. Permanently adds 50 GB to your cloud storage limit. Stackable, never expires, no subscription."
+            "description": "Auto-renewing annual cloud storage subscription with a 20 GB total account limit. Cancel anytime."
+          },
+          {
+            "@type": "Offer",
+            "name": "Cloud 50 Monthly",
+            "price": "3.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "description": "Auto-renewing monthly cloud storage subscription with a 50 GB total account limit. Cancel anytime."
+          },
+          {
+            "@type": "Offer",
+            "name": "Cloud 50 Annual",
+            "price": "39.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "description": "Auto-renewing annual cloud storage subscription with a 50 GB total account limit. Cancel anytime."
           }
         ]
       }
@@ -6191,8 +6207,8 @@
         <div class="section-header">
           <h2 class="section-title" data-i18n="pricing.title">Pay Once. Yours Forever.</h2>
           <p class="section-subtitle" data-i18n="pricing.subtitle">
-            No app subscriptions. No churn. No surprise charges. One purchase unlocks every feature for life — for you and everyone you
-            bring with you. Extra cloud storage is the one optional add-on, only if you ever outgrow your free space.
+            No app-feature subscription. One purchase unlocks every feature for life — for you and everyone you bring with you. Optional
+            cloud storage is the only monthly or annual subscription, and only if you outgrow your free space.
           </p>
           <p
             style="
@@ -6252,7 +6268,7 @@
                   <li>Bible Trivia &mdash; free for everyone</li>
                   <li>Milestone &mdash; day-by-day Bible reading plans</li>
                   <li>Reflect notes &amp; guided reflections</li>
-                  <li>20 GB cloud storage included</li>
+                  <li>10 GB cloud storage included for new accounts</li>
                   <li>Fellowship access</li>
                   <li>Scripture Glow / Zoom Canvas &mdash; paid only</li>
                   <li>Prayer Space &mdash; paid only</li>
@@ -6862,7 +6878,7 @@
           }
           .cs-fill {
             height: 100%;
-            width: 41%;
+            width: 82%;
             border-radius: 999px;
             background: linear-gradient(90deg, #b6751d 0%, #d4921f 50%, #f0c850 100%);
           }
@@ -7055,22 +7071,24 @@
             }
           }
         </style>
-        <section class="cs-block" aria-labelledby="cs-heading">
+        <section class="cs-block cloud-storage-section" aria-labelledby="cs-heading">
           <div class="cs-topline">
             <div>
-              <p class="cs-eyebrow">Cloud Storage · Included</p>
-              <h3 class="cs-title" id="cs-heading">20 GB included. Need more room? Buy it once — like everything else.</h3>
+              <p class="cs-eyebrow">Cloud Storage · Flexible</p>
+              <h3 class="cs-title" id="cs-heading">
+                10 GB included free. Upgrade to 20 GB or 50 GB whenever your sanctuary needs more room.
+              </h3>
             </div>
-            <div class="cs-pill">Private to you</div>
+            <div class="cs-pill">Private &amp; secure</div>
           </div>
 
           <div class="cs-meter" aria-label="Cloud storage meter preview">
             <div class="cs-meter-row">
               <div>
                 <p class="cs-meter-label">Cloud Storage</p>
-                <p class="cs-meter-value">8.2 GB used of 20 GB included</p>
+                <p class="cs-meter-value">8.2 GB used of 10 GB included</p>
               </div>
-              <div class="cs-percent">41%</div>
+              <div class="cs-percent">82%</div>
             </div>
 
             <div class="cs-bar" aria-hidden="true">
@@ -7078,53 +7096,52 @@
             </div>
 
             <p class="cs-help">
-              You won't even see this meter until you need it. Storage stays out of your way until you pass 85% full — only then does
-              MyBibleLens quietly offer more room. Add a pack once and the meter recedes again. No renewals, no monthly bill, no countdown
-              clocks.
+              Storage stays out of your way until you are close to full. Then MyBibleLens quietly offers more room with a monthly or annual
+              plan. Cancel anytime in your Apple account; your files remain yours.
             </p>
 
             <div class="cs-estimate">
               <div class="cs-card">
-                <div class="cs-card-label">Most of the time</div>
+                <div class="cs-card-label">Below 85%</div>
                 <div class="cs-card-value">Invisible</div>
-                <div class="cs-card-sub">Below 85% full, storage never asks for your attention</div>
+                <div class="cs-card-sub">Storage stays quiet while you have plenty of room</div>
               </div>
               <div class="cs-card">
-                <div class="cs-card-label">Near the cap</div>
+                <div class="cs-card-label">Near your limit</div>
                 <div class="cs-card-value">One gentle card</div>
-                <div class="cs-card-sub">"Add more room" appears in your profile — that's it</div>
+                <div class="cs-card-sub">Choose 20 GB or 50 GB only when you need it</div>
               </div>
               <div class="cs-card">
                 <div class="cs-card-label">At the cap</div>
                 <div class="cs-card-value">Nothing deleted</div>
-                <div class="cs-card-sub">Your work stays yours — view, edit, export, free up space</div>
+                <div class="cs-card-sub">View, export, or delete files while uploads pause</div>
               </div>
             </div>
 
             <div class="cs-plan-row">
               <div class="cs-plan">
-                <strong>Included</strong>
-                <div class="cs-seats">Every account</div>
-                <div class="cs-plan-meta">20 GB of lifetime cloud storage for your boards, photos, and creations</div>
+                <strong>Seeker Free</strong>
+                <div class="cs-seats">Included</div>
+                <div class="cs-plan-meta">10 GB total for new accounts</div>
                 <div class="cs-plan-price">$0</div>
               </div>
               <div class="cs-plan">
-                <strong>+10 GB</strong>
-                <div class="cs-seats">One-time</div>
-                <div class="cs-plan-meta">Raises your limit by 10 GB forever. Stacks with everything you own.</div>
-                <div class="cs-plan-price">$12.99 once</div>
+                <strong>Cloud 20</strong>
+                <div class="cs-seats">Monthly or annual</div>
+                <div class="cs-plan-meta">20 GB total for your whole sanctuary</div>
+                <div class="cs-plan-price">$1.99/month · $19.99/year</div>
               </div>
               <div class="cs-plan">
-                <strong>+50 GB</strong>
-                <div class="cs-seats">One-time</div>
-                <div class="cs-plan-meta">Raises your limit by 50 GB forever. Stacks with everything you own.</div>
-                <div class="cs-plan-price">$49.99 once</div>
+                <strong>Cloud 50</strong>
+                <div class="cs-seats">Monthly or annual</div>
+                <div class="cs-plan-meta">50 GB total for your whole sanctuary</div>
+                <div class="cs-plan-price">$3.99/month · $39.99/year</div>
               </div>
             </div>
           </div>
 
           <div class="cs-footer-note">
-            Storage packs are one-time purchases, like everything else in MyBibleLens. Nothing here is ever billed monthly.
+            Existing accounts keep their included 20 GB. Cancel anytime. Your files are never deleted automatically.
           </div>
         </section>
 
@@ -7139,10 +7156,8 @@
             line-height: 1.6;
           "
         >
-          Purchases are processed by Apple In-App Purchase or Google Play Billing. Lifetime means lifetime of the app — no recurring charges
-          for anything, ever. Empire Pack &amp; Empire Plus unlock every feature and can be bought on any plan — even free; seats inherit
-          your full access. Optional storage packs (+10 GB / +50 GB) are one-time purchases too — nothing in MyBibleLens is ever billed
-          monthly.
+          Core feature tiers and Empire seat packs remain one-time purchases. Cloud storage upgrades are the only auto-renewing plans and
+          are purchased in the iPhone app. Apple shows the final localized price before you subscribe.
         </p>
       </div>
     </section>
@@ -7168,15 +7183,15 @@
             "name": "What is MyBibleLens?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "MyBibleLens is the World's First Sanctuary App for Christianity — a digital sanctuary for Scripture rather than a daily-verse feed. It offers an Infinite Canvas for study notes with live fellowship, Sermon Builder with real-time fellowship, Scripture Glow (a hand-drawn zoom canvas), Reflections journaling, and Milestone Bible reading plans. One-time purchase from $14.99 with lifetime access — no subscriptions."
+              "text": "MyBibleLens is the World's First Sanctuary App for Christianity — a digital sanctuary for Scripture rather than a daily-verse feed. It offers an Infinite Canvas for study notes with live fellowship, Sermon Builder with real-time fellowship, Scripture Glow (a hand-drawn zoom canvas), Reflections journaling, and Milestone Bible reading plans. Core feature tiers are one-time purchases with lifetime access. Optional cloud storage is available as a monthly or annual subscription."
             }
           },
           {
             "@type": "Question",
-            "name": "Is MyBibleLens really a one-time purchase with no subscription?",
+            "name": "Is MyBibleLens really a one-time purchase?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. You pay once on the Apple App Store or Google Play and the tier you buy is yours for the lifetime of the app — no renewals, no subscriptions, and no paywalling features you already own."
+              "text": "Yes. You pay once for a feature tier and keep it for the lifetime of the app. Optional cloud storage is the only auto-renewing product, with 20 GB and 50 GB monthly or annual plans that you can cancel anytime."
             }
           }
         ]
@@ -7200,21 +7215,22 @@
                 MyBibleLens is the World's First Sanctuary App for Christianity — a digital sanctuary for Scripture, not a daily-verse feed.
                 Map study notes on an Infinite Canvas with live fellowship, build and present sermons in real-time fellowship (Sermon
                 Builder), hand-draw on a Scripture Glow zoom canvas, and journal through Reflections while Milestone paces your whole-Bible
-                reading plan. One-time purchase from $14.99 — lifetime access, no subscriptions.
+                reading plan. Core feature tiers start at a one-time $14.99 purchase with lifetime access. Optional cloud storage is
+                available separately by month or year.
               </p>
             </div>
           </details>
 
           <details class="faq-item">
             <summary>
-              <span class="faq-item__q">Is this <em>really</em> one-time? No subscription tricks?</span>
+              <span class="faq-item__q">Is the main app <em>really</em> a one-time purchase?</span>
               <span class="faq-item__chevron" aria-hidden="true">+</span>
             </summary>
             <div class="faq-item__a">
               <p>
-                Yes — really. You pay once on Apple's App Store or Google Play, and the tier you bought is yours for the lifetime of the
-                app. We will never convert you to a subscription, never charge you a renewal, and never paywall a feature you already own.
-                The founder built this app after a season of personal hardship — there will never be a "stress payment" inside MyBibleLens.
+                Yes — really. You pay once for a feature tier, and that tier is yours for the lifetime of the app. We will never convert
+                that tier into a subscription or paywall a feature you already own. Optional cloud storage is separate: new accounts receive
+                10 GB free, with 20 GB and 50 GB monthly or annual plans if you need more room.
               </p>
             </div>
           </details>
@@ -7235,15 +7251,14 @@
 
           <details class="faq-item">
             <summary>
-              <span class="faq-item__q">Will you add subscriptions or ads later?</span>
+              <span class="faq-item__q">Will my paid tier ever become a subscription or show ads?</span>
               <span class="faq-item__chevron" aria-hidden="true">+</span>
             </summary>
             <div class="faq-item__a">
               <p>
-                No. The business model is one-time IAP, full stop. New features that ship to the app are free forever for everyone who
-                already owns a paid tier. We will never sell your data, run ads in the experience, or introduce a "Pro" subscription on top
-                of your existing purchase. If economics change someday in a way that requires a new product, it will be a new app — not a
-                subscription bolted onto this one.
+                No. Your feature tier stays a one-time purchase, and we will not place ads in your sanctuary or introduce a recurring "Pro"
+                charge on top of it. Cloud storage is the one optional subscription because storing growing files has an ongoing cost. You
+                only choose it if you need more than your included space.
               </p>
             </div>
           </details>
@@ -8879,7 +8894,7 @@
               "Infinite Canvas. Sermon Builder. Scripture Glow. Doce santuarios, un temporizador, comunión integrada. <strong>Cada herramienta que guarda un santuario, en una sola app.</strong>",
             "pricing.title": "Paga una vez. Tuyo para siempre.",
             "pricing.subtitle":
-              "Sin suscripciones. Sin cargos recurrentes. Sin sorpresas. Una compra, acceso de por vida, para ti y para todos los que traigas contigo.",
+              "Sin suscripción para las funciones de la app. Una compra desbloquea todas las funciones de por vida. El almacenamiento opcional en la nube es la única suscripción mensual o anual.",
             "faq.title": "Respuestas honestas",
             "faq.subtitle": "Las preguntas que hacen los amigos antes de confiarnos su práctica de fe.",
           },
@@ -8896,7 +8911,7 @@
               "Infinite Canvas. Sermon Builder. Scripture Glow. Doze santuários, um cronômetro, comunhão integrada. <strong>Cada ferramenta que um santuário guarda, em um só app.</strong>",
             "pricing.title": "Pague uma vez. Seu para sempre.",
             "pricing.subtitle":
-              "Sem assinaturas. Sem cobranças recorrentes. Sem surpresas. Uma compra, acesso vitalício, para você e para todos que trouxer com você.",
+              "Sem assinatura para os recursos do app. Uma compra libera todos os recursos para sempre. O armazenamento em nuvem opcional é a única assinatura mensal ou anual.",
             "faq.title": "Respostas honestas",
             "faq.subtitle": "As perguntas que os amigos fazem antes de confiar a nós a sua prática de fé.",
           },
@@ -8913,7 +8928,7 @@
               "Infinite Canvas. Sermon Builder. Scripture Glow. Douze sanctuaires, un minuteur, la communion intégrée. <strong>Chaque outil qu'un sanctuaire renferme, dans une seule application.</strong>",
             "pricing.title": "Payez une fois. À vous pour toujours.",
             "pricing.subtitle":
-              "Aucun abonnement. Aucun renouvellement. Aucune surprise. Un seul achat, un accès à vie, pour vous et pour tous ceux que vous amenez.",
+              "Aucun abonnement pour les fonctions de l’app. Un achat débloque toutes les fonctions à vie. Le stockage cloud facultatif est le seul abonnement mensuel ou annuel.",
             "faq.title": "Réponses honnêtes",
             "faq.subtitle": "Les questions que les amis posent avant de nous confier leur pratique de la foi.",
           },
@@ -8929,7 +8944,8 @@
             "repo.subtitle":
               "Infinite Canvas. Sermon Builder. Scripture Glow. 열두 개의 성소, 하나의 타이머, 내장된 교제. <strong>성소가 품은 모든 도구를 하나의 앱에.</strong>",
             "pricing.title": "한 번 결제, 평생 소유.",
-            "pricing.subtitle": "구독 없음. 갱신 없음. 깜짝 청구 없음. 한 번의 구매로 평생 이용 — 당신과 함께하는 모든 이들을 위해.",
+            "pricing.subtitle":
+              "앱 기능은 구독이 아닙니다. 한 번 구매하면 모든 기능을 평생 이용할 수 있습니다. 선택형 클라우드 저장 공간만 월간 또는 연간 구독입니다.",
             "faq.title": "솔직한 답변",
             "faq.subtitle": "친구들이 신앙 생활을 우리에게 맡기기 전에 묻는 질문들.",
           },
@@ -8945,7 +8961,7 @@
             "repo.subtitle":
               "Infinite Canvas. Sermon Builder. Scripture Glow. 十二个圣所，一个计时器，内置团契。<strong>圣所所拥有的每一个工具，尽在一个应用之中。</strong>",
             "pricing.title": "一次付费，永久拥有。",
-            "pricing.subtitle": "无订阅。无续费。无意外收费。一次购买，终身使用——为你，也为你带来的每一个人。",
+            "pricing.subtitle": "应用功能无需订阅。一次购买即可终身解锁全部功能。可选云存储是唯一按月或按年续订的服务。",
             "faq.title": "诚实的回答",
             "faq.subtitle": "朋友们在把信仰实践托付给我们之前会问的问题。",
           },

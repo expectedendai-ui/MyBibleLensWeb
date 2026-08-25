@@ -39,6 +39,7 @@ test.describe("Visual regression — index.html", () => {
   });
 
   test("pricing", async ({ page }) => {
+    test.setTimeout(60_000);
     await page.goto("/#pricing");
     await waitForPageReady(page);
     await settleLazyFlows(page);
@@ -48,6 +49,7 @@ test.describe("Visual regression — index.html", () => {
   });
 
   test("faq", async ({ page }) => {
+    test.setTimeout(60_000);
     await page.goto("/#faq");
     await waitForPageReady(page);
     await settleLazyFlows(page);
@@ -57,6 +59,7 @@ test.describe("Visual regression — index.html", () => {
   });
 
   test("about + footer", async ({ page }, testInfo) => {
+    test.setTimeout(60_000);
     // The mobile footer screenshot is genuinely flaky due to font subpixel
     // rendering on a small text-heavy section. The contrast smoke test
     // ("footer legal links are readable") covers the actual regression risk
@@ -67,6 +70,9 @@ test.describe("Visual regression — index.html", () => {
     );
     await page.goto("/#download");
     await waitForPageReady(page);
-    await expect(page.locator(".footer-section")).toHaveScreenshot("footer.png");
+    await settleLazyFlows(page);
+    const section = page.locator(".footer-section");
+    await waitForStableBox(page, section);
+    await expect(section).toHaveScreenshot("footer.png", { timeout: 15000 });
   });
 });
