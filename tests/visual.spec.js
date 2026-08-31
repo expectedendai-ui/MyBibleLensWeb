@@ -76,3 +76,28 @@ test.describe("Visual regression — index.html", () => {
     await expect(section).toHaveScreenshot("footer.png", { timeout: 15000 });
   });
 });
+
+test.describe("Visual regression — Infinite Canvas", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/mockups/canvas-spotlight.html");
+    await waitForPageReady(page);
+  });
+
+  test("living sanctuary hero", async ({ page }) => {
+    const hero = page.locator(".hero");
+    await waitForStableBox(page, hero);
+    await expect(hero).toHaveScreenshot("canvas-living-sanctuary-hero.png", {
+      timeout: 15000,
+    });
+  });
+
+  test("gold thread chapter", async ({ page }) => {
+    const chapter = page.locator(".feature-chapter").first();
+    await chapter.scrollIntoViewIfNeeded();
+    await waitForStableBox(page, chapter);
+    await expect(chapter).toHaveScreenshot("canvas-gold-thread-chapter.png", {
+      timeout: 15000,
+    });
+  });
+});
