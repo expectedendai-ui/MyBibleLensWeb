@@ -120,7 +120,21 @@ async function settleLazyFlows(page) {
       await new Promise((r) => setTimeout(r, 60));
     }
   });
-  await page.waitForLoadState("networkidle");
+  // Scrolling through the auto-sized spotlights wakes their muted demos. Pause
+  // them before the final settle so unrelated below-the-fold snapshots do not
+  // keep changing while clips buffer.
+  await Promise.all(
+    page.frames().map((frame) =>
+      frame.evaluate(() => {
+        document.querySelectorAll("video").forEach((video) => {
+          video.pause();
+        });
+      })
+    )
+  );
+  // Network-idle is best-effort here: a browser may continue buffering a
+  // paused media request even though the page geometry is already stable.
+  await page.waitForLoadState("networkidle", { timeout: 10000 }).catch(() => {});
   // Outlast the auto-resize retry timers (fire up to 2200ms after load).
   await page.waitForTimeout(2400);
 }

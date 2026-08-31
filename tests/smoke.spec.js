@@ -349,7 +349,10 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     const nav = page.locator("#floating-nav");
     await expect(nav).toHaveAttribute("data-hidden", "true");
     // Scroll past the hero
-    await page.evaluate(() => window.scrollTo(0, window.innerHeight));
+    await page.evaluate(() => {
+      const hero = document.getElementById("hero");
+      window.scrollTo(0, hero?.offsetHeight ?? window.innerHeight);
+    });
     await page.waitForTimeout(200);
     await expect(nav).toHaveAttribute("data-hidden", "false");
   });
@@ -360,7 +363,10 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await page.goto("/");
     await waitForPageReady(page);
     // Scroll past hero so the nav is showing
-    await page.evaluate(() => window.scrollTo(0, window.innerHeight));
+    await page.evaluate(() => {
+      const hero = document.getElementById("hero");
+      window.scrollTo(0, hero?.offsetHeight ?? window.innerHeight);
+    });
     await page.waitForTimeout(200);
     const nav = page.locator("#floating-nav");
     await expect(nav).toHaveAttribute("data-hidden", "false");
@@ -410,5 +416,157 @@ test.describe("MyBibleLens marketing site — smoke", () => {
         parseFloat((await fill.getAttribute("style"))?.match(/width:\s*([\d.]+)/)?.[1] ?? "0")
       )
       .toBeGreaterThan(25);
+  });
+});
+
+test.describe("Infinite Canvas — Living Sanctuary Board", () => {
+  test("preserves every capability inside four readable chapters", async ({ page }) => {
+    await page.goto("/mockups/canvas-spotlight.html");
+    await waitForPageReady(page);
+
+    await expect(page.locator(".sanctuary-stage")).toBeVisible();
+    await expect(page.locator(".feature-chapter")).toHaveCount(4);
+    await expect(page.locator("video")).toHaveCount(12);
+    await expect(page.locator("body")).toContainText("Gold Threads");
+    await expect(page.locator("body")).toContainText("1,000+ Stickers");
+    await expect(page.locator("body")).toContainText("50+ Sacred Templates");
+    await expect(page.locator("body")).toContainText("Lasso, Duplicate & Move Anywhere");
+    await expect(page.locator("body")).toContainText("30+ people at once");
+  });
+
+  test("runs each reveal once and does not restart it after re-entry", async ({ page }) => {
+    await page.goto("/mockups/canvas-spotlight.html");
+
+    const hero = page.locator(".sanctuary-stage");
+    const chapter = page.locator(".feature-chapter").first();
+    await expect(hero).toHaveClass(/is-revealed/);
+    await expect(page.locator(".stage-halo")).toHaveCSS("animation-name", "halo-breathe");
+    expect(
+      await page
+        .locator(".feature-chapter")
+        .evaluateAll((chapters) => chapters.map((item) => item.getAttribute("data-reveal")))
+    ).toEqual(["pop", "flip", "spin", "flip"]);
+    const entrance = await page.evaluate(() => {
+      const probe = document.createElement("div");
+      probe.className = "motion-reveal";
+      probe.dataset.reveal = "spin";
+      document.body.appendChild(probe);
+      const style = getComputedStyle(probe);
+      const values = {
+        opacity: style.opacity,
+        transform: style.transform,
+        transitionDuration: style.transitionDuration,
+      };
+      probe.remove();
+      return values;
+    });
+    expect(entrance.opacity).toBe("0");
+    expect(entrance.transform).not.toBe("none");
+    expect(entrance.transitionDuration).not.toBe("0s");
+
+    await chapter.scrollIntoViewIfNeeded();
+    await expect(chapter).toHaveClass(/is-revealed/);
+    await expect(chapter).toHaveAttribute("data-reveal-count", "1");
+
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+    await chapter.scrollIntoViewIfNeeded();
+    await expect(chapter).toHaveAttribute("data-reveal-count", "1");
+  });
+
+  test("reduced motion exposes a static final state and pauses every video", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/mockups/canvas-spotlight.html");
+
+    await expect(page.locator("html")).toHaveAttribute("data-motion", "reduced");
+    const states = await page.locator(".motion-reveal").evaluateAll((elements) =>
+      elements.map((element) => {
+        const style = getComputedStyle(element);
+        return {
+          opacity: style.opacity,
+          transform: style.transform,
+          animationDuration: style.animationDuration,
+          transitionDuration: style.transitionDuration,
+        };
+      })
+    );
+    for (const state of states) {
+      expect(state.opacity).toBe("1");
+      expect(state.transform).toBe("none");
+      expect(state.animationDuration).toBe("0s");
+      expect(state.transitionDuration).toBe("0s");
+    }
+    expect(await page.locator("video").evaluateAll((videos) => videos.every((v) => v.paused))).toBe(
+      true
+    );
+  });
+
+  test("reveals the complete static experience when IntersectionObserver is unavailable", async ({
+    page,
+  }) => {
+    await page.addInitScript(() => {
+      Object.defineProperty(window, "IntersectionObserver", {
+        value: undefined,
+        configurable: true,
+      });
+    });
+    const getErrors = attachConsoleErrorWatch(page);
+    await page.goto("/mockups/canvas-spotlight.html");
+
+    await expect(page.locator("html")).toHaveAttribute("data-motion", "fallback");
+    await expect(page.locator(".motion-reveal:not(.is-revealed)")).toHaveCount(0);
+    expect(getErrors(), "observer fallback must not log errors").toHaveLength(0);
+  });
+
+  test("stays inside a 375px viewport and removes pointer-only depth", async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto("/mockups/canvas-spotlight.html");
+
+    const width = await page.evaluate(() => ({
+      client: document.documentElement.clientWidth,
+      scroll: document.documentElement.scrollWidth,
+    }));
+    expect(width.scroll).toBeLessThanOrEqual(width.client);
+
+    for (const selector of [".sanctuary-stage", ".feature-chapter", ".media-frame"]) {
+      const boxes = await page.locator(selector).evaluateAll((elements) =>
+        elements.map((element) => {
+          const rect = element.getBoundingClientRect();
+          return { left: rect.left, right: rect.right };
+        })
+      );
+      for (const box of boxes) {
+        expect(box.left).toBeGreaterThanOrEqual(0);
+        expect(box.right).toBeLessThanOrEqual(375);
+      }
+    }
+    await expect(page.locator("html")).toHaveAttribute("data-pointer-depth", "off");
+  });
+
+  test("hands the closing action to the parent download section", async ({ page }) => {
+    await page.goto("/mockups/canvas-spotlight.html");
+    const cta = page.locator(".cta");
+    await expect(cta).toHaveAttribute("href", "../index.html#download");
+    await expect(cta).toHaveAttribute("target", "_parent");
+  });
+
+  test("pauses spotlight media after it leaves the viewport", async ({ page }) => {
+    await page.goto("/mockups/canvas-spotlight.html");
+    const heroVideo = page.locator(".stage-board video");
+    await heroVideo.evaluate((video) => video.scrollIntoView({ block: "center" }));
+    await expect.poll(() => heroVideo.evaluate((video) => video.paused)).toBe(false);
+
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+    await expect.poll(() => heroVideo.evaluate((video) => video.paused)).toBe(true);
+  });
+
+  test("loads the versioned spotlight and completes the parent-page handoff", async ({ page }) => {
+    await page.goto("/");
+    await waitForPageReady(page);
+    const frame = page.locator("#canvas-flow iframe");
+    await expect(frame).toHaveAttribute("src", "mockups/canvas-spotlight.html?v=5");
+    await frame.contentFrame().locator(".cta").click();
+    await expect(page).toHaveURL(/index\.html#download$/);
+    await expect(page.locator("#download")).toBeInViewport();
   });
 });
