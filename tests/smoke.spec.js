@@ -2,6 +2,15 @@
 const { test, expect } = require("@playwright/test");
 const { waitForPageReady, settleLazyFlows, attachConsoleErrorWatch } = require("./utils");
 
+async function prepareAboutCanvas(page, viewport) {
+  await page.setViewportSize(viewport);
+  await page.goto("/legal.html#about");
+  await page.addStyleTag({
+    content:
+      ".hero-photo-card, .hero-cursor { animation: none !important; opacity: 1 !important; }",
+  });
+}
+
 test.describe("MyBibleLens marketing site — smoke", () => {
   test("loads with no console errors", async ({ page }) => {
     const getErrors = attachConsoleErrorWatch(page);
@@ -238,6 +247,70 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     await waitForPageReady(page);
     const aboutLink = page.locator(".about-link-section a");
     await expect(aboutLink).toHaveAttribute("href", "legal.html#about");
+  });
+
+  test("about canvas frames the behind-the-scenes build video without the horse tile", async ({
+    page,
+  }) => {
+    await prepareAboutCanvas(page, { width: 1280, height: 900 });
+
+    const canvas = page.locator(".hero--canvas");
+    const buildVideo = canvas.locator(".hero-photo-card--build");
+
+    await expect(canvas.locator(".hero-photo-card")).toHaveCount(5);
+    await expect(canvas.locator(".hero-photo-card--tl")).toHaveCount(0);
+    await expect(canvas.getByText("The early days.", { exact: true })).toHaveCount(0);
+    await expect(canvas.getByText("Eyes forward.", { exact: true })).toHaveCount(0);
+    await expect(buildVideo.locator("video")).toHaveAttribute("src", "assets/about-build-desk.mp4");
+    await expect(buildVideo).toHaveAttribute("data-caption", /building/i);
+    await expect(canvas.locator(".hero-cursor__label")).toContainText("Denzel Rigaud");
+    await expect(canvas.locator(".hero-cursor__role")).toContainText("Founder");
+
+    const videoBox = await buildVideo.boundingBox();
+    expect(videoBox).not.toBeNull();
+    expect(videoBox.x).toBeGreaterThanOrEqual(0);
+    const canvasWidth = await canvas.evaluate((element) => ({
+      client: element.clientWidth,
+      scroll: element.scrollWidth,
+    }));
+    expect(canvasWidth.scroll).toBeLessThanOrEqual(canvasWidth.client);
+
+    await buildVideo.click();
+    const videoOverlay = page.locator("#about-video-overlay");
+    await expect(videoOverlay).toHaveClass(/is-open/);
+    await expect(videoOverlay.locator(".about-reward-video")).toHaveAttribute(
+      "src",
+      /about-build-desk\.mp4$/
+    );
+    await expect(videoOverlay.locator(".about-reward-caption")).toContainText(
+      "Building MyBibleLens"
+    );
+  });
+
+  test("about canvas keeps every memory tile inside a phone viewport", async ({ page }) => {
+    await prepareAboutCanvas(page, { width: 390, height: 844 });
+
+    const cards = page.locator(".hero--canvas .hero-photo-card");
+    await expect(cards).toHaveCount(5);
+    for (const card of await cards.all()) {
+      await expect(card).toBeVisible();
+      const box = await card.boundingBox();
+      expect(box).not.toBeNull();
+      expect(box.x).toBeGreaterThanOrEqual(0);
+      expect(box.x + box.width).toBeLessThanOrEqual(390);
+    }
+    const canvasWidth = await page.locator(".hero--canvas").evaluate((element) => ({
+      client: element.clientWidth,
+      scroll: element.scrollWidth,
+    }));
+    expect(canvasWidth.scroll).toBeLessThanOrEqual(canvasWidth.client);
+
+    const cursorBox = await page.locator(".hero-cursor").boundingBox();
+    const cursorLabelBox = await page.locator(".hero-cursor__label").boundingBox();
+    expect(cursorBox).not.toBeNull();
+    expect(cursorLabelBox).not.toBeNull();
+    expect(cursorLabelBox.x).toBeGreaterThanOrEqual(cursorBox.x);
+    expect(cursorLabelBox.x).toBeLessThan(cursorBox.x + cursorBox.width + 40);
   });
 
   test("App Store + Google Play badges are present", async ({ page }) => {
