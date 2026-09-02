@@ -893,6 +893,10 @@ a:hover {
   align-items: start;
 }
 
+.about-aside {
+  min-width: 0;
+}
+
 .callout-card {
   background: var(--deep-brown);
   color: var(--parchment);
