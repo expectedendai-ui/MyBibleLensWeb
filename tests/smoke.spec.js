@@ -20,6 +20,33 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     expect(errors, `Console errors detected:\n${errors.join("\n")}`).toHaveLength(0);
   });
 
+  test("publishes one canonical application identity", async ({ page }) => {
+    await page.goto("/");
+
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      "href",
+      "https://mybiblelens.us/"
+    );
+    const schema = await page
+      .locator('script[type="application/ld+json"]')
+      .first()
+      .evaluate((element) => JSON.parse(element.textContent || "{}"));
+
+    expect(schema["@id"]).toBe("https://mybiblelens.us/#application");
+    expect(schema.sameAs).toEqual(
+      expect.arrayContaining([
+        "https://www.wikidata.org/wiki/Q141251174",
+        "https://apps.apple.com/us/app/mybiblelens/id6764069602",
+        "https://www.instagram.com/mybiblelens/",
+      ])
+    );
+    expect(schema.author["@id"]).toBe("https://expectedend.co/denzel-rigaud#person");
+    expect(schema.author.url).toBe("https://expectedend.co/denzel-rigaud");
+    expect(schema.author.sameAs).toContain("https://www.wikidata.org/wiki/Q140198525");
+    expect(schema.author.sameAs).not.toContain("https://www.instagram.com/thewatercheck/");
+    expect(schema.author.sameAs).not.toContain("https://www.instagram.com/mybiblelens/");
+  });
+
   test("hero renders the brand title and tagline appears on the page", async ({ page }) => {
     await page.goto("/");
     await waitForPageReady(page);
