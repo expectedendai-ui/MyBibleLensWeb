@@ -27,6 +27,10 @@ test.describe("MyBibleLens marketing site — smoke", () => {
       "href",
       "https://mybiblelens.us/"
     );
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+      "content",
+      "https://mybiblelens.us/assets/denzel-rigaud.jpg"
+    );
     const schema = await page
       .locator('script[type="application/ld+json"]')
       .first()
@@ -49,6 +53,8 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     );
     expect(schema.publisher["@id"]).toBe("https://expectedend.co/#organization");
     expect(schema.publisher.legalName).toBe("Expected End LLC");
+    expect(schema.copyrightHolder["@id"]).toBe("https://expectedend.co/denzel-rigaud#person");
+    expect(schema.copyrightYear).toBe(2026);
     expect(schema.author.sameAs).toContain("https://www.wikidata.org/wiki/Q140198525");
     expect(schema.author.sameAs).not.toContain("https://www.instagram.com/thewatercheck/");
     expect(schema.author.sameAs).not.toContain("https://www.instagram.com/mybiblelens/");
@@ -64,10 +70,31 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     const expectedEnd = legalGraph.find(
       (entity) => entity["@id"] === "https://expectedend.co/#organization"
     );
+    const legalApplication = legalGraph.find(
+      (entity) => entity["@id"] === "https://mybiblelens.us/#application"
+    );
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      "href",
+      "https://mybiblelens.us/legal.html"
+    );
+    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+      "content",
+      "https://mybiblelens.us/legal.html"
+    );
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+      "content",
+      "https://mybiblelens.us/assets/denzel-rigaud.jpg"
+    );
     expect(legalPerson.jobTitle).toBe("Founder and Full-Stack Developer");
     expect(legalPerson.worksFor["@id"]).toBe("https://expectedend.co/#organization");
     expect(expectedEnd.legalName).toBe("Expected End LLC");
     expect(expectedEnd.founder["@id"]).toBe("https://expectedend.co/denzel-rigaud#person");
+    expect(expectedEnd.owns).toBeUndefined();
+    expect(legalApplication.publisher["@id"]).toBe("https://expectedend.co/#organization");
+    expect(legalApplication.copyrightHolder["@id"]).toBe(
+      "https://expectedend.co/denzel-rigaud#person"
+    );
+    expect(legalApplication.copyrightYear).toBe(2026);
     await expect(page.locator("body")).not.toContainText("MyBibleLens LLC");
     await expect(page.locator("#terms")).toContainText(
       "Expected End LLC, the operator of MyBibleLens™"
@@ -77,6 +104,25 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     );
     await expect(page.locator("#dmca")).toContainText(
       "Copyright Contact (Agent Registration Pending)"
+    );
+    await expect(page.locator(".company-attribution")).toContainText(
+      "Denzel owns the MyBibleLens copyright and licenses it to Expected End LLC"
+    );
+    await page.setViewportSize({ width: 375, height: 812 });
+    const ownershipBounds = await page.locator(".company-attribution").evaluate((element) => {
+      const rect = element.getBoundingClientRect();
+      return { left: rect.left, right: rect.right, viewportWidth: window.innerWidth };
+    });
+    expect(ownershipBounds.left).toBeGreaterThanOrEqual(0);
+    expect(ownershipBounds.right).toBeLessThanOrEqual(ownershipBounds.viewportWidth);
+    await expect(page.locator("#terms")).toContainText(
+      "Denzel Rigaud owns those copyrights and licenses them to Expected End LLC"
+    );
+    await expect(page.locator("#eula")).toContainText(
+      "Copyright in the MBL IP is owned by Denzel Rigaud and licensed to Expected End LLC"
+    );
+    await expect(page.locator(".footer-bottom")).toContainText(
+      "© 2026 Denzel Rigaud. MyBibleLens is published by Expected End LLC under license."
     );
   });
 
