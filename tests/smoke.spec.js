@@ -42,9 +42,42 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     );
     expect(schema.author["@id"]).toBe("https://expectedend.co/denzel-rigaud#person");
     expect(schema.author.url).toBe("https://expectedend.co/denzel-rigaud");
+    expect(schema.operatingSystem).toBe("iOS, iPadOS");
+    expect(schema.author.jobTitle).toBe("Founder and Full-Stack Developer");
+    expect(schema.author.description).toBe(
+      "Denzel Rigaud is the founder and solo full-stack developer behind Expected End, MyBibleLens — the World's First Sanctuary App for Christianity — and The Water Check."
+    );
+    expect(schema.publisher["@id"]).toBe("https://expectedend.co/#organization");
+    expect(schema.publisher.legalName).toBe("Expected End LLC");
     expect(schema.author.sameAs).toContain("https://www.wikidata.org/wiki/Q140198525");
     expect(schema.author.sameAs).not.toContain("https://www.instagram.com/thewatercheck/");
     expect(schema.author.sameAs).not.toContain("https://www.instagram.com/mybiblelens/");
+
+    await page.goto("/legal.html#about");
+    const legalGraph = await page
+      .locator('script[type="application/ld+json"]')
+      .first()
+      .evaluate((element) => JSON.parse(element.textContent || "{}")["@graph"]);
+    const legalPerson = legalGraph.find(
+      (entity) => entity["@id"] === "https://expectedend.co/denzel-rigaud#person"
+    );
+    const expectedEnd = legalGraph.find(
+      (entity) => entity["@id"] === "https://expectedend.co/#organization"
+    );
+    expect(legalPerson.jobTitle).toBe("Founder and Full-Stack Developer");
+    expect(legalPerson.worksFor["@id"]).toBe("https://expectedend.co/#organization");
+    expect(expectedEnd.legalName).toBe("Expected End LLC");
+    expect(expectedEnd.founder["@id"]).toBe("https://expectedend.co/denzel-rigaud#person");
+    await expect(page.locator("body")).not.toContainText("MyBibleLens LLC");
+    await expect(page.locator("#terms")).toContainText(
+      "Expected End LLC, the operator of MyBibleLens™"
+    );
+    await expect(page.locator("#privacy")).toContainText(
+      "Expected End LLC, as the operator of MyBibleLens™, is the data controller"
+    );
+    await expect(page.locator("#dmca")).toContainText(
+      "Copyright Contact (Agent Registration Pending)"
+    );
   });
 
   test("hero renders the brand title and tagline appears on the page", async ({ page }) => {
@@ -187,6 +220,36 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     const badge = page.locator(".supabase-badge");
     await expect(badge).toBeAttached();
     await expect(badge).toHaveAttribute("href", "https://supabase.com/security");
+    await expect(badge).toContainText("Security provided by Supabase");
+    await expect(badge).toContainText("Supabase SOC 2 Type 2");
+    await expect(page.locator(".supabase-badge-tag")).toHaveText(
+      "Row-level access controls · Data encrypted at rest and in transit"
+    );
+  });
+
+  test("only presents shipped platforms as available", async ({ page }) => {
+    await page.goto("/");
+    await waitForPageReady(page);
+
+    await expect(page.locator(".repo-coming-soon")).toHaveText(
+      "Available now on iPhone & iPad · Android coming soon"
+    );
+    await expect(page.locator("#platforms")).toContainText("Available now on iPhone & iPad");
+    await expect(page.locator("#platforms")).toContainText("One sanctuary. iPhone and iPad.");
+    await expect(page.locator("#platforms")).toContainText("Android is coming soon");
+    await expect(page.locator("#platforms")).not.toContainText(/Now on Mac|Apple TV/);
+    await expect(page.locator(".pricing-section")).toContainText("Cloud sync across iPhone & iPad");
+    await expect(page.locator(".pricing-section")).not.toContainText(
+      "Cloud sync across iPhone, iPad & Android"
+    );
+  });
+
+  test("Expected End LLC is the consistent operating entity", async ({ page }) => {
+    await page.goto("/");
+    await waitForPageReady(page);
+
+    await expect(page.locator("footer")).toContainText("© 2026 Expected End LLC · MyBibleLens™");
+    await expect(page.locator("body")).not.toContainText("MyBibleLens LLC");
   });
 
   test("pricing section shows all 5 tiers with correct prices", async ({ page }) => {
