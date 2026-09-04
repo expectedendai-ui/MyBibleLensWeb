@@ -280,6 +280,62 @@
         background: rgba(156, 175, 136, 0.25);
         color: #4a5b3a;
       }
+      .pl-ai-control {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        margin-top: 0.15rem;
+        padding: 0.65rem 0.7rem;
+        border: 1px solid rgba(61, 43, 31, 0.18);
+        border-radius: 14px;
+        background: rgba(61, 43, 31, 0.92);
+        color: #fffbf0;
+      }
+      .pl-ai-control__copy {
+        display: grid;
+        gap: 0.1rem;
+        flex: 1;
+      }
+      .pl-ai-control__title {
+        font-size: 0.74rem;
+        font-weight: 700;
+      }
+      .pl-ai-control__detail {
+        font-size: 0.56rem;
+        line-height: 1.25;
+        color: rgba(255, 251, 240, 0.65);
+      }
+      .pl-switch {
+        position: relative;
+        width: 38px;
+        height: 22px;
+        flex: 0 0 auto;
+        border-radius: 999px;
+        background: var(--gold);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+      }
+      .pl-switch::after {
+        content: "";
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #fffdf7;
+        box-shadow: 0 2px 6px rgba(26, 16, 8, 0.3);
+      }
+      .pl-switch__state {
+        position: absolute;
+        right: calc(100% + 0.35rem);
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 0.5rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--halo);
+      }
       .pl-presets {
         margin-top: auto;
         padding-top: 0.9rem;
@@ -424,6 +480,15 @@
                 ><span class="pl-module__state">Open</span>
               </div>
 
+              <div class="pl-ai-control">
+                <span class="pl-module__ico">✦</span>
+                <span class="pl-ai-control__copy">
+                  <span class="pl-ai-control__title">Hide Ask Lens</span>
+                  <span class="pl-ai-control__detail">Remove AI from Home &amp; Canvas</span>
+                </span>
+                <span class="pl-switch"><span class="pl-switch__state">On</span></span>
+              </div>
+
               <div class="pl-presets">
                 <div class="pl-presets__label">Lock for</div>
                 <div class="pl-presets__row">
@@ -442,7 +507,7 @@
         <!-- COPY -->
         <div class="pl-copy">
           <p class="pl-eyebrow">For the whole household</p>
-          <h2 class="pl-title">Hand them the iPad.<br />Keep the <span>sanctuary</span> safe.</h2>
+          <h2 class="pl-title">Hand them the iPad.<br />Keep the <span>sanctuary</span> safe.<br /><span>Remove AI Completely.</span></h2>
           <p class="pl-body">
             <strong>Parental Lock</strong> lets you put any study module on pause for your child. The app stays open &mdash; the locked
             tiles simply wait. Set it for an hour or until morning, and it <strong>unlocks itself</strong> when the time is up. It lives
@@ -450,6 +515,10 @@
           </p>
           <ul class="pl-bullets" role="list">
             <li><strong>Lock any module</strong> &mdash; Games, Canvas, anything in the Study Repository</li>
+            <li>
+              <strong>Hide Ask Lens</strong> &mdash; removes Ask Lens from Home and Lens from the Infinite Canvas toolbar for an
+              <strong>AI-free experience</strong>
+            </li>
             <li><strong>Timed or indefinite</strong> &mdash; 1h · 2h · 4h · until 7am · or off completely</li>
             <li><strong>Auto-unlocks</strong> &mdash; no need to remember to undo it</li>
             <li><strong>On-device &amp; private</strong> &mdash; nothing leaves the iPad, no account needed</li>

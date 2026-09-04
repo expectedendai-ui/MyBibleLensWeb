@@ -219,6 +219,21 @@ test.describe("MyBibleLens marketing site — smoke", () => {
     }
   });
 
+  test("Parental Lock explains how to hide Ask Lens for an AI-free experience", async ({
+    page,
+  }) => {
+    await page.goto("/mockups/parental-lock-spotlight.html");
+    await waitForPageReady(page);
+
+    await expect(page.locator(".pl-title")).toContainText("Remove AI Completely.");
+    await expect(page.locator(".pl-ai-control")).toContainText("Hide Ask Lens");
+    await expect(page.locator(".pl-ai-control")).toContainText("On");
+    await expect(page.locator(".pl-bullets")).toContainText(
+      "removes Ask Lens from Home and Lens from the Infinite Canvas toolbar"
+    );
+    await expect(page.locator(".pl-bullets")).toContainText("AI-free experience");
+  });
+
   test("Sermon Builder phones stay inside the visible spotlight at desktop widths", async ({
     page,
   }) => {
@@ -568,6 +583,47 @@ test.describe("Infinite Canvas — Living Sanctuary Board", () => {
     await expect(page.locator("body")).toContainText("50+ Sacred Templates");
     await expect(page.locator("body")).toContainText("Lasso, Duplicate & Move Anywhere");
     await expect(page.locator("body")).toContainText("30+ people at once");
+  });
+
+  test("shows every culture sticker video without cropping", async ({ page }) => {
+    await page.goto("/mockups/canvas-spotlight.html");
+    await waitForPageReady(page);
+
+    const videos = await page.locator(".chapter--culture video").evaluateAll((elements) =>
+      elements.map((video) => {
+        const style = getComputedStyle(video);
+        const bounds = video.getBoundingClientRect();
+        return {
+          aspectRatio: style.aspectRatio,
+          objectFit: style.objectFit,
+          renderedRatio: bounds.width / bounds.height,
+        };
+      })
+    );
+
+    expect(videos).toHaveLength(6);
+    for (const video of videos) {
+      expect(video.objectFit).toBe("contain");
+      expect(video.aspectRatio).toBe("4 / 5");
+      expect(video.renderedRatio).toBeCloseTo(4 / 5, 1);
+    }
+  });
+
+  test("shows every sacred template video without cropping", async ({ page }) => {
+    await page.goto("/mockups/canvas-spotlight.html");
+    await waitForPageReady(page);
+
+    const chapter = page.locator(".chapter--templates");
+    const mainVideo = chapter.locator(".chapter-media video");
+    const galleryVideos = chapter.locator(".gallery video");
+
+    await expect(mainVideo).toHaveCSS("object-fit", "contain");
+    await expect(mainVideo).toHaveCSS("aspect-ratio", "4 / 5");
+    await expect(galleryVideos).toHaveCount(2);
+    for (const video of await galleryVideos.all()) {
+      await expect(video).toHaveCSS("object-fit", "contain");
+      await expect(video).toHaveCSS("aspect-ratio", "1 / 1");
+    }
   });
 
   test("runs each reveal once and does not restart it after re-entry", async ({ page }) => {
