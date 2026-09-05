@@ -631,6 +631,25 @@
         border-radius: 15px;
       }
 
+      .chapter--culture .media-frame video {
+        height: auto;
+        aspect-ratio: 4 / 5;
+        object-fit: contain;
+      }
+
+      .chapter--templates .media-frame video {
+        height: auto;
+        object-fit: contain;
+      }
+
+      .chapter--templates .chapter-media video {
+        aspect-ratio: 4 / 5;
+      }
+
+      .chapter--templates .gallery video {
+        aspect-ratio: 1 / 1;
+      }
+
       .chapter--connection .chapter-media {
         transform: rotate(1.2deg);
       }
@@ -1026,6 +1045,10 @@
         .chapter--connection .chapter-media,
         .chapter--templates .chapter-media {
           transform: none;
+        }
+
+        .motion-enabled [data-reveal="spin"]:not(.is-revealed) {
+          transform: translateY(38px) scale(0.96);
         }
       }
 
